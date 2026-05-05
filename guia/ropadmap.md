@@ -7,6 +7,7 @@
 > **Roadmaps relacionados:**
 > - [`roadmap-landing.md`](./roadmap-landing.md) — Sitio público (Frontend)
 > - [`roadmap-infra.md`](./roadmap-infra.md) — Infraestructura (Docker + Coolify)
+> - [`roadmap-future.md`](./roadmap-future.md) — Mejoras y features futuras
 
 ---
 
@@ -691,6 +692,7 @@ just deploy  # → Successful
 |-----------|-----------|
 | [`roadmap-landing.md`](./roadmap-landing.md) | Sitio público (Frontend) |
 | [`roadmap-infra.md`](./roadmap-infra.md) | Infraestructura (Docker + Coolify) |
+| [`roadmap-future.md`](./roadmap-future.md) | Mejoras y features futuras |
 
 ---
 
