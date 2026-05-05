@@ -1,8 +1,12 @@
-# Roadmap: Migración beni.gob.bo WordPress → Laravel 12 + Filament v5
+# Roadmap Master — beni.gob.bo
 
-> **Stack:** Laravel 12 · Filament v5 · Filament Shield · MySQL/PostgreSQL · Tailwind v4
+> **Stack:** Laravel 12 · Filament v5 · Filament Shield · MySQL/PostgreSQL · Tailwind v4 · Coolify
 > 
 > **Inspirado en:** boilerplate4 roadmap structure
+> 
+> **Roadmaps relacionados:**
+> - [`roadmap-landing.md`](./roadmap-landing.md) — Sitio público (Frontend)
+> - [`roadmap-infra.md`](./roadmap-infra.md) — Infraestructura (Docker + Coolify)
 
 ---
 
@@ -17,18 +21,18 @@
 
 ## Progreso
 
-| Fase | Nombre | Progreso |
-|------|--------|----------|
-| 1 | Análisis y Planificación | **0%** |
-| 2 | Setup y Configuración Inicial | **0%** |
-| 3 | Estructura de Datos | **0%** |
-| 4 | Backend - Panel Filament | **0%** |
-| 5 | Frontend - Sitio Público | **0%** |
-| 6 | Integración con Sistemas Externos | **0%** |
-| 7 | Rendimiento y Optimización | **0%** |
-| 8 | Seguridad | **0%** |
-| 9 | Despliegue | **0%** |
-| 10 | Migración de Contenido | **0%** |
+| Fase | Nombre | Documento | Progreso |
+|------|--------|-----------|----------|
+| 1 | Análisis y Planificación | — | **0%** |
+| 2 | Setup y Configuración Inicial | — | **0%** |
+| 3 | Estructura de Datos | — | **0%** |
+| 4 | Backend - Panel Filament | — | **0%** |
+| 5 | Frontend - Sitio Público | [`roadmap-landing.md`](./roadmap-landing.md) | **0%** |
+| 6 | Integración con Sistemas Externos | — | **0%** |
+| 7 | Rendimiento y Optimización | — | **0%** |
+| 8 | Seguridad | — | **0%** |
+| 9 | Despliegue | [`roadmap-infra.md`](./roadmap-infra.md) | **0%** |
+| 10 | Migración de Contenido | — | **0%** |
 | **Total** | | **0%** |
 
 ---
@@ -337,6 +341,8 @@ DELETE /admin/posts/1  # → 204
 
 ## Fase 5: Frontend - Sitio Público (semana 6-8)
 
+> **Referencia:** [`roadmap-landing.md`](./roadmap-landing.md)
+
 > **Stack:** Blade + Tailwind v4 + Livewire (minimal)
 > **Objetivo:** Sitio web público funcional
 
@@ -555,6 +561,8 @@ gtmetrix.com score > 90
 
 ## Fase 9: Despliegue (semana 11)
 
+> **Referencia:** [`roadmap-infra.md`](./roadmap-infra.md)
+
 ```
 [ ] Configurar servidor (Nginx/PHP-FPM)
     └─[ ] Nginx config
@@ -674,6 +682,15 @@ just deploy  # → Successful
 
 - **Tiempo mínimo**: 12 semanas
 - **Con equipo**: 8 semanas (2 desarrolladores)
+
+---
+
+## Roadmaps Relacionados
+
+| Documento | Propósito |
+|-----------|-----------|
+| [`roadmap-landing.md`](./roadmap-landing.md) | Sitio público (Frontend) |
+| [`roadmap-infra.md`](./roadmap-infra.md) | Infraestructura (Docker + Coolify) |
 
 ---
 
