@@ -14,7 +14,9 @@ RUN apk add --no-cache \
     unzip \
     redis \
     nodejs \
-    npm
+    npm \
+    autoconf \
+    pecl
 
 # Extensiones PHP
 RUN docker-php-ext-configure gd \
