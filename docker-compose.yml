@@ -1,0 +1,64 @@
+# docker-compose.yml (producción usa MySQL externo en Coolify)
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: beni_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./storage:/var/www/storage
+      - ./bootstrap/cache:/var/www/bootstrap/cache
+    depends_on:
+      - redis
+    environment:
+      - APP_ENV=production
+
+  nginx:
+    image: nginx:alpine
+    container_name: beni_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./:/var/www
+      - ./docker/certbot/conf:/etc/letsencrypt
+      - ./docker/certbot/www:/var/www/certbot
+    depends_on:
+      - app
+
+  redis:
+    image: redis:7-alpine
+    container_name: beni_redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+
+  horizon:
+    build: .
+    container_name: beni_horizon
+    restart: unless-stopped
+    working_dir: /var/www
+    command: php artisan horizon
+    depends_on:
+      - redis
+    environment:
+      - APP_ENV=production
+
+  scheduler:
+    build: .
+    container_name: beni_scheduler
+    restart: unless-stopped
+    working_dir: /var/www
+    command: sh -c "while true; do php artisan schedule:run; sleep 60; done"
+    depends_on:
+      - redis
+    environment:
+      - APP_ENV=production
+
+volumes:
+  redis_data:

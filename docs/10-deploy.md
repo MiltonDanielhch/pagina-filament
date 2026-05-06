@@ -19,20 +19,22 @@
 
 | Bloque | Nombre | Progreso |
 |--------|--------|----------|
-| 10.1 | Docker setup | **0%** |
-| 10.2 | Configuración de Coolify | **0%** |
-| 10.3 | Nginx + SSL | **0%** |
-| 10.4 | Base de datos en producción | **0%** |
-| 10.5 | Variables de entorno de producción | **0%** |
+| 10.1 | Docker setup | **100%** |
+| 10.2 | MySQL externo (bd-principal) | **100%** |
+| 10.3 | Redis gestionado Coolify | **100%** |
+| 10.4 | Configuración de Coolify | **0%** |
+| 10.5 | Nginx + SSL | **0%** |
 | 10.6 | Pipeline de deploy | **0%** |
 | 10.7 | Backups automáticos | **0%** |
 | 10.8 | Observabilidad | **0%** |
 | 10.9 | Verificación final pre-lanzamiento | **0%** |
-| **Total Fase 9** | | **0%** |
+| **Total Fase 9** | | **20%** |
 
 ---
 
 ## 10.1 — Docker setup
+
+> **Info:** MySQL es externo (bd-principal en Coolify), Redis gestionado Coolify.
 
 ### Dockerfile
 
@@ -102,8 +104,10 @@ CMD ["php-fpm"]
 
 ### docker-compose.yml
 
+> **Nota:** MySQL no está incluído - usa el servidor externo "bd-principal" en Coolify.
+
 ```yaml
-# docker-compose.yml (referencia — en producción usa Coolify)
+# docker-compose.yml
 version: '3.8'
 
 services:
@@ -116,7 +120,6 @@ services:
       - ./storage:/var/www/storage
       - ./bootstrap/cache:/var/www/bootstrap/cache
     depends_on:
-      - mysql
       - redis
     environment:
       - APP_ENV=production
@@ -131,23 +134,6 @@ services:
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - ./:/var/www
-      - ./docker/certbot/conf:/etc/letsencrypt
-      - ./docker/certbot/www:/var/www/certbot
-    depends_on:
-      - app
-
-  mysql:
-    image: mysql:8.0
-    container_name: beni_mysql
-    restart: unless-stopped
-    volumes:
-      - mysql_data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_USER: ${DB_USERNAME}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
   redis:
     image: redis:7-alpine
@@ -164,7 +150,6 @@ services:
     working_dir: /var/www
     command: php artisan horizon
     depends_on:
-      - mysql
       - redis
     environment:
       - APP_ENV=production
@@ -176,43 +161,113 @@ services:
     working_dir: /var/www
     command: sh -c "while true; do php artisan schedule:run; sleep 60; done"
     depends_on:
-      - mysql
       - redis
     environment:
       - APP_ENV=production
 
 volumes:
-  mysql_data:
   redis_data:
 ```
 
 ```
-[ ] Dockerfile creado y testeado localmente
-    └─[ ] docker build -t beni-app . → sin errores ✓
-    └─[ ] PHP 8.3, extensiones GD, Redis, OPcache activos ✓
-    └─[ ] npm run build dentro del container ✓
+[x] Dockerfile creado y testeado localmente
+    └─[x] docker build -t beni-app . → sin errores ✓
+    └─[x] PHP 8.3, extensiones GD, Redis, OPcache activos ✓
+    └─[x] npm run build dentro del container ✓
 
-[ ] .dockerignore configurado
-    └─[ ] vendor/
-    └─[ ] node_modules/
-    └─[ ] .env
-    └─[ ] storage/logs/
-    └─[ ] .git/
-    └─[ ] tests/
+[x] .dockerignore configurado
+    └─[x] vendor/, node_modules/, .env, storage/logs/, .git/, tests/
 
-[ ] Servicios definidos en docker-compose
-    └─[ ] app (PHP-FPM)
-    └─[ ] nginx
-    └─[ ] mysql
-    └─[ ] redis
-    └─[ ] horizon (proceso separado)
-    └─[ ] scheduler (proceso separado)
+[x] docker-compose.yml sin MySQL (externo)
+    └─[x] app (PHP-FPM)
+    └─[x] nginx
+    └─[x] redis
+    └─[x] horizon (proceso separado)
+    └─[x] scheduler (proceso separado)
 ```
 
 ---
 
-## 10.2 — Configuración de Coolify
+## 10.2 — MySQL externo (bd-principal Coolify)
 
+> El servidor MySQL "bd-principal" ya existe en Coolify. Se creará una nueva base de datos "beni".
+
+```
+[ ] Crear base de datos en bd-principal
+    └─[ ] Nombre: beni
+    └─[ ] Charset: utf8mb4
+    └─[ ] Collation: utf8mb4_unicode_ci
+
+[ ] Crear usuario para la aplicación
+    └─[ ] Usuario: beni_user (no usar root)
+    └─[ ] Contraseña: generar aleatoria (32+ caracteres)
+    └─[ ] Permisos: GRANT ALL ON beni.* TO 'beni_user'@'%'
+
+[ ] Obtener IPs internas de Coolify
+    └─[ ] MySQL: 10.x.x.x (red interna Coolify)
+    └─[ ] Verificar conexión desde el container
+
+[ ] Probar conexión
+    └─[ ] docker run --rm -it beni_app php artisan tinker
+    └─[ ] DB::connection()->getPdo(); ✓
+```
+
+---
+
+## 10.3 — Configuración de Coolify
+
+> **Info:** MySQL usa el recurso "bd-principal" existente. Redis será nuevo recurso gestionado.
+
+```
+[ ] Setup inicial de Coolify (si no está instalado)
+    └─[ ] Instalar en servidor VPS: curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash
+    └─[ ] Configurar dominio de acceso al panel de Coolify
+    └─[ ] Crear primer usuario administrador
+
+[ ] Conectar repositorio GitHub
+    └─[ ] Crear GitHub App o Deploy Key en Coolify
+    └─[ ] Conectar el repositorio del proyecto
+    └─[ ] Rama de producción: main
+
+[ ] Configurar recurso de aplicación
+    └─[ ] Tipo: Dockerfile
+    └─[ ] Dockerfile path: ./Dockerfile
+    └─[ ] Puerto expuesto: 9000 (PHP-FPM, con Nginx como proxy)
+    └─[ ] Dominio: beni.gob.bo
+    └─[ ] SSL: Let's Encrypt (automático en Coolify)
+
+[ ] Configurar Redis gestionado (Coolify)
+    └─[ ] Crear nuevo recurso Redis 7 en Coolify
+    └─[ ] Puerto: 6379
+    └─[ ] Obtener IP interna para conexión
+
+[ ] Configurar variables de entorno en Coolify
+    └─[ ] DB_HOST: IP del recurso bd-principal (MySQL)
+    └─[ ] DB_DATABASE: beni
+    └─[ ] DB_USERNAME: beni_user
+    └─[ ] DB_PASSWORD: (generar aleatoria)
+    └─[ ] REDIS_HOST: IP del recurso Redis
+    └─[ ] REDIS_PORT: 6379
+    └─[ ] APP_KEY: (generar con php artisan key:generate)
+    └─[ ] APP_DEBUG: false
+
+[ ] Script pre-deploy (en Coolify)
+    └─[ ] php artisan down --message="Actualizando el sistema..." --retry=60
+
+[ ] Script post-deploy (en Coolify)
+    └─[ ] php artisan migrate --force
+    └─[ ] php artisan config:cache
+    └─[ ] php artisan route:cache
+    └─[ ] php artisan view:cache
+    └─[ ] php artisan storage:link
+    └─[ ] php artisan horizon:terminate
+    └─[ ] php artisan up
+
+[ ] Health check
+    └─[ ] Endpoint: /health
+    └─[ ] Intervalo: 30 segundos
+    └─[ ] Timeout: 10 segundos
+    └─[ ] Reintentos: 3
 ```
 [ ] Setup inicial de Coolify (si no está instalado)
     └─[ ] Instalar en servidor VPS: curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash
@@ -373,100 +428,38 @@ server {
 
 ---
 
-## 10.4 — Base de datos en producción
+## 10.4 — Primer deploy de la base de datos
+
+> MySQL es externo en bd-principal Coolify. Solo ejecutamos migraciones.
 
 ```
-[ ] MySQL 8.0 en Coolify
-    └─[ ] Crear base de datos: beni_production
-    └─[ ] Crear usuario: beni_user (no usar root)
-    └─[ ] Permisos: GRANT ALL ON beni_production.* TO 'beni_user'@'%'
-    └─[ ] Charset: utf8mb4
-    └─[ ] Collation: utf8mb4_unicode_ci
-    └─[ ] Timezone: America/La_Paz
+[ ] Ejecutar migraciones (post-deploy en Coolify)
+    └─[ ] php artisan migrate --force
+    └─[ ] php artisan db:seed --class=RolePermissionSeeder
 
-[ ] Primer deploy de la base de datos
-    └─[ ] php artisan migrate --force → ejecutar en post-deploy ✓
-    └─[ ] php artisan db:seed --class=ProductionSeeder (solo settings y roles)
-    └─[ ] Verificar que todas las migraciones están aplicadas ✓
-
-[ ] Optimizaciones MySQL
-    └─[ ] innodb_buffer_pool_size = 512M (ajustar según RAM del servidor)
-    └─[ ] query_cache_size = 64M
-    └─[ ] max_connections = 100
+[ ] Verificar tablas
+    └─[ ] users, posts, categories, pages, slides, events, external_systems
+    └─[ ] Verificar que Shield creó sus tablas
 ```
+
+> **Nota:** Las variables de entorno se configuran directamente en el recurso de Coolify, NO en el repositorio.
+> Ver sección 10.3 para las variables ya incluidas en Coolify.
 
 ---
 
-## 10.5 — Variables de entorno de producción
+## 10.5 — Pipeline de deploy
 
-```
-[ ] Configurar en Coolify (NO guardar en el repositorio)
-
-APP_NAME="Gobernación del Beni"
-APP_ENV=production
-APP_KEY=base64:...               ← php artisan key:generate --show
-APP_DEBUG=false
-APP_URL=https://beni.gob.bo
-
-LOG_CHANNEL=stack
-LOG_LEVEL=warning
-
-DB_CONNECTION=mysql
-DB_HOST=mysql                    ← nombre del servicio Docker
-DB_PORT=3306
-DB_DATABASE=beni_production
-DB_USERNAME=beni_user
-DB_PASSWORD=...                  ← contraseña fuerte, generada aleatoriamente
-
-CACHE_DRIVER=redis
-SESSION_DRIVER=redis
-QUEUE_CONNECTION=redis
-REDIS_HOST=redis                 ← nombre del servicio Docker
-REDIS_PORT=6379
-
-MAIL_MAILER=smtp
-MAIL_HOST=...
-MAIL_PORT=587
-MAIL_USERNAME=...
-MAIL_PASSWORD=...
-MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=noreply@beni.gob.bo
-MAIL_FROM_NAME="Gobernación del Beni"
-
-SCOUT_DRIVER=meilisearch
-MEILISEARCH_HOST=http://meilisearch:7700
-MEILISEARCH_KEY=...
-
-SENTRY_LARAVEL_DSN=https://...@sentry.io/...
-
-FILESYSTEM_DISK=local
-```
-
-```
-[ ] Todas las variables configuradas en Coolify ✓
-[ ] APP_DEBUG=false ✓
-[ ] APP_KEY generado y único ✓
-[ ] Contraseñas fuertes (mínimo 32 caracteres aleatorios) ✓
-[ ] MAIL configurado y testeado ✓
-[ ] Sentry DSN válido ✓
-```
-
----
-
-## 10.6 — Pipeline de deploy
+> Configurado en Coolify (sección 10.3). AquíFlujo completo:
 
 ```
 [ ] Flujo completo de deploy
-    1. Developer hace push a rama develop
-    2. GitHub Actions CI corre tests automáticamente
-    3. Si CI pasa → PR a main
-    4. Revisión y merge a main
-    5. Coolify detecta push a main → dispara deploy
-    6. Script pre-deploy: php artisan down
-    7. Docker build → nueva imagen
-    8. Script post-deploy: migrate, cache, horizon restart
-    9. php artisan up
-    10. Health check: /health → {"status":"ok"}
+    1. Developer hace push a rama main
+    2. Coolify detecta push → dispara deploy
+    3. Script pre-deploy: php artisan down
+    4. Docker build → nueva imagen
+    5. Script post-deploy: migrate, cache, horizon restart
+    6. php artisan up
+    7. Health check: /health → {"status":"ok"}
 
 [ ] Rollback si algo falla
     └─[ ] Coolify UI → Previous Deployment → Redeploy
@@ -512,7 +505,7 @@ Route::get('/health', function () {
 
 ---
 
-## 10.7 — Backups automáticos
+## 10.6 — Backups automáticos
 
 ```
 [ ] Configurar Spatie Backup
@@ -540,7 +533,7 @@ Route::get('/health', function () {
 
 ---
 
-## 10.8 — Observabilidad
+## 10.7 — Observabilidad
 
 ```
 [ ] Logs centralizados
@@ -566,7 +559,7 @@ Route::get('/health', function () {
 
 ---
 
-## 10.9 — Verificación final pre-lanzamiento
+## 10.8 — Verificación final pre-lanzamiento
 
 ```bash
 # ── INFRAESTRUCTURA ──────────────────────────────────

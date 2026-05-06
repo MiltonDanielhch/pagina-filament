@@ -1,0 +1,69 @@
+# docker-compose.local.yml (testing completo con WSL)
+# MySQL y Redis propios para testing
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: beni_app_test
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./storage:/var/www/storage
+      - ./bootstrap/cache:/var/www/bootstrap/cache
+    depends_on:
+      - mysql
+      - redis
+    environment:
+      - APP_ENV=local
+      - APP_URL=http://localhost:8000
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=beni_test
+      - DB_USERNAME=beni
+      - DB_PASSWORD=beni_test
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - CACHE_DRIVER=redis
+      - SESSION_DRIVER=redis
+
+  nginx:
+    image: nginx:alpine
+    container_name: beni_nginx_test
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./docker/nginx/local.conf:/etc/nginx/conf.d/default.conf
+      - ./public:/var/www/public
+      - ./storage:/var/www/storage
+    depends_on:
+      - app
+
+  mysql:
+    image: mysql:8.0
+    container_name: beni_mysql_test
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: beni_test
+      MYSQL_USER: beni
+      MYSQL_PASSWORD: beni_test
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  redis:
+    image: redis:7-alpine
+    container_name: beni_redis_test
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mysql_data:
+  redis_data:
