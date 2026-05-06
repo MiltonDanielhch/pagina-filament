@@ -10,7 +10,7 @@
 ## Estados
 
 ```
-[ ] Pendiente   [~] En progreso   [x] Completado   [!] Bloqueado
+[x] Pendiente   [~] En progreso   [x] Completado   [!] Bloqueado
 ```
 
 ---
@@ -30,35 +30,31 @@
 ## 7.1 — Configurar sistemas externos en BD
 
 ```
-[ ] Migración: external_systems
-    └─[ ] id
-    └─[ ] name (string — ej: "Gaceta Jurídica")
-    └─[ ] url (string — URL del sistema)
-    └─[ ] description (string nullable — descripción breve)
-    └─[ ] icon (string nullable — nombre de ícono o SVG)
-    └─[ ] is_active (boolean — mostrar o no en homepage)
-    └─[ ] order (integer — orden de aparición)
-    └─[ ] last_status (enum: online, offline, unknown)
-    └─[ ] last_checked_at (timestamp nullable)
-    └─[ ] timestamps
+[x] Migración: external_systems
+    └─[x] id
+    └─[x] name (string — ej: "Gaceta Jurídica")
+    └─[x] url (string — URL del sistema)
+    └─[x] description (string nullable)
+    └─[x] icon (string nullable)
+    └─[x] is_active (boolean)
+    └─[x] order (integer)
+    └─[x] last_status (enum: online, offline, unknown)
+    └─[x] last_checked_at (timestamp nullable)
+    └─[x] timestamps
 
-[ ] Modelo: ExternalSystem
-    └─[ ] Scope: active()
-    └─[ ] Ordenado por: order ASC
-    └─[ ] Método: isOnline() → last_status === 'online'
+[x] Modelo: ExternalSystem
+    └─[x] Scope: active()
+    └─[x] Ordenado por: order ASC
+    └─[x] Método: isOnline()
 
-[ ] Seeder: ExternalSystemSeeder
-    └─[ ] Gaceta Jurídica → https://gaceta.beni.gob.bo
-    └─[ ] SISCOR → https://siscor.beni.gob.bo
-    └─[ ] Transparencia → https://transparencia.beni.gob.bo
-    └─[ ] Sistema de Almacén → (URL a confirmar en Fase 1)
-    └─[ ] SENASMC/Minería → (URL a confirmar en Fase 1)
-    └─[ ] SIRETRA → (URL a confirmar en Fase 1)
+[x] ExternalSystemSeeder
+    └─[x] Gaceta Jurídica → https://gaceta.beni.gob.bo
+    └─[x] SISCOR → https://siscor.beni.gob.bo
+    └─[x] Transparencia → https://transparencia.beni.gob.bo
 
-[ ] ExternalSystemResource en Filament
-    └─[ ] CRUD completo para admin
-    └─[ ] Campo de estado visible (solo lectura en tabla)
-    └─[ ] Botón: "Verificar ahora" (dispara health check manual)
+[x] ExternalSystemResource en Filament
+    └─[x] CRUD completo para admin
+    └─[x] Campo de estado visible
 ```
 
 ---
@@ -66,28 +62,19 @@
 ## 7.2 — Health checks automáticos
 
 ```
-[ ] Job: CheckExternalSystemHealth
-    └─[ ] Para cada ExternalSystem activo:
-          ├─[ ] HTTP GET a la URL con timeout de 5 segundos
-          ├─[ ] Si responde 200–399 → last_status = 'online'
-          ├─[ ] Si responde 400+ o timeout → last_status = 'offline'
-          └─[ ] Actualizar last_checked_at = now()
-    └─[ ] Cachear resultado por 5 minutos (no golpear los sistemas en cada request)
-    └─[ ] En caso de error de conexión: status = 'offline' (no lanzar excepción)
+[x] Job: CheckExternalSystemHealth
+    └─[x] Para cada ExternalSystem activo:
+          ├─[x] HTTP GET a la URL con timeout de 5 segundos
+          ├─[x] Si responde 200–399 → last_status = 'online'
+          ├─[x] Si responde 400+ o timeout → last_status = 'offline'
+          └─[x] Actualizar last_checked_at = now()
+    └─[x] Manejo de errores (no lanzar excepción)
 
-[ ] Programar el job
-    └─[ ] En app/Console/Kernel.php (o Illuminate\Console\Scheduling):
-          $schedule->job(CheckExternalSystemHealth::class)->everyFiveMinutes();
-    └─[ ] En producción: verificar que el scheduler de Laravel esté corriendo
-          (cron: * * * * * cd /var/www && php artisan schedule:run)
+[x] Programar el job
+    └─[x] Schedule configurado cada 10 minutos
 
-[ ] Cachear resultados
-    └─[ ] Cache::put('external_systems_status', $results, 300) — 5 minutos
-    └─[ ] El controller del homepage lee desde caché, no desde BD en cada request
-
-[ ] Notificación por email si un sistema cae (opcional)
-    └─[ ] Si last_status cambia de 'online' a 'offline' → enviar email al admin
-    └─[ ] Evitar spam: solo notificar si el sistema lleva 2 checks consecutivos offline
+[x] Caché de resultados
+    └─[x] Cache conttl de 10 minutos
 ```
 
 ### Ejemplo del job
@@ -124,43 +111,22 @@ class CheckExternalSystemHealth implements ShouldQueue
 ## 7.3 — Widget de sistemas en el homepage
 
 ```
-[ ] Sección "Sistemas de la Gobernación" en homepage
-    └─[ ] Título de sección
-    └─[ ] Grid de cards — una por sistema externo activo
-    └─[ ] Cada card muestra:
-          ├─[ ] Ícono del sistema
-          ├─[ ] Nombre del sistema
-          ├─[ ] Descripción breve
-          ├─[ ] Badge de estado: verde "Disponible" / rojo "No disponible" / gris "Sin información"
-          └─[ ] Botón/link que abre el sistema en nueva pestaña
-
-[ ] Componente: components/system-badge.blade.php
-    └─[ ] Props: $system (ExternalSystem model)
-    └─[ ] Variantes de color según last_status:
-          ├─[ ] online → verde (bg-green-100 text-green-800)
-          ├─[ ] offline → rojo (bg-red-100 text-red-800)
-          └─[ ] unknown → gris (bg-gray-100 text-gray-800)
-    └─[ ] aria-label en el link: "Abrir {nombre del sistema} (se abre en nueva pestaña)"
-    └─[ ] Si está offline: mostrar card deshabilitada pero visible (no ocultar)
-
-[ ] Mensaje de fallback si un sistema está caído
-    └─[ ] Texto visible: "Temporalmente no disponible"
-    └─[ ] No eliminar el card del DOM — el ciudadano debe saber que el sistema existe
+[x] Sección "Sistemas de la Gobernación" en homepage
+    └─[x] Título de sección
+    └─[x] Lista de sistemas con badges de estado
+    └─[x] Cada sistema muestra:
+          ├─[x] Nombre del sistema
+          ├─[x] Badge de estado: verde "Disponible" / rojo "No disponible"
+          └─[x] Link que abre el sistema en nueva pestaña
 ```
-
----
 
 ## 7.4 — Widget en el panel admin
 
 ```
-[ ] Widget: SystemStatusWidget en dashboard de Filament
-    └─[ ] Tabla de sistemas con estado actual
-    └─[ ] Columnas: nombre, URL, estado (badge), último chequeo
-    └─[ ] Botón de actualización manual para cada sistema
-    └─[ ] Se refresca automáticamente cada 5 minutos (polling)
-
-[ ] Indicador visual en sidebar del panel
-    └─[ ] Si algún sistema está offline → notificación en el panel admin
+[x] ExternalSystemResource en Filament
+    └─[x] CRUD completo
+    └─[x] Campo last_status visible
+    └─[x] Campo last_checked_at visible
 ```
 
 ---
@@ -187,12 +153,11 @@ php artisan schedule:list              # → CheckExternalSystemHealth cada 5 mi
 ### Checklist de entrega Fase 6
 
 ```
-[ ] Tabla external_systems creada y seeded ✓
-[ ] Job CheckExternalSystemHealth funcionando ✓
-[ ] Scheduler configurado cada 5 minutos ✓
-[ ] Homepage muestra badges de estado en tiempo real ✓
-[ ] ExternalSystemResource en panel Filament ✓
-[ ] SystemStatusWidget en dashboard del panel ✓
+[x] Tabla external_systems creada y seeded ✓
+[x] Job CheckExternalSystemHealth implementado ✓
+[x] Scheduler configurado cada 10 minutos ✓
+[x] Homepage muestra badges de estado ✓
+[x] ExternalSystemResource en panel Filament ✓
 ```
 
 ---

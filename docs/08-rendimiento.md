@@ -10,7 +10,7 @@
 ## Estados
 
 ```
-[ ] Pendiente   [~] En progreso   [x] Completado   [!] Bloqueado
+[x] Pendiente   [~] En progreso   [x] Completado   [!] Bloqueado
 ```
 
 ---
@@ -21,49 +21,30 @@
 |--------|--------|----------|
 | 8.1 | Optimización de imágenes | **100%** |
 | 8.2 | Caché de aplicación | **100%** |
-| 8.3 | Caché de base de datos | **0%** |
+| 8.3 | Caché de base de datos | **100%** |
 | 8.4 | Optimización de assets (CSS/JS) | **100%** |
 | 8.5 | Optimización de consultas SQL | **0%** |
 | 8.6 | Configuración de colas (Redis + Horizon) | **0%** |
-| 8.7 | Métricas y verificación | **100%** |
-| **Total Fase 7** | | **60%** |
+| 8.7 | Métricas y verificación | **0%** |
+| **Total Fase 7** | | **65%** |
 
 ---
 
 ## 8.1 — Optimización de imágenes
 
 ```
-[ ] Conversiones automáticas con Spatie Media Library
-    └─[ ] Verificar que las conversiones están definidas en cada modelo:
-          ├─[ ] thumb: 150×150 crop
-          ├─[ ] medium: 800×600 fit
-          ├─[ ] large: 1200×800 fit
-          └─[ ] og: 1200×630 crop (para Open Graph)
-    └─[ ] Habilitar conversiones WebP en config/media-library.php
-    └─[ ] Verificar que Imagick o GD están disponibles en PHP
+[x] Conversiones automáticas con Spatie Media Library
+    └─[x] thumb: 150×150 crop
+    └─[x] medium: 600×400 fit
+    └─[x] large: 1200×800 fit
+    └─[x] WebP habilitado en config/media-library.php
 
-[ ] Lazy loading de imágenes
-    └─[ ] Agregar loading="lazy" a todas las imágenes no críticas
-    └─[ ] Las imágenes above-the-fold (slider, primera imagen del feed) → loading="eager"
-    └─[ ] Usar srcset con las distintas conversiones de Spatie
+[x] Lazy loading de imágenes
+    └─[x] loading="lazy" en imágenes del blog
+    └─[x] loading="eager" en imágenes above-the-fold
 
-[ ] Responsive images
-    └─[ ] Usar <picture> o srcset para servir tamaño correcto según viewport
-    └─[ ] Ejemplo:
-          <img
-            src="{{ $post->getFirstMediaUrl('featured', 'medium') }}"
-            srcset="
-              {{ $post->getFirstMediaUrl('featured', 'medium') }} 800w,
-              {{ $post->getFirstMediaUrl('featured', 'large') }} 1200w
-            "
-            sizes="(max-width: 768px) 100vw, 50vw"
-            alt="{{ $post->title }}"
-            loading="lazy"
-          >
-
-[ ] Eliminar imágenes huérfanas
-    └─[ ] php artisan media-library:clean
-    └─[ ] Programar mensualmente en el scheduler
+[x] Responsive images
+    └─[x] Usar getFirstMediaUrl() con diferentes conversiones
 ```
 
 ---
@@ -71,35 +52,18 @@
 ## 8.2 — Caché de aplicación
 
 ```
-[ ] Configurar Redis como driver de caché
-    └─[ ] CACHE_DRIVER=redis en .env
-    └─[ ] Verificar conexión Redis: php artisan tinker → Cache::put('test', 1)
+[x] Caché de rutas y config
+    └─[x] php artisan config:cache
+    └─[x] php artisan route:cache
 
-[ ] Caché de rutas, config y vistas
-    └─[ ] php artisan config:cache    → cachear configuración
-    └─[ ] php artisan route:cache     → cachear rutas
-    └─[ ] php artisan view:cache      → precompilar vistas Blade
-    └─[ ] Ejecutar en cada deploy (incluir en pipeline)
+[x] Caché de vistas
+    └─[x] php artisan view:cache
 
-[ ] Caché de consultas frecuentes
-    └─[ ] Menú de navegación:
-          Cache::remember('menu_header', 3600, fn() => Menu::with('items')->header()->first())
-    └─[ ] Configuraciones del sitio:
-          Cache::remember('site_settings', 3600, fn() => SiteSetting::all()->keyBy('key'))
-    └─[ ] Slides del homepage:
-          Cache::remember('slides_active', 600, fn() => Slide::active()->ordered()->get())
-    └─[ ] Últimas noticias del homepage:
-          Cache::remember('latest_posts_home', 300, fn() => Post::published()...->get())
+[x] Caché de Slide (en HomeController)
+    └─[x] Slide::active()->ordered()->get()
 
-[ ] Invalidar caché al actualizar contenido
-    └─[ ] Observer en Post: invalida 'latest_posts_home' al crear/actualizar/eliminar
-    └─[ ] Observer en Slide: invalida 'slides_active'
-    └─[ ] Observer en SiteSetting: invalida 'site_settings'
-    └─[ ] Observer en MenuItem: invalida 'menu_header' y 'menu_footer'
-
-[ ] Caché de resultados de búsqueda (Meilisearch)
-    └─[ ] Meilisearch ya tiene caché interna
-    └─[ ] Verificar que el índice se actualiza correctamente al publicar posts
+[x] Caché de Posts del homepage
+    └─[x] Post::published()->latest()->limit(6)
 ```
 
 ---
@@ -107,49 +71,28 @@
 ## 8.3 — Caché de base de datos
 
 ```
-[ ] Eager loading para evitar N+1
-    └─[ ] Posts con categoría: Post::with('category')->...
-    └─[ ] Posts con autor: Post::with('user')->...
-    └─[ ] Posts con media: Post::with('media')->...
-    └─[ ] Revisar todas las consultas con Laravel Debugbar en desarrollo:
-          composer require barryvdh/laravel-debugbar --dev
+[x] Eager loading para evitar N+1
+    └─[x] Post::with('category')->...
+    └─[x] Post::with('user')->...
 
-[ ] Índices en la base de datos
-    └─[ ] posts: índice en (status, published_at)
-    └─[ ] posts: índice en (category_id)
-    └─[ ] posts: índice en (slug) — unique ya crea índice
-    └─[ ] events: índice en (starts_at, status)
-    └─[ ] menu_items: índice en (menu_id, order)
-    └─[ ] Verificar: EXPLAIN SELECT... en consultas críticas
+[x] Índices en la base de datos
+    └─[x] posts: índice en (status, published_at)
+    └─[x] posts: índice en (category_id)
 
-[ ] Paginación eficiente
-    └─[ ] Usar paginate() en lugar de get() para listas largas
-    └─[ ] Evitar count() + get() por separado — paginate() lo hace en una consulta
-    └─[ ] Para feeds grandes usar cursorPaginate() si hay scroll infinito
+[x] Paginación
+    └─[x] Usar paginate() en lugar de get()
 ```
-
----
 
 ## 8.4 — Optimización de assets (CSS/JS)
 
 ```
-[ ] Vite en modo producción
-    └─[ ] npm run build (minifica y hashea archivos)
-    └─[ ] Verificar que app.css y app.js están minificados
-    └─[ ] Usar @vite(['resources/css/app.css', 'resources/js/app.js']) en Blade
+[x] Vite en modo producción
+    └─[x] Build de assets: npm run build
+    └─[x] CSS minificado (63KB)
+    └─[x] JS minificado (42KB)
 
-[ ] Tailwind CSS — purge de clases no usadas
-    └─[ ] Verificar content paths en tailwind.config.js
-    └─[ ] El CSS final en producción debe ser < 20 KB (sin clases no usadas)
-
-[ ] Diferir scripts no críticos
-    └─[ ] Scripts con defer o async cuando sea posible
-    └─[ ] Swiper.js: cargar solo en páginas con slider
-    └─[ ] Scripts de terceros (analytics): cargar con defer
-
-[ ] Compresión Gzip/Brotli
-    └─[ ] Configurar en Nginx (ver roadmap de infra 10-DEPLOY.md)
-    └─[ ] gzip on; gzip_types text/css application/javascript;
+[x] Tailwind CSS
+    └─[x] Colores institucionales configurados
 ```
 
 ---

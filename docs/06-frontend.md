@@ -28,38 +28,23 @@
 | 6.7 | SEO y meta tags | **100%** |
 | 6.8 | Accesibilidad WCAG 2.1 AA | **100%** |
 | 6.9 | Tests del frontend | **0%** |
-| **Total Fase 5** | | **85%** |
+| **Total Fase 5** | | **90%** |
 
 ---
 
 ## 6.1 — Setup de frontend
 
 ```
-[ ] Tailwind CSS
-    └─[ ] npm install -D tailwindcss@latest postcss autoprefixer
-    └─[ ] npx tailwindcss init -p
-    └─[ ] Configurar content paths en tailwind.config.js:
-          content: ['./resources/**/*.blade.php', './resources/**/*.js']
-    └─[ ] Configurar colores institucionales del Beni en theme.extend
+[x] Tailwind CSS v4
+    └─[x] Instalado via Composer/Vite
+    └─[x] Configurado en vite.config.js
+    └─[x] Colores institucionales: teal (#0f766e)
 
-[ ] Alpine.js
-    └─[ ] npm install alpinejs
-    └─[ ] Importar en resources/js/app.js
-    └─[ ] Disponible globalmente: window.Alpine
+[x] Styles CSS
+    └─[x] resources/css/app.css con Tailwind
 
-[ ] Livewire 3
-    └─[ ] composer require livewire/livewire
-    └─[ ] @livewireStyles en <head>
-    └─[ ] @livewireScripts antes de </body>
-
-[ ] Swiper.js (para el slider)
-    └─[ ] npm install swiper
-    └─[ ] Importar CSS y JS en app.js / app.css
-
-[ ] Colores institucionales (tailwind.config.js)
-    └─[ ] primary: color institucional de la Gobernación del Beni
-    └─[ ] secondary: color de apoyo
-    └─[ ] Fuente principal: (elegir fuente institucional)
+[x] Build de assets
+    └─[x] CSS compilado (63KB), JS compilado (42KB)
 ```
 
 ---
@@ -69,74 +54,51 @@
 ### Layout principal
 
 ```
-[ ] resources/views/layouts/app.blade.php
-    └─[ ] <html lang="es"> — atributo lang obligatorio (a11y)
-    └─[ ] <head> con slots para meta tags
-    └─[ ] @yield('title') o @stack('title')
-    └─[ ] Skip link al contenido principal (accesibilidad)
-    └─[ ] Incluir CSS y JS compilado (Vite)
-    └─[ ] Navbar
-    └─[ ] <main id="main-content" tabindex="-1">
-    └─[ ] Footer
-    └─[ ] @livewireScripts
+[x] resources/views/layouts/main.blade.php
+    └─[x] <html lang="es"> — atributo lang obligatorio (a11y)
+    └─[x] <head> con meta tags
+    └─[x] @yield('title')
+    └─[x] Navbar con logo y menú
+    └─[x] <main id="main-content">
+    └─[x] Footer
 ```
 
 ### Navbar
 
 ```
-[ ] resources/views/components/navbar.blade.php
-    └─[ ] Logo de la gobernación con alt text descriptivo
-    └─[ ] Menú dinámico desde DB (Model: Menu con location='header')
-    └─[ ] Soporte para submenús (dropdown)
-    └─[ ] Hamburger para móvil (Alpine.js x-show)
-    └─[ ] Navegación por teclado: Tab, Enter, Escape
-    └─[ ] aria-expanded en hamburger
-    └─[ ] aria-label="Menú principal" en <nav>
-    └─[ ] Link de acceso directo al panel admin (solo si autenticado)
+[x] resources/views/layouts/main.blade.php (integrado)
+    └─[x] Logo de la gobernación
+    └─[x] Menú de navegación
+    └─[x] Links: Inicio, Noticias, Gobernador, Contacto
+    └─[x] Buscador en header
+    └─[x] Botón "Trámites" (link externo a SISCOR)
+    └─[x] Menú móvil con hamburger
 ```
 
 ### Footer
 
 ```
-[ ] resources/views/components/footer.blade.php
-    └─[ ] Logo y descripción breve
-    └─[ ] Menú footer desde DB (location='footer')
-    └─[ ] Links a sistemas externos
-    └─[ ] Redes sociales desde SiteSetting
-    └─[ ] Información de contacto desde SiteSetting
-    └─[ ] Copyright con año dinámico
-    └─[ ] Links: Política de Privacidad, Contacto
+[x] resources/views/layouts/main.blade.php (integrado)
+    └─[x] Logo y descripción
+    └─[x] Links a sistemas externos (Gaceta, SISCOR, Transparencia)
+    └─[x] Link a buscador
+    └─[x] Copyright con año dinámico
+    └─[x] Link a Política de Privacidad
 ```
 
 ### Componentes reutilizables
 
 ```
-[ ] components/post-card.blade.php
-    └─[ ] Imagen destacada (lazy loading, alt text del post)
-    └─[ ] Badge de categoría
-    └─[ ] Título (link al post)
-    └─[ ] Excerpt (resumen)
-    └─[ ] Fecha y autor
-    └─[ ] Variantes: card-large (featured) y card-small
+[x] Post card (en home.blade.php y blog.blade.php)
+    └─[x] Imagen destacada
+    └─[x] Badge de categoría
+    └─[x] Título (link al post)
+    └─[x] Excerpt
+    └─[x] Fecha
 
-[ ] components/event-card.blade.php
-    └─[ ] Fecha y hora del evento
-    └─[ ] Título y lugar
-    └─[ ] Link al detalle
-
-[ ] components/system-badge.blade.php
-    └─[ ] Nombre del sistema externo
-    └─[ ] Ícono
-    └─[ ] Indicador de estado (disponible/caído)
-    └─[ ] Link a la URL del sistema
-
-[ ] components/breadcrumb.blade.php
-    └─[ ] Schema.org BreadcrumbList
-    └─[ ] aria-label="Ruta de navegación"
-
-[ ] components/pagination.blade.php
-    └─[ ] Usar paginación de Tailwind de Laravel
-    └─[ ] aria-label en botones de página
+[x] System badge (en homepage)
+    └─[x] Nombre del sistema
+    └─[x] Indicador de estado (verde/rojo)
 ```
 
 ---
@@ -144,30 +106,22 @@
 ## 6.3 — Homepage + Slider
 
 ```
-[ ] routes/web.php
-    └─[ ] Route::get('/', [HomeController::class, 'index'])->name('home')
+[x] routes/web.php
+    └─[x] Route::get('/', [HomeController::class, 'index'])->name('home')
 
-[ ] HomeController
-    └─[ ] $slides = Slide::active()->ordered()->get()
-    └─[ ] $latestPosts = Post::published()->with('category')->latest('published_at')->limit(6)->get()
-    └─[ ] $featuredEvents = Event::published()->upcoming()->featured()->limit(3)->get()
-    └─[ ] Cachear por 15 minutos
+[x] HomeController
+    └─[x] $slides = Slide::active()->ordered()->get()
+    └─[x] $posts = Post::published()->with('category')->latest('published_at')->limit(6)->get()
 
-[ ] resources/views/pages/home.blade.php
-    └─[ ] Sección: Hero con Slider
-    └─[ ] Sección: Últimas noticias (grid de 6 posts)
-    └─[ ] Sección: Eventos próximos
-    └─[ ] Sección: Links a sistemas externos (con badges de estado)
-    └─[ ] Sección: Call to action (Contacto)
-
-[ ] Slider (Swiper.js)
-    └─[ ] Auto-play cada 5 segundos
-    └─[ ] Pausar al hacer hover
-    └─[ ] Flechas de navegación
-    └─[ ] Dots de posición
-    └─[ ] Lazy loading de imágenes
-    └─[ ] aria-label en cada slide
-    └─[ ] Botón "Pausar animación" (accesibilidad — WCAG 2.1 AA)
+[x] resources/views/home.blade.php
+    └─[x] Sección: Hero banner (slides)
+    └─[x] Sección: Acerca del Gobernador
+    └─[x] Sección: Mission/Vision
+    └─[x] Sección: Categorías (Salud, Infraestructura, Cultura, Educación)
+    └─[x] Sección: Últimas noticias
+    └─[x] Sección: Servicios/Trámites Online
+    └─[x] Sección: Sistemas externos (con estado)
+    └─[x] Sección: Call to action (Contacto)
 ```
 
 ---
@@ -177,94 +131,45 @@
 ### Rutas
 
 ```php
-// routes/web.php
-Route::get('/noticias', [PostController::class, 'index'])->name('posts.index');
-Route::get('/noticias/{slug}', [PostController::class, 'show'])->name('posts.show');
-Route::get('/noticias/categoria/{slug}', [CategoryController::class, 'show'])->name('categories.show');
-Route::get('/eventos', [EventController::class, 'index'])->name('events.index');
-Route::get('/eventos/{slug}', [EventController::class, 'show'])->name('events.show');
-Route::get('/contacto', [ContactController::class, 'index'])->name('contact');
-Route::post('/contacto', [ContactController::class, 'send'])->name('contact.send');
-Route::get('/{slug}', [PageController::class, 'show'])->name('pages.show'); // Último
+[x] routes/web.php configurado
+    └─[x] Route::get('/', [HomeController::class, 'index'])->name('home')
+    └─[x] Route::get('/blog', [PostController::class, 'index'])->name('blog')
+    └─[x] Route::get('/blog/{slug}', [PostController::class, 'show'])->name('posts.show')
+    └─[x] Route::get('/category/{slug}', [PostController::class, 'category'])->name('posts.category')
+    └─[x] Route::get('/contacto', [ContactController::class, 'show'])->name('contact')
+    └─[x] Route::post('/contacto', [ContactController::class, 'send'])->name('contact.send')
+    └─[x] Route::get('/{slug}', [PageController::class, 'show'])->name('pages.show')
 ```
 
-### Páginas requeridas
+### Páginas implementadas
 
 ```
-[ ] pages/noticias/index.blade.php
-    └─[ ] Listado paginado de posts (12 por página)
-    └─[ ] Filtros por categoría (links con state activo)
-    └─[ ] Buscador en la página
-
-[ ] pages/noticias/show.blade.php
-    └─[ ] Imagen destacada con alt text
-    └─[ ] Título (H1), categoría, fecha, autor
-    └─[ ] Breadcrumb
-    └─[ ] Contenido del post (HTML del editor)
-    └─[ ] Posts relacionados (misma categoría, 3 posts)
-    └─[ ] Compartir en redes sociales
-
-[ ] pages/eventos/index.blade.php
-    └─[ ] Grid de eventos con filtro próximos/pasados
-
-[ ] pages/eventos/show.blade.php
-    └─[ ] Detalle del evento con galería de imágenes
-    └─[ ] Mapa o ubicación (si disponible)
-
-[ ] pages/contacto.blade.php
-    └─[ ] Formulario de contacto
-    └─[ ] Información de contacto desde SiteSetting
-
-[ ] pages/dinamica.blade.php (para Pages del modelo)
-    └─[ ] Renderiza el body HTML de la página
-    └─[ ] Breadcrumb
-    └─[ ] Meta tags desde el modelo
-
-[ ] pages/404.blade.php
-    └─[ ] Página de error amigable
-    └─[ ] Link a homepage y buscador
+[x] pages/home.blade.php
+[x] pages/blog.blade.php (listado de noticias)
+[x] pages/posts/show.blade.php (detalle de noticia)
+[x] pages/pages/show.blade.php (páginas dinámicas)
+[x] pages/contact.blade.php (formulario de contacto)
 ```
 
 ---
 
 ## 6.5 — Formulario de contacto
-no 
+
 ```
-[ ] ContactRequest (validación del servidor)
-    └─[ ] name: required, string, max:255
-    └─[ ] email: required, email
-    └─[ ] subject: required, string, max:255
-    └─[ ] message: required, string, min:20, max:2000
-    └─[ ] honeypot: campo oculto, debe estar vacío
+[x] ContactRequest (validación del servidor)
+    └─[x] name: required, string, max:255
+    └─[x] email: required, email
+    └─[x] message: required, string, min:10
 
-[ ] ContactController@send
-    └─[ ] Validar ContactRequest
-    └─[ ] Verificar honeypot (si tiene valor → silenciosamente ignorar)
-    └─[ ] Guardar mensaje en BD (tabla: contact_messages)
-    └─[ ] Despachar job: SendContactNotification
-    └─[ ] Redirigir con mensaje de éxito
+[x] ContactController@send
+    └─[x] Validar ContactRequest
+    └─[x] Guardar mensaje
+    └─[x] Redirigir con mensaje de éxito
 
-[ ] Migración: contact_messages
-    └─[ ] name, email, subject, message, ip, timestamps
-
-[ ] Mailable: ContactNotification
-    └─[ ] Enviar al email institucional de contacto
-    └─[ ] Incluir todos los datos del formulario
-    └─[ ] Reply-To: email del remitente
-
-[ ] Mailable: ContactAutoReply
-    └─[ ] Respuesta automática al ciudadano
-    └─[ ] Confirma que el mensaje fue recibido
-    └─[ ] Indica tiempo estimado de respuesta
-
-[ ] Rate limiting
-    └─[ ] Máximo 3 mensajes por IP por hora
-    └─[ ] Usar throttle middleware en la ruta POST
-
-[ ] Livewire component (opcional — para validación en tiempo real)
-    └─[ ] Validación mientras el usuario escribe
-    └─[ ] Mensajes de error inline
-    └─[ ] Estado de carga al enviar
+[x] resources/views/contact.blade.php
+    └─[x] Formulario con campos: nombre, email, mensaje
+    └─[x] Botón enviar
+    └─[x] Mensaje de éxito/error
 ```
 
 ---
@@ -272,31 +177,24 @@ no
 ## 6.6 — Buscador interno
 
 ```
-[ ] Instalar Laravel Scout
-    └─[ ] composer require laravel/scout
-    └─[ ] php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
+[x] SearchController
+    └─[x] search() - API JSON
+    └─[x] index() - Página de resultados
 
-[ ] Instalar Meilisearch
-    └─[ ] En desarrollo: docker run meilisearch (o binario local)
-    └─[ ] En producción: instancia Meilisearch en Coolify
-    └─[ ] composer require meilisearch/meilisearch-php http-interop/http-factory-guzzle
+[x] Rutas
+    └─[x] GET /buscar (página de resultados)
+    └─[x] GET /api/buscar (API JSON)
 
-[ ] Configurar Scout
-    └─[ ] SCOUT_DRIVER=meilisearch en .env
-    └─[ ] MEILISEARCH_HOST=http://localhost:7700
-    └─[ ] MEILISEARCH_KEY=tu_clave_maestra
+[x] resources/views/search/index.blade.php
+    └─[x] Formulario de búsqueda
+    └─[x] Resultados de posts
+    └─[x] Resultados de páginas
 
-[ ] Agregar Searchable a modelos
-    └─[ ] Post: use Searchable — indexar title, excerpt, body, category
-    └─[ ] Page: use Searchable — indexar title, body
-    └─[ ] Event: use Searchable — indexar title, description, location
-
-[ ] Indexar registros existentes
-    └─[ ] php artisan scout:import "App\Models\Post"
-    └─[ ] php artisan scout:import "App\Models\Page"
-    └─[ ] php artisan scout:import "App\Models\Event"
-
-[ ] SearchController
+[x] Buscador en header
+    └─[x] Input de búsqueda en desktop
+    └─[x] Input de búsqueda en móvil
+    └─[x] Enlace en footer
+```
     └─[ ] Route::get('/buscar', [SearchController::class, 'index'])->name('search')
     └─[ ] Buscar en Post, Page y Event
     └─[ ] Paginar resultados (10 por página)
@@ -312,6 +210,27 @@ no
 
 ## 6.7 — SEO y meta tags
 
+```
+[x] Meta tags en layouts/main.blade.php
+    └─[x] title, description, og:image
+    └─[x] Open Graph para Facebook
+    └─[x] Twitter Card
+
+[x] Meta tags por página
+    └─[x] Posts: meta_title, meta_description desde BD
+    └─[x] Páginas: meta_title, meta_description desde BD
+```
+
+## 6.8 — Accesibilidad WCAG 2.1 AA
+
+```
+[x] Atributo lang="es" en HTML
+[x] Skip link al contenido principal
+[x] aria-label en navegación
+[x] Imágenes con alt text
+[x] Contraste de colores (teal sobre blanco)
+[x] Focus states visibles
+[x] Navegación por teclado
 ```
 [ ] Configurar artesaos/seotools
     └─[ ] php artisan vendor:publish --provider="Artesaos\SEOTools\Providers\SEOToolsServiceProvider"

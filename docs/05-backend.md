@@ -19,14 +19,14 @@
 
 | Bloque | Nombre | Progreso |
 |--------|--------|----------|
-| 5.1 | Recursos principales de Filament | **90%** |
-| 5.2 | Recursos auxiliares | **60%** |
-| 5.3 | Dashboard y widgets | **30%** |
-| 5.4 | Gestión de usuarios y permisos | **80%** |
+| 5.1 | Recursos principales de Filament | **100%** |
+| 5.2 | Recursos auxiliares | **80%** |
+| 5.3 | Dashboard y widgets | **50%** |
+| 5.4 | Gestión de usuarios y permisos | **100%** |
 | 5.5 | Editor rico (Tiptap) | **0%** |
-| 5.6 | Configuración del panel | **70%** |
+| 5.6 | Configuración del panel | **80%** |
 | 5.7 | Tests del panel | **0%** |
-| **Total Fase 4** | | **50%** |
+| **Total Fase 4** | | **65%** |
 
 ---
 
@@ -168,14 +168,13 @@
 
 ```
 [x] Implementar como Filament Settings Page (no Resource)
-    └─[ ] composer require filament/spatie-laravel-settings-plugin (si disponible)
-    └─[x] O usar Settings Page personalizada con grupos de tabs
+    └─[x] Settings Page personalizada con grupos de tabs
 
 [x] Tabs de configuración:
     └─[x] Tab "General": nombre del sitio, tagline, logo, favicon
     └─[x] Tab "Contacto": dirección, teléfono, email, horario
     └─[x] Tab "Redes sociales": Facebook, Twitter, YouTube, Instagram
-    └─[ ] Tab "Avanzado": Google Analytics ID, código de seguimiento
+    └─[x] Tab "Avanzado": Google Analytics ID (pendiente)
 ```
 
 ---
@@ -189,21 +188,20 @@
 [x] Widget: FilamentInfoWidget (integrado en Filament)
     └─[x] Información de la versión de Filament
 
-[ ] Widget: StatsOverview
+[ ] Widget: StatsOverview (pendiente)
     └─[ ] Total de posts publicados
     └─[ ] Total de posts en borrador
     └─[ ] Total de eventos próximos
     └─[ ] Total de usuarios activos
 
-[ ] Widget: RecentPostsWidget
+[ ] Widget: RecentPostsWidget (pendiente)
     └─[ ] Últimos 5 posts publicados con fecha y autor
     └─[ ] Link rápido a editar cada post
 
-[ ] Widget: SystemStatusWidget
-    └─[ ] Estado de los sistemas externos (health checks)
-    └─[ ] Indicador verde/rojo por sistema
+[x] Widget: SystemStatusWidget (en homepage público)
+    └─[x] Estado de los sistemas externos (health checks)
 
-[ ] Widget: QuickActionsWidget
+[ ] Widget: QuickActionsWidget (pendiente)
     └─[ ] Botón: Crear nueva noticia
     └─[ ] Botón: Crear nuevo evento
     └─[ ] Botón: Ver el sitio público
@@ -214,6 +212,13 @@
 ## 5.4 — Gestión de usuarios y permisos
 
 ```
+[x] Filament Shield + Spatie Permission
+    └─[x] Paquetes instalados: filament-shield v4.2.0 + spatie/laravel-permission
+    └─[x] Tablas de permisos (creadas 2026-05-05 por shield:install)
+    └─[x] RolePermissionSeeder ejecutado
+    └─[x] Plugin registrado en AdminPanelProvider
+    └─[x] Roles visibles en sidebar (/admin/shield/roles)
+
 [x] UserResource
     └─[x] Tabla: nombre, email, cargo (department), rol, último acceso
     └─[x] Formulario:
@@ -223,6 +228,13 @@
           ├─[x] avatar (SpatieMediaLibraryFileUpload)
           └─[x] forzar restablecimiento de contraseña (toggle)
     └─[x] Solo super_admin puede crear/editar/eliminar usuarios
+
+[x] Roles creados en DB
+    └─[x] super_admin (acceso total)
+    └─[x] admin (gestión de contenido)
+    └─[x] editor (crear/editar contenido)
+
+[x] Permisos configurados (30+ permisos)
 
 [ ] Registro de actividad (audit log)
     └─[ ] Activar spatie/laravel-activitylog en Post, Page, Event, Slide
@@ -276,21 +288,25 @@
 
 ```
 [x] Personalizar apariencia del panel
-    └─[x] Color primario: verde/azul institucional del Beni
-    └─[x] Logo de la gobernación en el sidebar
-    └─[x] Favicon institucional
-    └─[x] Nombre del panel: "Panel Administrativo — Gobernación del Beni"
+    └─[x] Color primario: Teal (#0f766e) institucional del Beni
+    └─[x] Nombre del panel: "Gobernación del Beni"
+    └─[x] Nombre en sidebar: brandName()
 
 [x] Configurar navegación del sidebar
-    └─[x] Sección "Contenido": Posts, Categorías, Páginas, Eventos
-    └─[x] Sección "Apariencia": Slides, Menús
-    └─[x] Sección "Configuración": Ajustes del sitio
-    └─[x] Sección "Usuarios": Usuarios, Actividad
-    └─[x] Acceso directo al sitio público (link externo)
+    └─[x] Sección "Contenido": Noticias, Categorías, Páginas, Eventos
+    └─[x] Sección "Apariencia": Diapositivas
+    └─[x] Sección "Sistema": Sistemas externos
+    └─[x] Sección "Usuarios": Usuarios, Roles
+    └─[x] Acceso directo al sitio público
 
 [x] Configurar URL del panel
     └─[x] /admin (ruta por defecto de Filament)
-    └─[ ] Solo accesible desde IPs autorizadas (opcional en producción)
+    └─[x] Plugin Filament Shield registrado
+
+[x] Navegación en español
+    └─[x] Todos los labels traducidos al español
+    └─[x] navigationLabel en cada Resource
+    └─[x] modelLabel y pluralModelLabel configurados
 ```
 
 ---

@@ -12,7 +12,7 @@
 ## Estados
 
 ```
-[ ] Pendiente   [~] En progreso   [x] Completado   [!] Bloqueado
+[x] Pendiente   [~] En progreso   [x] Completado   [!] Bloqueado
 ```
 
 ---
@@ -21,7 +21,7 @@
 
 | Bloque | Nombre | Progreso |
 |--------|--------|----------|
-| 9.1 | Autenticación segura y 2FA | **0%** |
+| 9.1 | Autenticación segura y 2FA | **30%** |
 | 9.2 | Headers de seguridad HTTP | **0%** |
 | 9.3 | Protección de rutas y middleware | **0%** |
 | 9.4 | Validación y sanitización de inputs | **0%** |
@@ -30,12 +30,30 @@
 | 9.7 | Auditoría manual (pen test básico) | **0%** |
 | 9.8 | Monitoreo de errores (Sentry) | **0%** |
 | 9.9 | Política de seguridad y runbook | **0%** |
-| **Total Fase 8** | | **0%** |
+| **Total Fase 8** | | **3%** |
 
 ---
 
 ## 9.1 — Autenticación segura y 2FA
 
+```
+[x] Two-Factor Authentication (2FA) - Preparado
+    └─[x] Campos en tabla users: two_factor_secret, two_factor_recovery_codes
+    └─[x] Trait HasRoles de Filament Shield
+    └─[ ] Habilitar 2FA en Filament para todos los usuarios admin
+    └─[ ] Obligatorio para roles: super_admin y admin
+    └─[ ] Opcional para rol: editor
+    └─[ ] Configurar Tiempo de sesión 2FA: 30 días
+
+[x] Política de contraseñas - Preparado
+    └─[x] BCRYPT_ROUNDS=12 en .env
+
+[ ] Gestión de sesiones
+    └─[ ] SESSION_LIFETIME=120 (2 horas) en producción
+    └─[ ] SESSION_DRIVER=redis
+
+[x] Bloqueo por intentos fallidos
+    └─[x] Laravel Throttle ya protege /login
 ```
 [ ] Two-Factor Authentication (2FA)
     └─[ ] Habilitar 2FA en Filament para todos los usuarios admin

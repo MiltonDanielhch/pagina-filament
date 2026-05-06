@@ -43,10 +43,44 @@
     └─[x] timestamps
 
 [x] Modelo: User
-    └─[x] Trait: HasRoles (Filament Shield)
+    └─[x] Trait: HasRoles (Filament Shield + Spatie)
     └─[x] Trait: SoftDeletes
     └─[x] Relación: hasMany(Post::class)
     └─[ ] Relación: hasMany(Activity::class) — audit log
+```
+
+### Roles y Permisos (Filament Shield + Spatie)
+
+```
+[x] Paquetes instalados
+    └─[x] spatie/laravel-permission v6.25.0
+    └─[x] bezhansalleh/filament-shield v4.2.0
+
+[x] Tablas de permisos (creadas el 2026-05-05 por shield:install)
+    └─[x] permissions
+    └─[x] roles
+    └─[x] model_has_permissions
+    └─[x] model_has_roles
+    └─[x] role_has_permissions
+
+[x] Modelo User
+    └─[x] Trait: HasRoles
+
+[x] Roles creados
+    └─[x] super_admin (acceso total)
+    └─[x] admin (gestión de contenido)
+    └─[x] editor (crear/editar contenido)
+
+[x] Permisos configurados
+    └─[x] posts.viewAny, posts.view, posts.create, posts.update, posts.delete
+    └─[x] categories.viewAny, categories.view, categories.create, categories.update
+    └─[x] pages.viewAny, pages.view, pages.create, pages.update
+    └─[x] slides.viewAny, slides.view, slides.create, slides.update, slides.delete
+    └─[x] events.viewAny, events.view, events.create, events.update
+    └─[x] external_systems.viewAny, external_systems.view
+    └─[x] users.viewAny, users.view
+    └─[x] roles.viewAny, roles.view
+    └─[x] permissions.viewAny
 ```
 
 ### Noticias / Posts
