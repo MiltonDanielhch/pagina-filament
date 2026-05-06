@@ -1,0 +1,67 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
+class Event extends Model implements HasMedia
+{
+    use HasFactory, InteractsWithMedia, SoftDeletes;
+
+    protected $fillable = [
+        'user_id',
+        'title',
+        'slug',
+        'description',
+        'location',
+        'starts_at',
+        'ends_at',
+        'is_featured',
+        'status',
+    ];
+
+    protected $casts = [
+        'starts_at' => 'datetime',
+        'ends_at' => 'datetime',
+        'is_featured' => 'boolean',
+    ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->where('status', 'published');
+    }
+
+    public function scopeUpcoming($query)
+    {
+        return $query->where('starts_at', '>=', now())->orderBy('starts_at');
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('gallery')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(150)
+            ->height(150)
+            ->format('webp');
+
+        $this->addMediaConversion('medium')
+            ->width(800)
+            ->format('webp');
+    }
+}
