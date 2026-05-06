@@ -16,7 +16,7 @@ RUN apk add --no-cache \
     nodejs \
     npm \
     autoconf \
-    pecl
+    php-dev
 
 # Extensiones PHP
 RUN docker-php-ext-configure gd \
