@@ -19,6 +19,10 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-enable redis \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Instalar Nginx y Supervisord
+RUN apt-get update && apt-get install -y nginx supervisor \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -41,7 +45,21 @@ RUN chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www/storage \
     && chmod -R 755 /var/www/bootstrap/cache
 
-# Expose port
-EXPOSE 9000
+# Configurar PHP-FPM para usar socket
+RUN mkdir -p /var/run/php \
+    && sed -i 's|listen = 127.0.0.1:9000|listen = /var/run/php/php-fpm.sock|g' /usr/local/etc/php-fpm.d/www.conf \
+    && sed -i 's|;listen.mode = 0660|listen.mode = 0666|g' /usr/local/etc/php-fpm.d/www.conf \
+    && sed -i 's|user = www-data|user = www-data|g' /usr/local/etc/php-fpm.d/www.conf \
+    && sed -i 's|group = www-data|group = www-data|g' /usr/local/etc/php-fpm.d/www.conf
 
-CMD ["php-fpm"]
+# Configurar Nginx
+RUN rm /etc/nginx/sites-enabled/default
+COPY docker/nginx/coolify.conf /etc/nginx/conf.d/default.conf
+
+# Configurar Supervisord
+COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Expose port
+EXPOSE 80
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
