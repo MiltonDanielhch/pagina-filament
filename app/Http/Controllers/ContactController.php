@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
+use App\Jobs\ContactAutoReply;
+use App\Jobs\SendContactNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -17,8 +18,8 @@ class ContactController extends Controller
     {
         $data = $request->validated();
         
-        // Guardar o enviar email
-        // Mail::to('despacho@beni.gob.bo')->send(new ContactMail($data));
+        SendContactNotification::dispatch($data);
+        ContactAutoReply::dispatch($data['name'], $data['email']);
         
         return back()->with('success', 'Mensaje enviado correctamente. Nos pondremos en contacto pronto.');
     }

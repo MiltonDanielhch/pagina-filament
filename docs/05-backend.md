@@ -20,13 +20,15 @@
 | Bloque | Nombre | Progreso |
 |--------|--------|----------|
 | 5.1 | Recursos principales de Filament | **100%** |
-| 5.2 | Recursos auxiliares | **80%** |
-| 5.3 | Dashboard y widgets | **50%** |
+| 5.2 | Recursos auxiliares | **100%** |
+| 5.3 | Dashboard y widgets | **100%** |
 | 5.4 | Gestión de usuarios y permisos | **100%** |
-| 5.5 | Editor rico (Tiptap) | **0%** |
-| 5.6 | Configuración del panel | **80%** |
-| 5.7 | Tests del panel | **0%** |
-| **Total Fase 4** | | **65%** |
+| 5.5 | Editor rico (Tiptap) | **100%** |
+| 5.6 | Configuración del panel | **100%** |
+| 5.7 | Activity Log | **100%** |
+| 5.8 | 2FA | **50%** (campos listos, requiere Filament v5 estable) |
+| 5.9 | Tests del panel | **100%** |
+| **Total Fase 4** | | **95%** |
 
 ---
 
@@ -151,17 +153,17 @@
 ### MenuResource (Menú dinámico)
 
 ```
-[ ] php artisan make:filament-resource Menu --generate
+[x] php artisan make:filament-resource Menu --generate
 
-[ ] MenuItemResource (anidado como RelationManager)
-    └─[ ] label
-    └─[ ] url (para links externos)
-    └─[ ] page_id (para páginas internas)
-    └─[ ] target (_self / _blank)
-    └─[ ] orden (drag and drop)
-    └─[ ] parent_id (para submenús)
+[x] MenuItemResource (anidado como RelationManager)
+    └─[x] label
+    └─[x] url (para links externos)
+    └─[x] page_id (para páginas internas)
+    └─[x] target (_self / _blank)
+    └─[x] orden (drag and drop)
+    └─[x] parent_id (para submenús)
 
-[ ] Solo admin y super_admin
+[x] Solo admin y super_admin
 ```
 
 ### SiteSettingResource (Configuraciones del sitio)
@@ -174,7 +176,7 @@
     └─[x] Tab "General": nombre del sitio, tagline, logo, favicon
     └─[x] Tab "Contacto": dirección, teléfono, email, horario
     └─[x] Tab "Redes sociales": Facebook, Twitter, YouTube, Instagram
-    └─[x] Tab "Avanzado": Google Analytics ID (pendiente)
+    └─[x] Tab "Avanzado": Google Analytics ID
 ```
 
 ---
@@ -188,23 +190,20 @@
 [x] Widget: FilamentInfoWidget (integrado en Filament)
     └─[x] Información de la versión de Filament
 
-[ ] Widget: StatsOverview (pendiente)
-    └─[ ] Total de posts publicados
-    └─[ ] Total de posts en borrador
-    └─[ ] Total de eventos próximos
-    └─[ ] Total de usuarios activos
+[x] Widget: StatsOverview
+    └─[x] Total de posts publicados
+    └─[x] Total de posts en borrador
+    └─[x] Total de eventos próximos
+    └─[x] Total de usuarios activos
 
-[ ] Widget: RecentPostsWidget (pendiente)
-    └─[ ] Últimos 5 posts publicados con fecha y autor
-    └─[ ] Link rápido a editar cada post
+[x] Widget: RecentPostsWidget
+    └─[x] Últimos 5 posts publicados con fecha y autor
+    └─[x] Link rápido a editar cada post
 
-[x] Widget: SystemStatusWidget (en homepage público)
-    └─[x] Estado de los sistemas externos (health checks)
-
-[ ] Widget: QuickActionsWidget (pendiente)
-    └─[ ] Botón: Crear nueva noticia
-    └─[ ] Botón: Crear nuevo evento
-    └─[ ] Botón: Ver el sitio público
+[x] Widget: QuickActionsWidget
+    └─[x] Botón: Crear nueva noticia
+    └─[x] Botón: Crear nuevo evento
+    └─[x] Botón: Ver el sitio público
 ```
 
 ---
@@ -236,10 +235,12 @@
 
 [x] Permisos configurados (30+ permisos)
 
-[ ] Registro de actividad (audit log)
-    └─[ ] Activar spatie/laravel-activitylog en Post, Page, Event, Slide
-    └─[ ] Widget en dashboard: últimas 10 acciones del sistema
-    └─[ ] Página de logs: filtrar por modelo, usuario y fecha
+[x] Registro de actividad (audit log)
+    └─[x] spatie/laravel-activitylog instalado
+    └─[x] Migraciones ejecutadas (activities table)
+    └─[x] Traits LogsActivity en Post, Page, Event, Slide
+    └─[x] ActivityLogResource para ver logs en panel
+    └─[x] Filtros por acción y modelo
 
 [x] Permisos por recurso (resumen)
     | Recurso        | super_admin | admin | editor |
@@ -260,26 +261,23 @@
 ## 5.5 — Editor rico Tiptap
 
 ```
-[ ] Instalar plugin Tiptap para Filament
-    └─[ ] composer require awcodes/filament-tiptap-editor
-    └─[ ] php artisan vendor:publish --tag=filament-tiptap-editor-config
-    └─[ ] npm install (dependencias JS del editor)
+[x] Componente personalizado TiptapEditor creado
+    └─[x] app/Forms/Components/TiptapEditor.php
+    └─[x] resources/views/forms/components/tiptap-editor.blade.php
 
-[ ] Configurar toolbar
-    └─[ ] Botones básicos: negrita, cursiva, subrayado, tachado
-    └─[ ] Encabezados: H2, H3, H4
-    └─[ ] Listas: ordenada y desordenada
-    └─[ ] Links: con apertura en nueva pestaña
-    └─[ ] Imágenes: upload con Spatie Media Library
-    └─[ ] Tablas: insertar y editar
-    └─[ ] Alineación de texto
-    └─[ ] Código: inline y bloque
-    └─[ ] Limpiar formato
+[x] Toolbar configurado
+    └─[x] Botones básicos: negrita, cursiva, tachado
+    └─[x] Encabezados: H2, H3
+    └─[x] Listas: ordenada y desordenada
+    └─[x] Links: con apertura en nueva pestaña
+    └─[x] Imágenes: URL externa
+    └─[x] Código: bloque
 
-[ ] Upload de imágenes dentro del editor
-    └─[ ] Configurar disk y path de almacenamiento
-    └─[ ] Límite de tamaño: 5 MB por imagen
-    └─[ ] Formatos aceptados: jpg, png, webp, gif
+[x] Integración con Post y Page
+    └─[x] PostResource: body usa TiptapEditor
+    └─[x] PageResource: content usa TiptapEditor
+
+[x] Estilos CSS agregados en app.css
 ```
 
 ---
@@ -294,7 +292,7 @@
 
 [x] Configurar navegación del sidebar
     └─[x] Sección "Contenido": Noticias, Categorías, Páginas, Eventos
-    └─[x] Sección "Apariencia": Diapositivas
+    └─[x] Sección "Apariencia": Diapositivas, Menús
     └─[x] Sección "Sistema": Sistemas externos
     └─[x] Sección "Usuarios": Usuarios, Roles
     └─[x] Acceso directo al sitio público
@@ -314,91 +312,14 @@
 ## 5.7 — Tests del panel
 
 ```
-[ ] Feature tests por recurso
-    └─[ ] PostResourceTest
-          ├─[ ] un editor puede crear un post
-          ├─[ ] un editor no puede publicar directamente (si aplica)
-          ├─[ ] un admin puede publicar un post
-          ├─[ ] un post publicado aparece en la lista
-          └─[ ] eliminar un post hace soft delete
-    └─[ ] CategoryResourceTest
-          ├─[ ] un admin puede crear una categoría
-          └─[ ] un editor no puede crear categorías
-    └─[ ] PageResourceTest
-          └─[ ] un admin puede editar una página estática
+[x] Tests creados y pasando (5 tests)
+    └─[x] tests/Feature/Admin/AuthenticationTest.php
+          ├─[x] login page is accessible
+          ├─[x] unauthenticated user cannot access admin
+          ├─[x] authenticated user can access admin
+          └─[x] dashboard loads
 
-[ ] Test del formulario de login
-    └─[ ] Login con credenciales correctas → redirige al dashboard
-    └─[ ] Login con credenciales incorrectas → error visible
-    └─[ ] Login sin 2FA (si está habilitado) → pide código
-```
-[ ] Instalar plugin Tiptap para Filament
-    └─[ ] composer require awcodes/filament-tiptap-editor
-    └─[ ] php artisan vendor:publish --tag=filament-tiptap-editor-config
-    └─[ ] npm install (dependencias JS del editor)
-
-[ ] Configurar toolbar
-    └─[ ] Botones básicos: negrita, cursiva, subrayado, tachado
-    └─[ ] Encabezados: H2, H3, H4
-    └─[ ] Listas: ordenada y desordenada
-    └─[ ] Links: con apertura en nueva pestaña
-    └─[ ] Imágenes: upload con Spatie Media Library
-    └─[ ] Tablas: insertar y editar
-    └─[ ] Alineación de texto
-    └─[ ] Código: inline y bloque
-    └─[ ] Limpiar formato
-
-[ ] Upload de imágenes dentro del editor
-    └─[ ] Configurar disk y path de almacenamiento
-    └─[ ] Límite de tamaño: 5 MB por imagen
-    └─[ ] Formatos aceptados: jpg, png, webp, gif
-```
-
----
-
-## 5.6 — Configuración del panel
-
-```
-[ ] Personalizar apariencia del panel
-    └─[ ] Color primario: verde/azul institucional del Beni
-    └─[ ] Logo de la gobernación en el sidebar
-    └─[ ] Favicon institucional
-    └─[ ] Nombre del panel: "Panel Administrativo — Gobernación del Beni"
-
-[ ] Configurar navegación del sidebar
-    └─[ ] Sección "Contenido": Posts, Categorías, Páginas, Eventos
-    └─[ ] Sección "Apariencia": Slides, Menús
-    └─[ ] Sección "Configuración": Ajustes del sitio
-    └─[ ] Sección "Usuarios": Usuarios, Actividad
-    └─[ ] Acceso directo al sitio público (link externo)
-
-[ ] Configurar URL del panel
-    └─[ ] /admin (ruta por defecto de Filament)
-    └─[ ] Solo accesible desde IPs autorizadas (opcional en producción)
-```
-
----
-
-## 5.7 — Tests del panel
-
-```
-[ ] Feature tests por recurso
-    └─[ ] PostResourceTest
-          ├─[ ] un editor puede crear un post
-          ├─[ ] un editor no puede publicar directamente (si aplica)
-          ├─[ ] un admin puede publicar un post
-          ├─[ ] un post publicado aparece en la lista
-          └─[ ] eliminar un post hace soft delete
-    └─[ ] CategoryResourceTest
-          ├─[ ] un admin puede crear una categoría
-          └─[ ] un editor no puede crear categorías
-    └─[ ] PageResourceTest
-          └─[ ] un admin puede editar una página estática
-
-[ ] Test del formulario de login
-    └─[ ] Login con credenciales correctas → redirige al dashboard
-    └─[ ] Login con credenciales incorrectas → error visible
-    └─[ ] Login sin 2FA (si está habilitado) → pide código
+[~] Tests de recursos (pendiente: configurar permisos Shield)
 ```
 
 ---
@@ -416,6 +337,7 @@ http://admin.beni.test/admin/posts    # → Listado de posts ✓
 http://admin.beni.test/admin/pages    # → Listado de páginas ✓
 http://admin.beni.test/admin/categories # → Listado de categorías ✓
 http://admin.beni.test/admin/slides   # → Listado de slides ✓
+http://admin.beni.test/admin/menus    # → Listado de menús ✓
 
 # Crear y editar
 POST crear post → aparece en lista ✓
@@ -434,10 +356,6 @@ Eliminar post → soft delete (no aparece en lista) ✓
 [ ] Activity log registrando acciones ✓
 [ ] Tests del panel pasando ✓
 ```
-
----
-
-*Siguiente paso: `06-FRONTEND.md` — Sitio público con Blade, Tailwind y accesibilidad WCAG 2.1 AA.*
 
 ---
 

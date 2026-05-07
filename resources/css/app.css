@@ -21,3 +21,56 @@
         @apply bg-gray-50 text-gray-800;
     }
 }
+
+.ProseMirror {
+    outline: none;
+    min-height: 200px;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #9ca3af;
+    pointer-events: none;
+    height: 0;
+}
+
+.ProseMirror h2 {
+    @apply text-2xl font-bold mt-4 mb-2;
+}
+
+.ProseMirror h3 {
+    @apply text-xl font-bold mt-3 mb-2;
+}
+
+.ProseMirror ul, .ProseMirror ol {
+    @apply pl-6 mb-4;
+}
+
+.ProseMirror ul {
+    @apply list-disc;
+}
+
+.ProseMirror ol {
+    @apply list-decimal;
+}
+
+.ProseMirror a {
+    @apply text-teal-600 underline;
+}
+
+.ProseMirror img {
+    @apply max-w-full h-auto rounded-lg my-4;
+}
+
+.ProseMirror pre {
+    @apply bg-gray-800 text-gray-100 p-4 rounded-lg my-4 overflow-x-auto;
+}
+
+.ProseMirror code {
+    @apply bg-gray-100 px-1 py-0.5 rounded text-sm;
+}
+
+.ProseMirror pre code {
+    @apply bg-transparent p-0;
+}

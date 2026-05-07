@@ -1,5 +1,22 @@
 @extends('layouts.main')
 
+@section('title', $post->meta_title ?? $post->title)
+@section('description', $post->meta_description ?? $post->excerpt)
+
+@section('seo')
+<meta property="og:title" content="{{ $post->meta_title ?? $post->title }}">
+<meta property="og:description" content="{{ $post->meta_description ?? $post->excerpt }}">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="{{ $post->published_at }}">
+<meta property="article:author" content="{{ $post->user->name ?? 'Gobernación del Beni' }}">
+@if($post->category)
+<meta property="article:section" content="{{ $post->category->name }}">
+@endif
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $post->meta_title ?? $post->title }}">
+<meta name="twitter:description" content="{{ $post->meta_description ?? $post->excerpt }}">
+@endsection
+
 @section('content')
 <article class="container mx-auto px-4 py-12 max-w-4xl">
     <div class="mb-8">

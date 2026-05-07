@@ -58,7 +58,7 @@ class SearchController extends Controller
                 ->with('category')
                 ->paginate(10);
 
-            $pages = Page::published()
+            $pages = Page::where('is_published', true)
                 ->where(function ($q) use ($query) {
                     $q->where('title', 'like', "%{$query}%")
                         ->orWhere('content', 'like', "%{$query}%");

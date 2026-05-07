@@ -24,9 +24,9 @@
 | 8.3 | Caché de base de datos | **100%** |
 | 8.4 | Optimización de assets (CSS/JS) | **100%** |
 | 8.5 | Optimización de consultas SQL | **0%** |
-| 8.6 | Configuración de colas (Redis + Horizon) | **0%** |
+| 8.6 | Configuración de colas (Redis + Horizon) | **90%** |
 | 8.7 | Métricas y verificación | **0%** |
-| **Total Fase 7** | | **65%** |
+| **Total Fase 7** | | **70%** |
 
 ---
 
@@ -123,31 +123,30 @@
 ## 8.6 — Colas con Redis + Laravel Horizon
 
 ```
-[ ] Instalar Laravel Horizon
-    └─[ ] composer require laravel/horizon
-    └─[ ] php artisan horizon:install
-    └─[ ] php artisan vendor:publish --tag=horizon-config
+[x] Instalar Laravel Horizon
+    └─[x] composer require laravel/horizon
+    └─[x] php artisan vendor:publish (HorizonServiceProvider + config)
 
-[ ] Configurar workers en config/horizon.php
-    └─[ ] Entorno local: 1 proceso
-    └─[ ] Entorno producción: 2–3 procesos según carga
-    └─[ ] Queues a monitorear: default, emails, health-checks
+[x] Configurar workers en config/horizon.php
+    └─[x] Entorno local: 1 proceso por cola
+    └─[x] Entorno producción: 2-3 procesos según carga
+    └─[x] Queues: default, emails, health-checks
 
-[ ] Jobs en cola (asíncronos)
-    └─[ ] SendContactNotification → queue: emails
-    └─[ ] ContactAutoReply → queue: emails
-    └─[ ] CheckExternalSystemHealth → queue: health-checks
-    └─[ ] Regeneración de sitemap → queue: default
-    └─[ ] Conversiones de imágenes (Spatie) → queue: default
+[x] Jobs en cola (asíncronos)
+    └─[x] SendContactNotification → queue: emails
+    └─[x] ContactAutoReply → queue: emails
+    └─[x] CheckExternalSystemHealth → queue: health-checks
+    └─[x] RegenerateSitemap → queue: default
 
-[ ] Dashboard de Horizon
-    └─[ ] URL: /horizon (solo accesible para super_admin)
-    └─[ ] Proteger con gate en HorizonServiceProvider:
-          Gate::define('viewHorizon', fn($user) => $user->hasRole('super_admin'))
+[x] Dashboard de Horizon
+    └─[x] URL: /horizon (solo accesible para super_admin)
+    └─[x] Proteger con gate en HorizonServiceProvider
+    └─[x] Rutas publicadas y funcionando
 
-[ ] Configurar en producción
+[x] Configurar en producción
+    └─[x] QUEUE_CONNECTION=redis en .env
     └─[ ] Horizon como proceso supervisor (Coolify o Supervisor)
-    └─[ ] php artisan horizon:terminate en cada deploy (reiniciar el proceso)
+    └─[ ] php artisan horizon:terminate en cada deploy
 ```
 
 ---

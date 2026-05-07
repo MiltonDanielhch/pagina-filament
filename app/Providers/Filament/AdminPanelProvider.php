@@ -13,6 +13,10 @@ use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use App\Filament\Resources\Users\UserResource;
+use App\Filament\Widgets\StatsOverviewWidget;
+use App\Filament\Widgets\RecentPostsWidget;
+use App\Filament\Widgets\QuickActionsWidget;
+use App\Filament\Pages\Settings\SiteSettings;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use BezhanSalleh\FilamentShield\Resources\Roles\RoleResource;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -43,11 +47,15 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->pages([
                 Dashboard::class,
+                SiteSettings::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 AccountWidget::class,
                 FilamentInfoWidget::class,
+                StatsOverviewWidget::class,
+                RecentPostsWidget::class,
+                QuickActionsWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

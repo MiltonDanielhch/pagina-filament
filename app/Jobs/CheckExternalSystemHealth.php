@@ -3,45 +3,57 @@
 namespace App\Jobs;
 
 use App\Models\ExternalSystem;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class CheckExternalSystemHealth implements ShouldQueue
 {
-    use Queueable;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    public ?int $systemId;
+
+    public function __construct(?int $systemId = null)
+    {
+        $this->systemId = $systemId;
+        $this->onQueue('health-checks');
+    }
 
     public function handle(): void
     {
-        $systems = ExternalSystem::active()->get();
+        if ($this->systemId) {
+            $systems = ExternalSystem::where('id', $this->systemId)->get();
+        } else {
+            $systems = ExternalSystem::active()->get();
+        }
 
         foreach ($systems as $system) {
             $this->checkSystem($system);
         }
     }
 
-    public function checkSystem(ExternalSystem $system): void
+    protected function checkSystem(ExternalSystem $system): void
     {
-        $cacheKey = "system_status_{$system->id}";
-
-        if (Cache::has($cacheKey)) {
-            continue;
-        }
-
         try {
-            $response = Http::timeout(5)->get($system->url);
+            $response = Http::timeout(10)->get($system->url);
             $status = $response->successful() ? 'online' : 'offline';
+            $responseCode = $response->status();
         } catch (\Exception $e) {
             $status = 'offline';
+            $responseCode = null;
+            Log::warning("Health check failed for {$system->name}: {$e->getMessage()}");
         }
 
         $system->update([
             'last_status' => $status,
             'last_checked_at' => now(),
+            'last_response_code' => $responseCode,
         ]);
-
-        Cache::put($cacheKey, true, now()->addMinutes(5));
     }
 
     public static function checkNow(ExternalSystem $system): bool

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Pages\Schemas;
 
+use App\Forms\Components\TiptapEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -19,7 +20,7 @@ class PageForm
                 TextInput::make('slug')
                     ->label('Slug')
                     ->required(),
-                Textarea::make('content')
+                TiptapEditor::make('content')
                     ->label('Contenido')
                     ->columnSpanFull(),
                 TextInput::make('meta_title')

@@ -4,6 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Gobernación Autónoma Departamental del Beni' }}</title>
+    <style>
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+        .skip-link:focus {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: auto;
+            height: auto;
+            padding: 10px 20px;
+            background: #0f766e;
+            color: white;
+            border-radius: 8px;
+            z-index: 9999;
+            outline: 2px solid white;
+            text-decoration: none;
+        }
+    </style>
     <meta name="description" content="{{ $description ?? 'Sitio web oficial de la Gobernación Autónoma Departamental del Beni, Bolivia. Información sobre servicios, noticias y trámites gubernamentales.' }}">
     <meta name="author" content="Gobernación Autónoma Departamental del Beni">
     <meta name="robots" content="index, follow">
@@ -33,6 +57,11 @@
     @yield('seo')
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- Skip Link para accesibilidad -->
+    <a href="#main-content" class="skip-link">
+        Ir al contenido principal
+    </a>
+    
     <!-- Header -->
     <header class="bg-white shadow-lg sticky top-0 z-50">
         <!-- Top Bar -->
@@ -115,7 +144,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="flex-grow">
+    <main id="main-content" class="flex-grow">
         @yield('content')
     </main>
 

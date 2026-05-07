@@ -24,6 +24,10 @@ class PostController extends Controller
     {
         $category = Category::where('slug', $slug)->firstOrFail();
         $posts = Post::published()->where('category_id', $category->id)->latest('published_at')->paginate(10);
-        return view('posts.category', compact('posts', 'category'));
+        
+        $title = $category->name . ' - Gobernación del Beni';
+        $description = $category->description ?? 'Noticias sobre ' . $category->name . ' en la Gobernación Autónoma Departamental del Beni.';
+        
+        return view('posts.category', compact('posts', 'category', 'title', 'description'));
     }
 }

@@ -10,6 +10,16 @@ class PostSeeder extends Seeder
     public function run(): void
     {
         $user = \App\Models\User::first();
+        
+        // Si no hay usuario, crear uno temporal
+        if (!$user) {
+            $user = \App\Models\User::factory()->create([
+                'name' => 'Admin',
+                'email' => 'admin@admin.com',
+            ]);
+            $user->assignRole('super_admin');
+        }
+        
         $categories = \App\Models\Category::all();
 
         $posts = [

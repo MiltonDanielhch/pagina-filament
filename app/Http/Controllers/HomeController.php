@@ -16,6 +16,9 @@ class HomeController extends Controller
         $categories = Category::all();
         $externalSystems = ExternalSystem::active()->get();
 
-        return view('home', compact('slides', 'latestPosts', 'categories', 'externalSystems'));
+        $title = 'Gobernación Autónoma Departamental del Beni - Trinidad, Bolivia';
+        $description = 'Sitio web oficial de la Gobernación Autónoma Departamental del Beni. Información sobre servicios gubernamentales, noticias, trámites y proyectos de desarrollo para el departamento del Beni, Bolivia.';
+
+        return view('home', compact('slides', 'latestPosts', 'categories', 'externalSystems', 'title', 'description'));
     }
 }

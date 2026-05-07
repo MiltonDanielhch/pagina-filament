@@ -1,63 +1,45 @@
-# Dockerfile
-FROM php:8.3-fpm-alpine
+FROM php:8.3-fpm
 
-# Dependencias del sistema
-RUN apk add --no-cache \
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
     git \
     curl \
     libpng-dev \
-    libjpeg-turbo-dev \
-    libwebp-dev \
-    freetype-dev \
+    libonig-dev \
+    libxml2-dev \
     libzip-dev \
+    libicu-dev \
     zip \
     unzip \
-    redis \
     nodejs \
     npm \
-    autoconf \
-    php-dev
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip intl \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Extensiones PHP
-RUN docker-php-ext-configure gd \
-        --with-freetype \
-        --with-jpeg \
-        --with-webp \
-    && docker-php-ext-install \
-        pdo \
-        pdo_mysql \
-        gd \
-        zip \
-        bcmath \
-        opcache \
-        pcntl
-
-# Instalar extensión Redis
-RUN pecl install redis && docker-php-ext-enable redis
-
-# OPcache para producción
-RUN echo "opcache.enable=1" >> /usr/local/etc/php/conf.d/opcache.ini && \
-    echo "opcache.memory_consumption=256" >> /usr/local/etc/php/conf.d/opcache.ini && \
-    echo "opcache.validate_timestamps=0" >> /usr/local/etc/php/conf.d/opcache.ini
-
-# Composer
+# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Set working directory
 WORKDIR /var/www
 
-# Instalar dependencias PHP
+# Copy composer files first for better caching
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+RUN composer install --no-scripts --no-autoloader --no-dev --optimize-autoloader
 
-# Instalar y compilar assets
-COPY package.json package-lock.json ./
-RUN npm ci && npm run build
-
-# Copiar código fuente
+# Copy application files
 COPY . .
 
-# Permisos de storage
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+# Generate autoloader and run scripts
+RUN composer dump-autoload --optimize \
+    && composer run-script post-autoload-dump
 
+# Set permissions
+RUN chown -R www-data:www-data /var/www \
+    && chmod -R 755 /var/www/storage \
+    && chmod -R 755 /var/www/bootstrap/cache
+
+# Expose port
 EXPOSE 9000
+
 CMD ["php-fpm"]
