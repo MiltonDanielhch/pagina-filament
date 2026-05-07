@@ -12,7 +12,9 @@ tests/
 Thumbs.db
 *.md
 !README.md
-docker/
+docker/*
+!docker/nginx/coolify.conf
+!docker/supervisord.conf
 *.log
 .phpunit.result.json
 composer.phar
