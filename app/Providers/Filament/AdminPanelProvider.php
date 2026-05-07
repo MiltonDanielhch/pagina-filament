@@ -43,18 +43,10 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugin(FilamentShieldPlugin::make())
             ->navigationGroups([
-                NavigationGroup::make('Contenido')
-                    ->label('Contenido')
-                    ->icon('heroicon-o-document-text'),
-                NavigationGroup::make('Multimedia')
-                    ->label('Multimedia')
-                    ->icon('heroicon-o-photo'),
-                NavigationGroup::make('Gestión')
-                    ->label('Gestión')
-                    ->icon('heroicon-o-cog'),
-                NavigationGroup::make('Seguridad')
-                    ->label('Seguridad')
-                    ->icon('heroicon-o-shield-check'),
+                NavigationGroup::make('Contenido'),
+                NavigationGroup::make('Multimedia'),
+                NavigationGroup::make('Gestión'),
+                NavigationGroup::make('Seguridad'),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')

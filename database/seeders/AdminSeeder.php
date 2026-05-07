@@ -9,7 +9,7 @@ class AdminSeeder extends Seeder
 {
     public function run(): void
     {
-        $user = User::firstOrCreate(
+        User::firstOrCreate(
             ['email' => 'admin@admin.com'],
             [
                 'id' => 1,
@@ -17,10 +17,5 @@ class AdminSeeder extends Seeder
                 'password' => bcrypt('admin123'),
             ]
         );
-
-        // Asignar super_admin si existe el rol
-        if (method_exists($user, 'assignRole')) {
-            $user->assignRole('super_admin');
-        }
     }
 }

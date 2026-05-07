@@ -15,6 +15,8 @@ RUN apt-get update && apt-get install -y \
     npm \
     && docker-php-ext-configure intl \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip intl \
+    && pecl install redis \
+    && docker-php-ext-enable redis \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Composer
@@ -25,7 +27,7 @@ WORKDIR /var/www
 
 # Copy composer files first for better caching
 COPY composer.json composer.lock ./
-RUN composer install --no-scripts --no-autoloader --no-dev --optimize-autoloader
+RUN composer install --no-scripts --no-autoloader --optimize-autoloader
 
 # Copy application files
 COPY . .
