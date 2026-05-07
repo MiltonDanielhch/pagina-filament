@@ -11,6 +11,7 @@ use App\Filament\Resources\Pages\Schemas\PageInfolist;
 use App\Filament\Resources\Pages\Tables\PagesTable;
 use App\Models\Page;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -23,6 +24,8 @@ class PageResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocument;
 
     protected static ?string $navigationLabel = 'Páginas';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Contenido';
 
     protected static ?string $recordTitleAttribute = 'title';
 

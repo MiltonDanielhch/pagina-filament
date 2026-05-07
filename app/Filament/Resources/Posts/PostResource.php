@@ -11,6 +11,7 @@ use App\Filament\Resources\Posts\Schemas\PostInfolist;
 use App\Filament\Resources\Posts\Tables\PostsTable;
 use App\Models\Post;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -25,6 +26,8 @@ class PostResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedNewspaper;
 
     protected static ?string $navigationLabel = 'Noticias';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Contenido';
 
     protected static ?string $recordTitleAttribute = 'title';
 

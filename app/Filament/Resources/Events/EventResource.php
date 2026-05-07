@@ -11,6 +11,7 @@ use App\Filament\Resources\Events\Schemas\EventInfolist;
 use App\Filament\Resources\Events\Tables\EventsTable;
 use App\Models\Event;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -23,6 +24,8 @@ class EventResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendar;
 
     protected static ?string $navigationLabel = 'Eventos';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Contenido';
 
     protected static ?string $recordTitleAttribute = 'title';
 

@@ -11,6 +11,7 @@ use App\Filament\Resources\Slides\Schemas\SlideInfolist;
 use App\Filament\Resources\Slides\Tables\SlidesTable;
 use App\Models\Slide;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -23,6 +24,8 @@ class SlideResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $navigationLabel = 'Diapositivas';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Multimedia';
 
     protected static ?string $recordTitleAttribute = 'title';
 

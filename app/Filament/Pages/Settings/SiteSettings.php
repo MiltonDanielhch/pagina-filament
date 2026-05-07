@@ -10,6 +10,7 @@ use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use UnitEnum;
 use App\Models\SiteSetting;
 
 class SiteSettings extends Page implements HasSchemas
@@ -17,6 +18,8 @@ class SiteSettings extends Page implements HasSchemas
     use InteractsWithSchemas;
 
     protected static ?string $title = 'Configuración del sitio';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Gestión';
 
     protected string $view = 'filament.pages.settings.site-settings';
 

@@ -5,6 +5,7 @@ namespace App\Filament\Resources\ActivityLog;
 use App\Filament\Resources\ActivityLog\Pages\ListActivities;
 use Filament\Resources\Resource;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Icons\Heroicon;
 use Spatie\Activitylog\Models\Activity;
@@ -16,6 +17,8 @@ class ActivityLogResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClock;
 
     protected static ?string $navigationLabel = 'Registro de actividad';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Seguridad';
 
     protected static ?string $modelLabel = 'Actividad';
 

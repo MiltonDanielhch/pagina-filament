@@ -11,6 +11,7 @@ use App\Filament\Resources\ExternalSystems\Schemas\ExternalSystemInfolist;
 use App\Filament\Resources\ExternalSystems\Tables\ExternalSystemsTable;
 use App\Models\ExternalSystem;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -23,6 +24,8 @@ class ExternalSystemResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedLink;
 
     protected static ?string $navigationLabel = 'Sistemas externos';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Multimedia';
 
     protected static ?string $recordTitleAttribute = 'name';
 

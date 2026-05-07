@@ -11,6 +11,7 @@ use App\Filament\Resources\Menus\Schemas\MenuInfolist;
 use App\Filament\Resources\Menus\Tables\MenusTable;
 use App\Models\Menu;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Icons\Heroicon;
@@ -24,6 +25,8 @@ class MenuResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBars3;
 
     protected static ?string $navigationLabel = 'Menús';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Gestión';
 
     protected static ?string $recordTitleAttribute = 'name';
 
