@@ -60,6 +60,9 @@ COPY docker/nginx/coolify.conf /etc/nginx/conf.d/default.conf
 # Configurar Supervisord
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+# Configurar proxy confianza para Coolify
+ENV TRUSTED_PROXIES=*
+
 # Expose port
 EXPOSE 8000
 
