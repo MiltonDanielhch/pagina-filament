@@ -33,6 +33,8 @@ class DatabaseSeeder extends Seeder
             PostSeeder::class,
             ExternalSystemSeeder::class,
             EventSeeder::class,
+            SiteSettingSeeder::class,
+            MenuSeeder::class,
         ]);
     }
 }
