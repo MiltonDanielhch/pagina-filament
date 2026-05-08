@@ -27,9 +27,12 @@ class DatabaseSeeder extends Seeder
 
         // 3. Datos que dependen del usuario
         $this->call([
+            SlideSeeder::class,
             CategorySeeder::class,
             PageSeeder::class,
             PostSeeder::class,
+            ExternalSystemSeeder::class,
+            EventSeeder::class,
         ]);
     }
 }

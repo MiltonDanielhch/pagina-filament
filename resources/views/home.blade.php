@@ -217,4 +217,52 @@
         </div>
     </div>
 </section>
+
+@section('scripts')
+<script>
+    // Slider automático
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('[data-slide]');
+        const contents = document.querySelectorAll('[data-slide-content]');
+        const buttons = document.querySelectorAll('[data-slide-btn]');
+        
+        if (slides.length > 1) {
+            let currentSlide = 0;
+            const interval = 5000; // 5 segundos
+            
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('opacity-100', i === index);
+                    slide.classList.toggle('opacity-0', i !== index);
+                });
+                
+                contents.forEach((content, i) => {
+                    content.classList.toggle('hidden', i !== index);
+                });
+                
+                buttons.forEach((btn, i) => {
+                    btn.classList.toggle('bg-white', i === index);
+                    btn.classList.toggle('w-8', i === index);
+                    btn.classList.toggle('bg-white/50', i !== index);
+                    btn.classList.toggle('w-3', i !== index);
+                });
+            }
+            
+            // Auto-rotar
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }, interval);
+            
+            // Click en botones
+            buttons.forEach((btn, index) => {
+                btn.addEventListener('click', () => {
+                    currentSlide = index;
+                    showSlide(currentSlide);
+                });
+            });
+        }
+    });
+</script>
+@endsection
 @endsection
