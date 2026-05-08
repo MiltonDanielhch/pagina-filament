@@ -40,17 +40,15 @@ COPY . .
 RUN composer dump-autoload --optimize \
     && composer run-script post-autoload-dump
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 755 /var/www/storage \
-    && chmod -R 755 /var/www/bootstrap/cache
-
-# Configurar PHP-FPM para usar socket
+# Configurar PHP-FPM socket y permisos
 RUN mkdir -p /var/run/php \
     && sed -i 's|^;*listen =.*|listen = /var/run/php/php-fpm.sock|g' /usr/local/etc/php-fpm.d/www.conf \
     && sed -i 's|^;*listen.mode =.*|listen.mode = 0666|g' /usr/local/etc/php-fpm.d/www.conf \
     && sed -i 's|^;*listen.owner =.*|listen.owner = www-data|g' /usr/local/etc/php-fpm.d/www.conf \
-    && sed -i 's|^;*listen.group =.*|listen.group = www-data|g' /usr/local/etc/php-fpm.d/www.conf
+    && sed -i 's|^;*listen.group =.*|listen.group = www-data|g' /usr/local/etc/php-fpm.d/www.conf \
+    && mkdir -p /var/www/storage /var/www/bootstrap/cache \
+    && chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache \
+    && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
 # Configurar Nginx
 RUN rm /etc/nginx/sites-enabled/default
