@@ -40,6 +40,9 @@ COPY . .
 RUN composer dump-autoload --optimize \
     && composer run-script post-autoload-dump
 
+# Build assets with Vite
+RUN npm install && npm run build
+
 # Configurar PHP-FPM socket y permisos
 RUN mkdir -p /var/run/php \
     && sed -i 's|^;*listen =.*|listen = /var/run/php/php-fpm.sock|g' /usr/local/etc/php-fpm.d/www.conf \
