@@ -61,6 +61,6 @@ COPY docker/nginx/coolify.conf /etc/nginx/conf.d/default.conf
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Expose port
-EXPOSE 80
+EXPOSE 8000
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
