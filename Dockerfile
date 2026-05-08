@@ -47,10 +47,10 @@ RUN chown -R www-data:www-data /var/www \
 
 # Configurar PHP-FPM para usar socket
 RUN mkdir -p /var/run/php \
-    && sed -i 's|listen = 127.0.0.1:9000|listen = /var/run/php/php-fpm.sock|g' /usr/local/etc/php-fpm.d/www.conf \
-    && sed -i 's|;listen.mode = 0660|listen.mode = 0666|g' /usr/local/etc/php-fpm.d/www.conf \
-    && sed -i 's|user = www-data|user = www-data|g' /usr/local/etc/php-fpm.d/www.conf \
-    && sed -i 's|group = www-data|group = www-data|g' /usr/local/etc/php-fpm.d/www.conf
+    && sed -i 's|^;*listen =.*|listen = /var/run/php/php-fpm.sock|g' /usr/local/etc/php-fpm.d/www.conf \
+    && sed -i 's|^;*listen.mode =.*|listen.mode = 0666|g' /usr/local/etc/php-fpm.d/www.conf \
+    && sed -i 's|^;*listen.owner =.*|listen.owner = www-data|g' /usr/local/etc/php-fpm.d/www.conf \
+    && sed -i 's|^;*listen.group =.*|listen.group = www-data|g' /usr/local/etc/php-fpm.d/www.conf
 
 # Configurar Nginx
 RUN rm /etc/nginx/sites-enabled/default
