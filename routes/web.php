@@ -8,6 +8,9 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
+// Filament routes (auto-registered by Filament)
+// Livewire routes are automatically registered by Livewire v3
+
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/blog', [PostController::class, 'index'])->name('blog');
