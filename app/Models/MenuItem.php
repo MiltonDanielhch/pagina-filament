@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Ubicación: `app/Models/MenuItem.php`
+ *
+ * Descripción: Modelo para items de menú con soporte anidado y relación recursiva.
+ *
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

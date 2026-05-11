@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `database/migrations/2026_05_07_044606_create_menu_items_table.php`
+ *
+ * Descripción: Crea tabla menu_items con relación jerárquica: parent_id,
+ *              menu_id, label, url, route_name, icon, order.
+ *
+ * Dependencias: menus_table, pages_table
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

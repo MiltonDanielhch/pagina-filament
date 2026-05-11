@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Ubicación: `app/Models/Category.php`
+ *
+ * Descripción: Modelo para categorías de noticias con color y relación hasMany.
+ *
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

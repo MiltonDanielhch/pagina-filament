@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Filament/Pages/Settings/SiteSettings.php`
+ *
+ * Descripción: Página Filament para configuración del sitio: general, contacto,
+ *              redes sociales y analytics
+ *
+ * Uso: Accesible desde el panel de Filament en Gestión > Configuración del sitio
+ * Roadmap: 05-BACKEND.md — Bloque 3.4
+ */
+
 namespace App\Filament\Pages\Settings;
 
 use Filament\Actions\Action;

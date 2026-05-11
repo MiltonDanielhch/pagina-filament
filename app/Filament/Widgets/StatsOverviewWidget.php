@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Filament/Widgets/StatsOverviewWidget.php`
+ *
+ * Descripción: Widget Filament que muestra estadísticas en el dashboard:
+ *              posts publicados, borradores, eventos próximos, usuarios
+ *
+ * Uso: Se usa en el dashboard de Filament
+ * Roadmap: 05-BACKEND.md — Bloque 3.2
+ */
+
 namespace App\Filament\Widgets;
 
 use App\Models\Post;

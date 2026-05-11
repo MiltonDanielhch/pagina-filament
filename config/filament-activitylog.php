@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `config/filament-activitylog.php`
+ *
+ * Descripción: Configuración del plugin Filament Activity Log para panel
+ *              de auditoría.
+ *
+ * Dependencias: rmsramos/laravel-filament-activitylog
+ * Roadmap: 08-RENDIMIENTO.md — Bloque 8.6
+ */
+
 return [
     'resources' => [
         'label'                     => 'Activity Log',

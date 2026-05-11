@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Ubicación: `database/migrations/2026_05_05_160918_create_permission_tables.php`
+ *
+ * Descripción: Crea tablas de permisos y roles para Spatie Permission:
+ *              permissions, roles, role_has_permissions, model_has_permissions,
+ *              model_has_roles.
+ *
+ * Dependencias: Ninguna (paquete Spatie)
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

@@ -26,6 +26,16 @@ use Spatie\MediaLibrary\Support\PathGenerator\DefaultPathGenerator;
 use Spatie\MediaLibrary\Support\UrlGenerator\DefaultUrlGenerator;
 use Spatie\MediaLibraryPro\Models\TemporaryUpload;
 
+/**
+ * Ubicación: `config/media-library.php`
+ *
+ * Descripción: Configuración de Spatie Media Library para gestión de imágenes:
+ *              conversiones WebP, tamaños, optimizaciones.
+ *
+ * Dependencias: spatie/laravel-medialibrary, spatie/laravel-image-optimizer
+ * Roadmap: 08-RENDIMIENTO.md — Bloque 8.6
+ */
+
 return [
 
     /*

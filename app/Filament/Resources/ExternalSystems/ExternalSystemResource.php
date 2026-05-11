@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Filament/Resources/ExternalSystems/ExternalSystemResource.php`
+ *
+ * Descripción: Resource Filament para gestionar sistemas externos. Incluye
+ *              campos URL, estado de health check automático.
+ *
+ * Grupo: Administración
+ * Roadmap: 05-BACKEND.md — Bloque 5.2
+ */
+
 namespace App\Filament\Resources\ExternalSystems;
 
 use App\Filament\Resources\ExternalSystems\Pages\CreateExternalSystem;

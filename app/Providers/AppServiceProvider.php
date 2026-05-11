@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Providers/AppServiceProvider.php`
+ *
+ * Descripción: Service Provider principal donde se registran
+ *              los observers de Post, Page y Event.
+ *
+ * Vinculación: Se carga automáticamente via config/app.php
+ * Roadmap: 08-RENDIMIENTO.md — Bloque 8.6
+ */
+
 namespace App\Providers;
 
 use App\Models\Event;

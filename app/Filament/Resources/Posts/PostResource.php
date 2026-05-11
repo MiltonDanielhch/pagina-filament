@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Ubicación: `app/Filament/Resources/Posts/PostResource.php`
+ *
+ * Descripción: Resource Filament para gestionar noticias/posts. Incluye
+ *              editor Tiptap, Spatie Media para imágenes, campos SEO y
+ *              estados published/draft.
+ *
+ * Grupo: Contenido
+ * Roadmap: 05-BACKEND.md — Bloque 5.2
+ */
+
 namespace App\Filament\Resources\Posts;
 
 use App\Filament\Resources\Posts\Pages\CreatePost;

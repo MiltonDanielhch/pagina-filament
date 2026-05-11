@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Filament/Resources/ActivityLog/ActivityLogResource.php`
+ *
+ * Descripción: Resource Filament para visualizar el log de actividad
+ *              (spatie/laravel-activitylog). Solo lectura de auditorías.
+ *
+ * Grupo: Administración
+ * Roadmap: 05-BACKEND.md — Bloque 5.2
+ */
+
 namespace App\Filament\Resources\ActivityLog;
 
 use App\Filament\Resources\ActivityLog\Pages\ListActivities;

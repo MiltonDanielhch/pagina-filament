@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Http/Controllers/SearchController.php`
+ *
+ * Descripción: Controlador para el buscador interno del sitio. Busca en posts,
+ *              páginas y eventos.
+ *
+ * Métodos: search() — GET /api/search, index() — GET /buscar
+ * Roadmap: 06-FRONTEND.md — Bloque 6.6
+ */
+
 namespace App\Http\Controllers;
 
 use App\Models\Post;

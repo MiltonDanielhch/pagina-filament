@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Http/Controllers/HomeController.php`
+ *
+ * Descripción: Controlador principal del sitio público. Carga slides,
+ *              posts recientes, categorías y sistemas externos para el homepage.
+ *
+ * Métodos: index() — GET /
+ * Roadmap: 06-FRONTEND.md — Bloque 6.1
+ */
+
 namespace App\Http\Controllers;
 
 use App\Models\Post;

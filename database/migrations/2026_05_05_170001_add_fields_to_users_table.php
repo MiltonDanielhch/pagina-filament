@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `database/migrations/2026_05_05_170001_add_fields_to_users_table.php`
+ *
+ * Descripción: Añade campos adicionales a users: department, avatar,
+ *              two_factor_secret, two_factor_recovery_codes.
+ *
+ * Dependencias: users_table
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

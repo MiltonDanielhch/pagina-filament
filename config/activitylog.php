@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `config/activitylog.php`
+ *
+ * Descripción: Configuración de spatie/laravel-activitylog para auditoría
+ *              de cambios en modelos.
+ *
+ * Dependencias: spatie/laravel-activitylog
+ * Roadmap: 08-RENDIMIENTO.md — Bloque 8.6
+ */
+
 return [
 
     /*

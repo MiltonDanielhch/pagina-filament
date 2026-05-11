@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Ubicación: `app/Filament/Resources/Events/EventResource.php`
+ *
+ * Descripción: Resource Filament para gestionar eventos departamentales.
+ *              Incluye fechas, ubicación, galería de imágenes y estado
+ *              published/draft.
+ *
+ * Grupo: Contenido
+ * Roadmap: 05-BACKEND.md — Bloque 5.2
+ */
+
 namespace App\Filament\Resources\Events;
 
 use App\Filament\Resources\Events\Pages\CreateEvent;

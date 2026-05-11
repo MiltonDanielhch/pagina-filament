@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Http/Controllers/PostController.php`
+ *
+ * Descripción: Controlador para listar y mostrar posts/noticias. Incluye búsqueda
+ *              por categoría y detalle de post individual.
+ *
+ * Métodos: index() — GET /blog, show() — GET /blog/{slug}, category() — GET /categoria/{slug}
+ * Roadmap: 06-FRONTEND.md — Bloque 6.2
+ */
+
 namespace App\Http\Controllers;
 
 use App\Models\Post;

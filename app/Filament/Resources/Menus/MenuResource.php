@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Filament/Resources/Menus/MenuResource.php`
+ *
+ * Descripción: Resource Filament para gestionar menús de navegación. Soporta
+ *              items anidados y relación con páginas/posts.
+ *
+ * Grupo: Contenido
+ * Roadmap: 05-BACKEND.md — Bloque 5.2
+ */
+
 namespace App\Filament\Resources\Menus;
 
 use App\Filament\Resources\Menus\Pages\CreateMenu;

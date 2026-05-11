@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Jobs/RegenerateSitemap.php`
+ *
+ * Descripción: Job para regenerar el archivo sitemap.xml después de
+ *              publicar contenido. Se ejecuta en la cola 'default'.
+ *
+ * Uso: RegenerateSitemap::dispatch()
+ * Roadmap: 08-RENDIMIENTO.md — Bloque 8.6
+ */
+
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;

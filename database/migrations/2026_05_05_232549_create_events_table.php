@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `database/migrations/2026_05_05_232549_create_events_table.php`
+ *
+ * Descripción: Crea tabla events con title, slug, description, starts_at,
+ *              ends_at, location, address, status, timestamps y softDeletes.
+ *
+ * Dependencias: users_table
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

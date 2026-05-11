@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Filament/Resources/Categories/CategoryResource.php`
+ *
+ * Descripción: Resource Filament para gestionar categorías de noticias.
+ *              Cada categoría tiene color y relación hasMany con posts.
+ *
+ * Grupo: Contenido
+ * Roadmap: 05-BACKEND.md — Bloque 5.2
+ */
+
 namespace App\Filament\Resources\Categories;
 
 use App\Filament\Resources\Categories\Pages\CreateCategory;

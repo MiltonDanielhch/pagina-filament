@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Jobs/ContactAutoReply.php`
+ *
+ * Descripción: Job asíncrono para enviar respuesta automática al usuario
+ *              que contactó.
+ *
+ * Uso: ContactAutoReply::dispatch($name, $email)
+ * Roadmap: 08-RENDIMIENTO.md — Bloque 8.6
+ */
+
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;

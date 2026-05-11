@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Ubicación: `app/Models/ExternalSystem.php`
+ *
+ * Descripción: Modelo para sistemas externos con health check.
+ *
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;

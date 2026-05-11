@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Http/Controllers/ContactController.php`
+ *
+ * Descripción: Controlador para el formulario de contacto. Dispatch jobs asíncronos
+ *              para notificación y auto-respuesta.
+ *
+ * Métodos: show() — GET /contacto, send() — POST /contacto
+ * Roadmap: 06-FRONTEND.md — Bloque 6.5
+ */
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;

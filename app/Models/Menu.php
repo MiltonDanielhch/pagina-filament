@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Ubicación: `app/Models/Menu.php`
+ *
+ * Descripción: Modelo para menús de navegación, tiene muchos MenuItems.
+ *
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

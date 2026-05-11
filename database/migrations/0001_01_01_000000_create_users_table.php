@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `database/migrations/0001_01_01_000000_create_users_table.php`
+ *
+ * Descripción: Crea tabla users con softDeletes, department, avatar,
+ *              two_factor_secret, two_factor_recovery_codes.
+ *
+ * Dependencias: Ninguna
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

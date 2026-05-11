@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Filament/Resources/Slides/SlideResource.php`
+ *
+ * Descripción: Resource Filament para gestionar las diapositivas del slider
+ *              principal. Orden, imagen, título y enlace.
+ *
+ * Grupo: Contenido
+ * Roadmap: 05-BACKEND.md — Bloque 5.2
+ */
+
 namespace App\Filament\Resources\Slides;
 
 use App\Filament\Resources\Slides\Pages\CreateSlide;

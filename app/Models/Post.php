@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Models/Post.php`
+ *
+ * Descripción: Modelo Eloquent para las noticias del sitio.
+ *              Implementa SoftDeletes, HasMedia (Spatie), HasSlug y
+ *              scopes de publicación. Relacionado con Category y User.
+ *
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

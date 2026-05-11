@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Ubicación: `app/Jobs/SendContactNotification.php`
+ *
+ * Descripción: Job asíncrono para notificar a los administradores
+ *              cuando se recibe un mensaje de contacto. Se ejecuta
+ *              en la cola 'emails'.
+ *
+ * Uso: SendContactNotification::dispatch($data)
+ * Roadmap: 08-RENDIMIENTO.md — Bloque 8.6
+ */
+
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;

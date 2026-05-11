@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Providers/HorizonServiceProvider.php`
+ *
+ * Descripción: Service Provider para configurar Laravel Horizon,
+ *              incluye gate de seguridad para super_admin.
+ *
+ * Vinculación: Se carga automáticamente via config/app.php
+ * Roadmap: 08-RENDIMIENTO.md — Bloque 8.7
+ */
+
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;

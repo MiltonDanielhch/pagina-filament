@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Http/Controllers\SitemapController.php`
+ *
+ * Descripción: Controlador que genera el sitemap.xml dinámicamente con posts,
+ *              páginas y eventos publicados.
+ *
+ * Métodos: __invoke() — GET /sitemap.xml
+ * Roadmap: 06-FRONTEND.md — Bloque 6.7
+ */
+
 namespace App\Http\Controllers;
 
 use App\Models\Post;

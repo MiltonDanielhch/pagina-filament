@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Jobs/CheckExternalSystemHealth.php`
+ *
+ * Descripción: Job para verificar el estado de salud de sistemas externos.
+ *              Se ejecuta en la cola 'health-checks'.
+ *
+ * Uso: CheckExternalSystemHealth::dispatch($systemId)
+ * Roadmap: 08-RENDIMIENTO.md — Bloque 8.6
+ */
+
 namespace App\Jobs;
 
 use App\Models\ExternalSystem;

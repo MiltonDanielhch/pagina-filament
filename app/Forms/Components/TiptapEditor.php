@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Forms/Components/TiptapEditor.php`
+ *
+ * Descripción: Componente Filament Forms para editor de texto enriquecido
+ *              Tiptap. Reemplaza awcodes/tiptap-editor incompatible con Filament 5.x
+ *
+ * Uso: TiptapEditor::make('content')
+ * Roadmap: 05-BACKEND.md — Bloque 5.3
+ */
+
 namespace App\Forms\Components;
 
 use Filament\Forms\Components\Textarea;

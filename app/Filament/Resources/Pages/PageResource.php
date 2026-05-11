@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Ubicación: `app/Filament/Resources/Pages/PageResource.php`
+ *
+ * Descripción: Resource Filament para gestionar páginas estáticas. Soporta
+ *              contenido rico con Tiptap y campos SEO meta_title,
+ *              meta_description.
+ *
+ * Grupo: Contenido
+ * Roadmap: 05-BACKEND.md — Bloque 5.2
+ */
+
 namespace App\Filament\Resources\Pages;
 
 use App\Filament\Resources\Pages\Pages\CreatePage;

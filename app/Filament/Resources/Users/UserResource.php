@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Filament/Resources/Users/UserResource.php`
+ *
+ * Descripción: Resource Filament para gestionar usuarios del sistema.
+ *              Implementa SoftDeletes, 2FA, HasRoles (Shield) y departamento.
+ *
+ * Grupo: Administración
+ * Roadmap: 05-BACKEND.md — Bloque 5.2
+ */
+
 namespace App\Filament\Resources\Users;
 
 use App\Filament\Resources\Users\Pages\CreateUser;

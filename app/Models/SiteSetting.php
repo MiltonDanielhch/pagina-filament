@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Ubicación: `app/Models/SiteSetting.php`
+ *
+ * Descripción: Modelo key/value para configuraciones del sitio.
+ *
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;

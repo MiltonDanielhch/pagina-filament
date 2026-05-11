@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Ubicación: `app/Models/Slide.php`
+ *
+ * Descripción: Modelo para diapositivas del slider principal.
+ *
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

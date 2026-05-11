@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Ubicación: `app/Models/User.php`
+ *
+ * Descripción: Modelo de usuario con SoftDeletes, HasRoles (Shield), 2FA.
+ *
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 namespace App\Models;
 
 use Database\Factories\UserFactory;

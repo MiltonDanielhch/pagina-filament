@@ -3,6 +3,16 @@
  * @see https://github.com/artesaos/seotools
  */
 
+/**
+ * Ubicación: `config/seotools.php`
+ *
+ * Descripción: Configuración de artesaos/seotools para meta tags, Open Graph
+ *              y Twitter Cards. Valores por defecto para sitio gubernamental.
+ *
+ * Dependencias: artesaos/seotools
+ * Roadmap: 08-RENDIMIENTO.md — Bloque 8.6
+ */
+
 return [
     'inertia' => env('SEO_TOOLS_INERTIA', false),
     'meta' => [

@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Providers/Filament/AdminPanelProvider.php`
+ *
+ * Descripción: Configuración del panel Filament: navegación, plugins,
+ *              widgets, middleware y grupos de navegación.
+ *
+ * Vinculación: Se carga automáticamente via Filament
+ * Roadmap: 03-ADMIN.md — Bloque 3.1
+ */
+
 namespace App\Providers\Filament;
 
 use Filament\Http\Middleware\Authenticate;

@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Filament/Widgets/RecentPostsWidget.php`
+ *
+ * Descripción: Widget Filament que muestra tabla de los 5 posts más recientes
+ *              publicados
+ *
+ * Uso: Se usa en el dashboard de Filament
+ * Roadmap: 05-BACKEND.md — Bloque 3.2
+ */
+
 namespace App\Filament\Widgets;
 
 use App\Models\Post;

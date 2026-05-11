@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `database/migrations/2026_05_05_165650_create_pages_table.php`
+ *
+ * Descripción: Crea tabla pages con title, slug, content, SEO fields,
+ *              is_published, timestamps y softDeletes.
+ *
+ * Dependencias: Ninguna
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

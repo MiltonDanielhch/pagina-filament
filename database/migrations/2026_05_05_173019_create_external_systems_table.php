@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `database/migrations/2026_05_05_173019_create_external_systems_table.php`
+ *
+ * Descripción: Crea tabla external_systems para sistemas externos con name,
+ *              url, description, is_active, last_status, last_checked_at.
+ *
+ * Dependencias: Ninguna
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

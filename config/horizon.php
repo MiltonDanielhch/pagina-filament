@@ -2,6 +2,17 @@
 
 use Illuminate\Support\Str;
 
+/**
+ * Ubicación: `config/horizon.php`
+ *
+ * Descripción: Configuración de Laravel Horizon para monitoreo de colas.
+ *              Define supervisors para default, emails y health-checks
+ *              con procesos diferenciados por entorno.
+ *
+ * Dependencias: Redis, spatie/laravel-sitemap
+ * Roadmap: 08-RENDIMIENTO.md — Bloque 8.6
+ */
+
 return [
 
     /*

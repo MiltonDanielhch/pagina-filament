@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `database/migrations/2026_05_07_044549_create_menus_table.php`
+ *
+ * Descripción: Crea tabla menus con name, slug, location (header/footer),
+ *              is_active.
+ *
+ * Dependencias: Ninguna
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

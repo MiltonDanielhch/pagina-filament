@@ -4,6 +4,16 @@ use Spatie\Permission\DefaultTeamResolver;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
+/**
+ * Ubicación: `config/permission.php`
+ *
+ * Descripción: Configuración de Spatie Permission: modelos custom, tablas
+ *              y cache.
+ *
+ * Dependencias: spatie/laravel-permission
+ * Roadmap: 08-RENDIMIENTO.md — Bloque 8.6
+ */
+
 return [
 
     'models' => [

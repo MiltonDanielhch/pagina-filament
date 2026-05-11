@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `database/migrations/2026_05_05_170000_create_posts_table.php`
+ *
+ * Descripción: Crea tabla posts con title, slug, excerpt, content,
+ *              status, published_at, SEO fields, timestamps y softDeletes.
+ *
+ * Dependencias: users_table, categories_table
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

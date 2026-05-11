@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Ubicación: `app/Models/Page.php`
+ *
+ * Descripción: Modelo para páginas estáticas con contenido rico.
+ *
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

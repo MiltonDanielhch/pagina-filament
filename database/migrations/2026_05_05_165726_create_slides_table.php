@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `database/migrations/2026_05_05_165726_create_slides_table.php`
+ *
+ * Descripción: Crea tabla slides para el slider principal con order, image,
+ *              title, description, link, is_active.
+ *
+ * Dependencias: Ninguna
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

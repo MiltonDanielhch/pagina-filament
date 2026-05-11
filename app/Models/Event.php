@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Ubicación: `app/Models/Event.php`
+ *
+ * Descripción: Modelo para eventos departamentales con fechas y ubicación.
+ *
+ * Roadmap: 04-DATOS.md — Bloque 4.1
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

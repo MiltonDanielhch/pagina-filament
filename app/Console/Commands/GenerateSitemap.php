@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Console/Commands/GenerateSitemap.php`
+ *
+ * Descripción: Comando Artisan para generar manualmente el sitemap.xml.
+ *              Incluye posts, páginas y eventos.
+ *
+ * Uso: php artisan sitemap:generate
+ * Roadmap: 08-RENDIMIENTO.md — Bloque 8.6
+ */
+
 namespace App\Console\Commands;
 
 use App\Models\Post;
