@@ -1,10 +1,21 @@
 <?php
 
+/**
+ * Ubicación: `app/Filament/Resources/Users/Schemas/UserForm.php`
+ *
+ * Descripción: Schema de formulario para crear/editar usuarios.
+ *              Incluye campos de usuario y selección de rol.
+ *
+ * Grupo: Seguridad
+ * Roadmap: 05-BACKEND.md — Bloque 5.1
+ */
+
 namespace App\Filament\Resources\Users\Schemas;
 
-use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Spatie\Permission\Models\Role;
 
 class UserForm
 {
@@ -19,12 +30,16 @@ class UserForm
                     ->label('Correo electrónico')
                     ->email()
                     ->required(),
-                DateTimePicker::make('email_verified_at')
-                    ->label('Correo verificado el'),
+                Select::make('roles')
+                    ->label('Rol')
+                    ->options(Role::where('guard_name', 'web')->pluck('name', 'name'))
+                    ->multiple()
+                    ->preload(),
                 TextInput::make('password')
                     ->label('Contraseña')
                     ->password()
-                    ->required(),
+                    ->required(fn(string $operation): bool => $operation === 'create')
+                    ->dehydrated(fn(string $operation): bool => $operation === 'create'),
             ]);
     }
 }

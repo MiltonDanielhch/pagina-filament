@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Categories\Schemas;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Str;
 
 class CategoryForm
 {
@@ -13,10 +14,16 @@ class CategoryForm
             ->components([
                 TextInput::make('name')
                     ->label('Nombre')
-                    ->required(),
+                    ->required()
+                    ->live()
+                    ->afterStateUpdated(function ($state, $set) {
+                        $set('slug', Str::slug($state));
+                    }),
                 TextInput::make('slug')
                     ->label('Slug')
-                    ->required(),
+                    ->required()
+                    ->disabled()
+                    ->dehydrated(),
                 TextInput::make('description')
                     ->label('Descripción'),
                 TextInput::make('color')

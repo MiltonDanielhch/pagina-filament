@@ -67,8 +67,68 @@
 </section>
 @endif
 
-<!-- About Section - Mission/Vision -->
+<!-- Últimas Noticias -->
 <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center mb-12">
+            <div>
+                <p class="text-official font-semibold uppercase tracking-wider mb-2">Últimas Noticias</p>
+                <h2 class="text-4xl font-bold text-gray-900">Noticias del Beni</h2>
+            </div>
+            <a href="/blog" class="link-official hidden md:inline-flex">Ver todas las noticias</a>
+        </div>
+
+        @if($latestPosts->count() > 0)
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @foreach($latestPosts as $post)
+            <article class="card-article">
+                <a href="{{ route('posts.show', $post->slug) }}">
+                    @if($post->getFirstMediaUrl('images'))
+                    <img src="{{ $post->getFirstMediaUrl('images', 'medium') }}" alt="{{ $post->title }}" class="w-full h-48 object-cover">
+                    @else
+                    <div class="w-full h-48 bg-gradient-to-br from-official/20 to-official/5 flex items-center justify-center">
+                        <svg class="w-12 h-12 text-official/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+                    </div>
+                    @endif
+                </a>
+                <div class="p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="badge-official">{{ $post->category->name ?? 'General' }}</span>
+                        <span class="text-gray-400 text-sm">{{ $post->published_at->format('d/m/Y') }}</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 line-clamp-2">
+                        <a href="{{ route('posts.show', $post->slug) }}" class="hover:text-official transition">
+                            {{ $post->title }}
+                        </a>
+                    </h3>
+                    @if($post->excerpt)
+                    <p class="text-gray-600 text-sm line-clamp-2 mb-4">{{ $post->excerpt }}</p>
+                    @endif
+                    <a href="{{ route('posts.show', $post->slug) }}" class="text-official font-medium text-sm inline-flex items-center gap-1 hover:gap-2 transition-all">
+                        Leer más <span>→</span>
+                    </a>
+                </div>
+            </article>
+            @endforeach
+        </div>
+
+        @if($latestPosts->count() > 3)
+        <div class="text-center mt-8 md:hidden">
+            <a href="/blog" class="btn-secondary">Ver todas las noticias</a>
+        </div>
+        @endif
+        @else
+        <div class="text-center py-12 bg-gray-50 rounded-xl">
+            <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+            <p class="text-gray-500">No hay noticias publicadas actualmente.</p>
+            <a href="/blog" class="btn-primary mt-4 inline-block">Ver noticias anteriores</a>
+        </div>
+        @endif
+    </div>
+</section>
+
+<!-- About Section - Mission/Vision -->
+<section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -134,66 +194,6 @@
             </a>
             @endforeach
         </div>
-    </div>
-</section>
-
-<!-- Últimas Noticias -->
-<section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-        <div class="flex justify-between items-center mb-12">
-            <div>
-                <p class="text-official font-semibold uppercase tracking-wider mb-2">Últimas Noticias</p>
-                <h2 class="text-4xl font-bold text-gray-900">Noticias del Beni</h2>
-            </div>
-            <a href="/blog" class="link-official hidden md:inline-flex">Ver todas las noticias</a>
-        </div>
-        
-        @if($latestPosts->count() > 0)
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @foreach($latestPosts as $post)
-            <article class="card-article">
-                <a href="{{ route('posts.show', $post->slug) }}">
-                    @if($post->getFirstMediaUrl('images'))
-                    <img src="{{ $post->getFirstMediaUrl('images', 'medium') }}" alt="{{ $post->title }}" class="w-full h-48 object-cover">
-                    @else
-                    <div class="w-full h-48 bg-gradient-to-br from-official/20 to-official/5 flex items-center justify-center">
-                        <svg class="w-12 h-12 text-official/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
-                    </div>
-                    @endif
-                </a>
-                <div class="p-6">
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="badge-official">{{ $post->category->name ?? 'General' }}</span>
-                        <span class="text-gray-400 text-sm">{{ $post->published_at->format('d/m/Y') }}</span>
-                    </div>
-                    <h3 class="text-lg font-bold mb-2 line-clamp-2">
-                        <a href="{{ route('posts.show', $post->slug) }}" class="hover:text-official transition">
-                            {{ $post->title }}
-                        </a>
-                    </h3>
-                    @if($post->excerpt)
-                    <p class="text-gray-600 text-sm line-clamp-2 mb-4">{{ $post->excerpt }}</p>
-                    @endif
-                    <a href="{{ route('posts.show', $post->slug) }}" class="text-official font-medium text-sm inline-flex items-center gap-1 hover:gap-2 transition-all">
-                        Leer más <span>→</span>
-                    </a>
-                </div>
-            </article>
-            @endforeach
-        </div>
-        
-        @if($latestPosts->count() > 3)
-        <div class="text-center mt-8 md:hidden">
-            <a href="/blog" class="btn-secondary">Ver todas las noticias</a>
-        </div>
-        @endif
-        @else
-        <div class="text-center py-12 bg-gray-50 rounded-xl">
-            <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
-            <p class="text-gray-500">No hay noticias publicadas actualmente.</p>
-            <a href="/blog" class="btn-primary mt-4 inline-block">Ver noticias anteriores</a>
-        </div>
-        @endif
     </div>
 </section>
 

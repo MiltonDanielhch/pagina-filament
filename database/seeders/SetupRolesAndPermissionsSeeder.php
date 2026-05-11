@@ -26,9 +26,10 @@ class SetupRolesAndPermissionsSeeder extends Seeder
 {
     public function run(): void
     {
-        // 1. Generar permisos de Shield (ejecuta el comando)
-        $this->command->info('Generando permisos de Shield...');
-        Artisan::call('shield:seed', ['--panel' => 'admin']);
+        // 1. Generar permisos de Shield (el usuario ejecuta el comando manualmente primero)
+        // El usuario debe ejecutar: php artisan shield:generate (seleccionar "admin", luego "yes")
+        // O ejecutar: php artisan shield:generate --panel=admin --permissions
+        $this->command->info('NOTA: Si los permisos no existen, ejecuta antes: php artisan shield:generate');
 
         // 2. Super Admin - todos los permisos
         $this->setupSuperAdmin();
@@ -49,6 +50,10 @@ class SetupRolesAndPermissionsSeeder extends Seeder
     private function setupSuperAdmin(): void
     {
         $superAdmin = Role::firstOrCreate(['name' => 'super_admin'], ['guard_name' => 'web']);
+
+        $this->command->info('Generando permisos con shield:generate...');
+        Artisan::call('shield:generate', ['--panel' => 'admin', '--all' => true, '-n' => true]);
+        
         $allPermissions = Permission::where('guard_name', 'web')->pluck('name')->toArray();
         $superAdmin->syncPermissions($allPermissions);
         $this->command->info("  Super Admin: " . count($allPermissions) . " permisos");

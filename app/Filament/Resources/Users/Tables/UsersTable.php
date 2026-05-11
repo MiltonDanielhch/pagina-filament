@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Ubicación: `app/Filament/Resources/Users/Tables/UsersTable.php`
+ *
+ * Descripción: Tabla de listado de usuarios en el panel Filament.
+ *              Muestra nombre, email, rol y fecha de verificación.
+ *
+ * Grupo: Seguridad
+ * Roadmap: 05-BACKEND.md — Bloque 5.1
+ */
+
 namespace App\Filament\Resources\Users\Tables;
 
 use Filament\Actions\BulkActionGroup;
@@ -21,6 +31,13 @@ class UsersTable
                 TextColumn::make('email')
                     ->label('Correo electrónico')
                     ->searchable(),
+                TextColumn::make('roles.name')
+                    ->label('Rol')
+                    ->badge()
+                    ->color('info')
+                    ->getStateUsing(function ($record) {
+                        return $record->getRoleNames()->first() ?? 'Sin rol';
+                    }),
                 TextColumn::make('email_verified_at')
                     ->label('Verificado el')
                     ->dateTime()
