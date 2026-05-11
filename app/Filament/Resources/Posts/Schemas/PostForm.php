@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\Posts\Schemas;
 
-use App\Forms\Components\TiptapEditor;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -31,7 +31,7 @@ class PostForm
                 Textarea::make('excerpt')
                     ->label('Extracto')
                     ->columnSpanFull(),
-                TiptapEditor::make('body')
+                RichEditor::make('body')
                     ->label('Contenido')
                     ->required()
                     ->columnSpanFull(),
