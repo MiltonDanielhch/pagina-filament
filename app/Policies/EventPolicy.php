@@ -14,61 +14,62 @@ class EventPolicy
     
     public function viewAny(AuthUser $authUser): bool
     {
-        return $authUser->can('events:viewAny');
+        return $authUser->can('ViewAny:Event');
     }
 
     public function view(AuthUser $authUser, Event $event): bool
     {
-        return $authUser->can('events:view');
+        return $authUser->can('View:Event');
     }
 
     public function create(AuthUser $authUser): bool
     {
-        return $authUser->can('events:create');
+        return $authUser->can('Create:Event');
     }
 
     public function update(AuthUser $authUser, Event $event): bool
     {
-        return $authUser->can('events:update');
+        return $authUser->can('Update:Event');
     }
 
     public function delete(AuthUser $authUser, Event $event): bool
     {
-        return $authUser->can('events:delete');
+        return $authUser->can('Delete:Event');
     }
 
     public function deleteAny(AuthUser $authUser): bool
     {
-        return $authUser->can('events:deleteAny');
+        return $authUser->can('DeleteAny:Event');
     }
 
     public function restore(AuthUser $authUser, Event $event): bool
     {
-        return $authUser->can('events:restore');
+        return $authUser->can('Restore:Event');
     }
 
     public function forceDelete(AuthUser $authUser, Event $event): bool
     {
-        return $authUser->can('events:forceDelete');
+        return $authUser->can('ForceDelete:Event');
     }
 
     public function forceDeleteAny(AuthUser $authUser): bool
     {
-        return $authUser->can('events:forceDeleteAny');
+        return $authUser->can('ForceDeleteAny:Event');
     }
 
     public function restoreAny(AuthUser $authUser): bool
     {
-        return $authUser->can('events:restoreAny');
+        return $authUser->can('RestoreAny:Event');
     }
 
     public function replicate(AuthUser $authUser, Event $event): bool
     {
-        return $authUser->can('events:replicate');
+        return $authUser->can('Replicate:Event');
     }
 
     public function reorder(AuthUser $authUser): bool
     {
-        return $authUser->can('events:reorder');
+        return $authUser->can('Reorder:Event');
     }
+
 }

@@ -14,61 +14,62 @@ class PagePolicy
     
     public function viewAny(AuthUser $authUser): bool
     {
-        return $authUser->can('pages:viewAny');
+        return $authUser->can('ViewAny:Page');
     }
 
     public function view(AuthUser $authUser, Page $page): bool
     {
-        return $authUser->can('pages:view');
+        return $authUser->can('View:Page');
     }
 
     public function create(AuthUser $authUser): bool
     {
-        return $authUser->can('pages:create');
+        return $authUser->can('Create:Page');
     }
 
     public function update(AuthUser $authUser, Page $page): bool
     {
-        return $authUser->can('pages:update');
+        return $authUser->can('Update:Page');
     }
 
     public function delete(AuthUser $authUser, Page $page): bool
     {
-        return $authUser->can('pages:delete');
+        return $authUser->can('Delete:Page');
     }
 
     public function deleteAny(AuthUser $authUser): bool
     {
-        return $authUser->can('pages:deleteAny');
+        return $authUser->can('DeleteAny:Page');
     }
 
     public function restore(AuthUser $authUser, Page $page): bool
     {
-        return $authUser->can('pages:restore');
+        return $authUser->can('Restore:Page');
     }
 
     public function forceDelete(AuthUser $authUser, Page $page): bool
     {
-        return $authUser->can('pages:forceDelete');
+        return $authUser->can('ForceDelete:Page');
     }
 
     public function forceDeleteAny(AuthUser $authUser): bool
     {
-        return $authUser->can('pages:forceDeleteAny');
+        return $authUser->can('ForceDeleteAny:Page');
     }
 
     public function restoreAny(AuthUser $authUser): bool
     {
-        return $authUser->can('pages:restoreAny');
+        return $authUser->can('RestoreAny:Page');
     }
 
     public function replicate(AuthUser $authUser, Page $page): bool
     {
-        return $authUser->can('pages:replicate');
+        return $authUser->can('Replicate:Page');
     }
 
     public function reorder(AuthUser $authUser): bool
     {
-        return $authUser->can('pages:reorder');
+        return $authUser->can('Reorder:Page');
     }
+
 }

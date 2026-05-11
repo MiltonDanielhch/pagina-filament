@@ -14,61 +14,62 @@ class PostPolicy
     
     public function viewAny(AuthUser $authUser): bool
     {
-        return $authUser->can('posts:viewAny');
+        return $authUser->can('ViewAny:Post');
     }
 
     public function view(AuthUser $authUser, Post $post): bool
     {
-        return $authUser->can('posts:view');
+        return $authUser->can('View:Post');
     }
 
     public function create(AuthUser $authUser): bool
     {
-        return $authUser->can('posts:create');
+        return $authUser->can('Create:Post');
     }
 
     public function update(AuthUser $authUser, Post $post): bool
     {
-        return $authUser->can('posts:update');
+        return $authUser->can('Update:Post');
     }
 
     public function delete(AuthUser $authUser, Post $post): bool
     {
-        return $authUser->can('posts:delete');
+        return $authUser->can('Delete:Post');
     }
 
     public function deleteAny(AuthUser $authUser): bool
     {
-        return $authUser->can('posts:deleteAny');
+        return $authUser->can('DeleteAny:Post');
     }
 
     public function restore(AuthUser $authUser, Post $post): bool
     {
-        return $authUser->can('posts:restore');
+        return $authUser->can('Restore:Post');
     }
 
     public function forceDelete(AuthUser $authUser, Post $post): bool
     {
-        return $authUser->can('posts:forceDelete');
+        return $authUser->can('ForceDelete:Post');
     }
 
     public function forceDeleteAny(AuthUser $authUser): bool
     {
-        return $authUser->can('posts:forceDeleteAny');
+        return $authUser->can('ForceDeleteAny:Post');
     }
 
     public function restoreAny(AuthUser $authUser): bool
     {
-        return $authUser->can('posts:restoreAny');
+        return $authUser->can('RestoreAny:Post');
     }
 
     public function replicate(AuthUser $authUser, Post $post): bool
     {
-        return $authUser->can('posts:replicate');
+        return $authUser->can('Replicate:Post');
     }
 
     public function reorder(AuthUser $authUser): bool
     {
-        return $authUser->can('posts:reorder');
+        return $authUser->can('Reorder:Post');
     }
+
 }

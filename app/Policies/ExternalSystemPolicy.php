@@ -14,61 +14,62 @@ class ExternalSystemPolicy
     
     public function viewAny(AuthUser $authUser): bool
     {
-        return $authUser->can('external_systems:viewAny');
+        return $authUser->can('ViewAny:ExternalSystem');
     }
 
     public function view(AuthUser $authUser, ExternalSystem $externalSystem): bool
     {
-        return $authUser->can('external_systems:view');
+        return $authUser->can('View:ExternalSystem');
     }
 
     public function create(AuthUser $authUser): bool
     {
-        return $authUser->can('external_systems:create');
+        return $authUser->can('Create:ExternalSystem');
     }
 
     public function update(AuthUser $authUser, ExternalSystem $externalSystem): bool
     {
-        return $authUser->can('external_systems:update');
+        return $authUser->can('Update:ExternalSystem');
     }
 
     public function delete(AuthUser $authUser, ExternalSystem $externalSystem): bool
     {
-        return $authUser->can('external_systems:delete');
+        return $authUser->can('Delete:ExternalSystem');
     }
 
     public function deleteAny(AuthUser $authUser): bool
     {
-        return $authUser->can('external_systems:deleteAny');
+        return $authUser->can('DeleteAny:ExternalSystem');
     }
 
     public function restore(AuthUser $authUser, ExternalSystem $externalSystem): bool
     {
-        return $authUser->can('external_systems:restore');
+        return $authUser->can('Restore:ExternalSystem');
     }
 
     public function forceDelete(AuthUser $authUser, ExternalSystem $externalSystem): bool
     {
-        return $authUser->can('external_systems:forceDelete');
+        return $authUser->can('ForceDelete:ExternalSystem');
     }
 
     public function forceDeleteAny(AuthUser $authUser): bool
     {
-        return $authUser->can('external_systems:forceDeleteAny');
+        return $authUser->can('ForceDeleteAny:ExternalSystem');
     }
 
     public function restoreAny(AuthUser $authUser): bool
     {
-        return $authUser->can('external_systems:restoreAny');
+        return $authUser->can('RestoreAny:ExternalSystem');
     }
 
     public function replicate(AuthUser $authUser, ExternalSystem $externalSystem): bool
     {
-        return $authUser->can('external_systems:replicate');
+        return $authUser->can('Replicate:ExternalSystem');
     }
 
     public function reorder(AuthUser $authUser): bool
     {
-        return $authUser->can('external_systems:reorder');
+        return $authUser->can('Reorder:ExternalSystem');
     }
+
 }
