@@ -1,3 +1,10 @@
+{{--
+    Ubicación: resources/views/home.blade.php
+    Descripción: Homepage del sitio. Carga slides del slider, posts recientes
+                 en grid, categorías y badges de sistemas externos.
+    Accesibilidad: lang="es", skip link, contraste 4.5:1, semantic HTML
+    Roadmap: 06-FRONTEND.md — Bloque 6.1
+--}}
 @extends('layouts.main')
 
 @section('content')

@@ -1,3 +1,10 @@
+{{--
+    Ubicación: resources/views/forms/components/tiptap-editor.blade.php
+    Descripción: Componente Blade para el editor Tiptap. Renderiza
+                 toolbar y textarea.
+    Accesibilidad: lang="es", skip link, contraste 4.5:1, semantic HTML
+    Roadmap: 06-FRONTEND.md — Bloque 6.1
+--}}
 @php
     $id = $getId();
     $state = $getState();

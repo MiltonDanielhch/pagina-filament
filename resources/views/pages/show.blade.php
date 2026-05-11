@@ -1,3 +1,10 @@
+{{--
+    Ubicación: resources/views/pages/show.blade.php
+    Descripción: Detalle de página estática. Renderiza contenido Tiptap,
+                 meta tags dinámicos y Open Graph.
+    Accesibilidad: lang="es", skip link, contraste 4.5:1, semantic HTML
+    Roadmap: 06-FRONTEND.md — Bloque 6.1
+--}}
 @extends('layouts.main')
 
 @section('title', $page->meta_title ?? $page->title)

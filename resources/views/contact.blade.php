@@ -1,3 +1,10 @@
+{{--
+    Ubicación: resources/views/contact.blade.php
+    Descripción: Formulario de contacto con validación, labels accesibles
+                 y aria-required.
+    Accesibilidad: lang="es", skip link, contraste 4.5:1, semantic HTML
+    Roadmap: 06-FRONTEND.md — Bloque 6.1
+--}}
 @extends('layouts.main')
 
 @section('content')

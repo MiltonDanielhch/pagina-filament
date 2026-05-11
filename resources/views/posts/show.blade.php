@@ -1,3 +1,11 @@
+{{--
+    Ubicación: resources/views/posts/show.blade.php
+    Descripción: Detalle de un post/noticia individual. Incluye meta tags
+                 dinámicos, Open Graph, fecha en <time> y estructura
+                 semántica <article>.
+    Accesibilidad: lang="es", skip link, contraste 4.5:1, semantic HTML
+    Roadmap: 06-FRONTEND.md — Bloque 6.1
+--}}
 @extends('layouts.main')
 
 @section('title', $post->meta_title ?? $post->title)

@@ -1,3 +1,10 @@
+{{--
+    Ubicación: resources/views/posts/category.blade.php
+    Descripción: Listado de posts por categoría. Título dinámico y
+                 meta tags SEO.
+    Accesibilidad: lang="es", skip link, contraste 4.5:1, semantic HTML
+    Roadmap: 06-FRONTEND.md — Bloque 6.1
+--}}
 @extends('layouts.main')
 
 @section('content')

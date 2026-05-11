@@ -1,3 +1,10 @@
+{{--
+    Ubicación: resources/views/search/index.blade.php
+    Descripción: Página de resultados de búsqueda. Muestra posts y
+                 páginas que coinciden.
+    Accesibilidad: lang="es", skip link, contraste 4.5:1, semantic HTML
+    Roadmap: 06-FRONTEND.md — Bloque 6.1
+--}}
 @extends('layouts.main')
 
 @section('title', 'Buscar - Gobernación del Beni')

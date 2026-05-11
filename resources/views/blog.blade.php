@@ -1,3 +1,10 @@
+{{--
+    Ubicación: resources/views/blog.blade.php
+    Descripción: Listado de todas las noticias/posts. Incluye paginación
+                 y búsqueda.
+    Accesibilidad: lang="es", skip link, contraste 4.5:1, semantic HTML
+    Roadmap: 06-FRONTEND.md — Bloque 6.1
+--}}
 @extends('layouts.main')
 
 @section('content')

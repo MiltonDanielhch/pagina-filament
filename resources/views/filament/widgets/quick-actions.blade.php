@@ -1,3 +1,10 @@
+{{--
+    Ubicación: resources/views/filament/widgets/quick-actions.blade.php
+    Descripción: Widget de acciones rápidas en dashboard Filament:
+                 crear post, crear evento, ver sitio.
+    Accesibilidad: lang="es", skip link, contraste 4.5:1, semantic HTML
+    Roadmap: 06-FRONTEND.md — Bloque 6.1
+--}}
 <div class="grid grid-cols-3 gap-4">
     <a href="{{ route('filament.admin.resources.posts.create') }}"
        class="flex flex-col items-center justify-center p-4 bg-white rounded-lg shadow-sm border border-gray-200 hover:border-primary-500 transition-colors">
