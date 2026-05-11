@@ -4,12 +4,9 @@
  * Ubicación: `database/seeders/AssignPermissionsToAdminSeeder.php`
  *
  * Descripción: Asigna permisos al rol admin. El admin puede gestionar
- *              todo el contenido pero no puede modificar usuarios
- *              ni configuraciones del sistema.
+ *              todo el contenido pero no puede modificar usuarios,
+ *              roles ni configuraciones del sistema.
  *
- * Permisos: Todo el contenido (posts, eventos, páginas, categorías,
- *           slides, menús) + ver usuarios y activity log
- * No incluye: gestión de usuarios, roles, configuraciones
  * Ejecutar: php artisan db:seed --class=AssignPermissionsToAdminSeeder
  * Roadmap: 05-BACKEND.md — Bloque 5.1
  */
@@ -30,38 +27,21 @@ class AssignPermissionsToAdminSeeder extends Seeder
             $admin = Role::firstOrCreate(['name' => 'admin'], [
                 'guard_name' => 'web',
             ]);
-            $this->command->info('Rol admin creado.');
         }
 
-        // Obtener permisos de posts, eventos, páginas, categorías, slides, menús, sistemas
-        $resources = ['post', 'event', 'page', 'category', 'slide', 'menu', 'external_system'];
-        $adminPermissions = [];
+        $allPermissions = Permission::where('guard_name', 'web')->pluck('name')->toArray();
 
-        foreach ($resources as $resource) {
-            $permissions = Permission::where('name', 'like', "% {$resource}")->pluck('name')->toArray();
-            $adminPermissions = array_merge($adminPermissions, $permissions);
-        }
+        $adminPermissions = array_filter($allPermissions, function ($perm) {
+            // Excluir permisos de usuarios y roles (admin no puede gestionarlos)
+            if (str_contains($perm, ':User') || str_contains($perm, 'users:')) return false;
+            if (str_contains($perm, ':Role') || str_contains($perm, 'roles:')) return false;
 
-        // Agregar permisos de dashboard y widgets
-        $adminPermissions[] = 'view dashboard';
-        $adminPermissions[] = 'viewAny stats_overview_widget';
-        $adminPermissions[] = 'viewAny recent_posts_widget';
-        $adminPermissions[] = 'viewAny quick_actions_widget';
+            // Admin tiene todo el contenido
+            return true;
+        });
 
-        // Solo puede ver usuarios (no crear/editar/borrar)
-        $adminPermissions[] = 'viewAny user';
-        $adminPermissions[] = 'view user';
+        $admin->syncPermissions(array_values($adminPermissions));
 
-        // Puede ver activity log
-        $adminPermissions[] = 'viewAny activity_log';
-        $adminPermissions[] = 'view activity_log';
-
-        // Menús - full CRUD
-        $menuPermissions = Permission::where('name', 'like', '% menu%')->pluck('name')->toArray();
-        $adminPermissions = array_merge($adminPermissions, $menuPermissions);
-
-        $admin->syncPermissions($adminPermissions);
-
-        $this->command->info('Admin ahora tiene ' . count($adminPermissions) . ' permisos asignados.');
+        $this->command->info('Admin ahora tiene ' . count($adminPermissions) . ' permisos.');
     }
 }
