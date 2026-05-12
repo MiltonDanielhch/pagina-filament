@@ -12,9 +12,59 @@
     <h1 class="text-4xl font-bold mb-8 text-gray-800">Noticias</h1>
     
     @if($posts->count() > 0)
+    
+    @if($pinnedPost)
+    <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-4 text-amber-600">Noticias del Beni</h2>
+        <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+            @if($pinnedPost->getFirstMedia('featured'))
+            <a href="{{ route('posts.show', $pinnedPost->slug) }}">
+                <img src="{{ $pinnedPost->getFirstMedia('featured')->getUrl('medium') }}" 
+                     alt="{{ $pinnedPost->title }}" 
+                     class="w-full h-64 md:h-96 object-cover">
+            </a>
+            @endif
+            <div class="p-6">
+                <div class="flex items-center mb-2">
+                    <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded">Destacado</span>
+                    <span class="mx-2">-</span>
+                    <span class="text-sm text-gray-500">{{ $pinnedPost->category->name ?? 'Sin categoría' }}</span>
+                    <span class="mx-2">-</span>
+                    <span class="text-sm text-gray-500">{{ $pinnedPost->published_at->format('d/m/Y') }}</span>
+                </div>
+                <h2 class="text-2xl font-bold mb-2">
+                    <a href="{{ route('posts.show', $pinnedPost->slug) }}" class="hover:text-amber-600">
+                        {{ $pinnedPost->title }}
+                    </a>
+                </h2>
+                @if($pinnedPost->excerpt)
+                <p class="text-gray-600 mb-4">{{ $pinnedPost->excerpt }}</p>
+                @endif
+                <a href="{{ route('posts.show', $pinnedPost->slug) }}" class="text-amber-600 hover:text-amber-700 font-medium">
+                    Leer más
+                </a>
+            </div>
+        </article>
+    </div>
+    @endif
+    
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">Últimas Noticias</h2>
+        <a href="{{ route('blog') }}" class="text-amber-600 hover:text-amber-700 font-medium">
+            Ver todas las noticias
+        </a>
+    </div>
+    
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         @foreach($posts as $post)
         <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+            @if($post->getFirstMedia('featured'))
+            <a href="{{ route('posts.show', $post->slug) }}">
+                <img src="{{ $post->getFirstMedia('featured')->getUrl('medium') }}" 
+                     alt="{{ $post->title }}" 
+                     class="w-full h-48 object-cover">
+            </a>
+            @endif
             <div class="p-6">
                 <div class="flex items-center mb-2">
                     <span class="text-sm text-gray-500">{{ $post->category->name ?? 'Sin categoría' }}</span>

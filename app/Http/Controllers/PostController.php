@@ -20,8 +20,16 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::published()->latest('published_at')->paginate(10);
-        return view('blog', compact('posts'));
+        $pinnedPost = Post::published()->where('is_pinned', true)->first();
+        
+        $posts = Post::published()
+            ->when($pinnedPost, function ($query) use ($pinnedPost) {
+                $query->where('id', '!=', $pinnedPost->id);
+            })
+            ->latest('published_at')
+            ->paginate(10);
+            
+        return view('blog', compact('posts', 'pinnedPost'));
     }
 
     public function show($slug)

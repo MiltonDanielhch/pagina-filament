@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Posts\Schemas;
 
 use App\Models\Post;
+use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 
@@ -12,6 +13,10 @@ class PostInfolist
     {
         return $schema
             ->components([
+                SpatieMediaLibraryImageEntry::make('image')
+                    ->label('Imagen')
+                    ->collection('featured')
+                    ->conversion('medium'),
                 TextEntry::make('user.name')
                     ->label('User'),
                 TextEntry::make('category.name')

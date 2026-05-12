@@ -8,6 +8,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Str;
 
 class EventForm
 {
@@ -21,10 +22,16 @@ class EventForm
                     ->required(),
                 TextInput::make('title')
                     ->label('Título')
-                    ->required(),
+                    ->required()
+                    ->live()
+                    ->afterStateUpdated(function ($state, $set) {
+                        $set('slug', Str::slug($state));
+                    }),
                 TextInput::make('slug')
                     ->label('Slug')
-                    ->required(),
+                    ->required()
+                    ->disabled()
+                    ->dehydrated(),
                 Textarea::make('description')
                     ->label('Descripción')
                     ->required()

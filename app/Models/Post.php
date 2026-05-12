@@ -34,6 +34,7 @@ class Post extends Model implements HasMedia
         'excerpt',
         'body',
         'status',
+        'is_pinned',
         'published_at',
         'meta_title',
         'meta_description',
@@ -67,10 +68,12 @@ class Post extends Model implements HasMedia
     {
         $this->addMediaCollection('featured')
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
-            ->singleFile();
+            ->singleFile()
+            ->useDisk('public');
 
         $this->addMediaCollection('gallery')
-            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+            ->useDisk('public');
     }
 
     public function registerMediaConversions(Media $media = null): void

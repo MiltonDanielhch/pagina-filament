@@ -33,6 +33,12 @@
         </a>
     </div>
     
+    @if($post->getFirstMedia('featured'))
+    <img src="{{ $post->getFirstMedia('featured')->getUrl('large') }}" 
+         alt="{{ $post->title }}" 
+         class="w-full h-64 md:h-96 object-cover rounded-lg mb-8">
+    @endif
+    
     <h1 class="text-4xl font-bold mb-4 text-gray-800">{{ $post->title }}</h1>
     
     <div class="flex items-center mb-8 text-gray-600">
