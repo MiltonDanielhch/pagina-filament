@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Ubicación: `app/Http/Controllers\EventController.php`
+ * Ubicación: `app/Http/Controllers/EventController.php`
  *
  * Descripción: Controlador para listar y mostrar eventos departamentales.
  *              Filtra por fecha y muestra detalle de evento.
@@ -12,9 +12,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Event;
+use Illuminate\View\View;
 
 class EventController extends Controller
 {
-    //
+    public function index(): View
+    {
+        $events = Event::where('status', 'published')
+            ->where('starts_at', '>', now()->subDay())
+            ->orderBy('starts_at')
+            ->paginate(10);
+
+        return view('events', compact('events'));
+    }
 }

@@ -83,8 +83,8 @@
             @foreach($latestPosts as $post)
             <article class="card-article">
                 <a href="{{ route('posts.show', $post->slug) }}">
-                    @if($post->getFirstMediaUrl('images'))
-                    <img src="{{ $post->getFirstMediaUrl('images', 'medium') }}" alt="{{ $post->title }}" class="w-full h-48 object-cover">
+                    @if($post->getFirstMedia('featured'))
+                    <img src="{{ $post->getFirstMedia('featured')->getUrl('medium') }}" alt="{{ $post->title }}" class="w-full h-48 object-cover">
                     @else
                     <div class="w-full h-48 bg-gradient-to-br from-official/20 to-official/5 flex items-center justify-center">
                         <svg class="w-12 h-12 text-official/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
@@ -126,6 +126,43 @@
         @endif
     </div>
 </section>
+
+<!-- Próximos Eventos Destacados -->
+@if($featuredEvents->count() > 0)
+<section class="py-16 bg-official text-white">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center mb-12">
+            <div>
+                <p class="font-semibold uppercase tracking-wider mb-2 opacity-80">Próximos Eventos</p>
+                <h2 class="text-4xl font-bold">Eventos Destacados</h2>
+            </div>
+            <a href="{{ route('events') }}" class="text-white/80 hover:text-white transition hidden md:inline-flex">Ver todos los eventos →</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            @foreach($featuredEvents as $event)
+            <div class="bg-white/10 backdrop-blur rounded-xl p-6 border border-white/20 hover:bg-white/20 transition">
+                <div class="text-center mb-4">
+                    <div class="text-3xl font-bold">{{ $event->starts_at->format('d') }}</div>
+                    <div class="text-sm uppercase opacity-80">{{ $event->starts_at->format('M') }}</div>
+                </div>
+                <h3 class="text-xl font-bold mb-2">{{ $event->title }}</h3>
+                @if($event->location)
+                <p class="text-sm opacity-80 mb-2">📍 {{ $event->location }}</p>
+                @endif
+                <p class="text-sm opacity-80">{{ $event->starts_at->format('H:i') }}</p>
+            </div>
+            @endforeach
+        </div>
+
+        @if($featuredEvents->count() > 3)
+        <div class="text-center mt-8 md:hidden">
+            <a href="#" class="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-lg font-semibold transition inline-block">Ver todos los eventos</a>
+        </div>
+        @endif
+    </div>
+</section>
+@endif
 
 <!-- About Section - Mission/Vision -->
 <section class="py-16 bg-gray-50">
