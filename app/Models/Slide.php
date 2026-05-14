@@ -22,7 +22,6 @@ class Slide extends Model implements HasMedia
 
     protected $fillable = [
         'title',
-        'image',
         'link',
         'description',
         'order',
@@ -38,5 +37,13 @@ class Slide extends Model implements HasMedia
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logOnlyDirty()
             ->logExcept(['created_at', 'updated_at']);
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('slides')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+            ->singleFile()
+            ->useDisk('public');
     }
 }

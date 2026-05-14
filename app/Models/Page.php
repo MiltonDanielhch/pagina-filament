@@ -28,10 +28,14 @@ class Page extends Model implements HasMedia
         'meta_title',
         'meta_description',
         'is_published',
+        'show_in_menu',
+        'menu_order',
     ];
 
     protected $casts = [
         'is_published' => 'boolean',
+        'show_in_menu' => 'boolean',
+        'menu_order' => 'integer',
     ];
 
     protected function getActivitylogOptions(): \Spatie\Activitylog\LogOptions

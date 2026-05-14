@@ -8,7 +8,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -21,8 +21,9 @@ class SlidesTable
                 TextColumn::make('title')
                     ->label('Título')
                     ->searchable(),
-                ImageColumn::make('image')
-                    ->label('Imagen'),
+                SpatieMediaLibraryImageColumn::make('image')
+                    ->label('Imagen')
+                    ->collection('slides'),
                 TextColumn::make('link')
                     ->label('Enlace')
                     ->searchable(),

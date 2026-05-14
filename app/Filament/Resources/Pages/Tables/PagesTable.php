@@ -29,6 +29,13 @@ class PagesTable
                 IconColumn::make('is_published')
                     ->label('Publicado')
                     ->boolean(),
+                IconColumn::make('show_in_menu')
+                    ->label('En menú')
+                    ->boolean(),
+                TextColumn::make('menu_order')
+                    ->label('Orden')
+                    ->numeric()
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->label('Creado el')
                     ->dateTime()
@@ -44,7 +51,9 @@ class PagesTable
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
+                ViewAction::make()
+                    ->url(fn ($record) => url('/' . $record->slug))
+                    ->openUrlInNewTab(),
                 EditAction::make(),
                 DeleteAction::make(),
             ])

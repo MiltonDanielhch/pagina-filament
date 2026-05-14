@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Slides\Schemas;
 
-use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
@@ -16,9 +16,10 @@ class SlideForm
                 TextInput::make('title')
                     ->label('Título')
                     ->required(),
-                FileUpload::make('image')
+                SpatieMediaLibraryFileUpload::make('image')
                     ->label('Imagen')
-                    ->image()
+                    ->collection('slides')
+                    ->multiple(false)
                     ->required(),
                 TextInput::make('link')
                     ->label('Enlace'),

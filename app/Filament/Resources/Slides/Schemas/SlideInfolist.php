@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\Slides\Schemas;
 
 use Filament\Infolists\Components\IconEntry;
-use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 
@@ -14,7 +14,8 @@ class SlideInfolist
         return $schema
             ->components([
                 TextEntry::make('title'),
-                ImageEntry::make('image'),
+                SpatieMediaLibraryImageEntry::make('image')
+                    ->collection('slides'),
                 TextEntry::make('link')
                     ->placeholder('-'),
                 TextEntry::make('description')

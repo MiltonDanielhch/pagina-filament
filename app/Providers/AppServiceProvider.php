@@ -20,6 +20,7 @@ use App\Observers\EventObserver;
 use App\Observers\PageObserver;
 use App\Observers\PostObserver;
 use App\Observers\UserObserver;
+use App\Http\ViewComposers\MenuComposer;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -40,5 +41,7 @@ class AppServiceProvider extends ServiceProvider
         Post::observe(PostObserver::class);
         Page::observe(PageObserver::class);
         Event::observe(EventObserver::class);
+
+        view()->composer('layouts.main', MenuComposer::class);
     }
 }

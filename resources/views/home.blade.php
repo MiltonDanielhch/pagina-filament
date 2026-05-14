@@ -14,7 +14,7 @@
     <div class="absolute inset-0">
         @foreach($slides as $index => $slide)
         <div class="absolute inset-0 transition-opacity duration-700 {{ $index === 0 ? 'opacity-100' : 'opacity-0' }}" data-slide="{{ $index }}">
-            <img src="{{ $slide->image }}" alt="{{ $slide->title }}" class="w-full h-full object-cover">
+            <img src="{{ $slide->getFirstMediaUrl('slides') ?: $slide->image }}" alt="{{ $slide->title }}" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30"></div>
         </div>
         @endforeach

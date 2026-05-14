@@ -25,6 +25,7 @@ Lee los roadmaps **en este orden numérico**. Cada número indica la secuencia d
 | 10 | `10-DEPLOY.md` | Fase 9 — Infraestructura, Docker, Coolify y deploy | Sem 12 |
 | 11 | `11-MIGRACION.md` | Fase 10 — Migración de contenido desde WordPress | Sem 13–14 |
 | 12 | `12-FUTURO.md` | Features futuras — post-MVP (18 meses) | Post-MVP |
+| 13 | `13-AUTOMATIZACION-NOTICIAS.md` | Automatización de creación de noticias y redes sociales | Adicional |
 
 ---
 

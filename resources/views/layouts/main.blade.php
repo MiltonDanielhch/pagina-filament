@@ -110,7 +110,9 @@
                 <div class="hidden md:flex items-center gap-1">
                     <a href="/" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-official/5 hover:text-official transition font-medium">Inicio</a>
                     <a href="/blog" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-official/5 hover:text-official transition font-medium">Noticias</a>
-                    <a href="/gobernador" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-official/5 hover:text-official transition font-medium">Gobernador</a>
+                    @foreach($menuPages ?? [] as $page)
+                        <a href="{{ route('pages.show', $page->slug) }}" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-official/5 hover:text-official transition font-medium">{{ $page->title }}</a>
+                    @endforeach
                     <a href="/contacto" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-official/5 hover:text-official transition font-medium">Contacto</a>
                     <a href="https://siscor.beni.gob.bo" target="_blank" class="btn-primary ml-2">
                         🟣 Trámites
@@ -143,7 +145,9 @@
                 </form>
                 <a href="/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-official/5">Inicio</a>
                 <a href="/blog" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-official/5">Noticias</a>
-                <a href="/gobernador" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-official/5">Gobernador</a>
+                @foreach($menuPages ?? [] as $page)
+                    <a href="{{ route('pages.show', $page->slug) }}" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-official/5">{{ $page->title }}</a>
+                @endforeach
                 <a href="/contacto" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-official/5">Contacto</a>
                 <a href="https://siscor.beni.gob.bo" target="_blank" class="block mt-2 btn-primary text-center">Trámites Online</a>
             </div>

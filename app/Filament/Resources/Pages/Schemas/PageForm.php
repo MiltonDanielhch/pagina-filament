@@ -38,6 +38,13 @@ class PageForm
                 Toggle::make('is_published')
                     ->label('Publicado')
                     ->required(),
+                Toggle::make('show_in_menu')
+                    ->label('Mostrar en menú')
+                    ->default(false),
+                TextInput::make('menu_order')
+                    ->label('Orden en menú')
+                    ->numeric()
+                    ->default(0),
             ]);
     }
 }
