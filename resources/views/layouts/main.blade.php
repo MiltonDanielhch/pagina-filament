@@ -108,12 +108,37 @@
                 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center gap-1">
-                    <a href="/" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-official/5 hover:text-official transition font-medium">Inicio</a>
-                    <a href="/blog" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-official/5 hover:text-official transition font-medium">Noticias</a>
-                    @foreach($menuPages ?? [] as $page)
-                        <a href="{{ route('pages.show', $page->slug) }}" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-official/5 hover:text-official transition font-medium">{{ $page->title }}</a>
-                    @endforeach
-                    <a href="/contacto" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-official/5 hover:text-official transition font-medium">Contacto</a>
+                    @if($headerMenu && $headerMenu->items)
+                        @foreach($headerMenu->items->where('parent_id', null) as $item)
+                            @if($item->children->count() > 0)
+                                <!-- Dropdown -->
+                                <div class="relative group">
+                                    <button class="px-4 py-2 rounded-lg text-gray-700 hover:bg-official/5 hover:text-official transition font-medium flex items-center gap-1">
+                                        {{ $item->label }}
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                        </svg>
+                                    </button>
+                                    <div class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                                        @foreach($item->children as $child)
+                                            <a href="{{ $child->page_id ? route('pages.show', $child->page->slug) : $child->url }}"
+                                               target="{{ $child->target ?? '_self' }}"
+                                               class="block px-4 py-2 text-gray-700 hover:bg-official/5 hover:text-official transition">
+                                                {{ $child->label }}
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @else
+                                <!-- Regular item -->
+                                <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}"
+                                   target="{{ $item->target ?? '_self' }}"
+                                   class="px-4 py-2 rounded-lg text-gray-700 hover:bg-official/5 hover:text-official transition font-medium">
+                                    {{ $item->label }}
+                                </a>
+                            @endif
+                        @endforeach
+                    @endif
                     <a href="https://siscor.beni.gob.bo" target="_blank" class="btn-primary ml-2">
                         🟣 Trámites
                     </a>
@@ -140,15 +165,40 @@
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t">
                 <form action="{{ route('search') }}" method="GET" class="mb-3">
-                    <input type="text" name="q" placeholder="Buscar..." 
+                    <input type="text" name="q" placeholder="Buscar..."
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-official">
                 </form>
-                <a href="/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-official/5">Inicio</a>
-                <a href="/blog" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-official/5">Noticias</a>
-                @foreach($menuPages ?? [] as $page)
-                    <a href="{{ route('pages.show', $page->slug) }}" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-official/5">{{ $page->title }}</a>
-                @endforeach
-                <a href="/contacto" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-official/5">Contacto</a>
+                @if($headerMenu && $headerMenu->items)
+                    @foreach($headerMenu->items->where('parent_id', null) as $item)
+                        @if($item->children->count() > 0)
+                            <!-- Mobile Dropdown -->
+                            <div class="mobile-dropdown">
+                                <button onclick="this.nextElementSibling.classList.toggle('hidden')" class="w-full px-4 py-3 rounded-lg text-gray-700 hover:bg-official/5 flex items-center justify-between">
+                                    {{ $item->label }}
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                    </svg>
+                                </button>
+                                <div class="hidden pl-4">
+                                    @foreach($item->children as $child)
+                                        <a href="{{ $child->page_id ? route('pages.show', $child->page->slug) : $child->url }}"
+                                           target="{{ $child->target ?? '_self' }}"
+                                           class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-official/5">
+                                            {{ $child->label }}
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @else
+                            <!-- Regular item -->
+                            <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}"
+                               target="{{ $item->target ?? '_self' }}"
+                               class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-official/5">
+                                {{ $item->label }}
+                            </a>
+                        @endif
+                    @endforeach
+                @endif
                 <a href="https://siscor.beni.gob.bo" target="_blank" class="block mt-2 btn-primary text-center">Trámites Online</a>
             </div>
         </nav>

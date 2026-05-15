@@ -101,8 +101,9 @@ class MenuItemsRelationManager extends RelationManager
                 \Filament\Tables\Columns\TextColumn::make('order')
                     ->label('Orden')
                     ->sortable(),
-                \Filament\Tables\Columns\BooleanColumn::make('is_active')
-                    ->label('Activo'),
+                \Filament\Tables\Columns\IconColumn::make('is_active')
+                    ->label('Activo')
+                    ->boolean(),
             ])
             ->headerActions([
                 \Filament\Actions\CreateAction::make(),
@@ -112,5 +113,57 @@ class MenuItemsRelationManager extends RelationManager
                 \Filament\Actions\DeleteAction::make(),
             ])
             ->reorderable('order');
+    }
+
+    public function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
+    {
+        return $schema
+            ->schema([
+                \Filament\Forms\Components\TextInput::make('label')
+                    ->label('Etiqueta')
+                    ->required()
+                    ->live()
+                    ->afterStateUpdated(function ($state, callable $set, callable $get) {
+                        if ($get('page_id')) {
+                            $page = \App\Models\Page::find($get('page_id'));
+                            if ($page && !$state) {
+                                $set('label', $page->title);
+                            }
+                        }
+                    }),
+                \Filament\Forms\Components\Select::make('page_id')
+                    ->label('Página')
+                    ->relationship('page', 'title')
+                    ->searchable()
+                    ->preload()
+                    ->live()
+                    ->afterStateUpdated(function ($state, callable $set) {
+                        if ($state) {
+                            $page = \App\Models\Page::find($state);
+                            if ($page) {
+                                $set('label', $page->title);
+                                $set('url', route('pages.show', $page->slug));
+                            }
+                        }
+                    }),
+                \Filament\Forms\Components\TextInput::make('url')
+                    ->label('URL')
+                    ->prefix('https://')
+                    ->visible(fn (callable $get) => !$get('page_id')),
+                \Filament\Forms\Components\Select::make('target')
+                    ->label('Target')
+                    ->options([
+                        '_self' => 'Misma ventana',
+                        '_blank' => 'Nueva ventana',
+                    ])
+                    ->default('_self'),
+                \Filament\Forms\Components\TextInput::make('order')
+                    ->label('Orden')
+                    ->numeric()
+                    ->default(0),
+                \Filament\Forms\Components\Toggle::make('is_active')
+                    ->label('Activo')
+                    ->default(true),
+            ]);
     }
 }
