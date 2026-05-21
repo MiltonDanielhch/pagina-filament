@@ -13,6 +13,7 @@
 namespace App\Filament\Pages\Settings;
 
 use Filament\Actions\Action;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
@@ -75,10 +76,20 @@ class SiteSettings extends Page implements HasSchemas
                                     ->required(),
                                 TextInput::make('site_tagline')
                                     ->label('Tagline'),
-                                TextInput::make('site_logo')
-                                    ->label('Logo (URL)'),
-                                TextInput::make('site_favicon')
-                                    ->label('Favicon (URL)'),
+                                FileUpload::make('site_logo')
+                                    ->label('Logo del sitio')
+                                    ->image()
+                                    ->disk('public')
+                                    ->directory('site-logos')
+                                    ->imagePreviewHeight(100)
+                                    ->columnSpan('full'),
+                                FileUpload::make('site_favicon')
+                                    ->label('Favicon del sitio')
+                                    ->image()
+                                    ->disk('public')
+                                    ->directory('site-favicons')
+                                    ->imagePreviewHeight(80)
+                                    ->columnSpan('full'),
                             ]),
                         \Filament\Schemas\Components\Tabs\Tab::make('Contacto')
                             ->schema([

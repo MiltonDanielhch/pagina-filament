@@ -39,7 +39,7 @@
     <meta name="author" content="Gobernación Autónoma Departamental del Beni">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#0f766e">
-    
+
     <!-- Open Graph -->
     <meta property="og:title" content="{{ $title ?? 'Gobernación Autónoma Departamental del Beni' }}">
     <meta property="og:description" content="Sitio web oficial de la Gobernación Autónoma Departamental del Beni">
@@ -47,19 +47,34 @@
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:site_name" content="Gobernación Autónoma Departamental del Beni">
     <meta property="og:image" content="{{ asset('images/beni-og.jpg') }}">
-    
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $title ?? 'Gobernación Autónoma Departamental del Beni' }}">
     <meta name="twitter:description" content="Sitio web oficial de la Gobernación Autónoma Departamental del Beni">
-    
+
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-    <link rel="apple-touch-icon" href="{{ asset('images/logo-beni.png') }}">
-    
+    @php
+        $siteLogo = \App\Models\SiteSetting::get('site_logo', '');
+        $siteFavicon = \App\Models\SiteSetting::get('site_favicon', '');
+
+        if ($siteLogo && !str_starts_with($siteLogo, 'http://') && !str_starts_with($siteLogo, 'https://')) {
+            $siteLogo = \Illuminate\Support\Facades\Storage::url($siteLogo);
+        }
+        if ($siteFavicon && !str_starts_with($siteFavicon, 'http://') && !str_starts_with($siteFavicon, 'https://')) {
+            $siteFavicon = \Illuminate\Support\Facades\Storage::url($siteFavicon);
+        }
+
+        $logoSrc = $siteLogo ?: asset('images/logo-beni.png');
+        $faviconSrc = $siteFavicon ?: asset('favicon.ico');
+    @endphp
+
+    <link rel="icon" type="image/x-icon" href="{{ $faviconSrc }}">
+    <link rel="apple-touch-icon" href="{{ $faviconSrc }}">
+
     <!-- Tailwind CSS -->
     @vite(['resources/css/app.css'])
-    
+
     <!-- SEO -->
     @yield('seo')
 </head>
@@ -68,7 +83,7 @@
     <a href="#main-content" class="skip-link">
         Ir al contenido principal
     </a>
-    
+
     <!-- Header -->
     <header class="bg-white shadow-lg sticky top-0 z-50">
         <!-- Top Bar -->
@@ -91,21 +106,25 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Nav -->
         <nav class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <!-- Logo -->
                 <a href="/" class="flex items-center gap-3">
-                    <div class="w-12 h-12 bg-official rounded-full flex items-center justify-center">
-                        <span class="text-white font-bold text-xl">B</span>
+                    <div class="w-12 h-12 rounded-full overflow-hidden bg-official flex items-center justify-center">
+                        @if($siteLogo)
+                            <img src="{{ $logoSrc }}" alt="Logo Gobernación del Beni" class="w-full h-full object-contain">
+                        @else
+                            <span class="text-white font-bold text-xl">B</span>
+                        @endif
                     </div>
                     <div>
                         <h1 class="text-xl font-bold text-gray-900 leading-tight">Gobernación<br><span class="text-official">del Beni</span></h1>
                         <p class="text-xs text-gray-500">Autónoma Departamental</p>
                     </div>
                 </a>
-                
+
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center gap-1">
                     @if($headerMenu && $headerMenu->items)
@@ -143,7 +162,7 @@
                         🟣 Trámites
                     </a>
                     <form action="{{ route('search') }}" method="GET" class="relative ml-2">
-                        <input type="text" name="q" placeholder="Buscar..." 
+                        <input type="text" name="q" placeholder="Buscar..."
                             class="w-32 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-official focus:ring-1 focus:ring-official"
                             minlength="3">
                         <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-official">
@@ -153,7 +172,7 @@
                         </button>
                     </form>
                 </div>
-                
+
                 <!-- Mobile Menu Button -->
                 <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-600">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -161,7 +180,7 @@
                     </svg>
                 </button>
             </div>
-            
+
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t">
                 <form action="{{ route('search') }}" method="GET" class="mb-3">
@@ -216,8 +235,12 @@
                 <!-- Logo & Description -->
                 <div class="md:col-span-2">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 bg-official rounded-full flex items-center justify-center">
-                            <span class="text-white font-bold text-xl">B</span>
+                        <div class="w-12 h-12 rounded-full overflow-hidden bg-official flex items-center justify-center">
+                            @if($siteLogo)
+                                <img src="{{ $logoSrc }}" alt="Logo Gobernación del Beni" class="w-full h-full object-contain">
+                            @else
+                                <span class="text-white font-bold text-xl">B</span>
+                            @endif
                         </div>
                         <div>
                             <h3 class="text-xl font-bold">Gobernación<br><span class="text-official-light">del Beni</span></h3>
@@ -228,7 +251,7 @@
                         Institución pública comprometida con el desarrollo integral del departamento del Beni.
                     </p>
                 </div>
-                
+
                 <!-- Quick Links -->
                 <div>
                     <h4 class="font-bold mb-4 text-official-light">Enlaces</h4>
@@ -240,7 +263,7 @@
                         <li><a href="/politica-de-privacidad" class="text-gray-400 hover:text-white transition">🔒 Privacidad</a></li>
                     </ul>
                 </div>
-                
+
                 <!-- Contacto -->
                 <div>
                     <h4 class="font-bold mb-4 text-official-light">Contacto</h4>
@@ -252,7 +275,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <!-- Bottom Bar -->
             <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-gray-500 text-sm">
@@ -267,7 +290,7 @@
         const mobileMenu = document.getElementById('mobile-menu');
         menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
     </script>
-    
+
     @yield('scripts')
 </body>
 </html>

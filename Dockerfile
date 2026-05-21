@@ -49,13 +49,19 @@ RUN mkdir -p /var/run/php \
     && sed -i 's|^;*listen.mode =.*|listen.mode = 0666|g' /usr/local/etc/php-fpm.d/www.conf \
     && sed -i 's|^;*listen.owner =.*|listen.owner = www-data|g' /usr/local/etc/php-fpm.d/www.conf \
     && sed -i 's|^;*listen.group =.*|listen.group = www-data|g' /usr/local/etc/php-fpm.d/www.conf \
-    && mkdir -p /var/www/storage /var/www/bootstrap/cache \
-    && chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache \
+    && mkdir -p /var/www/storage/app/public /var/www/bootstrap/cache \
+    && ln -sf /var/www/storage/app/public /var/www/public/storage \
+    && chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache /var/www/public \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-# Configurar Nginx
-RUN rm /etc/nginx/sites-enabled/default
-COPY docker/nginx/coolify.conf /etc/nginx/conf.d/default.conf
+# Configurar Nginx (Código 3026 - Sintonía de Rutas y Configuración limpia)
+RUN rm -f /etc/nginx/sites-enabled/default \
+    && rm -f /etc/nginx/sites-available/default \
+    && rm -f /etc/nginx/conf.d/default.conf \
+    && mkdir -p /etc/nginx/sites-enabled
+
+COPY docker/nginx/coolify.conf /etc/nginx/sites-available/default
+RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 # Configurar Supervisord
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
