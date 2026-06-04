@@ -88,9 +88,9 @@ Este documento contiene un plan de trabajo para implementar las mejoras sugerida
 ## Extras (Opcionales)
 
 ### 9. Accesibilidad Adicional
-- [ ] Agregar modo alto contraste
-- [ ] Mejorar navegación por teclado
-- [ ] Agregar ARIA labels en elementos interactivos
+- [x] Agregar modo alto contraste
+- [x] Mejorar navegación por teclado
+- [x] Agregar ARIA labels en elementos interactivos
 
 ### 10. SEO Adicional
 - [ ] Agregar schema.org markup para organización gubernamental

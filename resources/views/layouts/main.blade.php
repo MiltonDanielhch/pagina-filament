@@ -34,6 +34,47 @@
             outline: 2px solid white;
             text-decoration: none;
         }
+        .high-contrast {
+            --bg-primary: #000000;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #ffff00;
+            --border-color: #ffffff;
+        }
+        .high-contrast body {
+            background-color: var(--bg-primary) !important;
+            color: var(--text-primary) !important;
+        }
+        .high-contrast header,
+        .high-contrast .bg-white,
+        .high-contrast .bg-gray-50 {
+            background-color: var(--bg-secondary) !important;
+            color: var(--text-primary) !important;
+        }
+        .high-contrast .text-gray-900,
+        .high-contrast .text-gray-800,
+        .high-contrast .text-gray-700 {
+            color: var(--text-primary) !important;
+        }
+        .high-contrast .text-gray-600,
+        .high-contrast .text-gray-500 {
+            color: var(--text-secondary) !important;
+        }
+        .high-contrast .border-gray-200,
+        .high-contrast .border-gray-300 {
+            border-color: var(--border-color) !important;
+        }
+        .high-contrast a {
+            color: var(--text-secondary) !important;
+            text-decoration: underline !important;
+        }
+        .high-contrast .bg-official {
+            background-color: var(--text-secondary) !important;
+            color: var(--bg-primary) !important;
+        }
+        .high-contrast .text-official {
+            color: var(--text-secondary) !important;
+        }
     </style>
     <meta name="description" content="{{ $description ?? 'Sitio web oficial de la Gobernación Autónoma Departamental del Beni, Bolivia. Información sobre servicios, noticias y trámites gubernamentales.' }}">
     <meta name="author" content="Gobernación Autónoma Departamental del Beni">
@@ -94,13 +135,23 @@
                     <span class="flex items-center gap-1">📞 (591) 346-21651</span>
                 </div>
                 <div class="flex items-center gap-3">
-                    <a href="https://www.facebook.com/profile.php?id=61589790584981&rdid=B8ljagCl47BWWMeA&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1CTSBMKLaG%2F#" target="_blank" class="hover:text-amber-200 transition">
+                    <button onclick="toggleHighContrast()" 
+                            class="hover:text-amber-200 transition flex items-center gap-1"
+                            title="Activar modo alto contraste"
+                            aria-label="Activar modo alto contraste">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        <span class="hidden sm:inline text-xs">Alto Contraste</span>
+                    </button>
+                    <a href="https://www.facebook.com/profile.php?id=61589790584981&rdid=B8ljagCl47BWWMeA&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1CTSBMKLaG%2F#" target="_blank" class="hover:text-amber-200 transition" aria-label="Facebook">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.637H7.078v-3.497h3.047V9.603c0-3.014 1.825-4.679 4.532-4.679 1.313 0 2.703.235 2.703.235v2.965h-1.524c-1.501 0-1.973.934-1.973 1.893v2.27h3.328l-.527 3.497h-2.801v8.637C19.613 23.027 24 17.062 24 12.073z"/></svg>
                     </a>
-                    <a href="https://twitter.com/GAD_Beni" target="_blank" class="hover:text-amber-200 transition">
+                    <a href="https://twitter.com/GAD_Beni" target="_blank" class="hover:text-amber-200 transition" aria-label="Twitter">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                     </a>
-                    <a href="https://instagram.com/gobernacionbeni" target="_blank" class="hover:text-amber-200 transition">
+                    <a href="https://instagram.com/gobernacionbeni" target="_blank" class="hover:text-amber-200 transition" aria-label="Instagram">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0 2.163c-3.259 0-3.667.014-4.947.072-2.905.132-4.289 1.513-4.421 4.421-.057 1.28-.071 1.689-.071 4.947 0 3.259.014 3.668.072 4.946.132 2.908 1.516 4.291 4.421 4.422 1.281.058 1.69.072 4.947.072 3.259 0 3.668-.014 4.947-.072 2.906-.132 4.291-1.516 4.421-4.422.058-1.28.072-1.689.072-4.946 0-3.259-.014-3.667-.072-4.947-.131-2.905-1.513-4.29-4.421-4.421-1.28-.058-1.688-.072-4.947-.072zm0 3.678c2.623 0 4.756 2.133 4.756 4.756s-2.133 4.756-4.756 4.756-4.756-2.133-4.756-4.756 2.133-4.756 4.756-4.756zm0 1.838c-1.641 0-2.975 1.334-2.975 2.975s1.334 2.975 2.975 2.975 2.975-1.334 2.975-2.975-1.334-2.975-2.975-2.975zm5.938-3.846c-.663 0-1.2.537-1.2 1.2s.537 1.2 1.2 1.2 1.2-.537 1.2-1.2-.537-1.2-1.2-1.2z"/></svg>
                     </a>
                 </div>
@@ -111,7 +162,7 @@
         <nav class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <!-- Logo -->
-                <a href="/" class="flex items-center gap-3">
+                <a href="/" class="flex items-center gap-3" aria-label="Ir a la página de inicio">
                     <div class="w-12 h-12 rounded-full overflow-hidden bg-official flex items-center justify-center">
                         @if($siteLogo)
                             <img src="{{ $logoSrc }}" alt="Logo Gobernación del Beni" class="w-full h-full object-contain">
@@ -133,13 +184,16 @@
                                 <!-- Dropdown -->
                                 <div class="relative desktop-dropdown">
                                     <button onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-180');"
-                                            class="px-4 py-2 rounded-lg text-gray-700 hover:bg-official/5 hover:text-official transition font-medium flex items-center gap-1">
+                                            class="px-4 py-2 rounded-lg text-gray-700 hover:bg-official/5 hover:text-official transition font-medium flex items-center gap-1"
+                                            aria-expanded="false"
+                                            aria-haspopup="true"
+                                            aria-label="{{ $item->label }} - Menú desplegable">
                                         {{ $item->label }}
                                         <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                         </svg>
                                     </button>
-                                    <div class="hidden absolute right-0 mt-2 min-w-[24rem] bg-white rounded-lg shadow-lg z-50" style="width: max-content;">
+                                    <div class="hidden absolute right-0 mt-2 min-w-[24rem] bg-white rounded-lg shadow-lg z-50" style="width: max-content;" role="menu" aria-label="{{ $item->label }} - Submenú">
                                         <div class="py-1 flex flex-col">
                                             @foreach($item->children as $child)
                                             <a href="{{ $child->page_id ? route('pages.show', $child->page->slug) : $child->url }}"
@@ -161,11 +215,13 @@
                             @endif
                         @endforeach
                     @endif
-                    <form action="{{ route('search') }}" method="GET" class="relative ml-2">
-                        <input type="text" name="q" placeholder="Buscar..."
+                    <form action="{{ route('search') }}" method="GET" class="relative ml-2" role="search">
+                        <label for="desktop-search" class="sr-only">Buscar en el sitio</label>
+                        <input type="text" name="q" id="desktop-search" placeholder="Buscar..."
                             class="w-32 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-official focus:ring-1 focus:ring-official"
-                            minlength="3">
-                        <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-official">
+                            minlength="3"
+                            aria-label="Buscar en el sitio">
+                        <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-official" aria-label="Realizar búsqueda">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                             </svg>
@@ -174,7 +230,11 @@
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-600">
+                <button id="mobile-menu-btn" 
+                        class="md:hidden p-2 text-gray-600"
+                        aria-label="Abrir menú de navegación"
+                        aria-expanded="false"
+                        aria-controls="mobile-menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
@@ -182,10 +242,12 @@
             </div>
 
             <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t">
-                <form action="{{ route('search') }}" method="GET" class="mb-3">
-                    <input type="text" name="q" placeholder="Buscar..."
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-official">
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t" role="navigation" aria-label="Menú de navegación móvil">
+                <form action="{{ route('search') }}" method="GET" class="mb-3" role="search">
+                    <label for="mobile-search" class="sr-only">Buscar en el sitio</label>
+                    <input type="text" name="q" id="mobile-search" placeholder="Buscar..."
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-official"
+                        aria-label="Buscar en el sitio">
                 </form>
                 @if($headerMenu && $headerMenu->items)
                     @foreach($headerMenu->items->where('parent_id', null) as $item)
@@ -358,6 +420,40 @@
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+        // High Contrast Mode
+        function toggleHighContrast() {
+            document.documentElement.classList.toggle('high-contrast');
+            const isHighContrast = document.documentElement.classList.contains('high-contrast');
+            localStorage.setItem('highContrast', isHighContrast);
+            
+            // Update button aria-label
+            const button = document.querySelector('button[onclick="toggleHighContrast()"]');
+            if (button) {
+                button.setAttribute('aria-label', isHighContrast ? 'Desactivar modo alto contraste' : 'Activar modo alto contraste');
+            }
+        }
+
+        // Load high contrast preference on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const highContrast = localStorage.getItem('highContrast') === 'true';
+            if (highContrast) {
+                document.documentElement.classList.add('high-contrast');
+                const button = document.querySelector('button[onclick="toggleHighContrast()"]');
+                if (button) {
+                    button.setAttribute('aria-label', 'Desactivar modo alto contraste');
+                }
+            }
+        });
+
+        // Keyboard navigation improvements
+        document.addEventListener('keydown', (e) => {
+            // Skip to main content with Alt+M
+            if (e.altKey && e.key === 'm') {
+                e.preventDefault();
+                document.getElementById('main-content')?.focus();
+            }
+        });
     </script>
 
     @yield('scripts')
