@@ -71,11 +71,11 @@ Este documento contiene un plan de trabajo para implementar las mejoras sugerida
 ## Prioridad Baja
 
 ### 7. Performance - Lazy Loading
-- [ ] Implementar lazy loading para iframes de Google Maps
+- [x] Implementar lazy loading para iframes de Google Maps
   - Archivo: `resources/views/home.blade.php`
   - Ubicación: Sección "Nuestro Territorio" y "Visítanos"
-- [ ] Usar atributo `loading="lazy"` en imágenes pesadas
-- [ ] Considerar usar imágenes estáticas para mapas con link a Google Maps
+- [x] Usar atributo `loading="lazy"` en imágenes pesadas
+- [x] Considerar usar imágenes estáticas para mapas con link a Google Maps
 
 ### 8. Mobile Experience
 - [ ] Probar slider en dispositivos móviles

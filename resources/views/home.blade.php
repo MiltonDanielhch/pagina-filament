@@ -75,7 +75,7 @@
             <article class="card-article">
                 <a href="{{ route('posts.show', $post->slug) }}">
                     @if($post->getFirstMedia('featured'))
-                    <img src="{{ $post->getFirstMedia('featured')->getUrl('medium') }}" alt="{{ $post->title }}" class="w-full h-48 object-cover">
+                    <img src="{{ $post->getFirstMedia('featured')->getUrl('medium') }}" alt="{{ $post->title }}" class="w-full h-48 object-cover" loading="lazy">
                     @else
                     <div class="w-full h-48 bg-gradient-to-br from-official/20 to-official/5 flex items-center justify-center">
                         <svg class="w-12 h-12 text-official/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
@@ -198,7 +198,7 @@
             <div class="relative">
                 <!-- Imagen institucional del Beni -->
                 @if($aboutSettings['image'])
-                <img src="{{ $aboutSettings['image'] }}" alt="Imagen institucional de la Gobernación del Beni mostrando el edificio principal" class="rounded-2xl shadow-2xl w-full object-cover">
+                <img src="{{ $aboutSettings['image'] }}" alt="Imagen institucional de la Gobernación del Beni mostrando el edificio principal" class="rounded-2xl shadow-2xl w-full object-cover" loading="lazy">
                 @endif
                 <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-official/10 rounded-full -z-10"></div>
                 <div class="absolute -top-6 -left-6 w-32 h-32 bg-official/20 rounded-full -z-10"></div>
