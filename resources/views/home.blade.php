@@ -198,7 +198,7 @@
             <div class="relative">
                 <!-- Imagen institucional del Beni -->
                 @if($aboutSettings['image'])
-                <img src="{{ $aboutSettings['image'] }}" alt="Sobre Nosotros" class="rounded-2xl shadow-2xl w-full object-cover">
+                <img src="{{ $aboutSettings['image'] }}" alt="Imagen institucional de la Gobernación del Beni mostrando el edificio principal" class="rounded-2xl shadow-2xl w-full object-cover">
                 @endif
                 <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-official/10 rounded-full -z-10"></div>
                 <div class="absolute -top-6 -left-6 w-32 h-32 bg-official/20 rounded-full -z-10"></div>

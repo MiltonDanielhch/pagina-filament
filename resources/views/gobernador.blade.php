@@ -42,7 +42,7 @@
             <div class="lg:col-span-1">
                 <div class="bg-gray-50 rounded-2xl p-6 shadow-lg">
                     <div class="aspect-[3/4] bg-gradient-to-br from-official/20 to-official/5 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
-                        <img src="{{ asset('images/titogobe.jpg') }}" alt="Gobernador del Beni" class="w-full h-full object-cover">
+                        <img src="{{ asset('images/titogobe.jpg') }}" alt="Retrato oficial de Jesús Tito Egüez Rivero, Gobernador del Beni" class="w-full h-full object-cover">
                     </div>
                     <h2 class="text-2xl font-bold text-gray-900 mb-2 text-center">Jesús "Tito" Egüez Rivero</h2>
                     <p class="text-official font-semibold text-center mb-4">Gobernador del Beni</p>

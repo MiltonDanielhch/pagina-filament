@@ -45,11 +45,11 @@ Este documento contiene un plan de trabajo para implementar las mejoras sugerida
 ## Prioridad Media
 
 ### 4. Imágenes - Alt Text
-- [ ] Revisar todas las imágenes en `home.blade.php`
-- [ ] Revisar imágenes en `gobernador.blade.php`
-- [ ] Revisar imágenes en `blog.blade.php`
-- [ ] Revisar imágenes en `events.blade.php`
-- [ ] Asegurar que todas las imágenes tengan alt text descriptivo
+- [x] Revisar todas las imágenes en `home.blade.php`
+- [x] Revisar imágenes en `gobernador.blade.php`
+- [x] Revisar imágenes en `blog.blade.php`
+- [x] Revisar imágenes en `events.blade.php`
+- [x] Asegurar que todas las imágenes tengan alt text descriptivo
 
 ### 5. Formularios - Validación JavaScript
 - [ ] Agregar validación en tiempo real al formulario de contacto
