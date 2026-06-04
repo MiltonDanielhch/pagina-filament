@@ -7,6 +7,10 @@
 --}}
 @extends('layouts.main')
 
+@section('seo')
+    <meta name="description" content="Página oficial de la Gobernación Autónoma Departamental del Beni. Conoce las últimas noticias, eventos destacados, servicios gubernamentales y la gestión del gobernador. Información actualizada para los ciudadanos del departamento del Beni, Bolivia.">
+@endsection
+
 @section('content')
 <!-- Hero Banner / Slider -->
 @if($slides->count() > 0)

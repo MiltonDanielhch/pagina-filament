@@ -76,7 +76,7 @@
             color: var(--text-secondary) !important;
         }
     </style>
-    <meta name="description" content="{{ $description ?? 'Sitio web oficial de la Gobernación Autónoma Departamental del Beni, Bolivia. Información sobre servicios, noticias y trámites gubernamentales.' }}">
+    <meta name="description" content="{{ $description ?? 'Sitio web oficial de la Gobernación Autónoma Departamental del Beni, Bolivia. Información sobre servicios gubernamentales, noticias, eventos y trámites. Atención al ciudadano de lunes a viernes de 8:00 a 16:00.' }}">
     <meta name="author" content="Gobernación Autónoma Departamental del Beni">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#0f766e">
@@ -118,6 +118,41 @@
 
     <!-- SEO -->
     @yield('seo')
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Schema.org Markup for Government Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "GovernmentOrganization",
+        "name": "Gobernación Autónoma Departamental del Beni",
+        "url": "{{ config('app.url') }}",
+        "logo": "{{ asset('images/logo-beni.png') }}",
+        "description": "Sitio web oficial de la Gobernación Autónoma Departamental del Beni, Bolivia. Información sobre servicios, noticias y trámites gubernamentales.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Trinidad",
+            "addressRegion": "Beni",
+            "addressCountry": "BO",
+            "streetAddress": "Calle Principal"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+591 346-21651",
+            "contactType": "customer service",
+            "areaServed": "BO",
+            "availableLanguage": "Spanish"
+        },
+        "sameAs": [
+            "https://www.facebook.com/profile.php?id=61589790584981",
+            "https://twitter.com/GAD_Beni",
+            "https://instagram.com/gobernacionbeni"
+        ],
+        "openingHours": "Mo-Fr 08:00-16:00"
+    }
+    </script>
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
     <!-- Skip Link para accesibilidad -->

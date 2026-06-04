@@ -7,6 +7,10 @@
 --}}
 @extends('layouts.main')
 
+@section('seo')
+    <meta name="description" content="Noticias y comunicados oficiales de la Gobernación Autónoma Departamental del Beni. Mantente informado sobre las últimas actividades gubernamentales, proyectos, eventos y noticias relevantes para los ciudadanos del Beni, Bolivia.">
+@endsection
+
 @section('content')
 <section class="container mx-auto px-4 py-12">
     <x-breadcrumb :items="[

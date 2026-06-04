@@ -6,7 +6,7 @@
 @extends('layouts.main')
 
 @section('title', 'Gobernador - Gobernación Autónoma del Beni')
-@section('meta_description', 'Conozca al Gobernador del Departamento del Beni, Jesús "Tito" Egüez Rivero, electo en las elecciones subnacionales 2026.')
+@section('meta_description', 'Perfil oficial del Gobernador del Departamento del Beni, Jesús Tito Egüez Rivero. Conoce su biografía, plan de gestión, compromisos y visión para el desarrollo del departamento del Beni, Bolivia.')
 
 @section('content')
 <!-- Hero Section -->

@@ -4,6 +4,10 @@
 --}}
 @extends('layouts.main')
 
+@section('seo')
+    <meta name="description" content="Calendario de eventos oficiales de la Gobernación Autónoma Departamental del Beni. Consulta las actividades, ceremonias, reuniones y eventos públicos programados. Participa en los eventos gubernamentales del departamento del Beni, Bolivia.">
+@endsection
+
 @section('content')
 <section class="container mx-auto px-4 py-12">
     <x-breadcrumb :items="[
