@@ -59,14 +59,14 @@ Este documento contiene un plan de trabajo para implementar las mejoras sugerida
 - [x] Mostrar errores antes de enviar el formulario
 
 ### 6. Paginación Mejorada
-- [ ] Mejorar diseño de paginación en `blog.blade.php`
+- [x] Mejorar diseño de paginación en `blog.blade.php`
   - Archivo: `resources/views/blog.blade.php`
   - Línea: 34-36
-- [ ] Mejorar diseño de paginación en `events.blade.php`
+- [x] Mejorar diseño de paginación en `events.blade.php`
   - Archivo: `resources/views/events.blade.php`
   - Línea: 34-36
-- [ ] Usar estilos Tailwind más modernos para botones de paginación
-- [ ] Agregar números de página con mejor diseño
+- [x] Usar estilos Tailwind más modernos para botones de paginación
+- [x] Agregar números de página con mejor diseño
 
 ## Prioridad Baja
 
