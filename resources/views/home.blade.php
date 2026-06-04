@@ -24,15 +24,6 @@
             <div class="max-w-3xl">
                 @foreach($slides as $index => $slide)
                 <div class="text-white {{ $index === 0 ? '' : 'hidden' }}" data-slide-content="{{ $index }}">
-                    @if($slide->description)
-                    <p class="text-official-light font-semibold mb-2 uppercase tracking-wider">{{ $slide->description }}</p>
-                    @endif
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">{{ $slide->title }}</h1>
-                    @if($slide->link)
-                    <a href="{{ $slide->link }}" class="btn-primary inline-flex items-center gap-2 mt-4">
-                        Ver más <span>→</span>
-                    </a>
-                    @endif
                 </div>
                 @endforeach
             </div>
@@ -170,29 +161,48 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
                 <p class="text-official font-semibold uppercase tracking-wider mb-2">Sobre Nosotros</p>
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">Construyendo el futuro del Beni</h2>
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">{{ $aboutSettings['title'] }}</h2>
                 <p class="text-gray-600 text-lg mb-8">
-                    En el corazón de la Amazonía boliviana, la Gobernación del Departamento del Beni se erige como el motor del progreso y el bienestar de nuestra gente. 
-                    Somos la institución pública que lidera la administración y el desarrollo autónomo de este vasto y diverso territorio.
+                    {!! $aboutSettings['description'] !!}
                 </p>
                 
                 <!-- Tabs: Mission/Vision -->
-                <div class="space-y-4" x-data="{ tab: 'mision' }">
-                    <div class="flex gap-4 border-b">
-                        <button @click="tab = 'mision'" class="pb-3 px-4 font-semibold transition border-b-2" :class="tab === 'mision' ? 'border-official text-official' : 'border-transparent text-gray-500'">Misión</button>
-                        <button @click="tab = 'vision'" class="pb-3 px-4 font-semibold transition border-b-2" :class="tab === 'vision' ? 'border-official text-official' : 'border-transparent text-gray-500'">Visión</button>
+                <div class="space-y-6" x-data="{ tab: 'mision' }">
+                    <div class="flex gap-2 border-b border-gray-200">
+                        <button @click="tab = 'mision'" class="flex items-center gap-2 pb-3 px-6 font-semibold transition border-b-2 rounded-t-lg" :class="tab === 'mision' ? 'border-official bg-official/5 text-official' : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                            Misión
+                        </button>
+                        <button @click="tab = 'vision'" class="flex items-center gap-2 pb-3 px-6 font-semibold transition border-b-2 rounded-t-lg" :class="tab === 'vision' ? 'border-official bg-official/5 text-official' : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                            Visión
+                        </button>
                     </div>
-                    <div x-show="tab === 'mision'" class="text-gray-600">
-                        Ser el <strong>Gobierno Autónomo Departamental del Beni</strong> que, con transparencia y eficiencia, impulsa el desarrollo integral del departamento, promoviendo el bienestar de su población, la protección de su medio ambiente y la consolidación de su identidad cultural.
+                    <div x-show="tab === 'mision'" class="p-6 bg-gray-50 rounded-xl border-l-4 border-official">
+                        <h3 class="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-official" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                            Nuestra Misión
+                        </h3>
+                        <div class="text-gray-600 leading-relaxed">
+                            {!! $aboutSettings['mission'] !!}
+                        </div>
                     </div>
-                    <div x-show="tab === 'vision'" class="text-gray-600" x-cloak>
-                        Consolidar al Beni como un departamento líder en desarrollo sostenible, con una economía diversificada, infraestructura moderna, servicios básicos de calidad y un fuerte compromiso con la preservación de su riqueza natural y cultural.
+                    <div x-show="tab === 'vision'" class="p-6 bg-gray-50 rounded-xl border-l-4 border-blue-500" x-cloak>
+                        <h3 class="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                            Nuestra Visión
+                        </h3>
+                        <div class="text-gray-600 leading-relaxed">
+                            {!! $aboutSettings['vision'] !!}
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="relative">
                 <!-- Imagen institucional del Beni -->
-                <img src="https://tse4.mm.bing.net/th/id/OIP._-jB-IGPqj7kVbnZgh4xcQHaHa?r=0&s=1&pid=ImgDetMain&o=7&rm=3" alt="Escudo del Beni" class="rounded-2xl shadow-2xl w-full object-contain bg-white p-8">
+                @if($aboutSettings['image'])
+                <img src="{{ $aboutSettings['image'] }}" alt="Sobre Nosotros" class="rounded-2xl shadow-2xl w-full object-cover">
+                @endif
                 <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-official/10 rounded-full -z-10"></div>
                 <div class="absolute -top-6 -left-6 w-32 h-32 bg-official/20 rounded-full -z-10"></div>
             </div>

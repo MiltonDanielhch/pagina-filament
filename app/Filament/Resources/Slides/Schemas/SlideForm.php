@@ -14,8 +14,7 @@ class SlideForm
         return $schema
             ->components([
                 TextInput::make('title')
-                    ->label('Título')
-                    ->required(),
+                    ->label('Título'),
                 SpatieMediaLibraryFileUpload::make('image')
                     ->label('Imagen')
                     ->collection('slides')

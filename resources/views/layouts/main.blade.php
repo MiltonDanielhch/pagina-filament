@@ -158,9 +158,6 @@
                             @endif
                         @endforeach
                     @endif
-                    <a href="https://siscor.beni.gob.bo" target="_blank" class="btn-primary ml-2">
-                        🟣 Trámites
-                    </a>
                     <form action="{{ route('search') }}" method="GET" class="relative ml-2">
                         <input type="text" name="q" placeholder="Buscar..."
                             class="w-32 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-official focus:ring-1 focus:ring-official"

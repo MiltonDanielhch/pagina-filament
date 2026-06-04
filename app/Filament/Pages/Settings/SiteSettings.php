@@ -16,6 +16,8 @@ use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
@@ -39,7 +41,11 @@ class SiteSettings extends Page implements HasSchemas
     public function mount(): void
     {
         $this->loadSettings();
-        $this->form->fill();
+    }
+
+    public function hydrate(): void
+    {
+        $this->loadSettings();
     }
 
     protected function loadSettings(): void
@@ -58,9 +64,28 @@ class SiteSettings extends Page implements HasSchemas
             'social_youtube' => SiteSetting::get('social_youtube', ''),
             'social_instagram' => SiteSetting::get('social_instagram', ''),
             'analytics_id' => SiteSetting::get('analytics_id', ''),
+            'about_title' => SiteSetting::get('about_title', ''),
+            'about_description' => SiteSetting::get('about_description', ''),
+            'about_mission' => SiteSetting::get('about_mission', ''),
+            'about_vision' => SiteSetting::get('about_vision', ''),
+            'about_image' => SiteSetting::get('about_image', ''),
         ];
 
+        // Convert FileUpload string paths to arrays for Filament
+        if ($settings['site_logo']) {
+            $settings['site_logo'] = [$settings['site_logo']];
+        }
+        if ($settings['site_favicon']) {
+            $settings['site_favicon'] = [$settings['site_favicon']];
+        }
+        if ($settings['about_image']) {
+            $settings['about_image'] = [$settings['about_image']];
+        }
+
         $this->data = $settings;
+
+        // Debug: log loaded data
+        \Log::info('Settings loaded', $settings);
     }
 
     public function form(Schema $schema): Schema
@@ -118,6 +143,27 @@ class SiteSettings extends Page implements HasSchemas
                                     ->label('Instagram')
                                     ->url(),
                             ]),
+                        \Filament\Schemas\Components\Tabs\Tab::make('Sobre Nosotros')
+                            ->schema([
+                                TextInput::make('about_title')
+                                    ->label('Título'),
+                                RichEditor::make('about_description')
+                                    ->label('Descripción')
+                                    ->columnSpanFull(),
+                                RichEditor::make('about_mission')
+                                    ->label('Misión')
+                                    ->columnSpanFull(),
+                                RichEditor::make('about_vision')
+                                    ->label('Visión')
+                                    ->columnSpanFull(),
+                                FileUpload::make('about_image')
+                                    ->label('Imagen')
+                                    ->image()
+                                    ->disk('public')
+                                    ->directory('about-images')
+                                    ->imagePreviewHeight(200)
+                                    ->columnSpanFull(),
+                            ]),
                         \Filament\Schemas\Components\Tabs\Tab::make('Avanzado')
                             ->schema([
                                 TextInput::make('analytics_id')
@@ -134,14 +180,27 @@ class SiteSettings extends Page implements HasSchemas
         return [
             Action::make('save')
                 ->label('Guardar configuración')
-                ->submit('save'),
+                ->action('save')
+                ->after(function () {
+                    // Reload settings after save to ensure form shows updated values
+                    $this->loadSettings();
+                }),
         ];
     }
 
     public function save(): void
     {
         $data = $this->form->getState();
+
         foreach ($data as $key => $value) {
+            // Handle FileUpload arrays
+            if (is_array($value)) {
+                $value = $value[0] ?? null;
+            }
+            // Handle null values
+            if ($value === null) {
+                continue;
+            }
             SiteSetting::set($key, $value);
         }
 
