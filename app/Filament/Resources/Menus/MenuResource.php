@@ -119,6 +119,12 @@ class MenuItemsRelationManager extends RelationManager
     {
         return $schema
             ->schema([
+                \Filament\Forms\Components\Select::make('parent_id')
+                    ->label('Item Padre (Dropdown)')
+                    ->relationship('parent', 'label')
+                    ->searchable()
+                    ->preload()
+                    ->helperText('Selecciona un item padre para crear un dropdown/submenú'),
                 \Filament\Forms\Components\TextInput::make('label')
                     ->label('Etiqueta')
                     ->required()

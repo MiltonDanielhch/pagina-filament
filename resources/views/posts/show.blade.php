@@ -27,11 +27,11 @@
 
 @section('content')
 <article class="container mx-auto px-4 py-12 max-w-4xl">
-    <div class="mb-8">
-        <a href="/blog" class="text-amber-600 hover:text-amber-700">
-            ← Volver a noticias
-        </a>
-    </div>
+    <x-breadcrumb :items="[
+        ['label' => 'Inicio', 'url' => '/'],
+        ['label' => 'Noticias', 'url' => '/blog'],
+        ['label' => $post->title, 'url' => null]
+    ]" />
     
     @if($post->getFirstMedia('featured'))
     <img src="{{ $post->getFirstMedia('featured')->getUrl('large') }}" 

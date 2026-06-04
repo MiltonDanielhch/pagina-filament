@@ -26,6 +26,14 @@
     </div>
 </section>
 
+<!-- Breadcrumb -->
+<div class="container mx-auto px-4 py-4">
+    <x-breadcrumb :items="[
+        ['label' => 'Inicio', 'url' => '/'],
+        ['label' => 'Gobernador', 'url' => null]
+    ]" />
+</div>
+
 <!-- Perfil del Gobernador -->
 <section class="py-16 bg-white">
     <div class="container mx-auto px-4">

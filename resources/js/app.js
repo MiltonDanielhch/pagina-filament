@@ -1,5 +1,16 @@
 import './bootstrap';
 
+// Alpine.js
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+
+console.log('Alpine.js loaded:', Alpine);
+
+Alpine.start();
+
+console.log('Alpine.js started');
+
 // Tiptap Editor - Importar y exponer globalmente para el componente
 import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';

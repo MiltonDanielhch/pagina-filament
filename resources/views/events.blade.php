@@ -6,6 +6,10 @@
 
 @section('content')
 <section class="container mx-auto px-4 py-12">
+    <x-breadcrumb :items="[
+        ['label' => 'Inicio', 'url' => '/'],
+        ['label' => 'Eventos', 'url' => null]
+    ]" />
     <h1 class="text-4xl font-bold mb-8 text-gray-800">Eventos</h1>
     
     @if($events->count() > 0)

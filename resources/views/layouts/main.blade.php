@@ -131,21 +131,24 @@
                         @foreach($headerMenu->items->where('parent_id', null) as $item)
                             @if($item->children->count() > 0)
                                 <!-- Dropdown -->
-                                <div class="relative group">
-                                    <button class="px-4 py-2 rounded-lg text-gray-700 hover:bg-official/5 hover:text-official transition font-medium flex items-center gap-1">
+                                <div class="relative desktop-dropdown">
+                                    <button onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-180');"
+                                            class="px-4 py-2 rounded-lg text-gray-700 hover:bg-official/5 hover:text-official transition font-medium flex items-center gap-1">
                                         {{ $item->label }}
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                         </svg>
                                     </button>
-                                    <div class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                                        @foreach($item->children as $child)
+                                    <div class="hidden absolute right-0 mt-2 min-w-[24rem] bg-white rounded-lg shadow-lg z-50" style="width: max-content;">
+                                        <div class="py-1 flex flex-col">
+                                            @foreach($item->children as $child)
                                             <a href="{{ $child->page_id ? route('pages.show', $child->page->slug) : $child->url }}"
-                                               target="{{ $child->target ?? '_self' }}"
-                                               class="block px-4 py-2 text-gray-700 hover:bg-official/5 hover:text-official transition">
+                                            target="{{ $child->target ?? '_self' }}"
+                                            class="block px-4 py-2 text-gray-700 hover:bg-official/5 hover:text-official transition whitespace-nowrap text-sm">
                                                 {{ $child->label }}
                                             </a>
-                                        @endforeach
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             @else

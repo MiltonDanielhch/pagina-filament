@@ -5,26 +5,36 @@ Este documento contiene un plan de trabajo para implementar las mejoras sugerida
 ## Prioridad Alta
 
 ### 1. Consistencia de Colores
-- [ ] Cambiar botones de contacto de `bg-amber-600` a color `official`
+- [x] Cambiar botones de contacto de `bg-amber-600` a color `official`
   - Archivo: `resources/views/contact.blade.php`
   - Línea: 66-69
   - Acción: Reemplazar `bg-amber-600 hover:bg-amber-700` con `btn-primary` o clases del color oficial
 
 ### 2. Navegación - Breadcrumbs
-- [ ] Agregar breadcrumbs en página de gobernador
+- [x] Agregar breadcrumbs en página de gobernador
   - Archivo: `resources/views/gobernador.blade.php`
   - Ubicación: Después del hero section
-- [ ] Agregar breadcrumbs en página de eventos
+- [x] Agregar breadcrumbs en página de eventos
   - Archivo: `resources/views/events.blade.php`
   - Ubicación: Después del título principal
-- [ ] Agregar breadcrumbs en página de contacto
+- [x] Agregar breadcrumbs en página de contacto
   - Archivo: `resources/views/contact.blade.php`
   - Ubicación: Después del título principal
-- [ ] Crear componente de breadcrumb reutilizable
+- [x] Crear componente de breadcrumb reutilizable
   - Archivo: `resources/views/components/breadcrumb.blade.php`
+- [x] Agregar breadcrumbs en página de noticias (blog)
+  - Archivo: `resources/views/blog.blade.php`
+- [x] Agregar breadcrumbs en detalle de noticias
+  - Archivo: `resources/views/posts/show.blade.php`
+- [x] Agregar breadcrumbs en páginas estáticas (Política de Privacidad, etc.)
+  - Archivo: `resources/views/pages/show.blade.php`
+- [x] Implementar dropdowns en menú de navegación
+  - Archivo: `resources/views/layouts/main.blade.php`
+  - Agregado campo parent_id en MenuItem para soportar submenús
+  - Dropdown funcional en móvil y escritorio
 
 ### 3. Footer Completo
-- [ ] Revisar contenido actual del footer en `layouts/main.blade.php`
+- [ ] Revisar contenido actual del footer en `layouts/main.blade.php` esto tienes que ver con el backend tambien con filament porque es dinamico el footer principal header
 - [ ] Agregar enlaces legales (Política de Privacidad, Términos de Uso)
 - [ ] Agregar mapa del sitio con enlaces principales
 - [ ] Agregar información de contacto completa

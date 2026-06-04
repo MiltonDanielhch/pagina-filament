@@ -21,6 +21,10 @@
 
 @section('content')
 <article class="container mx-auto px-4 py-12 max-w-4xl">
+    <x-breadcrumb :items="[
+        ['label' => 'Inicio', 'url' => '/'],
+        ['label' => $page->title, 'url' => null]
+    ]" />
     <h1 class="text-4xl font-bold mb-4 text-gray-800">{{ $page->title }}</h1>
     
     <div class="prose prose-lg max-w-none">
