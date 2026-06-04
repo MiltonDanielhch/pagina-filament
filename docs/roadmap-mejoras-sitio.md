@@ -34,11 +34,13 @@ Este documento contiene un plan de trabajo para implementar las mejoras sugerida
   - Dropdown funcional en móvil y escritorio
 
 ### 3. Footer Completo
-- [ ] Revisar contenido actual del footer en `layouts/main.blade.php` esto tienes que ver con el backend tambien con filament porque es dinamico el footer principal header
-- [ ] Agregar enlaces legales (Política de Privacidad, Términos de Uso)
-- [ ] Agregar mapa del sitio con enlaces principales
-- [ ] Agregar información de contacto completa
-- [ ] Agregar redes sociales actualizadas
+- [x] Revisar contenido actual del footer en `layouts/main.blade.php`
+- [x] Reemplazar enlaces estáticos con sistema dinámico footerMenu
+- [x] Agregar enlaces legales (Política de Privacidad, Términos de Uso)
+- [x] Agregar mapa del sitio con enlaces principales (vía footerMenu dinámico)
+- [x] Agregar información de contacto completa (en fallback)
+- [x] Agregar redes sociales actualizadas
+- [x] Crear página de Términos de Uso en Filament
 
 ## Prioridad Media
 
