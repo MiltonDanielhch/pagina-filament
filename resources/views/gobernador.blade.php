@@ -10,8 +10,13 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative py-20 bg-gradient-to-br from-official to-official-dark">
-    <div class="absolute inset-0 bg-pattern opacity-10"></div>
+<section class="relative py-32 bg-gradient-to-br from-official to-official-dark overflow-hidden">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70"></div>
+        <div class="absolute inset-0 bg-pattern opacity-5"></div>
+    </div>
+
     <div class="container mx-auto px-4 relative">
         <div class="max-w-4xl mx-auto text-center text-white">
             <p class="text-official-light font-semibold uppercase tracking-wider mb-4">Autoridad Departamental</p>
@@ -28,10 +33,8 @@
             <!-- Imagen y datos básicos -->
             <div class="lg:col-span-1">
                 <div class="bg-gray-50 rounded-2xl p-6 shadow-lg">
-                    <div class="aspect-[3/4] bg-gradient-to-br from-official/20 to-official/5 rounded-xl mb-6 flex items-center justify-center">
-                        <svg class="w-32 h-32 text-official/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                        </svg>
+                    <div class="aspect-[3/4] bg-gradient-to-br from-official/20 to-official/5 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="{{ asset('images/titogobe.jpg') }}" alt="Gobernador del Beni" class="w-full h-full object-cover">
                     </div>
                     <h2 class="text-2xl font-bold text-gray-900 mb-2 text-center">Jesús "Tito" Egüez Rivero</h2>
                     <p class="text-official font-semibold text-center mb-4">Gobernador del Beni</p>
@@ -61,6 +64,18 @@
                             </svg>
                             <span class="text-gray-600">Electo con 53% de votos</span>
                         </div>
+                    </div>
+
+                    <!-- QR Code Card -->
+                    <div class="mt-6 bg-gradient-to-br from-official to-official-dark rounded-xl p-6 text-center">
+                        <p class="text-white font-semibold mb-3">Tarjeta Digital del Gobernador</p>
+                        <div class="bg-white rounded-lg p-4 inline-block mb-3">
+                            <img src="{{ asset('images/qr.jpeg') }}" alt="QR Code - Tarjeta Digital" class="w-32 h-32">
+                        </div>
+                        <p class="text-white/80 text-sm mb-3">Escanea para ver la tarjeta digital</p>
+                        <a href="https://card.beni.gob.bo/" target="_blank" class="inline-block bg-white text-official font-semibold px-4 py-2 rounded-lg hover:bg-official-light transition">
+                            Visitar card.beni.gob.bo
+                        </a>
                     </div>
                 </div>
             </div>

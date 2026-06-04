@@ -94,7 +94,7 @@
                     <span class="flex items-center gap-1">📞 (591) 346-21651</span>
                 </div>
                 <div class="flex items-center gap-3">
-                    <a href="https://facebook.com/GobernacionDelBeni" target="_blank" class="hover:text-amber-200 transition">
+                    <a href="https://www.facebook.com/profile.php?id=61589790584981&rdid=B8ljagCl47BWWMeA&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1CTSBMKLaG%2F#" target="_blank" class="hover:text-amber-200 transition">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.637H7.078v-3.497h3.047V9.603c0-3.014 1.825-4.679 4.532-4.679 1.313 0 2.703.235 2.703.235v2.965h-1.524c-1.501 0-1.973.934-1.973 1.893v2.27h3.328l-.527 3.497h-2.801v8.637C19.613 23.027 24 17.062 24 12.073z"/></svg>
                     </a>
                     <a href="https://twitter.com/GAD_Beni" target="_blank" class="hover:text-amber-200 transition">
