@@ -30,7 +30,6 @@ class ContactAutoReply implements ShouldQueue
     {
         $this->name = $name;
         $this->email = $email;
-        $this->onQueue('emails');
     }
 
     public function handle(): void

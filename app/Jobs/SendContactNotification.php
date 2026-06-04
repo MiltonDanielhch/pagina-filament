@@ -35,12 +35,11 @@ class SendContactNotification implements ShouldQueue
         $this->email = $data['email'];
         $this->subject = $data['subject'] ?? null;
         $this->message = $data['message'];
-        $this->onQueue('emails');
     }
 
     public function handle(): void
     {
-        $admins = ['despacho@beni.gob.bo'];
+        $admins = ['miltondanielhch617@gmail.com'];
         $subjectLine = $this->subject ?? 'Sin asunto';
         $body = "Nuevo mensaje de contacto recibido:\n\nNombre: {$this->name}\nEmail: {$this->email}\nAsunto: {$subjectLine}\n\nMensaje:\n{$this->message}\n\nResponder a: {$this->email}";
 

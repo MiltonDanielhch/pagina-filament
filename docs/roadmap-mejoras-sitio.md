@@ -52,11 +52,11 @@ Este documento contiene un plan de trabajo para implementar las mejoras sugerida
 - [x] Asegurar que todas las imágenes tengan alt text descriptivo
 
 ### 5. Formularios - Validación JavaScript
-- [ ] Agregar validación en tiempo real al formulario de contacto
+- [x] Agregar validación en tiempo real al formulario de contacto
   - Archivo: `resources/views/contact.blade.php`
   - Acción: Agregar JavaScript para validación de campos
-- [ ] Agregar feedback visual en tiempo real
-- [ ] Mostrar errores antes de enviar el formulario
+- [x] Agregar feedback visual en tiempo real
+- [x] Mostrar errores antes de enviar el formulario
 
 ### 6. Paginación Mejorada
 - [ ] Mejorar diseño de paginación en `blog.blade.php`
@@ -101,6 +101,24 @@ Este documento contiene un plan de trabajo para implementar las mejoras sugerida
 - [ ] Agregar animaciones sutiles en hover
 - [ ] Implementar loading states para contenido asíncrono
 - [ ] Agregar notificaciones toast para acciones del usuario
+
+### 12. Integración de Notificaciones - WhatsApp y Telegram
+- [ ] Integrar Telegram Bot API para notificaciones de contacto
+  - Crear bot de Telegram y obtener token
+  - Configurar chat ID del administrador
+  - Crear Job para enviar notificaciones a Telegram
+  - Integrar en ContactController junto con email
+  - Archivos: `app/Jobs/SendTelegramNotification.php`, `app/Http/Controllers/ContactController.php`
+- [ ] Integrar WhatsApp Business API para notificaciones de contacto
+  - Opción A: Usar WhatsApp Business API oficial (requiere aprobación de Meta)
+  - Opción B: Usar servicio de terceros (Twilio, MessageBird, 360dialog)
+  - Crear Job para enviar notificaciones a WhatsApp
+  - Integrar en ContactController junto con email y Telegram
+  - Archivos: `app/Jobs/SendWhatsAppNotification.php`, `app/Http/Controllers/ContactController.php`
+- [ ] Configurar canales de notificación en Filament
+  - Crear configuración para activar/desactivar canales (email, Telegram, WhatsApp)
+  - Agregar configuración en Settings de Filament
+  - Archivo: `app/Filament/Settings/NotificationSettings.php`
 
 ---
 
