@@ -99,13 +99,14 @@ Cada feature se clasifica por:
     └─[x] Seeder con 8 funcionarios reales
     └─[x] Complejidad: Baja | Impacto ciudadano: Alto
 
-[ ] Galería multimedia (fotos y videos)
-    └─[ ] Modelo: Gallery (título, fecha, tipo: foto/video, álbum)
-    └─[ ] Modelos: GalleryItem (media o link de YouTube/Vimeo)
-    └─[ ] Página pública: /galeria con filtros por tipo y fecha
-    └─[ ] Lightbox para visualización de fotos
-    └─[ ] Embeds de YouTube (no subir videos al servidor)
-    └─[ ] Complejidad: Media | Impacto ciudadano: Medio
+[x] Galería multimedia (fotos y videos)
+    └─[x] Modelo: Gallery (título, fecha, tipo: foto/video/mixto, álbum)
+    └─[x] Modelos: GalleryItem (media o link de YouTube/Vimeo)
+    └─[x] Página pública: /galeria con filtros por tipo y fecha
+    └─[x] Lightbox para visualización de fotos
+    └─[x] Embeds de YouTube (no subir videos al servidor)
+    └─[x] Filament Resources para gestión
+    └─[x] Complejidad: Media | Impacto ciudadano: Medio
 
 [ ] Agenda del gobernador
     └─[ ] Modelo: Agenda (título, descripción, fecha, hora, lugar, público: sí/no)

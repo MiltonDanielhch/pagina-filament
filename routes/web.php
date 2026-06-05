@@ -9,6 +9,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\OfficialController;
+use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
 
 // Filament routes (auto-registered by Filament)
@@ -20,6 +21,8 @@ Route::get('/blog', [PostController::class, 'index'])->name('blog');
 Route::get('/blog/{slug}', [PostController::class, 'show'])->name('posts.show');
 Route::get('/category/{slug}', [PostController::class, 'category'])->name('posts.category');
 Route::get('/eventos', [EventController::class, 'index'])->name('events');
+Route::get('/galeria', [GalleryController::class, 'index'])->name('gallery');
+Route::get('/galeria/{slug}', [GalleryController::class, 'show'])->name('gallery.show');
 Route::get('/resultados', [AchievementController::class, 'index'])->name('achievements');
 Route::get('/autoridades', [OfficialController::class, 'index'])->name('officials');
 Route::get('/contacto', [ContactController::class, 'show'])->name('contact');
