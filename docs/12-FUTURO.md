@@ -108,12 +108,12 @@ Cada feature se clasifica por:
     └─[x] Filament Resources para gestión
     └─[x] Complejidad: Media | Impacto ciudadano: Medio
 
-[ ] Agenda del gobernador
-    └─[ ] Modelo: Agenda (título, descripción, fecha, hora, lugar, público: sí/no)
-    └─[ ] Página pública: /agenda
-    └─[ ] Vista de calendario mensual (Alpine.js o Livewire)
-    └─[ ] Exportar a Google Calendar / iCal
-    └─[ ] Complejidad: Media | Impacto ciudadano: Medio
+[x] Agenda del gobernador
+    └─[x] Modelo: Agenda (título, descripción, fecha, hora, lugar, público: sí/no)
+    └─[x] Página pública: /agenda
+    └─[x] Vista de calendario mensual (Alpine.js o Livewire)
+    └─[x] Exportar a Google Calendar / iCal
+    └─[x] Complejidad: Media | Impacto ciudadano: Medio
 ```
 
 ---

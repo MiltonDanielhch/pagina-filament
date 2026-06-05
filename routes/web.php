@@ -10,6 +10,7 @@ use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\OfficialController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\AgendaController;
 use Illuminate\Support\Facades\Route;
 
 // Filament routes (auto-registered by Filament)
@@ -23,6 +24,9 @@ Route::get('/category/{slug}', [PostController::class, 'category'])->name('posts
 Route::get('/eventos', [EventController::class, 'index'])->name('events');
 Route::get('/galeria', [GalleryController::class, 'index'])->name('gallery');
 Route::get('/galeria/{slug}', [GalleryController::class, 'show'])->name('gallery.show');
+Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda');
+Route::get('/agenda/{agenda}/ical', [AgendaController::class, 'exportIcal'])->name('agenda.export-ical');
+Route::get('/agenda/{agenda}/google', [AgendaController::class, 'exportGoogleCalendar'])->name('agenda.export-google');
 Route::get('/resultados', [AchievementController::class, 'index'])->name('achievements');
 Route::get('/autoridades', [OfficialController::class, 'index'])->name('officials');
 Route::get('/contacto', [ContactController::class, 'show'])->name('contact');
