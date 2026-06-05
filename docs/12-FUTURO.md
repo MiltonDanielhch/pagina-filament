@@ -91,11 +91,13 @@ Cada feature se clasifica por:
     └─[ ] Notificación al ciudadano cuando cambia el estado (si dejó email)
     └─[ ] Complejidad: Media | Impacto ciudadano: Muy alto
 
-[ ] Directorio de funcionarios
-    └─[ ] Modelo: Official (nombre, cargo, área, foto, email institucional)
-    └─[ ] Página pública: /autoridades
-    └─[ ] Organgigrama visual por área de gobierno
-    └─[ ] Complejidad: Baja | Impacto ciudadano: Alto
+[x] Directorio de funcionarios
+    └─[x] Modelo: Official (nombre, cargo, área, foto, email institucional)
+    └─[x] Página pública: /autoridades
+    └─[x] Organigrama visual por área de gobierno
+    └─[x] CRUD completo en panel Filament
+    └─[x] Seeder con 8 funcionarios reales
+    └─[x] Complejidad: Baja | Impacto ciudadano: Alto
 
 [ ] Galería multimedia (fotos y videos)
     └─[ ] Modelo: Gallery (título, fecha, tipo: foto/video, álbum)
