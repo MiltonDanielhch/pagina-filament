@@ -159,13 +159,13 @@ Cada feature se clasifica por:
 ## Mes 12–18 post-lanzamiento — Plataforma departamental
 
 ```
-[ ] Sistema de Estadísticas Departamentales
-    └─[ ] Indicadores clave: población, área, municipios, PIB departamental
-    └─[ ] Datos educativos, de salud, infraestructura
-    └─[ ] Visualizaciones con Chart.js o Recharts
-    └─[ ] Actualización anual desde el panel Filament
-    └─[ ] Fuente: INE Bolivia + datos propios
-    └─[ ] Complejidad: Media | Impacto ciudadano: Alto
+[x] Sistema de Estadísticas Departamentales
+    └─[x] Indicadores clave: población, área, municipios, PIB departamental
+    └─[x] Datos educativos, de salud, infraestructura
+    └─[x] Visualizaciones con Chart.js o Recharts
+    └─[x] Actualización anual desde el panel Filament
+    └─[x] Fuente: INE Bolivia + datos propios
+    └─[x] Complejidad: Media | Impacto ciudadano: Alto
 
 [ ] Blog de áreas de gobierno
     └─[ ] Categorías de posts vinculadas a secretarías (Salud, Educación, etc.)

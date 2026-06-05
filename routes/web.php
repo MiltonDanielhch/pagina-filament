@@ -12,6 +12,7 @@ use App\Http\Controllers\OfficialController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\Api\InfrastructureProjectController;
+use App\Http\Controllers\StatisticsController;
 use Illuminate\Support\Facades\Route;
 
 // Filament routes (auto-registered by Filament)
@@ -29,9 +30,11 @@ Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda');
 Route::get('/agenda/{agenda}/ical', [AgendaController::class, 'exportIcal'])->name('agenda.export-ical');
 Route::get('/agenda/{agenda}/google', [AgendaController::class, 'exportGoogleCalendar'])->name('agenda.export-google');
 Route::get('/resultados', [AchievementController::class, 'index'])->name('achievements');
+Route::get('/estadisticas', [StatisticsController::class, 'index'])->name('statistics');
 
 // API Routes
 Route::get('/api/infrastructure-projects', [InfrastructureProjectController::class, 'index'])->name('api.infrastructure-projects.index');
+Route::get('/api/statistics', [StatisticsController::class, 'api'])->name('api.statistics');
 Route::get('/autoridades', [OfficialController::class, 'index'])->name('officials');
 Route::get('/contacto', [ContactController::class, 'show'])->name('contact');
 Route::post('/contacto', [ContactController::class, 'send'])->name('contact.send');
