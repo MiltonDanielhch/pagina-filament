@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'Gobernación Autónoma Departamental del Beni' }}</title>
+    <title><?php echo e($title ?? 'Gobernación Autónoma Departamental del Beni'); ?></title>
     <style>
         .skip-link {
             position: absolute;
@@ -167,26 +167,26 @@
             }
         }
     </style>
-    <meta name="description" content="{{ $description ?? 'Sitio web oficial de la Gobernación Autónoma Departamental del Beni, Bolivia. Información sobre servicios gubernamentales, noticias, eventos y trámites. Atención al ciudadano de lunes a viernes de 8:00 a 16:00.' }}">
+    <meta name="description" content="<?php echo e($description ?? 'Sitio web oficial de la Gobernación Autónoma Departamental del Beni, Bolivia. Información sobre servicios gubernamentales, noticias, eventos y trámites. Atención al ciudadano de lunes a viernes de 8:00 a 16:00.'); ?>">
     <meta name="author" content="Gobernación Autónoma Departamental del Beni">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#0f766e">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="{{ $title ?? 'Gobernación Autónoma Departamental del Beni' }}">
+    <meta property="og:title" content="<?php echo e($title ?? 'Gobernación Autónoma Departamental del Beni'); ?>">
     <meta property="og:description" content="Sitio web oficial de la Gobernación Autónoma Departamental del Beni">
     <meta property="og:type" content="governmentOrganization">
-    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:url" content="<?php echo e(url()->current()); ?>">
     <meta property="og:site_name" content="Gobernación Autónoma Departamental del Beni">
-    <meta property="og:image" content="{{ asset('images/beni-og.jpg') }}">
+    <meta property="og:image" content="<?php echo e(asset('images/beni-og.jpg')); ?>">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ $title ?? 'Gobernación Autónoma Departamental del Beni' }}">
+    <meta name="twitter:title" content="<?php echo e($title ?? 'Gobernación Autónoma Departamental del Beni'); ?>">
     <meta name="twitter:description" content="Sitio web oficial de la Gobernación Autónoma Departamental del Beni">
 
     <!-- Favicon -->
-    @php
+    <?php
         $siteLogo = \App\Models\SiteSetting::get('site_logo', '');
         $siteFavicon = \App\Models\SiteSetting::get('site_favicon', '');
 
@@ -199,21 +199,21 @@
 
         $logoSrc = $siteLogo ?: asset('images/logo-beni.png');
         $faviconSrc = $siteFavicon ?: asset('favicon.ico');
-    @endphp
+    ?>
 
-    <link rel="icon" type="image/x-icon" href="{{ $faviconSrc }}">
-    <link rel="apple-touch-icon" href="{{ $faviconSrc }}">
+    <link rel="icon" type="image/x-icon" href="<?php echo e($faviconSrc); ?>">
+    <link rel="apple-touch-icon" href="<?php echo e($faviconSrc); ?>">
 
     <!-- Tailwind CSS -->
-    @vite(['resources/css/app.css'])
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css']); ?>
 
     <!-- SEO -->
-    @yield('seo')
+    <?php echo $__env->yieldContent('seo'); ?>
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="{{ url()->current() }}">
+    <link rel="canonical" href="<?php echo e(url()->current()); ?>">
         <!-- Schema.org Markup for Government Organization -->
-    @verbatim
+    
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -244,7 +244,7 @@
         "openingHours": "Mo-Fr 08:00-16:00"
     }
     </script>
-    @endverbatim
+    
 
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
@@ -292,11 +292,11 @@
                 <!-- Logo -->
                 <a href="/" class="flex items-center gap-3" aria-label="Ir a la página de inicio">
                     <div class="w-12 h-12 rounded-full overflow-hidden bg-official flex items-center justify-center">
-                        @if($siteLogo)
-                            <img src="{{ $logoSrc }}" alt="Logo Gobernación del Beni" class="w-full h-full object-contain">
-                        @else
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($siteLogo): ?>
+                            <img src="<?php echo e($logoSrc); ?>" alt="Logo Gobernación del Beni" class="w-full h-full object-contain">
+                        <?php else: ?>
                             <span class="text-white font-bold text-xl">B</span>
-                        @endif
+                        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                     </div>
                     <div>
                         <h1 class="text-xl font-bold text-gray-900 leading-tight">Gobernación<br><span class="text-official">del Beni</span></h1>
@@ -306,44 +306,47 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center gap-1">
-                    @if($headerMenu && $headerMenu->items)
-                        @foreach($headerMenu->items->where('parent_id', null) as $item)
-                            @if($item->children->count() > 0)
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($headerMenu && $headerMenu->items): ?>
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $headerMenu->items->where('parent_id', null); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($item->children->count() > 0): ?>
                                 <!-- Dropdown -->
                                 <div class="relative desktop-dropdown">
                                     <button onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-180');"
                                             class="px-4 py-2 rounded-lg text-gray-700 hover:bg-official/5 hover:text-official transition font-medium flex items-center gap-1"
                                             aria-expanded="false"
                                             aria-haspopup="true"
-                                            aria-label="{{ $item->label }} - Menú desplegable">
-                                        {{ $item->label }}
+                                            aria-label="<?php echo e($item->label); ?> - Menú desplegable">
+                                        <?php echo e($item->label); ?>
+
                                         <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                         </svg>
                                     </button>
-                                    <div class="hidden absolute right-0 mt-2 min-w-[24rem] bg-white rounded-lg shadow-lg z-50" style="width: max-content;" role="menu" aria-label="{{ $item->label }} - Submenú">
+                                    <div class="hidden absolute right-0 mt-2 min-w-[24rem] bg-white rounded-lg shadow-lg z-50" style="width: max-content;" role="menu" aria-label="<?php echo e($item->label); ?> - Submenú">
                                         <div class="py-1 flex flex-col">
-                                            @foreach($item->children as $child)
-                                            <a href="{{ $child->page_id ? route('pages.show', $child->page->slug) : $child->url }}"
-                                            target="{{ $child->target ?? '_self' }}"
+                                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $item->children; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $child): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                                            <a href="<?php echo e($child->page_id ? route('pages.show', $child->page->slug) : $child->url); ?>"
+                                            target="<?php echo e($child->target ?? '_self'); ?>"
                                             class="block px-4 py-2 text-gray-700 hover:bg-official/5 hover:text-official transition whitespace-nowrap text-sm">
-                                                {{ $child->label }}
+                                                <?php echo e($child->label); ?>
+
                                             </a>
-                                            @endforeach
+                                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
-                            @else
+                            <?php else: ?>
                                 <!-- Regular item -->
-                                <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}"
-                                   target="{{ $item->target ?? '_self' }}"
+                                <a href="<?php echo e($item->page_id ? route('pages.show', $item->page->slug) : $item->url); ?>"
+                                   target="<?php echo e($item->target ?? '_self'); ?>"
                                    class="px-4 py-2 rounded-lg text-gray-700 hover:bg-official/5 hover:text-official transition font-medium">
-                                    {{ $item->label }}
+                                    <?php echo e($item->label); ?>
+
                                 </a>
-                            @endif
-                        @endforeach
-                    @endif
-                    <form action="{{ route('search') }}" method="GET" class="relative ml-2" role="search">
+                            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+                    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                    <form action="<?php echo e(route('search')); ?>" method="GET" class="relative ml-2" role="search">
                         <label for="desktop-search" class="sr-only">Buscar en el sitio</label>
                         <input type="text" name="q" id="desktop-search" placeholder="Buscar..."
                             class="w-32 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-official focus:ring-1 focus:ring-official"
@@ -371,43 +374,46 @@
 
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t" role="navigation" aria-label="Menú de navegación móvil">
-                <form action="{{ route('search') }}" method="GET" class="mb-3" role="search">
+                <form action="<?php echo e(route('search')); ?>" method="GET" class="mb-3" role="search">
                     <label for="mobile-search" class="sr-only">Buscar en el sitio</label>
                     <input type="text" name="q" id="mobile-search" placeholder="Buscar..."
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-official"
                         aria-label="Buscar en el sitio">
                 </form>
-                @if($headerMenu && $headerMenu->items)
-                    @foreach($headerMenu->items->where('parent_id', null) as $item)
-                        @if($item->children->count() > 0)
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($headerMenu && $headerMenu->items): ?>
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $headerMenu->items->where('parent_id', null); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($item->children->count() > 0): ?>
                             <!-- Mobile Dropdown -->
                             <div class="mobile-dropdown">
                                 <button onclick="this.nextElementSibling.classList.toggle('hidden')" class="w-full px-4 py-3 rounded-lg text-gray-700 hover:bg-official/5 flex items-center justify-between">
-                                    {{ $item->label }}
+                                    <?php echo e($item->label); ?>
+
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                     </svg>
                                 </button>
                                 <div class="hidden pl-4">
-                                    @foreach($item->children as $child)
-                                        <a href="{{ $child->page_id ? route('pages.show', $child->page->slug) : $child->url }}"
-                                           target="{{ $child->target ?? '_self' }}"
+                                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $item->children; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $child): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                                        <a href="<?php echo e($child->page_id ? route('pages.show', $child->page->slug) : $child->url); ?>"
+                                           target="<?php echo e($child->target ?? '_self'); ?>"
                                            class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-official/5">
-                                            {{ $child->label }}
+                                            <?php echo e($child->label); ?>
+
                                         </a>
-                                    @endforeach
+                                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
                                 </div>
                             </div>
-                        @else
+                        <?php else: ?>
                             <!-- Regular item -->
-                            <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}"
-                               target="{{ $item->target ?? '_self' }}"
+                            <a href="<?php echo e($item->page_id ? route('pages.show', $item->page->slug) : $item->url); ?>"
+                               target="<?php echo e($item->target ?? '_self'); ?>"
                                class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-official/5">
-                                {{ $item->label }}
+                                <?php echo e($item->label); ?>
+
                             </a>
-                        @endif
-                    @endforeach
-                @endif
+                        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+                <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                 <a href="https://siscor.beni.gob.bo" target="_blank" class="block mt-2 btn-primary text-center">Trámites Online</a>
             </div>
         </nav>
@@ -415,7 +421,7 @@
 
     <!-- Main Content -->
     <main id="main-content" class="flex-grow">
-        @yield('content')
+        <?php echo $__env->yieldContent('content'); ?>
     </main>
 
     <!-- Footer -->
@@ -430,11 +436,11 @@
                 <div class="space-y-4">
                     <div class="flex items-center gap-3">
                         <div class="w-12 h-12 rounded-lg overflow-hidden bg-white p-1 flex items-center justify-center shadow-md">
-                            @if($siteLogo)
-                                <img src="{{ $logoSrc }}" alt="Logo Gobernación del Beni" class="w-full h-full object-contain">
-                            @else
+                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($siteLogo): ?>
+                                <img src="<?php echo e($logoSrc); ?>" alt="Logo Gobernación del Beni" class="w-full h-full object-contain">
+                            <?php else: ?>
                                 <span class="text-official font-bold text-xl">B</span>
-                            @endif
+                            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                         </div>
                         <div>
                             <h3 class="text-lg font-bold text-white leading-tight">Gobernación<br><span class="text-amber-400 text-sm font-medium">del Beni</span></h3>
@@ -462,28 +468,30 @@
                 </div>
 
                 <!-- Columnas 2 y 3 Dinámicas: Distribución automática de los ítems de Filament -->
-                @if($footerMenu && $footerMenu->items && $footerMenu->items->count() > 0)
-                    {{-- Dividimos la colección en 2 bloques para armar las dos columnas centrales dinámicamente --}}
-                    @foreach($footerMenu->items->sortBy('order')->chunk(4) as $chunk)
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($footerMenu && $footerMenu->items && $footerMenu->items->count() > 0): ?>
+                    
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $footerMenu->items->sortBy('order')->chunk(4); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $chunk): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
                         <div class="space-y-4">
                             <h4 class="text-xs font-bold text-amber-400 uppercase tracking-widest border-b border-gray-800 pb-2">
-                                {{ $loop->first ? 'Enlaces Institucionales' : 'Servicios y Más' }}
+                                <?php echo e($loop->first ? 'Enlaces Institucionales' : 'Servicios y Más'); ?>
+
                             </h4>
                             <ul class="space-y-2 text-sm">
-                                @foreach($chunk as $item)
+                                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $chunk; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
                                     <li>
-                                        <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}"
-                                           target="{{ $item->target ?? '_self' }}"
+                                        <a href="<?php echo e($item->page_id ? route('pages.show', $item->page->slug) : $item->url); ?>"
+                                           target="<?php echo e($item->target ?? '_self'); ?>"
                                            class="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group py-0.5">
                                             <span class="w-1.5 h-1.5 rounded-full bg-amber-400/50 group-hover:bg-amber-400 transition-colors"></span>
-                                            {{ $item->label }}
+                                            <?php echo e($item->label); ?>
+
                                         </a>
                                     </li>
-                                @endforeach
+                                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
                             </ul>
                         </div>
-                    @endforeach
-                @else
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+                <?php else: ?>
                     <!-- Fallback en caso de que no existan ítems en BD -->
                     <div class="space-y-4">
                         <h4 class="text-xs font-bold text-amber-400 uppercase tracking-widest border-b border-gray-800 pb-2">Enlaces de Interés</h4>
@@ -498,7 +506,7 @@
                             <li><a href="/politica-de-privacidad" class="text-gray-400 hover:text-white transition-colors">Privacidad</a></li>
                         </ul>
                     </div>
-                @endif
+                <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
                 <!-- Columna Última: Contacto (Estática) -->
                 <div class="space-y-4">
@@ -532,7 +540,7 @@
             <div class="border-t border-gray-800 mt-6 pt-4">
                 <div class="flex flex-col md:flex-row justify-between items-center gap-2 text-[11px] text-gray-500">
                     <p class="text-center md:text-left">
-                        &copy; {{ date('Y') }} Gobernación Autónoma Departamental del Beni. Todos los derechos reservados.
+                        &copy; <?php echo e(date('Y')); ?> Gobernación Autónoma Departamental del Beni. Todos los derechos reservados.
                     </p>
                     <div class="flex gap-4">
                         <a href="/politica-de-privacidad" class="hover:text-gray-300 transition-colors">Política de Privacidad</a>
@@ -584,7 +592,7 @@
         });
     </script>
 
-    @yield('scripts')
+    <?php echo $__env->yieldContent('scripts'); ?>
 
     <!-- Toast Container -->
     <div id="toast-container" class="toast-container"></div>
@@ -633,3 +641,4 @@
     </script>
 </body>
 </html>
+<?php /**PATH C:\laravel\principal\resources\views/layouts/main.blade.php ENDPATH**/ ?>

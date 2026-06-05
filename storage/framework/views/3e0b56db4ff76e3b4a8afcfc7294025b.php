@@ -1,22 +1,37 @@
-{{--
-    Ubicación: resources/views/contact.blade.php
-    Descripción: Formulario de contacto con validación, labels accesibles
-                 y aria-required.
-    Accesibilidad: lang="es", skip link, contraste 4.5:1, semantic HTML
-    Roadmap: 06-FRONTEND.md — Bloque 6.1
---}}
-@extends('layouts.main')
-
-@section('seo')
+<?php $__env->startSection('seo'); ?>
     <meta name="description" content="Formulario de contacto de la Gobernación Autónoma Departamental del Beni. Envía tus consultas, sugerencias y trámites. Horario de atención de lunes a viernes de 8:00 a 16:00. Teléfono: (591) 346-21651.">
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <article class="container mx-auto px-4 py-12 max-w-2xl">
-    <x-breadcrumb :items="[
+    <?php if (isset($component)) { $__componentOriginale19f62b34dfe0bfdf95075badcb45bc2 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginale19f62b34dfe0bfdf95075badcb45bc2 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.breadcrumb','data' => ['items' => [
         ['label' => 'Inicio', 'url' => '/'],
         ['label' => 'Contacto', 'url' => null]
-    ]" />
+    ]]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('breadcrumb'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['items' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute([
+        ['label' => 'Inicio', 'url' => '/'],
+        ['label' => 'Contacto', 'url' => null]
+    ])]); ?>
+<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
+
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginale19f62b34dfe0bfdf95075badcb45bc2)): ?>
+<?php $attributes = $__attributesOriginale19f62b34dfe0bfdf95075badcb45bc2; ?>
+<?php unset($__attributesOriginale19f62b34dfe0bfdf95075badcb45bc2); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginale19f62b34dfe0bfdf95075badcb45bc2)): ?>
+<?php $component = $__componentOriginale19f62b34dfe0bfdf95075badcb45bc2; ?>
+<?php unset($__componentOriginale19f62b34dfe0bfdf95075badcb45bc2); ?>
+<?php endif; ?>
     <h1 class="text-4xl font-bold mb-8 text-gray-800">Contacto</h1>
     
     <div class="mb-8 p-6 bg-amber-50 rounded-lg">
@@ -26,14 +41,15 @@
         <p class="mb-2"><strong>Email:</strong> despacho@beni.gob.bo</p>
     </div>
     
-    @if(session('success'))
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(session('success')): ?>
     <div class="mb-6 p-4 bg-green-100 text-green-700 rounded-lg">
-        {{ session('success') }}
+        <?php echo e(session('success')); ?>
+
     </div>
-    @endif
+    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
     
-    <form method="POST" action="{{ route('contact.send') }}" class="space-y-6" id="contact-form" novalidate>
-        @csrf
+    <form method="POST" action="<?php echo e(route('contact.send')); ?>" class="space-y-6" id="contact-form" novalidate>
+        <?php echo csrf_field(); ?>
         
         <div>
             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre completo <span class="text-red-500">*</span></label>
@@ -41,9 +57,16 @@
                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-official focus:border-official transition-colors"
                    data-validate="name">
             <p class="mt-1 text-red-600 text-sm hidden" id="name-error-js" role="alert"></p>
-            @error('name')
-            <p class="mt-1 text-red-600 text-sm" id="name-error" role="alert">{{ $message }}</p>
-            @enderror
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+            <p class="mt-1 text-red-600 text-sm" id="name-error" role="alert"><?php echo e($message); ?></p>
+            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
         </div>
         
         <div>
@@ -52,9 +75,16 @@
                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-official focus:border-official transition-colors"
                    data-validate="email">
             <p class="mt-1 text-red-600 text-sm hidden" id="email-error-js" role="alert"></p>
-            @error('email')
-            <p class="mt-1 text-red-600 text-sm" id="email-error" role="alert">{{ $message }}</p>
-            @enderror
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+            <p class="mt-1 text-red-600 text-sm" id="email-error" role="alert"><?php echo e($message); ?></p>
+            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
         </div>
         
         <div>
@@ -63,9 +93,16 @@
                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-official focus:border-official transition-colors"
                    data-validate="subject">
             <p class="mt-1 text-red-600 text-sm hidden" id="subject-error-js" role="alert"></p>
-            @error('subject')
-            <p class="mt-1 text-red-600 text-sm" id="subject-error" role="alert">{{ $message }}</p>
-            @enderror
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__errorArgs = ['subject'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+            <p class="mt-1 text-red-600 text-sm" id="subject-error" role="alert"><?php echo e($message); ?></p>
+            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
         </div>
         
         <div>
@@ -74,9 +111,16 @@
                       class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-official focus:border-official transition-colors"
                       data-validate="message"></textarea>
             <p class="mt-1 text-red-600 text-sm hidden" id="message-error-js" role="alert"></p>
-            @error('message')
-            <p class="mt-1 text-red-600 text-sm" id="message-error" role="alert">{{ $message }}</p>
-            @enderror
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__errorArgs = ['message'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+            <p class="mt-1 text-red-600 text-sm" id="message-error" role="alert"><?php echo e($message); ?></p>
+            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
         </div>
         
         <button type="submit"
@@ -87,9 +131,9 @@
         </button>
     </form>
 </article>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
+<?php $__env->startSection('scripts'); ?>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('contact-form');
@@ -199,4 +243,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laravel\principal\resources\views/contact.blade.php ENDPATH**/ ?>

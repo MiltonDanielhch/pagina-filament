@@ -98,9 +98,10 @@ Este documento contiene un plan de trabajo para implementar las mejoras sugerida
 - [x] Mejorar meta descriptions en todas las páginas
 
 ### 11. UX Mejorada
-- [ ] Agregar animaciones sutiles en hover
-- [ ] Implementar loading states para contenido asíncrono
-- [ ] Agregar notificaciones toast para acciones del usuario
+- [x] Agregar animaciones sutiles en hover
+- [x] Implementar loading states para contenido asíncrono
+- [x] Agregar notificaciones toast para acciones del usuario
+  - Sugerencia: Conectar toast automáticamente a mensajes de sesión (success/error) para mostrar notificaciones al enviar formularios
 
 ### 12. Integración de Notificaciones - WhatsApp y Telegram
 - [ ] Integrar Telegram Bot API para notificaciones de contacto
