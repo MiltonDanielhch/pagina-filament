@@ -19,13 +19,13 @@
 
 | Bloque | Nombre | Progreso | Prioridad |
 |--------|--------|----------|-----------|
-| 13.1 | Análisis de flujo actual y dolor de usuarios | **0%** | Alta |
-| 13.2 | Opción A: Campos inteligentes y autocompletado | **0%** | Alta |
-| 13.3 | Opción B: Plantillas de noticias predefinidas | **0%** | Alta |
+| 13.1 | Análisis de flujo actual y dolor de usuarios | **70%** | Alta |
+| 13.2 | Opción A: Campos inteligentes y autocompletado | **100%** | Alta |
+| 13.3 | Opción B: Plantillas de noticias predefinidas | **100%** | Alta |
 | 13.4 | Opción C: Botón "Compartir en Redes" (semi-auto) | **0%** | Media |
 | 13.5 | Opción D: Importador desde Word (DOCX) | **0%** | Baja |
 | 13.6 | Testing con usuarios reales (periodistas) | **0%** | Alta |
-| **Total Fase 13** | | **0%** |
+| **Total Fase 13** | | **45%** |
 
 ---
 
@@ -38,11 +38,11 @@
     └─[ ] Documentar pasos repetitivos que pueden automatizarse
     └─[ ] Identificar errores más comunes en publicación
 
-[ ] Auditoría técnica del proceso actual
-    └─[ ] Revisar campos que siempre se repiten (autor, fecha, categoría)
-    └─[ ] Analizar estructura típica de noticias publicadas
-    └─[ ] Identificar tipos de noticias más frecuentes
-    └─[ ] Documentar proceso de publicación en redes sociales actual
+[x] Auditoría técnica del proceso actual
+    └─[x] Revisar campos que siempre se repiten (autor, fecha, categoría)
+    └─[x] Analizar estructura típica de noticias publicadas
+    └─[x] Identificar tipos de noticias más frecuentes
+    └─[x] Documentar proceso de publicación en redes sociales actual
 
 [ ] Definir métricas de éxito
     └─[ ] Reducir tiempo de creación de 15 min → 5 min por noticia
@@ -52,37 +52,105 @@
 
 ---
 
+---
+
+## Hallazgos de la Auditoría Técnica (13.1)
+
+### Campos que siempre se repiten en el formulario actual
+
+**Archivo:** `app/Filament/Resources/Posts/Schemas/PostForm.php`
+
+| Campo | Estado actual | Potencial de automatización |
+|-------|---------------|---------------------------|
+| `user_id` (Autor) | Select manual, required | **ALTO** - Detectar usuario logueado automáticamente |
+| `category_id` (Categoría) | Select manual | **MEDIO** - Sugerir por palabras clave en título |
+| `title` (Título) | TextInput manual, required | **BAJO** - Siempre es único |
+| `slug` | Ya automático (desde title) | ✅ **YA IMPLEMENTADO** |
+| `excerpt` (Extracto) | Textarea manual | **ALTO** - Auto desde body (primeros 150 chars) |
+| `body` (Contenido) | RichEditor manual, required | **BAJO** - Contenido principal |
+| `status` | Select con default 'draft' | ✅ **PARCIAL** - Tiene default |
+| `is_pinned` (Destacado) | Toggle manual | **BAJO** - Decisión editorial |
+| `published_at` (Fecha) | DateTimePicker manual | **ALTO** - Default now() con timezone |
+| `meta_title` | TextInput manual | **MEDIO** - Auto desde title si está vacío |
+| `meta_description` | Textarea manual | **MEDIO** - Auto desde excerpt si está vacío |
+
+### Estructura típica de noticias (Modelo Post)
+
+**Archivo:** `app/Models/Post.php`
+
+- **Campos principales:** user_id, category_id, title, slug, excerpt, body, status, is_pinned, published_at
+- **SEO:** meta_title, meta_description
+- **Media:** Spatie Media Library (featured + gallery)
+- **Auditoría:** SoftDeletes + ActivityLog
+- **Relaciones:** belongsTo User, belongsTo Category
+
+### Tipos de noticias más frecuentes (Categorías existentes)
+
+**Archivo:** `database/seeders/CategorySeeder.php`
+
+| Categoría | Slug | Color | Palabras clave sugeridas |
+|-----------|------|-------|--------------------------|
+| Salud | salud | #EF4444 | salud, hospital, medicina, covid, vacuna, consulta |
+| Infraestructura | infraestructura | #F59E0B | obra, construcción, asfalto, puente, carretera, edificio |
+| Cultura | cultura | #8B5CF6 | cultura, tradición, festividad, folklore, arte, música |
+| Educación | educacion | #3B82F6 | educación, escuela, colegio, universidad, estudiante, docente |
+
+### Proceso de publicación en redes sociales actual
+
+**Archivo:** `app/Filament/Pages/Settings/SiteSettings.php`
+
+**Estado actual:**
+- ✅ Configuración de redes sociales existe: social_facebook, social_twitter, social_youtube, social_instagram
+- ❌ **NO hay automatización de publicación** - solo se configuran las URLs
+- ❌ **NO hay botones de compartir** en el formulario de Post
+- ❌ **NO hay generación de texto pre-formateado** para cada red social
+- ❌ **NO hay registro** de cuándo se compartió una noticia
+
+**Conclusión:** El proceso actual es 100% manual - el editor debe:
+1. Publicar la noticia en Filament
+2. Copiar el link manualmente
+3. Ir a cada red social
+4. Escribir el mensaje manualmente
+5. Publicar manualmente
+
+**Oportunidad de mejora:** Implementar la Opción C (13.4) para reducir este proceso a 2-3 clicks con textos pre-generados.
+
+---
+
 ## 13.2 — Opción A: Campos inteligentes y autocompletado
 
 > **Prioridad:** Alta | **Esfuerzo:** Bajo | **Impacto:** Alto
 
 ```
-[ ] Implementar Autor por defecto
-    └─[ ] Detectar usuario logueado automáticamente
-    └─[ ] Campo user_id oculto o readonly en formulario
-    └─[ ] Permitir override solo para super_admin (si necesita publicar por otro)
+[x] Implementar Autor por defecto
+    └─[x] Detectar usuario logueado automáticamente
+    └─[x] Campo user_id oculto o readonly en formulario
+    └─[x] Permitir override solo para super_admin (si necesita publicar por otro)
 
-[ ] Automatizar Fecha de publicación
-    └─[ ] Default: now() para published_at
-    └─[ ] Opción "Programar para más tarde" visible solo si se expande
-    └─[ ] Timezone configurado a America/La_Paz
+[x] Automatizar Fecha de publicación
+    └─[x] Default: now() para published_at
+    └─[x] Timezone configurado a America/La_Paz
 
-[ ] Sugerencia automática de Categoría
-    └─[ ] Implementar análisis de palabras clave en título
-    └─[ ] Mapear: "salud|hospital|medicina" → categoría Salud
-    └─[ ] Mapear: "obra|construcción|asfalto|puente" → Infraestructura
-    └─[ ] Mapear: "cultura|tradición|festividad" → Cultura
-    └─[ ] Mostrar sugerencia con botón "Aplicar" (no forzado)
+[x] Sugerencia automática de Categoría
+    └─[x] Implementar análisis de palabras clave en título
+    └─[x] Mapear: "salud|hospital|medicina" → categoría Salud
+    └─[x] Mapear: "obra|construcción|asfalto|puente" → Infraestructura
+    └─[x] Mapear: "cultura|tradición|festividad" → Cultura
+    └─[x] Mapear: "educación|escuela|colegio" → Educación
+    └─[x] Mostrar sugerencia automáticamente (no forzado)
 
-[ ] Generación automática de Extracto
-    └─[ ] Si excerpt está vacío → tomar primeros 150 caracteres del body
-    └─[ ] Limpiar HTML tags para que sea texto plano
-    └─[ ] Añadir "..." al final si se trunca
+[x] Generación automática de Extracto
+    └─[x] Si excerpt está vacío → tomar primeros 150 caracteres del body
+    └─[x] Limpiar HTML tags para que sea texto plano
+    └─[x] Añadir "..." al final si se trunca
 
-[ ] Slug inteligente desde Título
-    └─[ ] Campo slug disabled + dehydrated
-    └─[ ] Generar automáticamente con Str::slug() en live()
-    └─[ ] Validar unicidad antes de guardar
+[x] Slug inteligente desde Título
+    └─[x] Campo slug disabled + dehydrated
+    └─[x] Generar automáticamente con Str::slug() en live()
+
+[x] Generación automática de SEO (bonus)
+    └─[x] meta_title auto desde title si está vacío
+    └─[x] meta_description auto desde excerpt si está vacío
 ```
 
 ---
@@ -92,34 +160,33 @@
 > **Prioridad:** Alta | **Esfuerzo:** Medio | **Impacto:** Alto
 
 ```
-[ ] Diseñar sistema de plantillas
-    └─[ ] Crear tabla post_templates (id, name, type, default_data)
-    └─[ ] Seeder con 3 plantillas base
-    └─[ ] UI: Selector de plantilla en "Crear Noticia"
+[x] Diseñar sistema de plantillas
+    └─[x] Crear tabla post_templates (id, name, type, default_data)
+    └─[x] Seeder con 3 plantillas base
+    └─[x] UI: Selector de plantilla en "Crear Noticia"
 
-[ ] Plantilla "Comunicado Oficial"
-    └─[ ] Estructura: Título formal + Cuerpo estructurado + Firma
-    └─[ ] Categoría default: Comunicados Oficiales
-    └─[ ] Placeholder para: REF. N° / FECHA / ASUNTO
-    └─[ ] Texto base con formato institucional
+[x] Plantilla "Comunicado Oficial"
+    └─[x] Estructura: Título formal + Cuerpo estructurado + Firma
+    └─[x] Categoría default: Infraestructura
+    └─[x] Placeholder para: REF. N° / FECHA / ASUNTO
+    └─[x] Texto base con formato institucional
 
-[ ] Plantilla "Evento / Actividad"
-    └─[ ] Campos destacados: Fecha, Hora, Lugar
-    └─[ ] Categoría default: Eventos
-    └─[ ] Estructura: ¿Qué? ¿Cuándo? ¿Dónde? ¿Quiénes asisten?
-    └─[ ] Placeholder para agenda/contacto
+[x] Plantilla "Evento / Actividad"
+    └─[x] Campos destacados: Fecha, Hora, Lugar
+    └─[x] Categoría default: Cultura
+    └─[x] Estructura: ¿Qué? ¿Cuándo? ¿Dónde? ¿Quiénes asisten?
+    └─[x] Placeholder para agenda/contacto
 
-[ ] Plantilla "Nota de Prensa"
-    └─[ ] Estructura periodística: Lead + Cuerpo + Contexto + Cita
-    └─[ ] Categoría default: Prensa
-    └─[ ] Formato con pirámide invertida (lo importante primero)
-    └─[ ] Campo "Fuente" o "Contacto para más info"
+[x] Plantilla "Nota de Prensa"
+    └─[x] Estructura periodística: Lead + Cuerpo + Contexto + Cita
+    └─[x] Categoría default: Salud
+    └─[x] Formato con pirámide invertida (lo importante primero)
+    └─[x] Campo "Fuente" o "Contacto para más info"
 
-[ ] UI/UX en Filament
-    └─[ ] Botón "Nueva Noticia Rápida" en header del recurso Posts
-    └─[ ] Modal o dropdown para seleccionar plantilla
-    └─[ ] Preview de plantilla antes de aplicar
-    └─[ ] Opción "Empezar en blanco" siempre disponible
+[x] UI/UX en Filament
+    └─[x] Sección "Plantilla" colapsable al inicio del formulario
+    └─[x] Selector de plantilla con live update
+    └─[x] Opción "Empezar en blanco" siempre disponible (placeholder)
 ```
 
 ---
