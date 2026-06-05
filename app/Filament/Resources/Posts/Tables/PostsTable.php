@@ -47,6 +47,10 @@ class PostsTable
                     ->falseIcon('heroicon-m-x-circle')
                     ->trueColor('success')
                     ->falseColor('gray'),
+                TextColumn::make('view_count')
+                    ->label('Visitas')
+                    ->numeric()
+                    ->sortable(),
                 TextColumn::make('meta_title')
                     ->label('Meta título')
                     ->searchable(),

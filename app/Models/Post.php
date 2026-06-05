@@ -49,12 +49,16 @@ class Post extends Model implements HasMedia
         // Redes sociales
         'shared_to_social',
         'shared_at',
+
+        // Estadísticas
+        'view_count',
     ];
 
     protected $casts = [
         'published_at' => 'datetime',
         'shared_at' => 'datetime',
         'shared_to_social' => 'boolean',
+        'view_count' => 'integer',
     ];
 
     /**

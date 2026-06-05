@@ -39,17 +39,20 @@ Cada feature se clasifica por:
     └─[ ] Complejidad: Media | Impacto ciudadano: Alto
 
 [ ] Contador de visitas por artículo
-    └─[ ] Campo view_count en Post y Event
-    └─[ ] Middleware que incrementa al cargar la vista
-    └─[ ] Widget en dashboard: "Posts más visitados esta semana"
-    └─[ ] Sin usar Google Analytics — privacidad compliant
+    └─[x] Campo view_count en Post y Event
+    └─[x] Middleware que incrementa al cargar la vista
+    └─[x] Widget en dashboard: "Posts más visitados esta semana"
+    └─[x] Sin usar Google Analytics — privacidad compliant
+    └─[x] Columna de visitas en tabla Posts
     └─[ ] Complejidad: Baja | Impacto editorial: Medio
 
-[ ] Compartir en redes sociales
-    └─[ ] Botones en el detalle de post: Facebook, X (Twitter), WhatsApp, copiar link
-    └─[ ] WhatsApp es el más relevante para el contexto boliviano
-    └─[ ] Sin usar SDKs externos — solo links nativos de compartir
-    └─[ ] Complejidad: Baja | Impacto ciudadano: Medio
+[x] Compartir en redes sociales
+    └─[x] Botones en el detalle de post: Facebook, X (Twitter), WhatsApp, copiar link
+    └─[x] WhatsApp es el más relevante para el contexto boliviano
+    └─[x] Sin usar SDKs externos — solo links nativos de compartir
+    └─[x] Botones en panel Filament para compartir desde el admin
+    └─[x] Registro de cuándo se compartió (shared_at)
+    └─[x] Complejidad: Baja | Impacto ciudadano: Medio
 
 [ ] Página de resultados del gobierno
     └─[ ] Modelo: Achievement (logro, descripción, fecha, área, imagen)

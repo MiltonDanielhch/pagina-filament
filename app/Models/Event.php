@@ -33,12 +33,14 @@ class Event extends Model implements HasMedia
         'ends_at',
         'is_featured',
         'status',
+        'view_count',
     ];
 
     protected $casts = [
         'starts_at' => 'datetime',
         'ends_at' => 'datetime',
         'is_featured' => 'boolean',
+        'view_count' => 'integer',
     ];
 
     public function user(): BelongsTo
