@@ -14,11 +14,15 @@
 @section('content')
 <!-- Hero Banner / Slider -->
 @if($slides->count() > 0)
-<section class="relative h-[500px] md:h-[600px]">
+<section class="relative h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden" id="hero-slider">
     <div class="absolute inset-0">
         @foreach($slides as $index => $slide)
         <div class="absolute inset-0 transition-opacity duration-700 {{ $index === 0 ? 'opacity-100' : 'opacity-0' }}" data-slide="{{ $index }}">
-            <img src="{{ $slide->getFirstMediaUrl('slides') ?: $slide->image }}" alt="{{ $slide->title }}" class="w-full h-full object-cover">
+            <picture>
+                <source media="(max-width: 768px)" srcset="{{ $slide->getFirstMediaUrl('slides') ?: $slide->image }}?w=800&q=80">
+                <source media="(max-width: 1024px)" srcset="{{ $slide->getFirstMediaUrl('slides') ?: $slide->image }}?w=1200&q=85">
+                <img src="{{ $slide->getFirstMediaUrl('slides') ?: $slide->image }}" alt="{{ $slide->title }}" class="w-full h-full object-cover" loading="eager">
+            </picture>
             <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30"></div>
         </div>
         @endforeach
@@ -35,9 +39,9 @@
     </div>
     <!-- Slide Indicators -->
     @if($slides->count() > 1)
-    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-10">
         @foreach($slides as $index => $slide)
-        <button data-slide-btn="{{ $index }}" class="w-3 h-3 rounded-full transition-all {{ $index === 0 ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/70' }}"></button>
+        <button data-slide-btn="{{ $index }}" class="w-4 h-4 md:w-3 md:h-3 rounded-full transition-all {{ $index === 0 ? 'bg-white w-10 md:w-8' : 'bg-white/50 hover:bg-white/70' }}" aria-label="Slide {{ $index + 1 }}"></button>
         @endforeach
     </div>
     @endif
@@ -79,7 +83,11 @@
             <article class="card-article hover-lift">
                 <a href="{{ route('posts.show', $post->slug) }}">
                     @if($post->getFirstMedia('featured'))
-                    <img src="{{ $post->getFirstMedia('featured')->getUrl('medium') }}" alt="{{ $post->title }}" class="w-full h-48 object-cover hover-scale" loading="lazy">
+                    <picture>
+                        <source media="(max-width: 640px)" srcset="{{ $post->getFirstMedia('featured')->getUrl('medium') }}">
+                        <source media="(max-width: 1024px)" srcset="{{ $post->getFirstMedia('featured')->getUrl('medium') }}">
+                        <img src="{{ $post->getFirstMedia('featured')->getUrl('medium') }}" alt="{{ $post->title }}" class="w-full h-48 object-cover hover-scale" loading="lazy">
+                    </picture>
                     @else
                     <div class="w-full h-48 bg-gradient-to-br from-official/20 to-official/5 flex items-center justify-center">
                         <svg class="w-12 h-12 text-official/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
@@ -202,7 +210,11 @@
             <div class="relative">
                 <!-- Imagen institucional del Beni -->
                 @if($aboutSettings['image'])
-                <img src="{{ $aboutSettings['image'] }}" alt="Imagen institucional de la Gobernación del Beni mostrando el edificio principal" class="rounded-2xl shadow-2xl w-full object-cover" loading="lazy">
+                <picture>
+                    <source media="(max-width: 640px)" srcset="{{ $aboutSettings['image'] }}?w=600&q=80">
+                    <source media="(max-width: 1024px)" srcset="{{ $aboutSettings['image'] }}?w=900&q=85">
+                    <img src="{{ $aboutSettings['image'] }}" alt="Imagen institucional de la Gobernación del Beni mostrando el edificio principal" class="rounded-2xl shadow-2xl w-full object-cover" loading="lazy">
+                </picture>
                 @endif
                 <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-official/10 rounded-full -z-10"></div>
                 <div class="absolute -top-6 -left-6 w-32 h-32 bg-official/20 rounded-full -z-10"></div>
@@ -398,15 +410,17 @@
 
 @section('scripts')
 <script>
-    // Slider automático
+    // Slider automático con touch gestures
     document.addEventListener('DOMContentLoaded', function() {
+        const slider = document.getElementById('hero-slider');
         const slides = document.querySelectorAll('[data-slide]');
         const contents = document.querySelectorAll('[data-slide-content]');
         const buttons = document.querySelectorAll('[data-slide-btn]');
         
-        if (slides.length > 1) {
+        if (slides.length > 1 && slider) {
             let currentSlide = 0;
             const interval = 5000; // 5 segundos
+            let autoRotateInterval;
             
             function showSlide(index) {
                 slides.forEach((slide, i) => {
@@ -420,25 +434,121 @@
                 
                 buttons.forEach((btn, i) => {
                     btn.classList.toggle('bg-white', i === index);
-                    btn.classList.toggle('w-8', i === index);
+                    btn.classList.toggle('w-10', i === index);
+                    btn.classList.toggle('md:w-8', i === index);
                     btn.classList.toggle('bg-white/50', i !== index);
-                    btn.classList.toggle('w-3', i !== index);
+                    btn.classList.toggle('w-4', i !== index);
+                    btn.classList.toggle('md:w-3', i !== index);
                 });
             }
             
-            // Auto-rotar
-            setInterval(() => {
-                currentSlide = (currentSlide + 1) % slides.length;
-                showSlide(currentSlide);
-            }, interval);
+            function startAutoRotate() {
+                autoRotateInterval = setInterval(() => {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    showSlide(currentSlide);
+                }, interval);
+            }
+            
+            function stopAutoRotate() {
+                clearInterval(autoRotateInterval);
+            }
+            
+            // Touch gestures
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let isDragging = false;
+            
+            slider.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                isDragging = true;
+                stopAutoRotate();
+            }, { passive: true });
+            
+            slider.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                touchEndX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            
+            slider.addEventListener('touchend', () => {
+                if (!isDragging) return;
+                isDragging = false;
+                handleSwipe();
+                startAutoRotate();
+            });
+            
+            // Mouse drag support
+            let mouseStartX = 0;
+            let mouseEndX = 0;
+            
+            slider.addEventListener('mousedown', (e) => {
+                mouseStartX = e.clientX;
+                isDragging = true;
+                stopAutoRotate();
+            });
+            
+            slider.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                mouseEndX = e.clientX;
+            });
+            
+            slider.addEventListener('mouseup', () => {
+                if (!isDragging) return;
+                isDragging = false;
+                handleMouseDrag();
+                startAutoRotate();
+            });
+            
+            slider.addEventListener('mouseleave', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    startAutoRotate();
+                }
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        // Swipe left - next slide
+                        currentSlide = (currentSlide + 1) % slides.length;
+                    } else {
+                        // Swipe right - previous slide
+                        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                    }
+                    showSlide(currentSlide);
+                }
+            }
+            
+            function handleMouseDrag() {
+                const dragThreshold = 50;
+                const diff = mouseStartX - mouseEndX;
+                
+                if (Math.abs(diff) > dragThreshold) {
+                    if (diff > 0) {
+                        // Drag left - next slide
+                        currentSlide = (currentSlide + 1) % slides.length;
+                    } else {
+                        // Drag right - previous slide
+                        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                    }
+                    showSlide(currentSlide);
+                }
+            }
             
             // Click en botones
             buttons.forEach((btn, index) => {
                 btn.addEventListener('click', () => {
                     currentSlide = index;
                     showSlide(currentSlide);
+                    stopAutoRotate();
+                    startAutoRotate();
                 });
             });
+            
+            // Iniciar auto-rotación
+            startAutoRotate();
         }
     });
 </script>

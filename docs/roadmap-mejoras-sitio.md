@@ -78,11 +78,14 @@ Este documento contiene un plan de trabajo para implementar las mejoras sugerida
 - [x] Considerar usar imágenes estáticas para mapas con link a Google Maps
 
 ### 8. Mobile Experience
-- [ ] Probar slider en dispositivos móviles
+- [x] Probar slider en dispositivos móviles
   - Archivo: `resources/views/home.blade.php`
   - Ubicación: Sección de slides
-- [ ] Optimizar tamaño de imágenes para móviles
-- [ ] Mejorar touch gestures para slider
+  - Mejoras: Reducido altura en móvil (400px), aumentado tamaño de botones touch, agregado touch gestures (swipe), soporte mouse drag
+- [x] Optimizar tamaño de imágenes para móviles
+  - Archivo: `resources/views/home.blade.php`
+  - Mejoras: Agregado srcset responsive para slider, posts, e imagen institucional con diferentes tamaños según breakpoint
+- [x] Mejorar touch gestures para slider
 - [ ] Probar todas las páginas en diferentes tamaños de pantalla
 
 ## Extras (Opcionales)
