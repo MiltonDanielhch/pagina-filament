@@ -298,15 +298,7 @@
         </div>
         <div class="max-w-6xl mx-auto">
             <div class="rounded-2xl overflow-hidden shadow-2xl">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3181533!2d-66.5!3d-14.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91e3d0d0d0d0d0d%3A0x0!2sBeni+Department%2C+Bolivia!5e0!3m2!1ses!2sbo!4v1717497600&z=6"
-                    width="100%"
-                    height="500"
-                    style="border:0; aspect-ratio: 16/9;"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+                <div id="beni-map" style="height: 500px; width: 100%;"></div>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8">
                 <div class="text-center">
@@ -409,6 +401,8 @@
 @endsection
 
 @section('scripts')
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
     // Slider automático con touch gestures
     document.addEventListener('DOMContentLoaded', function() {
@@ -549,6 +543,106 @@
             
             // Iniciar auto-rotación
             startAutoRotate();
+        }
+
+        // Inicializar mapa Leaflet
+        if (document.getElementById('beni-map')) {
+            const map = L.map('beni-map').setView([-14.5, -64.9], 7);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors',
+                maxZoom: 18
+            }).addTo(map);
+
+            // Cargar municipios del Beni
+            fetch('/data/beni-municipios.geojson')
+                .then(response => response.json())
+                .then(data => {
+                    L.geoJSON(data, {
+                        pointToLayer: function(feature, latlng) {
+                            return L.circleMarker(latlng, {
+                                radius: 8,
+                                fillColor: '#0f766e',
+                                color: '#fff',
+                                weight: 2,
+                                opacity: 1,
+                                fillOpacity: 0.8
+                            });
+                        },
+                        onEachFeature: function(feature, layer) {
+                            layer.bindPopup(`
+                                <div class="p-2">
+                                    <h3 class="font-bold text-lg">${feature.properties.name}</h3>
+                                    <p class="text-sm text-gray-600">Provincia: ${feature.properties.province}</p>
+                                </div>
+                            `);
+                        }
+                    }).addTo(map);
+                })
+                .catch(error => console.error('Error cargando municipios:', error));
+
+            // Cargar proyectos de infraestructura
+            fetch('/api/infrastructure-projects')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(project => {
+                        const marker = L.marker([project.latitude, project.longitude], {
+                            icon: L.divIcon({
+                                className: 'custom-marker',
+                                html: `<div style="background-color: ${getCategoryColor(project.category)}; width: 24px; height: 24px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>`,
+                                iconSize: [24, 24],
+                                iconAnchor: [12, 12]
+                            })
+                        }).addTo(map);
+
+                        marker.bindPopup(`
+                            <div class="p-2">
+                                <h3 class="font-bold text-lg">${project.title}</h3>
+                                <p class="text-sm text-gray-600">${project.description || ''}</p>
+                                <p class="text-sm"><strong>Categoría:</strong> ${getCategoryLabel(project.category)}</p>
+                                <p class="text-sm"><strong>Municipio:</strong> ${project.municipality}</p>
+                                <p class="text-sm"><strong>Estado:</strong> ${getStatusLabel(project.status)}</p>
+                                ${project.budget ? `<p class="text-sm"><strong>Presupuesto:</strong> Bs. ${parseFloat(project.budget).toLocaleString()}</p>` : ''}
+                            </div>
+                        `);
+                    });
+                })
+                .catch(error => console.error('Error cargando proyectos:', error));
+        }
+
+        function getCategoryColor(category) {
+            const colors = {
+                'salud': '#ef4444',
+                'educacion': '#3b82f6',
+                'infraestructura': '#f59e0b',
+                'agua': '#06b6d4',
+                'energia': '#8b5cf6',
+                'transporte': '#10b981',
+                'otro': '#6b7280'
+            };
+            return colors[category] || '#6b7280';
+        }
+
+        function getCategoryLabel(category) {
+            const labels = {
+                'salud': 'Salud',
+                'educacion': 'Educación',
+                'infraestructura': 'Infraestructura',
+                'agua': 'Agua y Saneamiento',
+                'energia': 'Energía',
+                'transporte': 'Transporte',
+                'otro': 'Otro'
+            };
+            return labels[category] || category;
+        }
+
+        function getStatusLabel(status) {
+            const labels = {
+                'planned': 'Planificado',
+                'in_progress': 'En Progreso',
+                'completed': 'Completado'
+            };
+            return labels[status] || status;
         }
     });
 </script>

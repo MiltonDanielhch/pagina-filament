@@ -147,11 +147,11 @@ Cada feature se clasifica por:
     └─[ ] Notificación por email a interesados suscritos
     └─[ ] Complejidad: Media-Alta | Impacto ciudadano: Alto
 
-[ ] Mapa interactivo del Beni
-    └─[ ] Integración con Leaflet.js (open source, sin costo)
-    └─[ ] Mostrar: municipios del departamento, proyectos de infraestructura
-    └─[ ] Fuente de datos: GeoJSON del GADGET Beni
-    └─[ ] Complejidad: Media | Impacto ciudadano: Medio
+[x] Mapa interactivo del Beni
+    └─[x] Integración con Leaflet.js (open source, sin costo)
+    └─[x] Mostrar: municipios del departamento, proyectos de infraestructura
+    └─[x] Fuente de datos: GeoJSON del GADGET Beni
+    └─[x] Complejidad: Media | Impacto ciudadano: Medio
 ```
 
 ---

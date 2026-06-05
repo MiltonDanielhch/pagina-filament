@@ -1,0 +1,511 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Trinidad",
+        "province": "Cercado"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-64.9, -14.8333]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San Ignacio de Moxos",
+        "province": "Moxos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-65.95, -14.95]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Riberalta",
+        "province": "Vaca Díez"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-66.1167, -11.0167]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Guayaramerín",
+        "province": "Vaca Díez"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-65.3833, -10.85]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Rurrenabaque",
+        "province": "Ballivián"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-67.5333, -14.45]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San Borja",
+        "province": "Ballivián"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-66.8833, -14.4167]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San Javier",
+        "province": "Ballivián"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-66.9, -14.6]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San Andrés",
+        "province": "Marbán"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-64.7, -14.8]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San Joaquín",
+        "province": "Yacuma"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-64.8, -13.6]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Magdalena",
+        "province": "Iténez"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-62.9, -13.3]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San Pedro",
+        "province": "Mamoré"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-63.5, -13.2]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San Ramón",
+        "province": "Mamoré"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-63.8, -13.5]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San Carlos",
+        "province": "Iténez"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-63.2, -13.4]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San Ana",
+        "province": "Yacuma"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-64.6, -13.7]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San Martín",
+        "province": "Marbán"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-64.5, -14.9]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San José",
+        "province": "Moxos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-65.5, -14.8]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San Felipe",
+        "province": "Yacuma"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-64.7, -13.5]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San Lucas",
+        "province": "Mamoré"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-63.6, -13.3]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San Miguel",
+        "province": "Iténez"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-63.1, -13.5]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San Pablo",
+        "province": "Ballivián"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-67.0, -14.5]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San Roque",
+        "province": "Marbán"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-64.6, -14.7]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Santa Ana",
+        "province": "Mamoré"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-63.4, -13.4]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Santa Rosa",
+        "province": "Iténez"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-63.0, -13.6]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Santa Cruz",
+        "province": "Moxos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-65.8, -14.9]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Exaltación",
+        "province": "Yacuma"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-64.9, -13.4]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Loreto",
+        "province": "Marbán"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-64.4, -15.0]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Siles",
+        "province": "Iténez"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-62.8, -13.2]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Rico",
+        "province": "Vaca Díez"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-66.0, -11.2]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Suárez",
+        "province": "Vaca Díez"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-65.5, -11.1]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Acosta",
+        "province": "Ballivián"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-67.2, -14.3]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Alonso",
+        "province": "Moxos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-65.7, -14.7]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Busch",
+        "province": "Iténez"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-62.7, -13.1]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Carabuco",
+        "province": "Ballivián"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-67.1, -14.4]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Cortés",
+        "province": "Mamoré"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-63.3, -13.5]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto González",
+        "province": "Yacuma"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-64.5, -13.6]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Huallata",
+        "province": "Moxos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-65.6, -14.6]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Mataral",
+        "province": "Marbán"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-64.3, -14.8]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Mendoza",
+        "province": "Iténez"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-62.6, -13.3]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Morales",
+        "province": "Mamoré"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-63.7, -13.4]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Paz",
+        "province": "Vaca Díez"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-65.9, -11.0]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Piraí",
+        "province": "Vaca Díez"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-65.7, -11.1]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Quijarro",
+        "province": "Vaca Díez"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-65.6, -11.0]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Serrano",
+        "province": "Iténez"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-62.5, -13.4]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Villarroel",
+        "province": "Ballivián"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-67.3, -14.2]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Yacuiba",
+        "province": "Vaca Díez"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-65.8, -10.9]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Puerto Zudáñez",
+        "province": "Mamoré"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-63.9, -13.6]
+      }
+    }
+  ]
+}
