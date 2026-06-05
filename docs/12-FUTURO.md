@@ -54,11 +54,13 @@ Cada feature se clasifica por:
     └─[x] Registro de cuándo se compartió (shared_at)
     └─[x] Complejidad: Baja | Impacto ciudadano: Medio
 
-[ ] Página de resultados del gobierno
-    └─[ ] Modelo: Achievement (logro, descripción, fecha, área, imagen)
-    └─[ ] Recurso Filament para gestionar logros
-    └─[ ] Página pública: /resultados
-    └─[ ] Complejidad: Baja | Impacto ciudadano: Alto
+[x] Página de resultados del gobierno
+    └─[x] Modelo: Achievement (logro, descripción, fecha, área, imagen)
+    └─[x] Recurso Filament para gestionar logros
+    └─[x] Página pública: /resultados
+    └─[x] CRUD completo en panel Filament
+    └─[x] Upload de imagen
+    └─[x] Complejidad: Baja | Impacto ciudadano: Alto
 
 [ ] Mejoras de accesibilidad nivel AAA (opcional)
     └─[ ] Revisar elementos en nivel AAA que sean factibles sin alto costo
