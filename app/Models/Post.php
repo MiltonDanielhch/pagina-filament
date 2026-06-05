@@ -45,10 +45,16 @@ class Post extends Model implements HasMedia
         // SEO y Metadatos de la publicación
         'meta_title',
         'meta_description',
+
+        // Redes sociales
+        'shared_to_social',
+        'shared_at',
     ];
 
     protected $casts = [
         'published_at' => 'datetime',
+        'shared_at' => 'datetime',
+        'shared_to_social' => 'boolean',
     ];
 
     /**

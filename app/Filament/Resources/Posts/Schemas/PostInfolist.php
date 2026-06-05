@@ -39,6 +39,16 @@ class PostInfolist
                 TextEntry::make('meta_description')
                     ->placeholder('-')
                     ->columnSpanFull(),
+                TextEntry::make('shared_to_social')
+                    ->label('Compartido en redes')
+                    ->badge()
+                    ->formatStateUsing(fn (bool $state): string => $state ? 'Sí' : 'No')
+                    ->color(fn (bool $state): string => $state ? 'success' : 'gray'),
+                TextEntry::make('shared_at')
+                    ->label('Fecha de compartición')
+                    ->dateTime()
+                    ->placeholder('Nunca')
+                    ->visible(fn (Post $record): bool => $record->shared_to_social),
                 TextEntry::make('deleted_at')
                     ->dateTime()
                     ->visible(fn (Post $record): bool => $record->trashed()),

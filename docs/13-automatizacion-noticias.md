@@ -22,10 +22,10 @@
 | 13.1 | Análisis de flujo actual y dolor de usuarios | **70%** | Alta |
 | 13.2 | Opción A: Campos inteligentes y autocompletado | **100%** | Alta |
 | 13.3 | Opción B: Plantillas de noticias predefinidas | **100%** | Alta |
-| 13.4 | Opción C: Botón "Compartir en Redes" (semi-auto) | **0%** | Media |
+| 13.4 | Opción C: Botón "Compartir en Redes" (semi-auto) | **100%** | Media |
 | 13.5 | Opción D: Importador desde Word (DOCX) | **0%** | Baja |
 | 13.6 | Testing con usuarios reales (periodistas) | **0%** | Alta |
-| **Total Fase 13** | | **45%** |
+| **Total Fase 13** | | **58%** |
 
 ---
 
@@ -196,32 +196,33 @@
 > **Prioridad:** Media | **Esfuerzo:** Medio | **Impacto:** Medio
 
 ```
-[ ] Preparar datos para redes sociales
-    └─[ ] Generar texto sugerido para Facebook (título + extracto + link)
-    └─[ ] Generar texto sugerido para Twitter/X (truncar a 280 chars)
-    └─[ ] Preparar imagen destacada (og:image) automáticamente
+[x] Preparar datos para redes sociales
+    └─[x] Generar texto sugerido para Facebook (título + extracto + link)
+    └─[x] Generar texto sugerido para Twitter/X (truncar a 280 chars)
+    └─[x] Generar texto sugerido para WhatsApp
+    └─[x] Preparar imagen destacada (og:image) automáticamente
 
-[ ] Implementar acciones en Filament
-    └─[ ] Checkbox "Preparar para redes sociales" en formulario Post
-    └─[ ] Botones de acción en header de página de edición:
-        └─[ ] "Compartir en Facebook" → abre popup con fb.com/sharer
-        └─[ ] "Compartir en X/Twitter" → abre popup con twitter.com/intent/tweet
-        └─[ ] "Copiar texto" → copia al portapapeles el mensaje formateado
+[x] Implementar acciones en Filament
+    └─[x] Botones de acción en header de página de edición:
+        └─[x] "Compartir en Facebook" → abre popup con fb.com/sharer
+        └─[x] "Compartir en X/Twitter" → abre popup con twitter.com/intent/tweet
+        └─[x] "Compartir en WhatsApp" → abre wa.me
+        └─[x] "Copiar texto" → copia al portapapeles el mensaje formateado
 
-[ ] Configuración de cuentas
-    └─[ ] Agregar en .env: FACEBOOK_PAGE_URL, TWITTER_HANDLE
-    └─[ ] Configurar metatags Open Graph para previews correctos
-    └─[ ] Validar que imágenes tengan dimensiones óptimas (1200x630)
+[x] Configuración de cuentas
+    └─[x] URLs de redes sociales desde SiteSetting (ya configurado)
+    └─[x] Configurar metatags Open Graph para previews correctos
+    └─[x] Validar que imágenes tengan dimensiones óptimas (1200x630)
 
-[ ] Registro de actividad
-    └─[ ] Campo shared_to_social (boolean) en posts
-    └─[ ] Timestamp de cuando se compartió
-    └─[ ] Log simple de qué red se usó (auditoría)
+[x] Registro de actividad
+    └─[x] Campo shared_to_social (boolean) en posts
+    └─[x] Timestamp shared_at de cuando se compartió
+    └─[x] Log simple de qué red se usó (auditoría via activitylog)
 
 [!] NOTA: Automatización total deshabilitada por seguridad
-    └─[ ] No implementar publicación directa vía API (riesgo de errores públicos)
-    └─[ ] Siempre requerir revisión humana antes de publicar
-    └─[ ] Mantener control editorial institucional
+    └─[x] No implementar publicación directa vía API (riesgo de errores públicos)
+    └─[x] Siempre requerir revisión humana antes de publicar
+    └─[x] Mantener control editorial institucional
 ```
 
 ---

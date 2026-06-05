@@ -9,6 +9,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
@@ -39,6 +40,13 @@ class PostsTable
                     ->label('Publicado el')
                     ->dateTime()
                     ->sortable(),
+                IconColumn::make('shared_to_social')
+                    ->label('Compartido')
+                    ->boolean()
+                    ->trueIcon('heroicon-m-check-circle')
+                    ->falseIcon('heroicon-m-x-circle')
+                    ->trueColor('success')
+                    ->falseColor('gray'),
                 TextColumn::make('meta_title')
                     ->label('Meta título')
                     ->searchable(),
