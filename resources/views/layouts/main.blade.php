@@ -263,6 +263,27 @@
                     <span class="flex items-center gap-1">📞 (591) 346-21651</span>
                 </div>
                 <div class="flex items-center gap-3">
+                    {{-- Botón disminuir fuente --}}
+                    <button onclick="decreaseFontSize()"
+                            class="hover:text-amber-200 transition flex items-center justify-center w-8 h-8"
+                            title="Disminuir tamaño de fuente"
+                            aria-label="Disminuir tamaño de fuente">
+                        <span class="text-xs font-bold">A-</span>
+                    </button>
+                    {{-- Botón restablecer fuente --}}
+                    <button onclick="resetFontSize()"
+                            class="hover:text-amber-200 transition flex items-center justify-center w-8 h-8"
+                            title="Restablecer tamaño de fuente"
+                            aria-label="Restablecer tamaño de fuente">
+                        <span class="text-sm font-bold">A</span>
+                    </button>
+                    {{-- Botón aumentar fuente --}}
+                    <button onclick="increaseFontSize()"
+                            class="hover:text-amber-200 transition flex items-center justify-center w-8 h-8"
+                            title="Aumentar tamaño de fuente"
+                            aria-label="Aumentar tamaño de fuente">
+                        <span class="text-lg font-bold">A+</span>
+                    </button>
                     <button onclick="toggleHighContrast()" 
                             class="hover:text-amber-200 transition flex items-center gap-1"
                             title="Activar modo alto contraste"
@@ -554,13 +575,45 @@
             document.documentElement.classList.toggle('high-contrast');
             const isHighContrast = document.documentElement.classList.contains('high-contrast');
             localStorage.setItem('highContrast', isHighContrast);
-            
+
             // Update button aria-label
             const button = document.querySelector('button[onclick="toggleHighContrast()"]');
             if (button) {
                 button.setAttribute('aria-label', isHighContrast ? 'Desactivar modo alto contraste' : 'Activar modo alto contraste');
             }
         }
+
+        // Font Size Adjustment
+        const MIN_FONT_SCALE = 0.8;
+        const MAX_FONT_SCALE = 1.4;
+        const FONT_STEP = 0.1;
+
+        function getFontScale() {
+            return parseFloat(localStorage.getItem('fontScale')) || 1;
+        }
+
+        function setFontScale(scale) {
+            scale = Math.max(MIN_FONT_SCALE, Math.min(MAX_FONT_SCALE, scale));
+            localStorage.setItem('fontScale', scale);
+            document.documentElement.style.fontSize = (scale * 100) + '%';
+        }
+
+        function increaseFontSize() {
+            setFontScale(getFontScale() + FONT_STEP);
+        }
+
+        function decreaseFontSize() {
+            setFontScale(getFontScale() - FONT_STEP);
+        }
+
+        function resetFontSize() {
+            setFontScale(1);
+        }
+
+        // Load font scale preference on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            setFontScale(getFontScale());
+        });
 
         // Load high contrast preference on page load
         document.addEventListener('DOMContentLoaded', () => {

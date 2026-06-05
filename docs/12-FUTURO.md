@@ -62,11 +62,11 @@ Cada feature se clasifica por:
     └─[x] Upload de imagen
     └─[x] Complejidad: Baja | Impacto ciudadano: Alto
 
-[ ] Mejoras de accesibilidad nivel AAA (opcional)
-    └─[ ] Revisar elementos en nivel AAA que sean factibles sin alto costo
-    └─[ ] Modo de alto contraste (botón en navbar)
-    └─[ ] Tamaño de fuente ajustable
-    └─[ ] Complejidad: Media | Impacto ciudadano: Medio
+[x] Mejoras de accesibilidad nivel AAA (opcional)
+    └─[x] Revisar elementos en nivel AAA que sean factibles sin alto costo
+    └─[x] Modo de alto contraste (botón en navbar)
+    └─[x] Tamaño de fuente ajustable
+    └─[x] Complejidad: Media | Impacto ciudadano: Medio
 ```
 
 ---
