@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
             AgendaSeeder::class,
             InfrastructureProjectSeeder::class,
             DepartmentalStatisticsSeeder::class,
+            PostTemplateSeeder::class,
         ]);
     }
 }

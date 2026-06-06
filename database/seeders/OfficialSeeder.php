@@ -15,7 +15,7 @@ class OfficialSeeder extends Seeder
         $officials = [
             // Gobernacion
             [
-                'name' => 'Alejandro Unzueta Shiriqui',
+                'name' => 'Jesús Tito Egüez Rivero',
                 'position' => 'Gobernador Departamental',
                 'area' => 'Gobernación',
                 'email' => 'gobernador@beni.gob.bo',

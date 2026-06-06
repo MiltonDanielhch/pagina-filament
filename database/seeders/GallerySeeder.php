@@ -48,24 +48,6 @@ class GallerySeeder extends Seeder
             'sort_order' => 1,
         ]);
 
-        GalleryItem::create([
-            'gallery_id' => $gallery1->id,
-            'title' => 'Recorrido por instalaciones',
-            'caption' => 'Autoridades recorren las nuevas instalaciones del hospital.',
-            'type' => 'image',
-            'image_path' => 'gallery-items/hospital-2.jpg',
-            'sort_order' => 2,
-        ]);
-
-        GalleryItem::create([
-            'gallery_id' => $gallery1->id,
-            'title' => 'Beneficiarios',
-            'caption' => 'Población beniana beneficiada con el nuevo centro de salud.',
-            'type' => 'image',
-            'image_path' => 'gallery-items/hospital-3.jpg',
-            'sort_order' => 3,
-        ]);
-
         // Galería 2: Festival de Cultura Beniana
         $gallery2 = Gallery::create([
             'user_id' => $user->id,
@@ -81,15 +63,6 @@ class GallerySeeder extends Seeder
         // Ítems para galería 2
         GalleryItem::create([
             'gallery_id' => $gallery2->id,
-            'title' => 'Baile tradicional',
-            'caption' => 'Grupo de danza folklórica presentando bailes tradicionales.',
-            'type' => 'image',
-            'image_path' => 'gallery-items/cultura-1.jpg',
-            'sort_order' => 1,
-        ]);
-
-        GalleryItem::create([
-            'gallery_id' => $gallery2->id,
             'title' => 'Video del festival',
             'caption' => 'Resumen del festival de cultura.',
             'type' => 'video',
@@ -98,14 +71,6 @@ class GallerySeeder extends Seeder
             'sort_order' => 2,
         ]);
 
-        GalleryItem::create([
-            'gallery_id' => $gallery2->id,
-            'title' => 'Artesanías',
-            'caption' => 'Exposición de artesanías locales.',
-            'type' => 'image',
-            'image_path' => 'gallery-items/cultura-2.jpg',
-            'sort_order' => 3,
-        ]);
 
         // Galería 3: Videos institucionales
         $gallery3 = Gallery::create([

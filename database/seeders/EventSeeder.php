@@ -32,26 +32,6 @@ class EventSeeder extends Seeder
                 'status' => 'published',
                 'is_featured' => true,
             ],
-            [
-                'user_id' => $user->id ?? 1,
-                'title' => 'Conferencia sobre Desarrollo Sostenible',
-                'slug' => 'conferencia-desarrollo-sostenible',
-                'description' => 'Panel de expertos discutiendo el futuro del desarrollo sostenible en la Amazonía boliviana',
-                'location' => 'Auditorio Gobernación, Trinidad',
-                'starts_at' => '2026-08-10 14:00:00',
-                'status' => 'published',
-                'is_featured' => false,
-            ],
-            [
-                'user_id' => $user->id ?? 1,
-                'title' => 'Carrera de Lanchas',
-                'slug' => 'carrera-lanchas',
-                'description' => 'Competencia anual de lanchas en el río Mamoré',
-                'location' => 'Puerto Trinidad',
-                'starts_at' => '2026-09-05 09:00:00',
-                'status' => 'published',
-                'is_featured' => true,
-            ],
         ];
 
         foreach ($events as $event) {

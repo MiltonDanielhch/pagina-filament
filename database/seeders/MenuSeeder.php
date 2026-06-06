@@ -21,7 +21,7 @@ class MenuSeeder extends Seeder
             ['label' => 'Inicio', 'url' => '/', 'order' => 1],
             ['label' => 'Noticias', 'url' => '/blog', 'order' => 2],
             ['label' => 'Gobernador', 'url' => '/gobernador', 'order' => 3],
-            ['label' => 'Ver más', 'url' => '#', 'order' => 4, 'is_dropdown' => true],
+            ['label' => 'Ver más', 'url' => '#', 'order' => 4],
         ];
 
         foreach ($menuItems as $item) {
@@ -67,10 +67,9 @@ class MenuSeeder extends Seeder
             ['label' => 'Transparencia', 'url' => 'https://transparencia.beni.gob.bo', 'target' => '_blank', 'order' => 3],
             ['label' => 'Buscador', 'url' => '/buscar', 'order' => 4],
             ['label' => 'Política de Privacidad', 'url' => '/politica-de-privacidad', 'order' => 5],
-            ['label' => 'Trámites Online', 'url' => 'https://siscor.beni.gob.bo', 'target' => '_blank', 'order' => 6],
+            ['label' => 'Trámites', 'url' => 'https://siscor.beni.gob.bo', 'target' => '_blank', 'order' => 6],
             ['label' => 'Noticias', 'url' => '/blog', 'order' => 7],
             ['label' => 'Eventos', 'url' => '/eventos', 'order' => 8],
-            ['label' => 'Directorio', 'url' => '/directorio', 'order' => 9],
         ];
 
         foreach ($footerItems as $item) {
