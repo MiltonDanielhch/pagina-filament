@@ -1,0 +1,166 @@
+/* Custom Styles for Gobernación del Beni */
+
+/* Skip Link for Accessibility */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.skip-link:focus {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: auto;
+    height: auto;
+    padding: 10px 20px;
+    background: #0f766e;
+    color: white;
+    border-radius: 8px;
+    z-index: 9999;
+    outline: 2px solid white;
+    text-decoration: none;
+}
+
+/* High Contrast Mode */
+.high-contrast {
+    --bg-primary: #000000;
+    --bg-secondary: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: #ffff00;
+    --border-color: #ffffff;
+}
+.high-contrast body {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+.high-contrast header,
+.high-contrast .bg-white,
+.high-contrast .bg-gray-50 {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+}
+.high-contrast .text-gray-900,
+.high-contrast .text-gray-800,
+.high-contrast .text-gray-700 {
+    color: var(--text-primary) !important;
+}
+.high-contrast .text-gray-600,
+.high-contrast .text-gray-500 {
+    color: var(--text-secondary) !important;
+}
+.high-contrast .border-gray-200,
+.high-contrast .border-gray-300 {
+    border-color: var(--border-color) !important;
+}
+.high-contrast a {
+    color: var(--text-secondary) !important;
+    text-decoration: underline !important;
+}
+.high-contrast .bg-official {
+    background-color: var(--text-secondary) !important;
+    color: var(--bg-primary) !important;
+}
+.high-contrast .text-official {
+    color: var(--text-secondary) !important;
+}
+
+/* Subtle Hover Animations */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+.hover-scale {
+    transition: transform 0.2s ease;
+}
+.hover-scale:hover {
+    transform: scale(1.02);
+}
+.hover-glow {
+    transition: box-shadow 0.3s ease;
+}
+.hover-glow:hover {
+    box-shadow: 0 0 20px rgba(15, 118, 110, 0.3);
+}
+
+/* Loading States */
+.loading-spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #0f766e;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+}
+@keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Toast Notifications */
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.toast {
+    min-width: 300px;
+    padding: 16px;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: slideIn 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.toast.success {
+    border-left: 4px solid #10b981;
+}
+.toast.error {
+    border-left: 4px solid #ef4444;
+}
+.toast.info {
+    border-left: 4px solid #0f766e;
+}
+.toast.hiding {
+    animation: slideOut 0.3s ease forwards;
+}
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}

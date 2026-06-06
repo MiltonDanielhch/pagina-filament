@@ -11,17 +11,23 @@ class MenuSeeder extends Seeder
     public function run(): void
     {
         // Menú Principal
-        $mainMenu = Menu::create([
-            'name' => 'Principal',
-            'location' => 'header',
-            'is_active' => true,
-        ]);
+        $mainMenu = Menu::firstOrCreate(
+            ['location' => 'header'],
+            [
+                'name' => 'Principal',
+                'is_active' => true,
+            ]
+        );
+
+        // Eliminar items existentes para evitar duplicados
+        MenuItem::where('menu_id', $mainMenu->id)->delete();
 
         $menuItems = [
             ['label' => 'Inicio', 'url' => '/', 'order' => 1],
             ['label' => 'Noticias', 'url' => '/blog', 'order' => 2],
             ['label' => 'Gobernador', 'url' => '/gobernador', 'order' => 3],
-            ['label' => 'Ver más', 'url' => '#', 'order' => 4],
+            ['label' => 'Sobre Nosotros', 'url' => '/sobre-nosotros', 'order' => 4],
+            ['label' => 'Ver más', 'url' => '#', 'order' => 5],
         ];
 
         foreach ($menuItems as $item) {
@@ -55,11 +61,16 @@ class MenuSeeder extends Seeder
         }
 
         // Menú Footer
-        $footerMenu = Menu::create([
-            'name' => 'Footer Principal',
-            'location' => 'footer',
-            'is_active' => true,
-        ]);
+        $footerMenu = Menu::firstOrCreate(
+            ['location' => 'footer'],
+            [
+                'name' => 'Footer Principal',
+                'is_active' => true,
+            ]
+        );
+
+        // Eliminar items existentes para evitar duplicados
+        MenuItem::where('menu_id', $footerMenu->id)->delete();
 
         $footerItems = [
             ['label' => 'Gaceta Jurídica', 'url' => 'https://gaceta.beni.gob.bo', 'target' => '_blank', 'order' => 1],

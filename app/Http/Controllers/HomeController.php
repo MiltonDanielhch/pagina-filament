@@ -55,4 +55,10 @@ class HomeController extends Controller
 
         return view('home', compact('slides', 'latestPosts', 'featuredEvents', 'categories', 'externalSystems', 'title', 'description', 'aboutSettings'));
     }
+
+    public function about()
+    {
+        $externalSystems = ExternalSystem::active()->get();
+        return view('sobre-nosotros', compact('externalSystems'));
+    }
 }

@@ -41,4 +41,5 @@ Route::post('/contacto', [ContactController::class, 'send'])->name('contact.send
 Route::get('/buscar', [SearchController::class, 'index'])->name('search');
 Route::get('/api/buscar', [SearchController::class, 'search']);
 Route::view('/gobernador', 'gobernador')->name('gobernador');
+Route::get('/sobre-nosotros', [HomeController::class, 'about'])->name('sobre-nosotros');
 Route::get('/{slug}', [PageController::class, 'show'])->name('pages.show');

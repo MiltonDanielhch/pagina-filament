@@ -164,65 +164,6 @@
     </div>
 </section>
 
-<!-- About Section - Mission/Vision -->
-<section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-                <p class="text-official font-semibold uppercase tracking-wider mb-2">Sobre Nosotros</p>
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">{{ $aboutSettings['title'] }}</h2>
-                <p class="text-gray-600 text-lg mb-8">
-                    {!! $aboutSettings['description'] !!}
-                </p>
-                
-                <!-- Tabs: Mission/Vision -->
-                <div class="space-y-6" x-data="{ tab: 'mision' }">
-                    <div class="flex gap-2 border-b border-gray-200">
-                        <button @click="tab = 'mision'" class="flex items-center gap-2 pb-3 px-6 font-semibold transition border-b-2 rounded-t-lg" :class="tab === 'mision' ? 'border-official bg-official/5 text-official' : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                            Misión
-                        </button>
-                        <button @click="tab = 'vision'" class="flex items-center gap-2 pb-3 px-6 font-semibold transition border-b-2 rounded-t-lg" :class="tab === 'vision' ? 'border-official bg-official/5 text-official' : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                            Visión
-                        </button>
-                    </div>
-                    <div x-show="tab === 'mision'" class="p-6 bg-gray-50 rounded-xl border-l-4 border-official">
-                        <h3 class="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
-                            <svg class="w-5 h-5 text-official" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                            Nuestra Misión
-                        </h3>
-                        <div class="text-gray-600 leading-relaxed">
-                            {!! $aboutSettings['mission'] !!}
-                        </div>
-                    </div>
-                    <div x-show="tab === 'vision'" class="p-6 bg-gray-50 rounded-xl border-l-4 border-blue-500" x-cloak>
-                        <h3 class="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
-                            <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                            Nuestra Visión
-                        </h3>
-                        <div class="text-gray-600 leading-relaxed">
-                            {!! $aboutSettings['vision'] !!}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="relative">
-                <!-- Imagen institucional del Beni -->
-                @if($aboutSettings['image'])
-                <picture>
-                    <source media="(max-width: 640px)" srcset="{{ $aboutSettings['image'] }}?w=600&q=80">
-                    <source media="(max-width: 1024px)" srcset="{{ $aboutSettings['image'] }}?w=900&q=85">
-                    <img src="{{ $aboutSettings['image'] }}" alt="Imagen institucional de la Gobernación del Beni mostrando el edificio principal" class="rounded-2xl shadow-2xl w-full object-cover" loading="lazy">
-                </picture>
-                @endif
-                <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-official/10 rounded-full -z-10"></div>
-                <div class="absolute -top-6 -left-6 w-32 h-32 bg-official/20 rounded-full -z-10"></div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- Próximos Eventos Destacados -->
 @if($featuredEvents->count() > 0)
 <section class="py-16 bg-official text-white">
@@ -259,34 +200,6 @@
     </div>
 </section>
 @endif
-
-<!-- External Systems -->
-<section class="py-16 bg-official text-white">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold">Servicios Digitales</h2>
-            <p class="opacity-80 mt-2">Accede a nuestros sistemas en línea</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            @foreach($externalSystems as $system)
-            <a href="{{ $system->url }}" target="_blank" 
-               class="bg-white/10 hover:bg-white/20 backdrop-blur rounded-xl p-6 text-center transition-all group border border-white/20 hover:border-white/40">
-                <div class="flex justify-center mb-3">
-                    @if($system->last_status === 'online')
-                    <span class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></span>
-                    @elseif($system->last_status === 'offline')
-                    <span class="w-3 h-3 bg-red-400 rounded-full"></span>
-                    @else
-                    <span class="w-3 h-3 bg-gray-400 rounded-full"></span>
-                    @endif
-                </div>
-                <h3 class="text-lg font-bold mb-1">{{ $system->name }}</h3>
-                <p class="text-sm opacity-80">{{ $system->description }}</p>
-            </a>
-            @endforeach
-        </div>
-    </div>
-</section>
 
 <!-- Nuestro Territorio -->
 <section class="py-16 bg-white">
