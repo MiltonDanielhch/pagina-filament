@@ -187,13 +187,13 @@ Cada feature se clasifica por:
     └─[ ] Permite que periodistas, investigadores y sistemas externos consuman datos
     └─[ ] Complejidad: Media | Impacto ciudadano: Medio
 
-[ ] App móvil (PWA)
-    └─[ ] Progressive Web App sobre el sitio existente
-    └─[ ] Service Worker para funcionamiento offline básico
+[x] App móvil (PWA)
+    └─[x] Progressive Web App sobre el sitio existente
+    └─[x] Service Worker para funcionamiento offline básico
     └─[ ] Push notifications para noticias destacadas (via Web Push API)
-    └─[ ] Instalable en Android e iOS desde el navegador
-    └─[ ] No requiere publicar en las tiendas de apps
-    └─[ ] Complejidad: Media | Impacto ciudadano: Alto
+    └─[x] Instalable en Android e iOS desde el navegador
+    └─[x] No requiere publicar en las tiendas de apps
+    └─[x] Complejidad: Media | Impacto ciudadano: Alto
 
 [ ] Integración con redes sociales del gobierno
     └─[ ] Auto-publicar noticias en Facebook/Twitter al publicar en el panel

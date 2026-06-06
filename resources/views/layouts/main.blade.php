@@ -204,6 +204,14 @@
     <link rel="icon" type="image/x-icon" href="{{ $faviconSrc }}">
     <link rel="apple-touch-icon" href="{{ $faviconSrc }}">
 
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Beni">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Gobierno del Beni">
+
     <!-- Tailwind CSS -->
     @vite(['resources/css/app.css'])
 
@@ -679,6 +687,47 @@
         // Show toast on successful form submission (if session has success message)
         // Individual pages can call showToast() as needed
         // Example: showToast('Message', 'success');
+
+        // Service Worker Registration for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker registrado con éxito:', registration.scope);
+                    })
+                    .catch((error) => {
+                        console.log('Error al registrar Service Worker:', error);
+                    });
+            });
+        }
+
+        // PWA Install Prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Mostrar botón de instalación (puedes personalizar esto según tu diseño)
+            const installButton = document.createElement('button');
+            installButton.textContent = 'Instalar App';
+            installButton.className = 'fixed bottom-4 right-4 bg-official text-white px-4 py-2 rounded-lg shadow-lg hover:bg-official-dark transition z-50';
+            installButton.onclick = () => {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('Usuario aceptó instalar la PWA');
+                    }
+                    deferredPrompt = null;
+                    installButton.remove();
+                });
+            };
+            document.body.appendChild(installButton);
+        });
+
+        // Detectar si la app está instalada
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA instalada exitosamente');
+        });
 
         // Show toast on error (if session has error message)
         // Individual pages can call showToast() as needed
