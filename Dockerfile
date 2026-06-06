@@ -40,9 +40,23 @@ RUN composer install --no-scripts --no-autoloader --optimize-autoloader
 # Copy application files
 COPY . .
 
-# Generate autoloader and run scripts
+# =========================================================================
+# MODIFICACIÓN PARA COOLIFY: Asegurar rutas de caché y un .env simulado 
+# para que los scripts post-autoload de Laravel no fallen durante el build.
+# =========================================================================
+RUN mkdir -p storage/framework/cache/data \
+             storage/framework/app \
+             storage/framework/sessions \
+             storage/framework/views \
+             storage/logs \
+    && echo "APP_ENV=production" > .env \
+    && echo "APP_KEY=base64:d3VubmVkZml4Y29vbGlmeWxhcmF2ZWxrZXlzZWN1cmU=" >> .env \
+    && echo "VIEW_COMPILED_PATH=/var/www/storage/framework/views" >> .env
+
+# Generate autoloader and run scripts (Ahora pasará sin problemas)
 RUN composer dump-autoload --optimize \
     && composer run-script post-autoload-dump
+# =========================================================================
 
 # Build assets with Vite
 RUN npm install && npm run build
