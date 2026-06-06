@@ -28,7 +28,13 @@ const STATIC_ASSETS = [
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
-            return cache.addAll(STATIC_ASSETS);
+            return Promise.all(
+                STATIC_ASSETS.map(url => {
+                    return cache.add(url).catch(error => {
+                        console.log('Failed to cache:', url, error);
+                    });
+                })
+            );
         })
     );
     self.skipWaiting();

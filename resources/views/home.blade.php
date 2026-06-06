@@ -297,8 +297,8 @@
             <p class="text-gray-600 mt-4 max-w-2xl mx-auto">El Beni es el departamento más grande de Bolivia, ubicado en la región amazónica, con una extensión de 213.564 km² y rica biodiversidad.</p>
         </div>
         <div class="max-w-6xl mx-auto">
-            <div class="rounded-2xl overflow-hidden shadow-2xl">
-                <div id="beni-map" style="height: 500px; width: 100%;"></div>
+            <div class="rounded-2xl overflow-hidden shadow-2xl relative" style="z-index: 0 !important;">
+                <div id="beni-map" style="height: 500px; width: 100%; z-index: 0 !important;"></div>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8">
                 <div class="text-center">
@@ -402,6 +402,12 @@
 
 @section('scripts')
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+    /* Esto le baja el copete a los botones y paneles internos de Leaflet cuando el header pasa */
+    .leaflet-top, .leaflet-bottom, .leaflet-map-pane { 
+        z-index: 0 !important; 
+    }
+</style>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
     // Slider automático con touch gestures
@@ -547,7 +553,10 @@
 
         // Inicializar mapa Leaflet
         if (document.getElementById('beni-map')) {
-            const map = L.map('beni-map').setView([-14.5, -64.9], 7);
+            const map = L.map('beni-map', {
+                scrollWheelZoom: false,
+                zIndex: 1
+            }).setView([-14.5, -64.9], 7);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© OpenStreetMap contributors',

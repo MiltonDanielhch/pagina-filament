@@ -262,15 +262,19 @@
     </a>
 
     <!-- Header -->
-    <header class="bg-white shadow-lg sticky top-0 z-50">
+    <header class="bg-white shadow-lg sticky top-0 z-50" id="main-header">
         <!-- Top Bar -->
-        <div class="bg-official text-white text-sm py-2">
+        <div class="bg-teal-700 text-white text-sm py-2" id="top-bar">
             <div class="container mx-auto px-4 flex justify-between items-center">
-                <div class="flex items-center gap-4">
+                <!-- Contenedor de horario y teléfono oculto en móviles (hidden md:flex) -->
+                <!-- <div class="hidden md:flex items-center gap-4"> -->
+                <div class="flex items-center flex-wrap justify-center gap-x-4 gap-y-1 text-xs sm:text-sm font-medium whitespace-nowrap">
                     <span class="flex items-center gap-1">🕐 Lun - Vie 8:00 - 16:00</span>
                     <span class="flex items-center gap-1">📞 (591) 346-21651</span>
                 </div>
-                <div class="flex items-center gap-3">
+                
+                <!-- Contenedor de herramientas de accesibilidad y redes (siempre visible, centrado o alineado a la derecha en móviles) -->
+                <div class="flex items-center justify-between w-full md:w-auto gap-3">
                     {{-- Botón disminuir fuente --}}
                     <button onclick="decreaseFontSize()"
                             class="hover:text-amber-200 transition flex items-center justify-center w-8 h-8"
@@ -302,13 +306,13 @@
                         </svg>
                         <span class="hidden sm:inline text-xs">Alto Contraste</span>
                     </button>
-                    <a href="https://www.facebook.com/profile.php?id=61589790584981&rdid=B8ljagCl47BWWMeA&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1CTSBMKLaG%2F#" target="_blank" class="hover:text-amber-200 transition" aria-label="Facebook">
+                    <a href="#" target="_blank" class="hover:text-amber-200 transition" aria-label="Facebook">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.637H7.078v-3.497h3.047V9.603c0-3.014 1.825-4.679 4.532-4.679 1.313 0 2.703.235 2.703.235v2.965h-1.524c-1.501 0-1.973.934-1.973 1.893v2.27h3.328l-.527 3.497h-2.801v8.637C19.613 23.027 24 17.062 24 12.073z"/></svg>
                     </a>
-                    <a href="https://twitter.com/GAD_Beni" target="_blank" class="hover:text-amber-200 transition" aria-label="Twitter">
+                    <a href="#" target="_blank" class="hover:text-amber-200 transition" aria-label="Twitter">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                     </a>
-                    <a href="https://instagram.com/gobernacionbeni" target="_blank" class="hover:text-amber-200 transition" aria-label="Instagram">
+                    <a href="#" target="_blank" class="hover:text-amber-200 transition" aria-label="Instagram">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0 2.163c-3.259 0-3.667.014-4.947.072-2.905.132-4.289 1.513-4.421 4.421-.057 1.28-.071 1.689-.071 4.947 0 3.259.014 3.668.072 4.946.132 2.908 1.516 4.291 4.421 4.422 1.281.058 1.69.072 4.947.072 3.259 0 3.668-.014 4.947-.072 2.906-.132 4.291-1.516 4.421-4.422.058-1.28.072-1.689.072-4.946 0-3.259-.014-3.667-.072-4.947-.131-2.905-1.513-4.29-4.421-4.421-1.28-.058-1.688-.072-4.947-.072zm0 3.678c2.623 0 4.756 2.133 4.756 4.756s-2.133 4.756-4.756 4.756-4.756-2.133-4.756-4.756 2.133-4.756 4.756-4.756zm0 1.838c-1.641 0-2.975 1.334-2.975 2.975s1.334 2.975 2.975 2.975 2.975-1.334 2.975-2.975-1.334-2.975-2.975-2.975zm5.938-3.846c-.663 0-1.2.537-1.2 1.2s.537 1.2 1.2 1.2 1.2-.537 1.2-1.2-.537-1.2-1.2-1.2z"/></svg>
                     </a>
                 </div>

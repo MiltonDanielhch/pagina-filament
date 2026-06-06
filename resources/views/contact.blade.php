@@ -185,8 +185,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (isValid) {
             submitButton.disabled = true;
-            submitText.textContent = 'Enviando...';
-            submitSpinner.classList.remove('hidden');
+            document.getElementById('submit-text').textContent = 'Enviando...';
+            document.getElementById('submit-spinner').classList.remove('hidden');
             form.submit();
         } else {
             // Scroll al primer campo con error
