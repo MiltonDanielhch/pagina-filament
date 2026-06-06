@@ -21,8 +21,7 @@ class MenuSeeder extends Seeder
             ['label' => 'Inicio', 'url' => '/', 'order' => 1],
             ['label' => 'Noticias', 'url' => '/blog', 'order' => 2],
             ['label' => 'Gobernador', 'url' => '/gobernador', 'order' => 3],
-            ['label' => 'Contacto', 'url' => '/contacto', 'order' => 4],
-            ['label' => 'Trámites', 'url' => 'https://siscor.beni.gob.bo', 'target' => '_blank', 'order' => 5],
+            ['label' => 'Ver más', 'url' => '#', 'order' => 4, 'is_dropdown' => true],
         ];
 
         foreach ($menuItems as $item) {
@@ -30,6 +29,29 @@ class MenuSeeder extends Seeder
                 'menu_id' => $mainMenu->id,
                 'is_active' => true,
             ]));
+        }
+
+        // Crear items hijos para "Ver más"
+        $verMasItem = MenuItem::where('menu_id', $mainMenu->id)->where('label', 'Ver más')->first();
+        
+        if ($verMasItem) {
+            $childItems = [
+                ['label' => 'Eventos', 'url' => '/eventos', 'order' => 1],
+                ['label' => 'Galería', 'url' => '/galeria', 'order' => 2],
+                ['label' => 'Agenda', 'url' => '/agenda', 'order' => 3],
+                ['label' => 'Resultados', 'url' => '/resultados', 'order' => 4],
+                ['label' => 'Estadísticas', 'url' => '/estadisticas', 'order' => 5],
+                ['label' => 'Autoridades', 'url' => '/autoridades', 'order' => 6],
+                ['label' => 'Contacto', 'url' => '/contacto', 'order' => 7],
+            ];
+
+            foreach ($childItems as $item) {
+                MenuItem::create(array_merge($item, [
+                    'menu_id' => $mainMenu->id,
+                    'parent_id' => $verMasItem->id,
+                    'is_active' => true,
+                ]));
+            }
         }
 
         // Menú Footer
