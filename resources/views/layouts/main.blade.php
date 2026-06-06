@@ -104,32 +104,25 @@
     <!-- Header -->
     <header class="bg-white shadow-lg sticky top-0 z-50" id="main-header">
         <!-- Top Bar -->
-        <div class="bg-teal-700 text-white text-sm py-2" id="top-bar">
+        {{-- <div class="bg-teal-700 text-white text-sm py-2" id="top-bar">
             <div class="container mx-auto px-4 flex justify-between items-center">
-                <!-- Contenedor de horario y teléfono oculto en móviles (hidden md:flex) -->
-                <!-- <div class="hidden md:flex items-center gap-4"> -->
                 <div class="flex items-center flex-wrap justify-center gap-x-4 gap-y-1 text-xs sm:text-sm font-medium whitespace-nowrap">
                     <span class="flex items-center gap-1">🕐 Lun - Vie 8:00 - 16:00</span>
                     <span class="flex items-center gap-1">📞 (591) 346-21651</span>
                 </div>
-                
-                <!-- Contenedor de herramientas de accesibilidad y redes (siempre visible, centrado o alineado a la derecha en móviles) -->
                 <div class="flex items-center justify-between w-full md:w-auto gap-3">
-                    {{-- Botón disminuir fuente --}}
                     <button onclick="decreaseFontSize()"
                             class="hover:text-amber-200 transition flex items-center justify-center w-8 h-8"
                             title="Disminuir tamaño de fuente"
                             aria-label="Disminuir tamaño de fuente">
                         <span class="text-xs font-bold">A-</span>
                     </button>
-                    {{-- Botón restablecer fuente --}}
                     <button onclick="resetFontSize()"
                             class="hover:text-amber-200 transition flex items-center justify-center w-8 h-8"
                             title="Restablecer tamaño de fuente"
                             aria-label="Restablecer tamaño de fuente">
                         <span class="text-sm font-bold">A</span>
                     </button>
-                    {{-- Botón aumentar fuente --}}
                     <button onclick="increaseFontSize()"
                             class="hover:text-amber-200 transition flex items-center justify-center w-8 h-8"
                             title="Aumentar tamaño de fuente"
@@ -157,7 +150,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <!-- Main Nav -->
         <nav class="container mx-auto px-4 py-4">
