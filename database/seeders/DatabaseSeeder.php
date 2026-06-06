@@ -36,6 +36,12 @@ class DatabaseSeeder extends Seeder
             EventSeeder::class,
             SiteSettingSeeder::class,
             MenuSeeder::class,
+            AchievementSeeder::class,
+            GallerySeeder::class,
+            OfficialSeeder::class,
+            AgendaSeeder::class,
+            InfrastructureProjectSeeder::class,
+            DepartmentalStatisticsSeeder::class,
         ]);
     }
 }
