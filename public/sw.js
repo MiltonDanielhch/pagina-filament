@@ -44,6 +44,11 @@ self.addEventListener('install', (event) => {
 self.addEventListener('fetch', (event) => {
     const url = new URL(event.request.url);
 
+    // Ignorar peticiones de Livewire (no cachear ni interceptar)
+    if (url.pathname.includes('/livewire-')) {
+        return;
+    }
+
     // Para assets estáticos, usar Cache First
     if (url.pathname.match(/\.(css|js|png|jpg|jpeg|svg|ico|woff|woff2|ttf)$/)) {
         event.respondWith(

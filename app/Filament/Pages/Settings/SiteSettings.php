@@ -23,12 +23,16 @@ use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Illuminate\Support\Facades\Storage;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Livewire\UploadedFile;
 use UnitEnum;
 use App\Models\SiteSetting;
 
 class SiteSettings extends Page implements HasSchemas
 {
     use InteractsWithSchemas;
+    use WithFileUploads;
 
     protected static ?string $title = 'Configuración del sitio';
 
@@ -39,11 +43,6 @@ class SiteSettings extends Page implements HasSchemas
     public ?array $data = [];
 
     public function mount(): void
-    {
-        $this->loadSettings();
-    }
-
-    public function hydrate(): void
     {
         $this->loadSettings();
     }
@@ -71,21 +70,30 @@ class SiteSettings extends Page implements HasSchemas
             'about_image' => SiteSetting::get('about_image', ''),
         ];
 
-        // Convert FileUpload string paths to arrays for Filament
-        if ($settings['site_logo']) {
-            $settings['site_logo'] = [$settings['site_logo']];
-        }
-        if ($settings['site_favicon']) {
-            $settings['site_favicon'] = [$settings['site_favicon']];
-        }
-        if ($settings['about_image']) {
-            $settings['about_image'] = [$settings['about_image']];
-        }
+        // Convert FileUpload string paths to arrays for Filament (Livewire v3 requires arrays)
+        $settings['site_logo'] = $this->normalizeImageValue($settings['site_logo']);
+        $settings['site_favicon'] = $this->normalizeImageValue($settings['site_favicon']);
+        $settings['about_image'] = $this->normalizeImageValue($settings['about_image']);
 
         $this->data = $settings;
 
         // Debug: log loaded data
         \Log::info('Settings loaded', $settings);
+    }
+
+    protected function normalizeImageValue(mixed $value): array
+    {
+        if (empty($value) || $value === '[]' || $value === null) {
+            return [];
+        }
+        // If it's already an array, return as is
+        if (is_array($value)) {
+            // Filter out "[]" strings
+            $filtered = array_filter($value, fn($v) => $v !== '[]' && !empty($v));
+            return array_values($filtered);
+        }
+        // If it's a string, wrap in array
+        return [$value];
     }
 
     public function form(Schema $schema): Schema
@@ -175,27 +183,47 @@ class SiteSettings extends Page implements HasSchemas
             ->statePath('data');
     }
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Action::make('save')
                 ->label('Guardar configuración')
-                ->action('save')
-                ->after(function () {
-                    // Reload settings after save to ensure form shows updated values
-                    $this->loadSettings();
+                ->action(function () {
+                    $this->save();
                 }),
         ];
     }
 
     public function save(): void
     {
-        $data = $this->form->getState();
+        // Use $this->data directly since statePath('data') is set
+        $data = $this->data;
 
         foreach ($data as $key => $value) {
+            // Skip empty arrays
+            if (is_array($value) && count($value) === 0) {
+                continue;
+            }
             // Handle FileUpload arrays
-            if (is_array($value)) {
-                $value = $value[0] ?? null;
+            if (is_array($value) && count($value) > 0) {
+                $firstValue = reset($value);
+                // Skip "[]" marker strings (used when image is removed)
+                if ($firstValue === '[]' || $firstValue === null) {
+                    continue;
+                }
+                // Handle TemporaryUploadedFile objects - store and get path
+                if ($firstValue instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile) {
+                    $path = $firstValue->store('/', [
+                        'disk' => 'public',
+                    ]);
+                    SiteSetting::set($key, $path);
+                    continue;
+                } elseif (is_string($firstValue)) {
+                    SiteSetting::set($key, $firstValue);
+                    continue;
+                }
+                // If firstValue is something else (unknown type), skip this field
+                continue;
             }
             // Handle null values
             if ($value === null) {
@@ -203,6 +231,9 @@ class SiteSettings extends Page implements HasSchemas
             }
             SiteSetting::set($key, $value);
         }
+
+        // Reload settings after save
+        $this->loadSettings();
 
         Notification::make()
             ->title('Configuración guardada')
