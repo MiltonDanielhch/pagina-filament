@@ -322,6 +322,35 @@
                 lastScrollY = currentScrollY;
             }, { passive: true });
         });
+
+        // Dropdown toggle function
+        function toggleDropdown(button) {
+            const dropdown = button.closest('.desktop-dropdown');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            const arrow = button.querySelector('svg');
+            
+            // Close all other dropdowns
+            document.querySelectorAll('.desktop-dropdown .dropdown-menu').forEach(el => {
+                if (el !== menu) {
+                    el.classList.add('hidden');
+                    el.closest('.desktop-dropdown').querySelector('svg').style.transform = '';
+                }
+            });
+            
+            // Toggle current dropdown
+            menu.classList.toggle('hidden');
+            arrow.style.transform = menu.classList.contains('hidden') ? '' : 'rotate(180deg)';
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.desktop-dropdown')) {
+                document.querySelectorAll('.desktop-dropdown .dropdown-menu').forEach(el => {
+                    el.classList.add('hidden');
+                    el.closest('.desktop-dropdown').querySelector('svg').style.transform = '';
+                });
+            }
+        });
     </script>
 
     @yield('scripts')
