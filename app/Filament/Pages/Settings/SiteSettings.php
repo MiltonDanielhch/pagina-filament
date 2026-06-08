@@ -24,15 +24,12 @@ use Filament\Schemas\Schema;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Storage;
-use Livewire\Features\SupportFileUploads\WithFileUploads;
-use Livewire\UploadedFile;
 use UnitEnum;
 use App\Models\SiteSetting;
 
 class SiteSettings extends Page implements HasSchemas
 {
     use InteractsWithSchemas;
-    use WithFileUploads;
 
     protected static ?string $title = 'Configuración del sitio';
 

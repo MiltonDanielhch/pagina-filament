@@ -191,6 +191,37 @@
                     </button>
                 </div>
             </nav>
+
+            <!-- Menú móvil -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+                <nav class="container mx-auto px-4 py-3">
+                    @if($headerMenu && $headerMenu->items)
+                        @foreach($headerMenu->items->where('parent_id', null) as $item)
+                            @if($item->children->count() > 0)
+                                <div class="mobile-dropdown">
+                                    <button onclick="toggleMobileDropdown(this)" class="dropdown-trigger w-full flex items-center justify-between px-3 py-3 text-gray-700 hover:bg-teal-50 transition font-medium">
+                                        {{ $item->label }}
+                                        <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                        </svg>
+                                    </button>
+                                    <div class="dropdown-menu hidden pl-4 pb-2">
+                                        @foreach($item->children as $child)
+                                            <a href="{{ $child->page_id ? route('pages.show', $child->page->slug) : $child->url }}" class="block px-4 py-2 text-sm text-gray-600 hover:bg-teal-50 hover:text-teal-700 transition">
+                                                {{ $child->label }}
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @else
+                                <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}" class="block px-3 py-3 text-gray-700 hover:bg-teal-50 transition font-medium">
+                                    {{ $item->label }}
+                                </a>
+                            @endif
+                        @endforeach
+                    @endif
+                </nav>
+            </div>
         </header>
     </div>
 
@@ -351,6 +382,35 @@
                 });
             }
         });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Mobile dropdown toggle
+        function toggleMobileDropdown(button) {
+            const dropdown = button.closest('.mobile-dropdown');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            const arrow = button.querySelector('svg');
+
+            // Close all other mobile dropdowns
+            document.querySelectorAll('.mobile-dropdown .dropdown-menu').forEach(el => {
+                if (el !== menu) {
+                    el.classList.add('hidden');
+                    el.closest('.mobile-dropdown').querySelector('svg').style.transform = '';
+                }
+            });
+
+            // Toggle current dropdown
+            menu.classList.toggle('hidden');
+            arrow.style.transform = menu.classList.contains('hidden') ? '' : 'rotate(180deg)';
+        }
     </script>
 
     @yield('scripts')
