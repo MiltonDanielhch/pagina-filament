@@ -1,571 +1,641 @@
 {{--
-    Ubicación: resources/views/home.blade.php
-    Descripción: Homepage del sitio. Carga slides del slider, posts recientes
-                 en grid, categorías y badges de sistemas externos.
-    Accesibilidad: lang="es", skip link, contraste 4.5:1, semantic HTML
-    Roadmap: 06-FRONTEND.md — Bloque 6.1
+    Homepage rediseñado — 18 bloques según Sección C (doc 14 RM 067/2025)
+    Cumple WCAG 2.1 AA, responsive, mobile-first.
 --}}
 @extends('layouts.main')
 
 @section('seo')
-    <meta name="description" content="Página oficial de la Gobernación Autónoma Departamental del Beni. Conoce las últimas noticias, eventos destacados, servicios gubernamentales y la gestión del gobernador. Información actualizada para los ciudadanos del departamento del Beni, Bolivia.">
+    <meta name="description" content="Portal oficial de la Gobernación Autónoma Departamental del Beni. Trámites, transparencia, noticias, proyectos de inversión y atención al ciudadano del departamento del Beni, Bolivia.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Gobernación Autónoma Departamental del Beni">
+    <meta property="og:description" content="Comprometidos con el desarrollo integral del Beni. Trámites, transparencia y atención al ciudadano.">
 @endsection
 
 @section('content')
-<!-- Hero Banner / Slider -->
+
+{{-- =====================================================
+     BLOQUE 1+2: Header / Navbar — manejados por layout
+     BLOQUE 3: Hero Slider
+     ===================================================== --}}
 @if($slides->count() > 0)
-<section class="relative h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden" id="hero-slider">
+<section class="relative h-[400px] md:h-[520px] lg:h-[600px] overflow-hidden" id="hero-slider" aria-label="Diapositivas principales">
     <div class="absolute inset-0">
         @foreach($slides as $index => $slide)
         <div class="absolute inset-0 transition-opacity duration-700 {{ $index === 0 ? 'opacity-100' : 'opacity-0' }}" data-slide="{{ $index }}">
             <picture>
                 <source media="(max-width: 768px)" srcset="{{ $slide->getFirstMediaUrl('slides') ?: $slide->image }}?w=800&q=80">
                 <source media="(max-width: 1024px)" srcset="{{ $slide->getFirstMediaUrl('slides') ?: $slide->image }}?w=1200&q=85">
-                <img src="{{ $slide->getFirstMediaUrl('slides') ?: $slide->image }}" alt="{{ $slide->title }}" class="w-full h-full object-cover" loading="eager">
+                <img src="{{ $slide->getFirstMediaUrl('slides') ?: $slide->image }}" alt="{{ $slide->title }}" class="w-full h-full object-cover" loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
             </picture>
-            <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20"></div>
         </div>
         @endforeach
     </div>
     <div class="absolute inset-0 flex items-center">
         <div class="container mx-auto px-4">
-            <div class="max-w-3xl">
+            <div class="max-w-3xl text-white">
                 @foreach($slides as $index => $slide)
-                <div class="text-white {{ $index === 0 ? '' : 'hidden' }}" data-slide-content="{{ $index }}">
+                <div class="{{ $index === 0 ? '' : 'hidden' }}" data-slide-content="{{ $index }}">
+                    @if($slide->title)
+                    <p class="font-semibold mb-2 uppercase tracking-widest text-amber-300 text-sm md:text-base">
+                        {{ $slide->subtitle ?? 'Gobernación del Beni' }}
+                    </p>
+                    <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
+                        {{ $slide->title }}
+                    </h1>
+                    @if($slide->description)
+                    <p class="text-lg md:text-xl opacity-90 mb-6 max-w-2xl">{{ $slide->description }}</p>
+                    @endif
+                    @if($slide->button_text && $slide->button_url)
+                    <div class="flex flex-wrap gap-3">
+                        <a href="{{ $slide->button_url }}" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg font-bold transition shadow-lg">
+                            {{ $slide->button_text }}
+                        </a>
+                        <a href="{{ route('transparency.index') }}" class="bg-white/20 hover:bg-white/30 backdrop-blur text-white px-6 py-3 rounded-lg font-semibold transition">
+                            Ver Transparencia
+                        </a>
+                    </div>
+                    @endif
+                    @endif
                 </div>
                 @endforeach
             </div>
         </div>
     </div>
-    <!-- Slide Indicators -->
     @if($slides->count() > 1)
-    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-10" role="tablist">
         @foreach($slides as $index => $slide)
-        <button data-slide-btn="{{ $index }}" class="w-4 h-4 md:w-3 md:h-3 rounded-full transition-all {{ $index === 0 ? 'bg-white w-10 md:w-8' : 'bg-white/50 hover:bg-white/70' }}" aria-label="Slide {{ $index + 1 }}"></button>
+        <button data-slide-btn="{{ $index }}" class="w-3 h-3 md:w-3 md:h-3 rounded-full transition-all {{ $index === 0 ? 'bg-white w-8 md:w-8' : 'bg-white/50 hover:bg-white/70' }}" aria-label="Slide {{ $index + 1 }}" role="tab" aria-selected="{{ $index === 0 ? 'true' : 'false' }}"></button>
         @endforeach
     </div>
     @endif
 </section>
 @else
-<!-- Default Hero if no slides -->
-<section class="relative h-[400px] bg-gradient-to-br from-official to-official-light flex items-center">
-    <div class="absolute inset-0 bg-pattern opacity-20"></div>
-    <div class="container mx-auto px-4">
+<section class="relative h-[400px] md:h-[520px] bg-gradient-to-br from-teal-700 via-teal-800 to-teal-900 flex items-center overflow-hidden">
+    <div class="absolute inset-0 opacity-10 bg-pattern"></div>
+    <div class="container mx-auto px-4 relative">
         <div class="max-w-3xl text-white">
-            <p class="font-semibold mb-2 uppercase tracking-wider">Gobierno Autónomo Departamental</p>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
+            <p class="font-semibold mb-2 uppercase tracking-widest text-amber-300 text-sm md:text-base">Gobierno Autónomo Departamental</p>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
                 Gobernación Autónoma Departamental del Beni
             </h1>
-            <p class="text-xl opacity-90 mb-6">Comprometidos con el desarrollo integral de nuestro departamento</p>
-            <div class="flex gap-4">
-                <a href="/blog" class="btn-primary">Ver Noticias</a>
-                <a href="/contacto" class="bg-white/20 hover:bg-white/30 backdrop-blur text-white px-6 py-3 rounded-lg font-semibold transition">Contacto</a>
+            <p class="text-lg md:text-xl opacity-90 mb-6 max-w-2xl">
+                Comprometidos con el desarrollo integral de nuestro departamento.
+                Trámites, transparencia y atención al ciudadano en un solo lugar.
+            </p>
+            <div class="flex flex-wrap gap-3">
+                <a href="{{ route('procedures.index') }}" class="bg-amber-500 hover:bg-amber-600 text-gray-900 px-6 py-3 rounded-lg font-bold transition shadow-lg">
+                    Ver Trámites
+                </a>
+                <a href="{{ route('transparency.index') }}" class="bg-white/20 hover:bg-white/30 backdrop-blur text-white px-6 py-3 rounded-lg font-semibold transition">
+                    Portal de Transparencia
+                </a>
             </div>
         </div>
     </div>
 </section>
 @endif
 
-<!-- Últimas Noticias -->
-<section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-        <div class="flex justify-between items-center mb-12">
-            <div>
-                <p class="text-official font-semibold uppercase tracking-wider mb-2">Últimas Noticias</p>
-                <h2 class="text-4xl font-bold text-gray-900">Noticias del Beni</h2>
-            </div>
-            <a href="/blog" class="link-official hidden md:inline-flex">Ver todas las noticias</a>
-        </div>
+{{-- =====================================================
+     BLOQUE 4: Banda de Búsqueda
+     ===================================================== --}}
+<x-search-band />
 
-        @if($latestPosts->count() > 0)
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+{{-- =====================================================
+     BLOQUE 5: Accesos Rápidos
+     ===================================================== --}}
+<x-quick-access-grid />
+
+{{-- =====================================================
+     BLOQUE 6: Trámites Destacados
+     ===================================================== --}}
+@if(isset($featuredProcedures) && $featuredProcedures->count() > 0)
+<section class="py-16 bg-gray-50" aria-label="Trámites destacados">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
+            <div>
+                <p class="text-teal-700 font-semibold uppercase tracking-wider mb-2 text-sm">Servicios al ciudadano</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Trámites Destacados</h2>
+                <p class="text-gray-600 mt-2">Los trámites más consultados por la ciudadanía</p>
+            </div>
+            <a href="{{ route('procedures.index') }}" class="text-teal-700 font-semibold hover:text-teal-800 inline-flex items-center gap-1 text-sm md:text-base">
+                Ver todos los trámites
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            @foreach($featuredProcedures as $procedure)
+                <x-procedure-card :procedure="$procedure" />
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
+{{-- =====================================================
+     BLOQUE 7: Últimas Noticias
+     ===================================================== --}}
+@if(isset($latestPosts) && $latestPosts->count() > 0)
+<section class="py-16 bg-white" aria-label="Últimas noticias">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
+            <div>
+                <p class="text-teal-700 font-semibold uppercase tracking-wider mb-2 text-sm">Sala de prensa</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Últimas Noticias</h2>
+            </div>
+            <a href="{{ route('posts.index') }}" class="text-teal-700 font-semibold hover:text-teal-800 inline-flex items-center gap-1 text-sm md:text-base">
+                Ver todas las noticias
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($latestPosts as $post)
-            <article class="card-article hover-lift">
-                <a href="{{ route('posts.show', $post->slug) }}">
-                    @if($post->getFirstMedia('featured'))
-                    <picture>
-                        <source media="(max-width: 640px)" srcset="{{ $post->getFirstMedia('featured')->getUrl('medium') }}">
-                        <source media="(max-width: 1024px)" srcset="{{ $post->getFirstMedia('featured')->getUrl('medium') }}">
-                        <img src="{{ $post->getFirstMedia('featured')->getUrl('medium') }}" alt="{{ $post->title }}" class="w-full h-48 object-cover hover-scale" loading="lazy">
-                    </picture>
+            <article class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden border border-gray-100">
+                <a href="{{ route('posts.show', $post->slug) }}" class="block">
+                    @if(method_exists($post, 'getFirstMedia') && $post->getFirstMedia('featured'))
+                    <img src="{{ $post->getFirstMedia('featured')->getUrl('medium') }}" alt="{{ $post->title }}" class="w-full h-48 object-cover" loading="lazy">
                     @else
-                    <div class="w-full h-48 bg-gradient-to-br from-official/20 to-official/5 flex items-center justify-center">
-                        <svg class="w-12 h-12 text-official/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+                    <div class="w-full h-48 bg-gradient-to-br from-teal-100 to-teal-50 flex items-center justify-center">
+                        <svg class="w-12 h-12 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                        </svg>
                     </div>
                     @endif
                 </a>
-                <div class="p-6">
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="badge-official">{{ $post->category->name ?? 'General' }}</span>
-                        <span class="text-gray-400 text-sm">{{ $post->published_at->format('d/m/Y') }}</span>
+                <div class="p-5">
+                    <div class="flex items-center gap-2 mb-3 text-xs">
+                        @if($post->category)
+                        <span class="bg-teal-100 text-teal-700 px-2 py-0.5 rounded font-semibold">{{ $post->category->name }}</span>
+                        @endif
+                        <span class="text-gray-500">{{ optional($post->published_at)->format('d/m/Y') }}</span>
                     </div>
                     <h3 class="text-lg font-bold mb-2 line-clamp-2">
-                        <a href="{{ route('posts.show', $post->slug) }}" class="hover:text-official transition">
+                        <a href="{{ route('posts.show', $post->slug) }}" class="hover:text-teal-700 transition">
                             {{ $post->title }}
                         </a>
                     </h3>
                     @if($post->excerpt)
-                    <p class="text-gray-600 text-sm line-clamp-2 mb-4">{{ $post->excerpt }}</p>
+                    <p class="text-sm text-gray-600 line-clamp-2 mb-3">{{ $post->excerpt }}</p>
                     @endif
-                    <a href="{{ route('posts.show', $post->slug) }}" class="text-official font-medium text-sm inline-flex items-center gap-1 hover:gap-2 transition-all">
-                        Leer más <span>→</span>
+                    <a href="{{ route('posts.show', $post->slug) }}" class="text-teal-700 font-medium text-sm inline-flex items-center gap-1 hover:gap-2 transition-all">
+                        Leer más →
                     </a>
                 </div>
             </article>
             @endforeach
         </div>
-
-        @if($latestPosts->count() > 3)
-        <div class="text-center mt-8 md:hidden">
-            <a href="/blog" class="btn-secondary">Ver todas las noticias</a>
-        </div>
-        @endif
-        @else
-        <div class="text-center py-12 bg-gray-50 rounded-xl">
-            <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
-            <p class="text-gray-500">No hay noticias publicadas actualmente.</p>
-            <a href="/blog" class="btn-primary mt-4 inline-block">Ver noticias anteriores</a>
-        </div>
-        @endif
-    </div>
-</section>
-
-<!-- Categories / Áreas de Trabajo -->
-<section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <p class="text-official font-semibold uppercase tracking-wider mb-2">Áreas de Trabajo</p>
-            <h2 class="text-4xl font-bold text-gray-900">Nuestros Ejes de Gestión</h2>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            @foreach($categories as $category)
-            <a href="{{ route('posts.category', $category->slug) }}"
-               class="group bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-1"
-               style="border-top: 4px solid {{ $category->color }}">
-                <div class="w-12 h-12 rounded-full flex items-center justify-center mb-4" :style="'background-color: ' + '{{ $category->color }}20'">
-                    @switch($category->slug)
-                        @case('salud')
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-                        @case('infraestructura')
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                        @case('cultura')
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
-                        @case('educacion')
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
-                        @default
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    @endswitch
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-official transition">{{ $category->name }}</h3>
-                <p class="text-gray-600 text-sm">{{ $category->description }}</p>
-            </a>
-            @endforeach
-        </div>
-    </div>
-</section>
-
-<!-- Próximos Eventos Destacados -->
-@if($featuredEvents->count() > 0)
-<section class="py-16 bg-official text-white">
-    <div class="container mx-auto px-4">
-        <div class="flex justify-between items-center mb-12">
-            <div>
-                <p class="font-semibold uppercase tracking-wider mb-2 opacity-80">Próximos Eventos</p>
-                <h2 class="text-4xl font-bold">Eventos Destacados</h2>
-            </div>
-            <a href="{{ route('events') }}" class="text-white/80 hover:text-white transition hidden md:inline-flex">Ver todos los eventos →</a>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            @foreach($featuredEvents as $event)
-            <div class="bg-white/10 backdrop-blur rounded-xl p-6 border border-white/20 hover:bg-white/20 transition hover-lift">
-                <div class="text-center mb-4">
-                    <div class="text-3xl font-bold">{{ $event->starts_at->format('d') }}</div>
-                    <div class="text-sm uppercase opacity-80">{{ $event->starts_at->format('M') }}</div>
-                </div>
-                <h3 class="text-xl font-bold mb-2">{{ $event->title }}</h3>
-                @if($event->location)
-                <p class="text-sm opacity-80 mb-2">📍 {{ $event->location }}</p>
-                @endif
-                <p class="text-sm opacity-80">{{ $event->starts_at->format('H:i') }}</p>
-            </div>
-            @endforeach
-        </div>
-
-        @if($featuredEvents->count() > 3)
-        <div class="text-center mt-8 md:hidden">
-            <a href="#" class="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-lg font-semibold transition inline-block">Ver todos los eventos</a>
-        </div>
-        @endif
     </div>
 </section>
 @endif
 
-<!-- Nuestro Territorio -->
-<section class="py-16 bg-white">
+{{-- =====================================================
+     BLOQUE 8: Transparencia en Cifras
+     ===================================================== --}}
+@if(isset($stats))
+<section class="py-16 bg-gradient-to-br from-teal-700 via-teal-800 to-teal-900 text-white" aria-label="Transparencia en cifras">
     <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <p class="text-official font-semibold uppercase tracking-wider mb-2">Nuestro Territorio</p>
-            <h2 class="text-4xl font-bold text-gray-900">Departamento del Beni</h2>
-            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">El Beni es el departamento más grande de Bolivia, ubicado en la región amazónica, con una extensión de 213.564 km² y rica biodiversidad.</p>
+        <div class="text-center mb-10">
+            <p class="font-semibold uppercase tracking-wider mb-2 text-amber-300 text-sm">Transparencia activa</p>
+            <h2 class="text-3xl md:text-4xl font-bold">El Beni en Cifras</h2>
+            <p class="text-white/80 mt-2 max-w-2xl mx-auto">Datos abiertos y actualizados del Gobierno Autónomo Departamental</p>
         </div>
-        <div class="max-w-6xl mx-auto">
-            <div class="rounded-2xl overflow-hidden shadow-2xl relative" style="z-index: 0 !important;">
-                <div id="beni-map" style="height: 500px; width: 100%; z-index: 0 !important;"></div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <x-stat-counter :value="$stats['tramites'] ?? 0" label="Trámites disponibles" icon="document" color="teal" :url="route('procedures.index')" />
+            <x-stat-counter :value="$stats['secretarias'] ?? 0" label="Secretarías" icon="building" color="emerald" :url="route('institutional.secretariats')" />
+            <x-stat-counter :value="$stats['oficinas'] ?? 0" label="Oficinas de atención" icon="map" color="amber" :url="route('offices')" />
+            <x-stat-counter :value="$stats['municipios'] ?? 0" label="Municipios" icon="map" color="blue" />
+            <x-stat-counter :value="$stats['normas'] ?? 0" label="Normas publicadas" icon="document" color="purple" :url="route('transparency.marco-normativo')" />
+            <x-stat-counter :value="$stats['datasets'] ?? 0" label="Datasets abiertos" icon="database" color="red" :url="route('open-data.index')" />
+        </div>
+        <div class="text-center mt-8">
+            <a href="{{ route('transparency.index') }}" class="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold px-6 py-3 rounded-lg transition shadow-lg">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>
+                Acceder al Portal de Transparencia
+            </a>
+        </div>
+    </div>
+</section>
+@endif
+
+{{-- =====================================================
+     BLOQUE 9: El Gobernador
+     ===================================================== --}}
+@if(isset($gobernador) && $gobernador->count() > 0)
+<section class="py-16 bg-white" aria-label="Mensaje del Gobernador">
+    <div class="container mx-auto px-4">
+        <div class="grid lg:grid-cols-5 gap-8 items-center max-w-6xl mx-auto">
+            <div class="lg:col-span-2">
+                <div class="aspect-[4/5] max-w-sm mx-auto bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl overflow-hidden shadow-2xl flex items-center justify-center text-white">
+                    <div class="text-center p-6">
+                        <div class="w-32 h-32 mx-auto bg-white/20 backdrop-blur rounded-full flex items-center justify-center mb-4 text-5xl font-bold">
+                            {{ strtoupper(mb_substr($gobernador->first()->full_name, 0, 1)) }}
+                        </div>
+                        <p class="text-lg font-bold">{{ $gobernador->first()->full_name }}</p>
+                        <p class="text-white/80 text-sm">{{ $gobernador->first()->position ?? 'Gobernador(a) del Beni' }}</p>
+                    </div>
+                </div>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8">
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-official">213.564</div>
-                    <div class="text-sm text-gray-600">km² de extensión</div>
+            <div class="lg:col-span-3">
+                <p class="text-amber-600 font-semibold uppercase tracking-wider mb-2 text-sm">Mensaje del Gobierno</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Construyendo el futuro del Beni</h2>
+                <div class="prose prose-lg text-gray-700 max-w-none">
+                    <p class="mb-4">
+                        {!! $aboutSettings['description'] !!}
+                    </p>
+                    <p class="text-teal-700 font-semibold italic border-l-4 border-amber-500 pl-4">
+                        "{{ $aboutSettings['mission'] }}"
+                    </p>
                 </div>
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-official">8</div>
-                    <div class="text-sm text-gray-600">provincias</div>
+                <a href="{{ route('institutional.index') }}" class="mt-6 inline-flex items-center gap-2 text-teal-700 font-semibold hover:text-teal-800">
+                    Conoce más sobre la Gobernación
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+@endif
+
+{{-- =====================================================
+     BLOQUE 10: Próximos Eventos
+     ===================================================== --}}
+@if(isset($featuredEvents) && $featuredEvents->count() > 0)
+<section class="py-16 bg-gray-50" aria-label="Próximos eventos">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
+            <div>
+                <p class="text-teal-700 font-semibold uppercase tracking-wider mb-2 text-sm">Agenda institucional</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Próximos Eventos</h2>
+            </div>
+            <a href="{{ route('events') }}" class="text-teal-700 font-semibold hover:text-teal-800 inline-flex items-center gap-1 text-sm md:text-base">
+                Ver todos los eventos →
+            </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            @foreach($featuredEvents as $event)
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden border border-gray-100">
+                <div class="bg-gradient-to-br from-teal-600 to-teal-800 text-white p-5 text-center">
+                    <p class="text-3xl font-bold">{{ optional($event->starts_at)->format('d') ?? '—' }}</p>
+                    <p class="text-sm uppercase tracking-wider opacity-80">{{ optional($event->starts_at)->translatedFormat('M Y') ?? '—' }}</p>
                 </div>
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-official">48</div>
-                    <div class="text-sm text-gray-600">municipios</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-official">~500K</div>
-                    <div class="text-sm text-gray-600">habitantes</div>
+                <div class="p-5">
+                    <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-2">{{ $event->title }}</h3>
+                    @if($event->location)
+                    <p class="text-sm text-gray-600 flex items-center gap-1 mb-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        </svg>
+                        {{ $event->location }}
+                    </p>
+                    @endif
+                    @if($event->starts_at)
+                    <p class="text-sm text-gray-600 flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        {{ $event->starts_at->format('H:i') }}
+                    </p>
+                    @endif
                 </div>
             </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
+{{-- =====================================================
+     BLOQUE 11: Secretarías Departamentales
+     ===================================================== --}}
+@if(isset($secretariats) && $secretariats->count() > 0)
+<section class="py-16 bg-white" aria-label="Secretarías departamentales">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
+            <div>
+                <p class="text-teal-700 font-semibold uppercase tracking-wider mb-2 text-sm">Estructura orgánica</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Secretarías Departamentales</h2>
+            </div>
+            <a href="{{ route('institutional.secretariats') }}" class="text-teal-700 font-semibold hover:text-teal-800 inline-flex items-center gap-1 text-sm md:text-base">
+                Ver todas →
+            </a>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            @foreach($secretariats as $secretariat)
+                <x-secretary-card :secretariat="$secretariat" />
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
+{{-- =====================================================
+     BLOQUE 12: Proyectos de Inversión
+     ===================================================== --}}
+@if(isset($featuredProjects) && $featuredProjects->count() > 0)
+<section class="py-16 bg-gray-50" aria-label="Proyectos de inversión">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
+            <div>
+                <p class="text-teal-700 font-semibold uppercase tracking-wider mb-2 text-sm">Inversión pública</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Proyectos Destacados</h2>
+            </div>
+            <a href="/gobierno/proyectos" class="text-teal-700 font-semibold hover:text-teal-800 inline-flex items-center gap-1 text-sm md:text-base">
+                Ver todos los proyectos →
+            </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            @foreach($featuredProjects as $project)
+            <article class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden border border-gray-100">
+                @if($project->image)
+                <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}" class="w-full h-40 object-cover" loading="lazy">
+                @else
+                <div class="w-full h-40 bg-gradient-to-br from-emerald-100 to-emerald-50 flex items-center justify-center">
+                    <svg class="w-12 h-12 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                    </svg>
+                </div>
+                @endif
+                <div class="p-4">
+                    <span class="text-xs px-2 py-0.5 rounded-full
+                        @switch($project->status)
+                            @case('ejecucion') bg-yellow-100 text-yellow-700 @break
+                            @case('planificacion') bg-blue-100 text-blue-700 @break
+                            @case('completado') bg-green-100 text-green-700 @break
+                            @default bg-gray-100 text-gray-700
+                        @endswitch
+                    ">{{ ucfirst($project->status ?? '—') }}</span>
+                    <h3 class="text-base font-bold text-gray-900 mt-2 line-clamp-2">{{ $project->title }}</h3>
+                    @if($project->municipality)
+                    <p class="text-xs text-gray-500 mt-1 flex items-center gap-1">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        </svg>
+                        {{ $project->municipality }}
+                    </p>
+                    @endif
+                </div>
+            </article>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
+{{-- =====================================================
+     BLOQUE 13: Atención al Ciudadano
+     ===================================================== --}}
+<section class="py-16 bg-gradient-to-br from-amber-50 to-white" aria-label="Atención al ciudadano">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-10">
+            <p class="text-amber-600 font-semibold uppercase tracking-wider mb-2 text-sm">Estamos para ayudarte</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Atención al Ciudadano</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <a href="{{ route('offices') }}" class="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-teal-500">
+                <div class="w-14 h-14 bg-teal-100 text-teal-700 rounded-xl flex items-center justify-center mb-4 group-hover:bg-teal-600 group-hover:text-white transition">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">📍 Encuéntranos</h3>
+                <p class="text-sm text-gray-600 mb-3">Conoce las oficinas de atención al ciudadano en todo el departamento.</p>
+                <span class="text-teal-700 font-semibold text-sm">Ver oficinas →</span>
+            </a>
+            <a href="{{ route('complaints.create') }}" class="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-red-500">
+                <div class="w-14 h-14 bg-red-100 text-red-700 rounded-xl flex items-center justify-center mb-4 group-hover:bg-red-600 group-hover:text-white transition">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">📝 Quejas y Reclamos</h3>
+                <p class="text-sm text-gray-600 mb-3">Registra tu queja, reclamo o sugerencia en nuestro Libro de Reclamaciones Virtual.</p>
+                <span class="text-red-700 font-semibold text-sm">Registrar ahora →</span>
+            </a>
+            <a href="{{ route('contact') }}" class="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-blue-500">
+                <div class="w-14 h-14 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">☎ Contáctanos</h3>
+                <p class="text-sm text-gray-600 mb-3">Teléfonos, correos electrónicos y horarios de atención al público.</p>
+                <span class="text-blue-700 font-semibold text-sm">Ver contactos →</span>
+            </a>
         </div>
     </div>
 </section>
 
-<!-- Visítanos -->
-<section class="py-16 bg-gray-50">
+{{-- =====================================================
+     BLOQUE 14: Datos Abiertos
+     ===================================================== --}}
+@if(isset($featuredDatasets) && $featuredDatasets->count() > 0)
+<section class="py-16 bg-gradient-to-br from-indigo-700 to-indigo-900 text-white" aria-label="Datos abiertos">
     <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <p class="text-official font-semibold uppercase tracking-wider mb-2">Visítanos</p>
-            <h2 class="text-4xl font-bold text-gray-900">Sede Principal - Trinidad</h2>
-            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Visita nuestra sede principal en la ciudad de Trinidad, capital del departamento del Beni.</p>
-        </div>
-        <div class="max-w-6xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                <div class="rounded-2xl overflow-hidden shadow-2xl">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.123456789!2d-64.9!3d-14.83333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91e3d0d0d0d0d0d%3A0x0!2sTrinidad%2C+Beni+Department%2C+Bolivia!5e0!3m2!1ses!2sbo!4v1717497600"
-                        width="100%"
-                        height="400"
-                        style="border:0;"
-                        allowfullscreen=""
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
+        <div class="grid lg:grid-cols-3 gap-8 items-center">
+            <div class="lg:col-span-1">
+                <div class="w-16 h-16 bg-white/15 backdrop-blur rounded-2xl flex items-center justify-center mb-4">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                    </svg>
                 </div>
-                <div class="space-y-6">
-                    <div class="bg-white rounded-xl p-6 shadow-lg">
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">Información de Contacto</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start gap-4">
-                                <svg class="w-6 h-6 text-official flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                </svg>
-                                <div>
-                                    <p class="font-semibold text-gray-900">Dirección</p>
-                                    <p class="text-gray-600">Plaza Principal 6 de Agosto, Trinidad, Beni, Bolivia</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <svg class="w-6 h-6 text-official flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                                </svg>
-                                <div>
-                                    <p class="font-semibold text-gray-900">Teléfono</p>
-                                    <p class="text-gray-600">(591) 346-21651</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <svg class="w-6 h-6 text-official flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                                </svg>
-                                <div>
-                                    <p class="font-semibold text-gray-900">Email</p>
-                                    <p class="text-gray-600">gobernador@beni.gob.bo</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <svg class="w-6 h-6 text-official flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                <div>
-                                    <p class="font-semibold text-gray-900">Horario de Atención</p>
-                                    <p class="text-gray-600">Lunes a Viernes: 8:00 - 16:00</p>
-                                </div>
-                            </div>
-                        </div>
+                <p class="font-semibold uppercase tracking-widest text-amber-300 mb-2 text-sm">Datos Abiertos</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-3">Información para la ciudadanía</h2>
+                <p class="text-white/90 mb-6">Descarga datasets públicos en formatos abiertos (CSV, JSON, XLSX) y úsalos libremente.</p>
+                <a href="{{ route('open-data.index') }}" class="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold px-6 py-3 rounded-lg transition shadow-lg">
+                    Explorar todos los datos
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <div class="mt-6 flex flex-wrap gap-2">
+                    <span class="text-xs bg-white/15 backdrop-blur px-2 py-1 rounded font-mono">CSV</span>
+                    <span class="text-xs bg-white/15 backdrop-blur px-2 py-1 rounded font-mono">JSON</span>
+                    <span class="text-xs bg-white/15 backdrop-blur px-2 py-1 rounded font-mono">XLSX</span>
+                    <span class="text-xs bg-white/15 backdrop-blur px-2 py-1 rounded font-mono">PDF</span>
+                </div>
+            </div>
+            <div class="lg:col-span-2 space-y-2">
+                @foreach($featuredDatasets as $dataset)
+                    <div class="bg-white/10 backdrop-blur p-3 rounded-xl border border-white/20">
+                        <x-dataset-mini-card :dataset="$dataset" />
                     </div>
-                    <a href="https://maps.google.com/?q=Trinidad+Beni+Bolivia" target="_blank" class="btn-primary inline-flex items-center gap-2 w-full justify-center">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
-                        </svg>
-                        Abrir en Google Maps
-                    </a>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
 </section>
+@endif
+
+{{-- =====================================================
+     BLOQUE 15: Gabinete / Autoridades
+     ===================================================== --}}
+@if(isset($gabinete) && $gabinete->count() > 0)
+<section class="py-16 bg-white" aria-label="Gabinete departamental">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-10">
+            <p class="text-teal-700 font-semibold uppercase tracking-wider mb-2 text-sm">Liderazgo</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Gabinete Departamental</h2>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            @foreach($gabinete as $person)
+            <div class="text-center">
+                <div class="aspect-square w-full max-w-[160px] mx-auto bg-gradient-to-br from-teal-500 to-teal-700 rounded-2xl flex items-center justify-center text-white text-4xl font-bold shadow-md mb-3">
+                    {{ strtoupper(mb_substr($person->full_name, 0, 1)) }}
+                </div>
+                <h3 class="text-sm font-bold text-gray-900 line-clamp-2">{{ $person->full_name }}</h3>
+                <p class="text-xs text-teal-700 font-semibold mt-1 line-clamp-1">{{ $person->position ?? 'Autoridad' }}</p>
+            </div>
+            @endforeach
+        </div>
+        <div class="text-center mt-8">
+            <a href="{{ route('institutional.organigrama') }}" class="text-teal-700 font-semibold hover:text-teal-800 inline-flex items-center gap-1">
+                Ver organigrama completo →
+            </a>
+        </div>
+    </div>
+</section>
+@endif
+
+{{-- =====================================================
+     BLOQUE 16: Multimedia (Galerías)
+     ===================================================== --}}
+@if(isset($galleries) && $galleries->count() > 0)
+<section class="py-16 bg-gray-50" aria-label="Galería multimedia">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
+            <div>
+                <p class="text-teal-700 font-semibold uppercase tracking-wider mb-2 text-sm">Multimedia</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Galería Institucional</h2>
+            </div>
+            <a href="{{ route('gallery') }}" class="text-teal-700 font-semibold hover:text-teal-800 inline-flex items-center gap-1 text-sm md:text-base">
+                Ver galería completa →
+            </a>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+            @foreach($galleries->flatMap->items->take(6) as $item)
+            <div class="aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-teal-200 to-teal-100">
+                @if($item->image ?? false)
+                <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title ?? '' }}" class="w-full h-full object-cover hover:scale-110 transition" loading="lazy">
+                @elseif(method_exists($item, 'getFirstMediaUrl') && $item->getFirstMediaUrl('gallery'))
+                <img src="{{ $item->getFirstMediaUrl('gallery') }}" alt="{{ $item->title ?? '' }}" class="w-full h-full object-cover hover:scale-110 transition" loading="lazy">
+                @endif
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
+{{-- =====================================================
+     BLOQUE 17: Newsletter / Suscripción
+     ===================================================== --}}
+<section class="py-16 bg-gradient-to-br from-amber-500 via-amber-600 to-amber-700 text-white" aria-label="Suscripción a noticias">
+    <div class="container mx-auto px-4 max-w-3xl text-center">
+        <div class="w-16 h-16 mx-auto bg-white/20 backdrop-blur rounded-full flex items-center justify-center mb-4">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold mb-3">Suscríbete a nuestras noticias</h2>
+        <p class="text-white/90 mb-6 max-w-xl mx-auto">
+            Recibe en tu correo electrónico las últimas noticias, convocatorias y eventos del Beni.
+        </p>
+        <form method="POST" action="#" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+            @csrf
+            <input type="email" name="email" required placeholder="tu@correo.com"
+                   class="flex-1 px-4 py-3 rounded-xl text-gray-900 focus:ring-2 focus:ring-white focus:outline-none">
+            <button type="submit" class="bg-teal-700 hover:bg-teal-800 text-white font-bold px-6 py-3 rounded-xl transition shadow-md">
+                Suscribirme
+            </button>
+        </form>
+        <p class="text-xs text-white/70 mt-3">🔒 Tus datos están protegidos. No compartimos tu correo.</p>
+    </div>
+</section>
+
+{{-- =====================================================
+     BLOQUE 18: Footer — manejado por layout
+     ===================================================== --}}
 
 @endsection
 
 @section('scripts')
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<style>
-    /* Esto le baja el copete a los botones y paneles internos de Leaflet cuando el header pasa */
-    .leaflet-top, .leaflet-bottom, .leaflet-map-pane { 
-        z-index: 0 !important; 
-    }
-</style>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    // Slider automático con touch gestures
-    document.addEventListener('DOMContentLoaded', function() {
+    // Animación de contadores (count-up) al entrar en viewport
+    document.addEventListener('DOMContentLoaded', function () {
+        const counters = document.querySelectorAll('.counter');
+        if (!counters.length || !('IntersectionObserver' in window)) return;
+
+        const animate = (el) => {
+            const target = parseInt(el.dataset.target, 10) || 0;
+            const duration = 1500;
+            const startTime = performance.now();
+            const startValue = 0;
+
+            const step = (now) => {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+                const current = Math.floor(startValue + (target - startValue) * eased);
+                el.textContent = current.toLocaleString('es-BO');
+                if (progress < 1) requestAnimationFrame(step);
+                else el.textContent = target.toLocaleString('es-BO');
+            };
+            requestAnimationFrame(step);
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting && !entry.target.dataset.animated) {
+                    entry.target.dataset.animated = '1';
+                    animate(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        counters.forEach((c) => observer.observe(c));
+    });
+
+    // Hero slider
+    document.addEventListener('DOMContentLoaded', function () {
         const slider = document.getElementById('hero-slider');
-        const slides = document.querySelectorAll('[data-slide]');
-        const contents = document.querySelectorAll('[data-slide-content]');
-        const buttons = document.querySelectorAll('[data-slide-btn]');
-        
-        if (slides.length > 1 && slider) {
-            let currentSlide = 0;
-            const interval = 5000; // 5 segundos
-            let autoRotateInterval;
-            
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('opacity-100', i === index);
-                    slide.classList.toggle('opacity-0', i !== index);
-                });
-                
-                contents.forEach((content, i) => {
-                    content.classList.toggle('hidden', i !== index);
-                });
-                
-                buttons.forEach((btn, i) => {
-                    btn.classList.toggle('bg-white', i === index);
-                    btn.classList.toggle('w-10', i === index);
-                    btn.classList.toggle('md:w-8', i === index);
-                    btn.classList.toggle('bg-white/50', i !== index);
-                    btn.classList.toggle('w-4', i !== index);
-                    btn.classList.toggle('md:w-3', i !== index);
-                });
-            }
-            
-            function startAutoRotate() {
-                autoRotateInterval = setInterval(() => {
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    showSlide(currentSlide);
-                }, interval);
-            }
-            
-            function stopAutoRotate() {
-                clearInterval(autoRotateInterval);
-            }
-            
-            // Touch gestures
-            let touchStartX = 0;
-            let touchEndX = 0;
-            let isDragging = false;
-            
-            slider.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-                isDragging = true;
-                stopAutoRotate();
-            }, { passive: true });
-            
-            slider.addEventListener('touchmove', (e) => {
-                if (!isDragging) return;
-                touchEndX = e.changedTouches[0].screenX;
-            }, { passive: true });
-            
-            slider.addEventListener('touchend', () => {
-                if (!isDragging) return;
-                isDragging = false;
-                handleSwipe();
-                startAutoRotate();
+        if (!slider) return;
+        const slides = slider.querySelectorAll('[data-slide]');
+        const contents = slider.querySelectorAll('[data-slide-content]');
+        const btns = slider.querySelectorAll('[data-slide-btn]');
+        if (slides.length <= 1) return;
+
+        let current = 0;
+        const show = (i) => {
+            slides.forEach((s, idx) => {
+                s.classList.toggle('opacity-100', idx === i);
+                s.classList.toggle('opacity-0', idx !== i);
             });
-            
-            // Mouse drag support
-            let mouseStartX = 0;
-            let mouseEndX = 0;
-            
-            slider.addEventListener('mousedown', (e) => {
-                mouseStartX = e.clientX;
-                isDragging = true;
-                stopAutoRotate();
+            contents.forEach((c, idx) => {
+                c.classList.toggle('hidden', idx !== i);
             });
-            
-            slider.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-                mouseEndX = e.clientX;
+            btns.forEach((b, idx) => {
+                const isActive = idx === i;
+                b.classList.toggle('w-8', isActive);
+                b.classList.toggle('md:w-8', isActive);
+                b.classList.toggle('bg-white', isActive);
+                b.classList.toggle('bg-white/50', !isActive);
+                b.setAttribute('aria-selected', isActive ? 'true' : 'false');
             });
-            
-            slider.addEventListener('mouseup', () => {
-                if (!isDragging) return;
-                isDragging = false;
-                handleMouseDrag();
-                startAutoRotate();
-            });
-            
-            slider.addEventListener('mouseleave', () => {
-                if (isDragging) {
-                    isDragging = false;
-                    startAutoRotate();
-                }
-            });
-            
-            function handleSwipe() {
-                const swipeThreshold = 50;
-                const diff = touchStartX - touchEndX;
-                
-                if (Math.abs(diff) > swipeThreshold) {
-                    if (diff > 0) {
-                        // Swipe left - next slide
-                        currentSlide = (currentSlide + 1) % slides.length;
-                    } else {
-                        // Swipe right - previous slide
-                        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                    }
-                    showSlide(currentSlide);
-                }
-            }
-            
-            function handleMouseDrag() {
-                const dragThreshold = 50;
-                const diff = mouseStartX - mouseEndX;
-                
-                if (Math.abs(diff) > dragThreshold) {
-                    if (diff > 0) {
-                        // Drag left - next slide
-                        currentSlide = (currentSlide + 1) % slides.length;
-                    } else {
-                        // Drag right - previous slide
-                        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                    }
-                    showSlide(currentSlide);
-                }
-            }
-            
-            // Click en botones
-            buttons.forEach((btn, index) => {
-                btn.addEventListener('click', () => {
-                    currentSlide = index;
-                    showSlide(currentSlide);
-                    stopAutoRotate();
-                    startAutoRotate();
-                });
-            });
-            
-            // Iniciar auto-rotación
-            startAutoRotate();
-        }
+            current = i;
+        };
+        btns.forEach((btn, idx) => btn.addEventListener('click', () => show(idx)));
 
-        // Inicializar mapa Leaflet
-        if (document.getElementById('beni-map')) {
-            const map = L.map('beni-map', {
-                scrollWheelZoom: false,
-                zIndex: 1
-            }).setView([-14.5, -64.9], 7);
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors',
-                maxZoom: 18
-            }).addTo(map);
-
-            // Cargar municipios del Beni
-            fetch('/data/beni-municipios.geojson')
-                .then(response => response.json())
-                .then(data => {
-                    L.geoJSON(data, {
-                        pointToLayer: function(feature, latlng) {
-                            return L.circleMarker(latlng, {
-                                radius: 8,
-                                fillColor: '#0f766e',
-                                color: '#fff',
-                                weight: 2,
-                                opacity: 1,
-                                fillOpacity: 0.8
-                            });
-                        },
-                        onEachFeature: function(feature, layer) {
-                            layer.bindPopup(`
-                                <div class="p-2">
-                                    <h3 class="font-bold text-lg">${feature.properties.name}</h3>
-                                    <p class="text-sm text-gray-600">Provincia: ${feature.properties.province}</p>
-                                </div>
-                            `);
-                        }
-                    }).addTo(map);
-                })
-                .catch(error => console.error('Error cargando municipios:', error));
-
-            // Cargar proyectos de infraestructura
-            fetch('/api/infrastructure-projects')
-                .then(response => response.json())
-                .then(data => {
-                    data.forEach(project => {
-                        const marker = L.marker([project.latitude, project.longitude], {
-                            icon: L.divIcon({
-                                className: 'custom-marker',
-                                html: `<div style="background-color: ${getCategoryColor(project.category)}; width: 24px; height: 24px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>`,
-                                iconSize: [24, 24],
-                                iconAnchor: [12, 12]
-                            })
-                        }).addTo(map);
-
-                        marker.bindPopup(`
-                            <div class="p-2">
-                                <h3 class="font-bold text-lg">${project.title}</h3>
-                                <p class="text-sm text-gray-600">${project.description || ''}</p>
-                                <p class="text-sm"><strong>Categoría:</strong> ${getCategoryLabel(project.category)}</p>
-                                <p class="text-sm"><strong>Municipio:</strong> ${project.municipality}</p>
-                                <p class="text-sm"><strong>Estado:</strong> ${getStatusLabel(project.status)}</p>
-                                ${project.budget ? `<p class="text-sm"><strong>Presupuesto:</strong> Bs. ${parseFloat(project.budget).toLocaleString()}</p>` : ''}
-                            </div>
-                        `);
-                    });
-                })
-                .catch(error => console.error('Error cargando proyectos:', error));
-        }
-
-        function getCategoryColor(category) {
-            const colors = {
-                'salud': '#ef4444',
-                'educacion': '#3b82f6',
-                'infraestructura': '#f59e0b',
-                'agua': '#06b6d4',
-                'energia': '#8b5cf6',
-                'transporte': '#10b981',
-                'otro': '#6b7280'
-            };
-            return colors[category] || '#6b7280';
-        }
-
-        function getCategoryLabel(category) {
-            const labels = {
-                'salud': 'Salud',
-                'educacion': 'Educación',
-                'infraestructura': 'Infraestructura',
-                'agua': 'Agua y Saneamiento',
-                'energia': 'Energía',
-                'transporte': 'Transporte',
-                'otro': 'Otro'
-            };
-            return labels[category] || category;
-        }
-
-        function getStatusLabel(status) {
-            const labels = {
-                'planned': 'Planificado',
-                'in_progress': 'En Progreso',
-                'completed': 'Completado'
-            };
-            return labels[status] || status;
-        }
+        // Autoplay
+        setInterval(() => show((current + 1) % slides.length), 6000);
     });
 </script>
 @endsection

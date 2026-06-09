@@ -118,11 +118,11 @@ D. ASPECTOS TÉCNICOS OBLIGATORIOS
 | B2 | Marco normativo departamental | 1 | **[~] 60% (vistas OK, falta carga inicial de 20-30 normas)** |
 | B3 | Convocatorias y contratación | 1 | **[x] 100% (vistas + modelos + Filament)** |
 | B4 | Proyectos de inversión | 1 | **[ ] 0% (modelo base, faltan vistas públicas)** |
-| C1–C4 | Rediseño del homepage | 1 | **[ ] 0% (próximo bloque)** |
+| C1–C4 | Rediseño del homepage | 1 | **[x] 100% (18 bloques + componentes)** |
 | D1–D4 | Aspectos técnicos obligatorios | 1 | **[ ] 0%** |
-| — | **Total estimado** | **~10 semanas** | **~75% A1–A4** |
+| — | **Total estimado** | **~10 semanas** | **~85% A1–C** |
 
-> **Estado al 2026-06-09:** Sesión A1–A4 completada. 7 modelos nuevos creados, 6 recursos Filament registrados, 8 controladores públicos, 22 vistas Blade implementadas y verificadas. Próximo paso: rediseño del homepage (Bloque C) y carga de datos reales del Beni en seeders.
+> **Estado al 2026-06-09:** Sesión A1–A4 y C1–C4 completada. 7 modelos nuevos, 6 recursos Filament, 8 controladores públicos, 22 vistas Blade en /transparencia, /institucional, /tramites, /convocatorias, /quejas-reclamos, /atencion-ciudadano, /datos-abiertos, /gobierno. Homepage rediseñado con 18 bloques. Próximo paso: Bloque D (técnico) y carga inicial de datos reales.
 
 ### Resumen de la sesión A1–A4
 
