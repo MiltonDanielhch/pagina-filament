@@ -13,6 +13,14 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\Api\InfrastructureProjectController;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\InstitutionalController;
+use App\Http\Controllers\SecretariatController;
+use App\Http\Controllers\TransparencyController;
+use App\Http\Controllers\ProcedureController;
+use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\ComplaintController;
+use App\Http\Controllers\OfficeController;
+use App\Http\Controllers\OpenDatasetController;
 use Illuminate\Support\Facades\Route;
 
 // Filament routes (auto-registered by Filament)
@@ -20,6 +28,60 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// --- Institucional (RM 067/2025) ---
+Route::prefix('institucional')->name('institutional.')->group(function () {
+    Route::get('/', [InstitutionalController::class, 'index'])->name('index');
+    Route::get('/autoridades', [OfficialController::class, 'publicIndex'])->name('officials');
+    Route::get('/organigrama', [InstitutionalController::class, 'organigrama'])->name('organigrama');
+    Route::get('/secretarias', [SecretariatController::class, 'index'])->name('secretariats');
+    Route::get('/secretarias/{slug}', [SecretariatController::class, 'show'])->name('secretariats.show');
+});
+
+// --- Servicios al ciudadano ---
+Route::prefix('tramites')->name('procedures.')->group(function () {
+    Route::get('/', [ProcedureController::class, 'index'])->name('index');
+    Route::get('/{slug}', [ProcedureController::class, 'show'])->name('show');
+});
+
+// --- Convocatorias y contratación ---
+Route::prefix('convocatorias')->name('announcements.')->group(function () {
+    Route::get('/', [AnnouncementController::class, 'index'])->name('index');
+    Route::get('/{slug}', [AnnouncementController::class, 'show'])->name('show');
+});
+
+// --- Quejas y reclamos (Libro de Reclamaciones Virtual) ---
+Route::prefix('quejas-reclamos')->name('complaints.')->group(function () {
+    Route::get('/', [ComplaintController::class, 'create'])->name('create');
+    Route::post('/', [ComplaintController::class, 'store'])->name('store');
+    Route::get('/seguir', [ComplaintController::class, 'trackForm'])->name('track-form');
+    Route::post('/seguir', [ComplaintController::class, 'trackSearch'])->name('track-search');
+    Route::get('/seguir/{token}', [ComplaintController::class, 'track'])->name('track');
+    Route::get('/confirmacion/{code}', [ComplaintController::class, 'confirmation'])->name('confirmation');
+});
+
+// --- Atención al ciudadano ---
+Route::get('/atencion-ciudadano', [OfficeController::class, 'index'])->name('offices');
+
+// --- Datos abiertos ---
+Route::prefix('datos-abiertos')->name('open-data.')->group(function () {
+    Route::get('/', [OpenDatasetController::class, 'index'])->name('index');
+    Route::get('/{slug}', [OpenDatasetController::class, 'show'])->name('show');
+    Route::get('/{slug}/descargar/{format}', [OpenDatasetController::class, 'download'])->name('download');
+});
+
+// --- Transparencia ---
+Route::prefix('transparencia')->name('transparency.')->group(function () {
+    Route::get('/', [TransparencyController::class, 'index'])->name('index');
+    Route::get('/presupuesto', [TransparencyController::class, 'presupuesto'])->name('presupuesto');
+    Route::get('/poa', [TransparencyController::class, 'poa'])->name('poa');
+    Route::get('/informes', [TransparencyController::class, 'informes'])->name('informes');
+    Route::get('/rendicion-cuentas', [TransparencyController::class, 'rendicion'])->name('rendicion');
+    Route::get('/auditorias', [TransparencyController::class, 'auditorias'])->name('auditorias');
+    Route::get('/marco-normativo', [TransparencyController::class, 'marcoNormativo'])->name('marco-normativo');
+});
+
+// --- Contenido existente ---
 Route::get('/blog', [PostController::class, 'index'])->name('blog');
 Route::get('/blog/{slug}', [PostController::class, 'show'])->name('posts.show');
 Route::get('/category/{slug}', [PostController::class, 'category'])->name('posts.category');
@@ -42,4 +104,6 @@ Route::get('/buscar', [SearchController::class, 'index'])->name('search');
 Route::get('/api/buscar', [SearchController::class, 'search']);
 Route::view('/gobernador', 'gobernador')->name('gobernador');
 Route::get('/sobre-nosotros', [HomeController::class, 'about'])->name('sobre-nosotros');
+
+// Página dinámica — siempre AL FINAL
 Route::get('/{slug}', [PageController::class, 'show'])->name('pages.show');

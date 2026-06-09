@@ -15,7 +15,7 @@ class OfficialForm
     {
         return $schema
             ->components([
-                \Filament\Forms\Components\Section::make('Información Personal')
+                \Filament\Schemas\Components\Section::make('Información Personal')
                     ->schema([
                         TextInput::make('name')
                             ->label('Nombre completo')
@@ -25,20 +25,17 @@ class OfficialForm
                             ->label('Cargo')
                             ->required()
                             ->maxLength(255),
-                        Select::make('area')
-                            ->label('Área de gobierno')
-                            ->options([
-                                'Gobernación' => 'Gobernación',
-                                'Secretaría de Planificación' => 'Secretaría de Planificación',
-                                'Secretaría de Hacienda' => 'Secretaría de Hacienda',
-                                'Secretaría de Obras Públicas' => 'Secretaría de Obras Públicas',
-                                'Secretaría de Educación' => 'Secretaría de Educación',
-                                'Secretaría de Salud' => 'Secretaría de Salud',
-                                'Secretaría de Desarrollo Productivo' => 'Secretaría de Desarrollo Productivo',
-                                'Secretaría de Tierras' => 'Secretaría de Tierras',
-                                'Secretaría de Transparencia' => 'Secretaría de Transparencia',
-                            ])
-                            ->required(),
+                        Select::make('secretariat_id')
+                            ->label('Secretaría')
+                            ->relationship('secretariat', 'name')
+                            ->searchable()
+                            ->preload(),
+                        Select::make('parent_id')
+                            ->label('Depende de (organigrama)')
+                            ->relationship('parent', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->helperText('Funcionario del que depende jerárquicamente'),
                         TextInput::make('email')
                             ->label('Email institucional')
                             ->email()
@@ -55,23 +52,39 @@ class OfficialForm
                             ->imagePreviewHeight(150),
                     ])
                     ->columns(2),
-                \Filament\Forms\Components\Section::make('Biografía')
+                \Filament\Schemas\Components\Section::make('Biografía y Funciones')
                     ->schema([
                         Textarea::make('bio')
                             ->label('Biografía corta')
                             ->rows(3)
                             ->maxLength(500),
+                        Textarea::make('function')
+                            ->label('Funciones del cargo')
+                            ->rows(3),
                     ]),
-                \Filament\Forms\Components\Section::make('Configuración')
+                \Filament\Schemas\Components\Section::make('Configuración')
                     ->schema([
-                        Toggle::make('is_active')
-                            ->label('Funcionario activo')
-                            ->default(true),
+                        Select::make('position_level')
+                            ->label('Nivel jerárquico')
+                            ->options([
+                                1 => '1 — Gobernador',
+                                2 => '2 — Vicegobernador',
+                                3 => '3 — Secretario Departamental',
+                                4 => '4 — Director',
+                                5 => '5 — Jefe de Unidad',
+                                6 => '6 — Técnico / Profesional',
+                            ])
+                            ->default(6)
+                            ->required(),
                         TextInput::make('sort_order')
                             ->label('Orden de aparición')
                             ->numeric()
                             ->default(0),
-                    ]),
+                        Toggle::make('is_active')
+                            ->label('Funcionario activo')
+                            ->default(true),
+                    ])
+                    ->columns(3),
             ]);
     }
 }

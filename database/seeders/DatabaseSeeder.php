@@ -26,7 +26,18 @@ class DatabaseSeeder extends Seeder
         // 1. Roles, permisos y usuario admin
         $this->call(SetupRolesAndPermissionsSeeder::class);
 
-        // 2. Datos de contenido
+        // 2. Datos institucionales base (RM 067/2025)
+        $this->call([
+            SecretariatSeeder::class,       // 1°: secretarías (sin dependencias)
+            MarcoNormativoSeeder::class,    // 2°: normativa nacional y departamental
+            OfficialSeeder::class,          // autoridades (existentes, después de secretarías)
+            ProcedureSeeder::class,         // trámites (depende de secretarías)
+            AnnouncementSeeder::class,      // convocatorias (depende de secretarías)
+            OfficeSeeder::class,            // oficinas de atención
+            OpenDatasetSeeder::class,       // datos abiertos
+        ]);
+
+        // 3. Datos de contenido
         $this->call([
             SlideSeeder::class,
             CategorySeeder::class,
@@ -38,7 +49,6 @@ class DatabaseSeeder extends Seeder
             MenuSeeder::class,
             AchievementSeeder::class,
             GallerySeeder::class,
-            OfficialSeeder::class,
             AgendaSeeder::class,
             InfrastructureProjectSeeder::class,
             DepartmentalStatisticsSeeder::class,
