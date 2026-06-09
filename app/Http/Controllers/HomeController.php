@@ -47,14 +47,15 @@ class HomeController extends Controller
             // Bloque 5 — Accesos rápidos (se renderizan estáticos)
 
             // Bloque 6 — Trámites Destacados
-            $featuredProcedures = Procedure::where('is_active', true)
+            // NOTA: procedures usa `status` enum (activo), no `is_active`
+            $featuredProcedures = Procedure::where('status', 'activo')
                 ->where('is_featured', true)
                 ->orderBy('sort_order')
                 ->take(8)
                 ->get();
             // Fallback: si no hay destacados, los más recientes
             if ($featuredProcedures->isEmpty()) {
-                $featuredProcedures = Procedure::where('is_active', true)
+                $featuredProcedures = Procedure::where('status', 'activo')
                     ->latest()
                     ->take(8)
                     ->get();
@@ -64,17 +65,18 @@ class HomeController extends Controller
             $latestPosts = Post::published()->latest('published_at')->take(6)->get();
 
             // Bloque 8 — Transparencia en Cifras
+            // Cada tabla tiene su propia convención: is_active, status, is_published
             $stats = [
-                'tramites'       => Procedure::where('is_active', true)->count(),
-                'procedures'     => Procedure::where('is_active', true)->count(),
-                'secretarias'    => Secretariat::where('is_active', true)->count(),
-                'oficinas'       => Office::where('is_active', true)->count(),
-                'municipios'     => 19,
-                'convocatorias'  => Announcement::whereIn('status', ['publicada', 'en_proceso'])->count(),
-                'normas'         => \App\Models\MarcoNormativo::where('is_active', true)->count(),
-                'datasets'       => OpenDataset::where('is_active', true)->count(),
-                'proyectos'      => InfrastructureProject::whereIn('status', ['ejecucion', 'planificacion'])->count(),
-                'funcionarios'   => Official::where('is_active', true)->count(),
+                'tramites'        => Procedure::where('status', 'activo')->count(),
+                'procedures'      => Procedure::where('status', 'activo')->count(),
+                'secretarias'     => Secretariat::where('is_active', true)->count(),
+                'oficinas'        => Office::where('is_active', true)->count(),
+                'municipios'      => 19,
+                'convocatorias'   => Announcement::whereIn('status', ['publicada', 'en_proceso'])->count(),
+                'normas'          => \App\Models\MarcoNormativo::where('is_published', true)->count(),
+                'datasets'        => OpenDataset::where('is_published', true)->count(),
+                'proyectos'       => InfrastructureProject::whereIn('status', ['in_progress', 'planned'])->count(),
+                'funcionarios'    => Official::where('is_active', true)->count(),
                 'quejas_atendidas' => Complaint::whereIn('status', ['resuelto', 'en_proceso'])->count(),
             ];
 
@@ -94,30 +96,30 @@ class HomeController extends Controller
 
             // Bloque 11 — Secretarías
             $secretariats = Secretariat::where('is_active', true)
-                ->orderBy('order')
+                ->orderBy('sort_order')
                 ->take(12)
                 ->get();
 
             // Bloque 12 — Proyectos
-            $featuredProjects = InfrastructureProject::whereIn('status', ['ejecucion', 'planificacion'])
+            $featuredProjects = InfrastructureProject::whereIn('status', ['in_progress', 'planned'])
                 ->latest()
                 ->take(4)
                 ->get();
 
             // Bloque 13 — Atención al ciudadano
             $mainOffices = Office::where('is_active', true)
-                ->orderBy('order')
+                ->orderBy('sort_order')
                 ->take(3)
                 ->get();
 
             // Bloque 14 — Datos abiertos
-            $featuredDatasets = OpenDataset::where('is_active', true)
-                ->where('is_featured', true)
+            // NOTA: open_datasets usa is_published y NO tiene is_featured
+            $featuredDatasets = OpenDataset::where('is_published', true)
                 ->orderBy('sort_order')
                 ->take(3)
                 ->get();
             if ($featuredDatasets->isEmpty()) {
-                $featuredDatasets = OpenDataset::where('is_active', true)
+                $featuredDatasets = OpenDataset::where('is_published', true)
                     ->orderByDesc('download_count')
                     ->take(3)
                     ->get();
@@ -131,7 +133,8 @@ class HomeController extends Controller
                 ->get();
 
             // Bloque 16 — Multimedia
-            $galleries = Gallery::where('is_active', true)
+            // NOTA: galleries usa status enum (draft/published), no is_active
+            $galleries = Gallery::where('status', 'published')
                 ->with(['items' => fn($q) => $q->take(6)])
                 ->latest()
                 ->take(2)
