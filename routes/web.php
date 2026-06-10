@@ -11,7 +11,8 @@ use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\OfficialController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\AgendaController;
-use App\Http\Controllers\Api\InfrastructureProjectController;
+use App\Http\Controllers\Api\InfrastructureProjectController as ApiInfrastructureProjectController;
+use App\Http\Controllers\InfrastructureProjectController as PublicInfrastructureProjectController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\InstitutionalController;
 use App\Http\Controllers\SecretariatController;
@@ -95,8 +96,14 @@ Route::get('/resultados', [AchievementController::class, 'index'])->name('achiev
 Route::get('/estadisticas', [StatisticsController::class, 'index'])->name('statistics');
 
 // API Routes
-Route::get('/api/infrastructure-projects', [InfrastructureProjectController::class, 'index'])->name('api.infrastructure-projects.index');
+Route::get('/api/infrastructure-projects', [ApiInfrastructureProjectController::class, 'index'])->name('api.infrastructure-projects.index');
 Route::get('/api/statistics', [StatisticsController::class, 'api'])->name('api.statistics');
+
+// --- Proyectos de Inversión (RM 067/2025 — Componente 15) ---
+Route::prefix('gobierno/proyectos')->name('gobierno.proyectos.')->group(function () {
+    Route::get('/', [PublicInfrastructureProjectController::class, 'index'])->name('index');
+    Route::get('/{slug}', [PublicInfrastructureProjectController::class, 'show'])->name('show');
+});
 Route::get('/autoridades', [OfficialController::class, 'index'])->name('officials');
 Route::get('/contacto', [ContactController::class, 'show'])->name('contact');
 Route::post('/contacto', [ContactController::class, 'send'])->name('contact.send');

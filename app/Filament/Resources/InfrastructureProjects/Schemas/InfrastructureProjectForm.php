@@ -3,20 +3,25 @@
 /**
  * Ubicación: `app/Filament/Resources/InfrastructureProjects/Schemas/InfrastructureProjectForm.php`
  *
- * Descripción: Formulario para proyectos de infraestructura.
+ * Descripción: Formulario Filament para proyectos de inversión.
+ *              Incluye los nuevos campos del B4 (RM 067/2025).
  *
- * Roadmap: 12-FUTURO.md — Mapa interactivo del Beni
+ * Cumplimiento: 14-cumplimiento-normativo-rm067-2025.md — Bloque B4.
  */
 
 namespace App\Filament\Resources\InfrastructureProjects\Schemas;
 
+use App\Models\InfrastructureProject;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\KeyValue;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Str;
 
 class InfrastructureProjectForm
 {
@@ -24,134 +29,189 @@ class InfrastructureProjectForm
     {
         return $schema
             ->components([
-                Grid::make(2)
+                Section::make('Información general')
+                    ->icon('heroicon-o-identification')
+                    ->columns(2)
+                    ->schema([
+                        TextInput::make('code')
+                            ->label('Código del proyecto')
+                            ->placeholder('GAD-BENI-PI-2026-001')
+                            ->maxLength(50)
+                            ->unique(ignoreRecord: true)
+                            ->helperText('Identificador único institucional (opcional, se puede autogenerar).'),
+                        Select::make('secretariat_id')
+                            ->label('Secretaría responsable')
+                            ->relationship('secretariat', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->placeholder('Seleccione secretaría'),
+                    ]),
+
+                Section::make('Identificación')
+                    ->columns(2)
                     ->schema([
                         TextInput::make('title')
-                            ->label('Título')
+                            ->label('Título del proyecto')
                             ->required()
                             ->maxLength(255)
-                            ->live()
-                            ->afterStateUpdated(function ($state, callable $set) {
-                                $set('slug', \Illuminate\Support\Str::slug($state));
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(function ($state, callable $set, $get) {
+                                $set('slug', Str::slug((string) $state));
+                                if (blank($get('code'))) {
+                                    $year = now()->year;
+                                    $set('code', sprintf('GAD-BENI-PI-%d-%04d', $year, random_int(1, 9999)));
+                                }
                             }),
                         TextInput::make('slug')
-                            ->label('Slug')
+                            ->label('Slug (URL)')
                             ->required()
                             ->maxLength(255)
-                            ->unique(ignoreRecord: true),
+                            ->unique(ignoreRecord: true)
+                            ->helperText('Se genera automáticamente del título.'),
                     ]),
-                Textarea::make('description')
-                    ->label('Descripción')
-                    ->rows(3)
-                    ->columnSpanFull(),
-                Grid::make(2)
+
+                Section::make('Descripción y beneficiarios')
+                    ->columns(1)
+                    ->schema([
+                        Textarea::make('description')
+                            ->label('Descripción del proyecto')
+                            ->rows(4)
+                            ->columnSpanFull()
+                            ->helperText('Objetivo general, alcance y justificación del proyecto.'),
+                        KeyValue::make('beneficiary_communities')
+                            ->label('Comunidades beneficiarias')
+                            ->keyLabel('Comunidad / localidad')
+                            ->valueLabel('Nº familias aprox.')
+                            ->columnSpanFull()
+                            ->addActionLabel('Agregar comunidad'),
+                    ]),
+
+                Section::make('Clasificación')
+                    ->columns(2)
                     ->schema([
                         Select::make('category')
                             ->label('Categoría')
-                            ->options([
-                                'salud' => 'Salud',
-                                'educacion' => 'Educación',
-                                'infraestructura' => 'Infraestructura',
-                                'agua' => 'Agua y Saneamiento',
-                                'energia' => 'Energía',
-                                'transporte' => 'Transporte',
-                                'otro' => 'Otro',
-                            ])
-                            ->required(),
+                            ->options(\App\Models\InfrastructureProject::categories())
+                            ->required()
+                            ->searchable(),
                         Select::make('municipality')
                             ->label('Municipio')
-                            ->options([
-                                'trinidad' => 'Trinidad',
-                                'san_ignacio' => 'San Ignacio de Moxos',
-                                'riberalta' => 'Riberalta',
-                                'guayaramerin' => 'Guayaramerín',
-                                'rurrenabaque' => 'Rurrenabaque',
-                                'san_borja' => 'San Borja',
-                                'san_javier' => 'San Javier',
-                                'san_andres' => 'San Andrés',
-                                'san_joaquin' => 'San Joaquín',
-                                'magdalena' => 'Magdalena',
-                                'san_pedro' => 'San Pedro',
-                                'san_ramon' => 'San Ramón',
-                                'san_carlos' => 'San Carlos',
-                                'san_ana' => 'San Ana',
-                                'san_martin' => 'San Martín',
-                                'san_jose' => 'San José',
-                                'san_felipe' => 'San Felipe',
-                                'san_lucas' => 'San Lucas',
-                                'san_miguel' => 'San Miguel',
-                                'san_pablo' => 'San Pablo',
-                                'san_roque' => 'San Roque',
-                                'santa_ana' => 'Santa Ana',
-                                'santa_rosa' => 'Santa Rosa',
-                                'santa_cruz' => 'Santa Cruz',
-                                'exaltacion' => 'Exaltación',
-                                'loreto' => 'Loreto',
-                                'puerto_siles' => 'Puerto Siles',
-                                'puerto_rico' => 'Puerto Rico',
-                                'puerto_suarez' => 'Puerto Suárez',
-                                'puerto_acosta' => 'Puerto Acosta',
-                                'puerto_alonso' => 'Puerto Alonso',
-                                'puerto_busch' => 'Puerto Busch',
-                                'puerto_carabuco' => 'Puerto Carabuco',
-                                'puerto_cortes' => 'Puerto Cortés',
-                                'puerto_gonzalez' => 'Puerto González',
-                                'puerto_huallata' => 'Puerto Huallata',
-                                'puerto_mataral' => 'Puerto Mataral',
-                                'puerto_mendoza' => 'Puerto Mendoza',
-                                'puerto_morales' => 'Puerto Morales',
-                                'puerto_paz' => 'Puerto Paz',
-                                'puerto_pirai' => 'Puerto Piraí',
-                                'puerto_quijaro' => 'Puerto Quijarro',
-                                'puerto_serrano' => 'Puerto Serrano',
-                                'puerto_villarroel' => 'Puerto Villarroel',
-                                'puerto_yacuiba' => 'Puerto Yacuiba',
-                                'puerto_zudanez' => 'Puerto Zudáñez',
-                            ])
-                            ->required(),
+                            ->options(self::municipalityOptions())
+                            ->required()
+                            ->searchable()
+                            ->placeholder('Seleccione municipio'),
                     ]),
-                Grid::make(2)
+
+                Section::make('Ubicación geográfica')
+                    ->columns(2)
                     ->schema([
                         TextInput::make('latitude')
                             ->label('Latitud')
-                            ->required()
                             ->numeric()
-                            ->step(0.00000001),
+                            ->step(0.00000001)
+                            ->placeholder('-14.8333'),
                         TextInput::make('longitude')
                             ->label('Longitud')
-                            ->required()
                             ->numeric()
-                            ->step(0.00000001),
-                    ]),
-                Grid::make(3)
+                            ->step(0.00000001)
+                            ->placeholder('-64.9000'),
+                    ])
+                    ->collapsible(),
+
+                Section::make('Estado y cronograma')
+                    ->columns(3)
                     ->schema([
                         Select::make('status')
                             ->label('Estado')
-                            ->options([
-                                'planned' => 'Planificado',
-                                'in_progress' => 'En Progreso',
-                                'completed' => 'Completado',
-                            ])
+                            ->options(InfrastructureProject::statuses())
                             ->required()
-                            ->default('planned'),
+                            ->default(InfrastructureProject::STATUS_PLANNING),
+                        TextInput::make('progress_percentage')
+                            ->label('Avance (%)')
+                            ->numeric()
+                            ->minValue(0)
+                            ->maxValue(100)
+                            ->suffix('%')
+                            ->default(0),
+                        Toggle::make('is_featured')
+                            ->label('Destacado en homepage')
+                            ->inline(false)
+                            ->default(false),
                         DatePicker::make('start_date')
-                            ->label('Fecha de Inicio')
+                            ->label('Fecha de inicio')
                             ->native(false),
-                        DatePicker::make('completion_date')
-                            ->label('Fecha de Finalización')
+                        DatePicker::make('end_date_planned')
+                            ->label('Fecha prevista de conclusión')
                             ->native(false),
+                        DatePicker::make('end_date_real')
+                            ->label('Fecha real de conclusión')
+                            ->native(false)
+                            ->helperText('Se llena al concluir la obra.'),
                     ]),
-                Grid::make(2)
+
+                Section::make('Presupuesto y financiamiento')
+                    ->columns(2)
                     ->schema([
                         TextInput::make('budget')
-                            ->label('Presupuesto (Bs)')
+                            ->label('Presupuesto total (Bs.)')
                             ->numeric()
-                            ->prefix('Bs.'),
+                            ->prefix('Bs.')
+                            ->step(0.01)
+                            ->minValue(0),
+                        TextInput::make('contract_number')
+                            ->label('Nº de contrato')
+                            ->maxLength(100),
+                        TextInput::make('contracting_company')
+                            ->label('Empresa contratista')
+                            ->maxLength(255),
+                        TextInput::make('financing_source')
+                            ->label('Fuente de financiamiento')
+                            ->placeholder('TGN, IDH, Crédito, Cooperación…')
+                            ->maxLength(255),
+                    ]),
+
+                Section::make('Imagen y galería')
+                    ->columns(2)
+                    ->schema([
                         FileUpload::make('image')
-                            ->label('Imagen')
+                            ->label('Imagen principal')
                             ->image()
-                            ->directory('infrastructure-projects'),
+                            ->directory('infrastructure-projects')
+                            ->imageEditor()
+                            ->columnSpanFull(),
+                        Select::make('gallery_id')
+                            ->label('Galería asociada (opcional)')
+                            ->relationship('gallery', 'title')
+                            ->searchable()
+                            ->preload()
+                            ->placeholder('Sin galería vinculada'),
                     ]),
             ]);
+    }
+
+    /**
+     * Municipios del Beni (subset ampliado).
+     */
+    private static function municipalityOptions(): array
+    {
+        return [
+            'trinidad'      => 'Trinidad',
+            'san_ignacio'   => 'San Ignacio de Moxos',
+            'riberalta'     => 'Riberalta',
+            'guayaramerin'  => 'Guayaramerín',
+            'rurrenabaque'  => 'Rurrenabaque',
+            'san_borja'     => 'San Borja',
+            'san_javier'    => 'San Javier',
+            'san_andres'    => 'San Andrés',
+            'san_joaquin'   => 'San Joaquín',
+            'magdalena'     => 'Magdalena',
+            'baures'        => 'Baures',
+            'huacaraje'     => 'Huacaraje',
+            'reyes'         => 'Reyes',
+            'santa_rosa'    => 'Santa Rosa',
+            'exaltacion'    => 'Exaltación',
+            'loreto'        => 'Loreto',
+            'puerto_siles'  => 'Puerto Siles',
+        ];
     }
 }

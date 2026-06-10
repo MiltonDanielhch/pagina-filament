@@ -347,43 +347,18 @@
             <div>
                 <p class="text-teal-700 font-semibold uppercase tracking-wider mb-2 text-sm">Inversión pública</p>
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Proyectos Destacados</h2>
+                <p class="text-gray-600 mt-2">Obras emblemáticas que impulsa la Gobernación del Beni</p>
             </div>
-            <a href="/gobierno/proyectos" class="text-teal-700 font-semibold hover:text-teal-800 inline-flex items-center gap-1 text-sm md:text-base">
-                Ver todos los proyectos →
+            <a href="{{ route('gobierno.proyectos.index') }}" class="text-teal-700 font-semibold hover:text-teal-800 inline-flex items-center gap-1 text-sm md:text-base">
+                Ver todos los proyectos
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
             </a>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             @foreach($featuredProjects as $project)
-            <article class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden border border-gray-100">
-                @if($project->image)
-                <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}" class="w-full h-40 object-cover" loading="lazy">
-                @else
-                <div class="w-full h-40 bg-gradient-to-br from-emerald-100 to-emerald-50 flex items-center justify-center">
-                    <svg class="w-12 h-12 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-                    </svg>
-                </div>
-                @endif
-                <div class="p-4">
-                    <span class="text-xs px-2 py-0.5 rounded-full
-                        @switch($project->status)
-                            @case('ejecucion') bg-yellow-100 text-yellow-700 @break
-                            @case('planificacion') bg-blue-100 text-blue-700 @break
-                            @case('completado') bg-green-100 text-green-700 @break
-                            @default bg-gray-100 text-gray-700
-                        @endswitch
-                    ">{{ ucfirst($project->status ?? '—') }}</span>
-                    <h3 class="text-base font-bold text-gray-900 mt-2 line-clamp-2">{{ $project->title }}</h3>
-                    @if($project->municipality)
-                    <p class="text-xs text-gray-500 mt-1 flex items-center gap-1">
-                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                        </svg>
-                        {{ $project->municipality }}
-                    </p>
-                    @endif
-                </div>
-            </article>
+                <x-project-card :project="$project" />
             @endforeach
         </div>
     </div>

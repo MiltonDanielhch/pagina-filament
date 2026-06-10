@@ -75,7 +75,7 @@ class HomeController extends Controller
                 'convocatorias'   => Announcement::whereIn('status', ['publicada', 'en_proceso'])->count(),
                 'normas'          => \App\Models\MarcoNormativo::where('is_published', true)->count(),
                 'datasets'        => OpenDataset::where('is_published', true)->count(),
-                'proyectos'       => InfrastructureProject::whereIn('status', ['in_progress', 'planned'])->count(),
+                'proyectos'       => InfrastructureProject::whereIn('status', ['in_progress', 'ejecucion', 'planificacion', 'planned'])->count(),
                 'funcionarios'    => Official::where('is_active', true)->count(),
                 'quejas_atendidas' => Complaint::whereIn('status', ['resuelto', 'en_proceso'])->count(),
             ];
@@ -100,11 +100,24 @@ class HomeController extends Controller
                 ->take(12)
                 ->get();
 
-            // Bloque 12 — Proyectos
-            $featuredProjects = InfrastructureProject::whereIn('status', ['in_progress', 'planned'])
-                ->latest()
+            // Bloque 12 — Proyectos destacados (B4 RM 067/2025)
+            $featuredProjects = InfrastructureProject::where('is_featured', true)
+                ->whereIn('status', [
+                    InfrastructureProject::STATUS_PLANNING,
+                    InfrastructureProject::STATUS_PROGRESS,
+                ])
+                ->latest('start_date')
                 ->take(4)
                 ->get();
+            if ($featuredProjects->isEmpty()) {
+                $featuredProjects = InfrastructureProject::whereIn('status', [
+                    InfrastructureProject::STATUS_PLANNING,
+                    InfrastructureProject::STATUS_PROGRESS,
+                ])
+                    ->latest('start_date')
+                    ->take(4)
+                    ->get();
+            }
 
             // Bloque 13 — Atención al ciudadano
             $mainOffices = Office::where('is_active', true)

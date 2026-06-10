@@ -117,7 +117,7 @@ D. ASPECTOS TÉCNICOS OBLIGATORIOS
 | B1 | Secretarías departamentales | 1 | **[x] 100% (vistas + seeders + Filament)** |
 | B2 | Marco normativo departamental | 1 | **[~] 60% (vistas OK, falta carga inicial de 20-30 normas)** |
 | B3 | Convocatorias y contratación | 1 | **[x] 100% (vistas + modelos + Filament)** |
-| B4 | Proyectos de inversión | 1 | **[ ] 0% (modelo base, faltan vistas públicas)** |
+| B4 | Proyectos de inversión | 1 | **[x] 100% (migración mejorada + vistas públicas + componente + seeder con 8 proyectos + mapa Leaflet + galería)** |
 | C1–C4 | Rediseño del homepage | 1 | **[x] 100% (18 bloques + componentes)** |
 | D1–D4 | Aspectos técnicos obligatorios | 1 | **[ ] 0%** |
 | — | **Total estimado** | **~10 semanas** | **~85% A1–C** |
@@ -861,28 +861,89 @@ Inicio
 
 ---
 
-## B4 — Proyectos de inversión (Semana 6)
+## B4 — Proyectos de inversión (Semana 6) ✅
 
-> El modelo `InfrastructureProject` ya existe. Falta vista pública y conectar con secretarías.
+> El modelo `InfrastructureProject` ya existía. Se completó con campos adicionales, vistas
+> públicas, componente reutilizable, seeder enriquecido y conexión con secretarías.
 
 ```
-[ ] Agregar campos a InfrastructureProject (A1.14)
-[ ] Página /gobierno/proyectos
-    └─[ ] Filtros: secretaría, estado, año, municipio
-    └─[ ] Mapa con geolocalización (Leaflet, ya en uso)
-    └─[ ] Grid de tarjetas con foto, nombre, avance, presupuesto
+[x] Migración 2026_06_09_120000_improve_infrastructure_projects_table:
+    [x] code (string unique — código institucional)
+    [x] progress_percentage (0–100)
+    [x] end_date_planned, end_date_real
+    [x] beneficiary_communities (json)
+    [x] contracting_company, financing_source, contract_number
+    [x] secretariat_id (FK → secretariats)
+    [x] gallery_id (FK → galleries)
+    [x] is_featured (boolean)
 
-[ ] Página /gobierno/proyectos/{slug}
-    └─[ ] Detalle completo
-    └─[ ] Galería de imágenes
-    └─[ ] Avance con barra de progreso
-    └─[ ] Presupuesto desglosado
-    └─[ ] Documentos contractuales (PDF)
-    └─[ ] Beneficiarios
-    └─[ ] Compartir
+[x] Modelo InfrastructureProject:
+    [x] Constantes STATUS_PLANNING/PROGRESS/COMPLETED/PARALYZED
+    [x] statuses() / categories() helpers
+    [x] Accessors status_label / status_color / category_label
+    [x] Relaciones: user(), secretariat(), gallery()
+    [x] Scopes: published, featured, inProgress, completed, byMunicipality, byStatus, byCategory
+    [x] Casts: dates, decimal, integer, boolean, json, array
+    [x] Spatie Media: colección "gallery"
+    [x] LogsActivity configurado
 
-[ ] Componente <x-project-card>
-[ ] Sección en homepage "Proyectos destacados" (opcional)
+[x] Filament InfrastructureProjectForm:
+    [x] Secciones: Información general, Identificación, Descripción, Clasificación,
+        Ubicación, Estado, Presupuesto, Imagen/Galería
+    [x] KeyValue para comunidades beneficiarias
+    [x] Toggle is_featured
+    [x] Slug auto-generado + code auto-generado
+
+[x] Filament InfrastructureProjectsTable:
+    [x] Columnas: imagen, código, título, categoría, municipio, estado (badge),
+        avance, presupuesto, secretaría, destacado, fechas
+    [x] Filtros: categoría, estado, secretaría, destacado, papelera
+    [x] Acciones: ver, editar, eliminar
+
+[x] Filament InfrastructureProjectInfolist: secciones Identificación, Descripción,
+    Clasificación, Estado, Presupuesto, Imagen, Auditoría.
+
+[x] Componente resources/views/components/project-card.blade.php:
+    [x] Imagen o placeholder con icono
+    [x] Badge de estado (color dinámico)
+    [x] Código del proyecto overlay
+    [x] Categoría + municipio
+    [x] Barra de avance
+    [x] Presupuesto + CTA "Ver detalle"
+    [x] Modo compact
+
+[x] Vista pública gobierno/proyectos/index.blade.php:
+    [x] Hero con stats (total, en ejecución, concluidos, inversión total)
+    [x] Filtros: búsqueda, estado, categoría, municipio
+    [x] Mapa Leaflet con marcadores por estado
+    [x] Grid de project-card
+    [x] Paginación
+    [x] Schema.org ItemList
+    [x] Estado vacío
+
+[x] Vista pública gobierno/proyectos/show.blade.php:
+    [x] Hero con código, estado, categoría, municipio, barra de avance
+    [x] Imagen principal
+    [x] Descripción
+    [x] Galería de imágenes (Spatie)
+    [x] Comunidades beneficiarias
+    [x] Secretaría responsable con link
+    [x] Información del proyecto (presupuesto, financiamiento, contrato, contratista, fechas)
+    [x] Compartir por WhatsApp / Facebook / Copiar link
+    [x] CTA para reportar inconsistencia (link a quejas con asunto prellenado)
+    [x] Proyectos relacionados
+    [x] Schema.org GovernmentService
+
+[x] Seeder con 8 proyectos realistas (Hospital, Puente, Alcantarillado,
+    Electrificación, Complejo deportivo, Mercado, Carretera, Escuela técnica)
+    que abarcan todos los estados posibles.
+
+[x] HomeController y home.blade.php: Bloque 12 usa <x-project-card> y carga
+    sólo los proyectos destacados (is_featured=true + status en planificación/ejecución).
+
+[x] Permisos: la Policy y los permisos de Shield ya existían (ViewAny/View/Create/
+    Update/Delete/Restore/ForceDelete/Reorder); basta con reejecutar
+    `php artisan shield:generate --all` si se agregan nuevos permisos.
 ```
 
 ---
