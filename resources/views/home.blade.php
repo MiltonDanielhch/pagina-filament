@@ -37,21 +37,21 @@
                 @foreach($slides as $index => $slide)
                 <div class="{{ $index === 0 ? '' : 'hidden' }}" data-slide-content="{{ $index }}">
                     @if($slide->title)
-                    <p class="font-semibold mb-2 uppercase tracking-widest text-amber-300 text-sm md:text-base">
+                    <p class="hero-eyebrow font-semibold mb-2 uppercase tracking-widest text-[#e9c46a] text-sm md:text-base">
                         {{ $slide->subtitle ?? 'Gobernación del Beni' }}
                     </p>
-                    <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
+                    <h1 class="hero-title text-3xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight drop-shadow-lg">
                         {{ $slide->title }}
                     </h1>
                     @if($slide->description)
-                    <p class="text-lg md:text-xl opacity-90 mb-6 max-w-2xl">{{ $slide->description }}</p>
+                    <p class="hero-desc text-lg md:text-xl opacity-90 mb-6 max-w-2xl leading-relaxed">{{ $slide->description }}</p>
                     @endif
                     @if($slide->button_text && $slide->button_url)
-                    <div class="flex flex-wrap gap-3">
-                        <a href="{{ $slide->button_url }}" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg font-bold transition shadow-lg">
+                    <div class="hero-cta flex flex-wrap gap-3">
+                        <a href="{{ $slide->button_url }}" class="btn-pulse bg-[#d4a017] hover:bg-[#b47d14] text-white px-7 py-3.5 rounded-xl font-bold transition shadow-lg hover:shadow-xl">
                             {{ $slide->button_text }}
                         </a>
-                        <a href="{{ route('transparency.index') }}" class="bg-white/20 hover:bg-white/30 backdrop-blur text-white px-6 py-3 rounded-lg font-semibold transition">
+                        <a href="{{ route('transparency.index') }}" class="bg-white/15 hover:bg-white/25 backdrop-blur border border-white/30 text-white px-7 py-3.5 rounded-xl font-semibold transition">
                             Ver Transparencia
                         </a>
                     </div>
@@ -63,31 +63,45 @@
         </div>
     </div>
     @if($slides->count() > 1)
-    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-10" role="tablist">
-        @foreach($slides as $index => $slide)
-        <button data-slide-btn="{{ $index }}" class="w-3 h-3 md:w-3 md:h-3 rounded-full transition-all {{ $index === 0 ? 'bg-white w-8 md:w-8' : 'bg-white/50 hover:bg-white/70' }}" aria-label="Slide {{ $index + 1 }}" role="tab" aria-selected="{{ $index === 0 ? 'true' : 'false' }}"></button>
-        @endforeach
+    {{-- Prev/Next arrows --}}
+    <button class="slider-arrow slider-arrow-left" id="prev-slide" aria-label="Diapositiva anterior">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+        </svg>
+    </button>
+    <button class="slider-arrow slider-arrow-right" id="next-slide" aria-label="Diapositiva siguiente">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+        </svg>
+    </button>
+    {{-- Dots + counter --}}
+    <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-3 z-10">
+        <div class="flex gap-2" role="tablist">
+            @foreach($slides as $index => $slide)
+            <button data-slide-btn="{{ $index }}" class="h-2 rounded-full transition-all duration-300 {{ $index === 0 ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/70 w-2' }}" aria-label="Slide {{ $index + 1 }}" role="tab" aria-selected="{{ $index === 0 ? 'true' : 'false' }}"></button>
+            @endforeach
+        </div>
+        <span id="slide-counter" class="text-white/70 text-xs font-mono tabular-nums">1 / {{ $slides->count() }}</span>
     </div>
     @endif
 </section>
 @else
-<section class="relative h-[400px] md:h-[520px] bg-gradient-to-br from-teal-700 via-teal-800 to-teal-900 flex items-center overflow-hidden">
-    <div class="absolute inset-0 opacity-10 bg-pattern"></div>
+<section class="relative h-[400px] md:h-[520px] bg-gradient-to-br from-[#1b4332] via-[#2d6a4f] to-[#1b4332] flex items-center overflow-hidden bg-nature-pattern">
     <div class="container mx-auto px-4 relative">
         <div class="max-w-3xl text-white">
-            <p class="font-semibold mb-2 uppercase tracking-widest text-amber-300 text-sm md:text-base">Gobierno Autónomo Departamental</p>
-            <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
+            <p class="hero-eyebrow font-semibold mb-2 uppercase tracking-widest text-[#e9c46a] text-sm md:text-base">Gobierno Autónomo Departamental</p>
+            <h1 class="hero-title text-3xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight drop-shadow-lg">
                 Gobernación Autónoma Departamental del Beni
             </h1>
-            <p class="text-lg md:text-xl opacity-90 mb-6 max-w-2xl">
+            <p class="hero-desc text-lg md:text-xl opacity-90 mb-6 max-w-2xl leading-relaxed">
                 Comprometidos con el desarrollo integral de nuestro departamento.
                 Trámites, transparencia y atención al ciudadano en un solo lugar.
             </p>
-            <div class="flex flex-wrap gap-3">
-                <a href="{{ route('procedures.index') }}" class="bg-amber-500 hover:bg-amber-600 text-gray-900 px-6 py-3 rounded-lg font-bold transition shadow-lg">
+            <div class="hero-cta flex flex-wrap gap-3">
+                <a href="{{ route('procedures.index') }}" class="btn-pulse bg-[#d4a017] hover:bg-[#b47d14] text-white px-7 py-3.5 rounded-xl font-bold transition shadow-lg hover:shadow-xl">
                     Ver Trámites
                 </a>
-                <a href="{{ route('transparency.index') }}" class="bg-white/20 hover:bg-white/30 backdrop-blur text-white px-6 py-3 rounded-lg font-semibold transition">
+                <a href="{{ route('transparency.index') }}" class="bg-white/15 hover:bg-white/25 backdrop-blur border border-white/30 text-white px-7 py-3.5 rounded-xl font-semibold transition">
                     Portal de Transparencia
                 </a>
             </div>
@@ -110,16 +124,16 @@
      BLOQUE 6: Trámites Destacados
      ===================================================== --}}
 @if(isset($featuredProcedures) && $featuredProcedures->count() > 0)
-<section class="py-16 bg-gray-50" aria-label="Trámites destacados">
+<section class="py-16 bg-cream" aria-label="Trámites destacados">
     <div class="container mx-auto px-4">
-        <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-10 reveal">
             <div>
-                <p class="text-teal-700 font-semibold uppercase tracking-wider mb-2 text-sm">Servicios al ciudadano</p>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Trámites Destacados</h2>
-                <p class="text-gray-600 mt-2">Los trámites más consultados por la ciudadanía</p>
+                <p class="section-label">Servicios al ciudadano</p>
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-gray-900">Trámites Destacados</h2>
+                <p class="text-gray-500 mt-3 text-sm">Los trámites más consultados por la ciudadanía</p>
             </div>
-            <a href="{{ route('procedures.index') }}" class="text-teal-700 font-semibold hover:text-teal-800 inline-flex items-center gap-1 text-sm md:text-base">
-                Ver todos los trámites
+            <a href="{{ route('procedures.index') }}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-teal-700 hover:text-teal-800 border border-teal-200 hover:border-teal-400 px-4 py-2 rounded-lg transition">
+                Ver todos
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>
@@ -127,7 +141,9 @@
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             @foreach($featuredProcedures as $procedure)
+            <div class="reveal reveal-d{{ ($loop->index % 4) + 1 }}">
                 <x-procedure-card :procedure="$procedure" />
+            </div>
             @endforeach
         </div>
     </div>
@@ -140,13 +156,13 @@
 @if(isset($latestPosts) && $latestPosts->count() > 0)
 <section class="py-16 bg-white" aria-label="Últimas noticias">
     <div class="container mx-auto px-4">
-        <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-10 reveal">
             <div>
-                <p class="text-teal-700 font-semibold uppercase tracking-wider mb-2 text-sm">Sala de prensa</p>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Últimas Noticias</h2>
+                <p class="section-label">Sala de prensa</p>
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-gray-900">Últimas Noticias</h2>
             </div>
-            <a href="{{ route('blog') }}" class="text-teal-700 font-semibold hover:text-teal-800 inline-flex items-center gap-1 text-sm md:text-base">
-                Ver todas las noticias
+            <a href="{{ route('blog') }}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-teal-700 hover:text-teal-800 border border-teal-200 hover:border-teal-400 px-4 py-2 rounded-lg transition">
+                Ver todas
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>
@@ -154,35 +170,53 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($latestPosts as $post)
-            <article class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden border border-gray-100">
-                <a href="{{ route('posts.show', $post->slug) }}" class="block">
+            <article class="card-lift bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm flex flex-col reveal reveal-d{{ $loop->index + 1 }}">
+                <a href="{{ route('posts.show', $post->slug) }}" class="block relative overflow-hidden">
                     @if(method_exists($post, 'getFirstMedia') && $post->getFirstMedia('featured'))
-                    <img src="{{ $post->getFirstMedia('featured')->getUrl('medium') }}" alt="{{ $post->title }}" class="w-full h-48 object-cover" loading="lazy">
+                    <img src="{{ $post->getFirstMedia('featured')->getUrl('medium') }}" alt="{{ $post->title }}" class="w-full h-48 object-cover transition-transform duration-500 hover:scale-105" loading="lazy">
                     @else
-                    <div class="w-full h-48 bg-gradient-to-br from-teal-100 to-teal-50 flex items-center justify-center">
-                        <svg class="w-12 h-12 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                    @php
+                        $placeholderColors = [
+                            ['from-teal-600','to-teal-800'],
+                            ['from-emerald-600','to-teal-700'],
+                            ['from-cyan-600','to-teal-700'],
+                        ];
+                        $pc = $placeholderColors[$loop->index % count($placeholderColors)];
+                    @endphp
+                    <div class="w-full h-48 bg-gradient-to-br {{ $pc[0] }} {{ $pc[1] }} flex flex-col items-center justify-center gap-2 relative">
+                        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 80%, white 1px, transparent 1px), radial-gradient(circle at 80% 20%, white 1px, transparent 1px); background-size: 30px 30px;"></div>
+                        <svg class="w-10 h-10 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
                         </svg>
+                        <span class="text-white/50 text-xs font-medium uppercase tracking-wider">Noticia oficial</span>
                     </div>
                     @endif
                 </a>
-                <div class="p-5">
+                <div class="p-5 flex flex-col flex-1">
                     <div class="flex items-center gap-2 mb-3 text-xs">
                         @if($post->category)
-                        <span class="bg-teal-100 text-teal-700 px-2 py-0.5 rounded font-semibold">{{ $post->category->name }}</span>
+                        <span class="bg-teal-50 text-teal-700 border border-teal-100 px-2 py-0.5 rounded-full font-semibold">{{ $post->category->name }}</span>
                         @endif
-                        <span class="text-gray-500">{{ optional($post->published_at)->format('d/m/Y') }}</span>
+                        <span class="text-gray-400 flex items-center gap-1">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            {{ optional($post->published_at)->format('d/m/Y') }}
+                        </span>
                     </div>
-                    <h3 class="text-lg font-bold mb-2 line-clamp-2">
-                        <a href="{{ route('posts.show', $post->slug) }}" class="hover:text-teal-700 transition">
+                    <h3 class="text-base font-bold mb-2 line-clamp-2 leading-snug flex-1">
+                        <a href="{{ route('posts.show', $post->slug) }}" class="hover:text-teal-700 transition text-gray-900">
                             {{ $post->title }}
                         </a>
                     </h3>
                     @if($post->excerpt)
-                    <p class="text-sm text-gray-600 line-clamp-2 mb-3">{{ $post->excerpt }}</p>
+                    <p class="text-sm text-gray-500 line-clamp-2 mb-4">{{ $post->excerpt }}</p>
                     @endif
-                    <a href="{{ route('posts.show', $post->slug) }}" class="text-teal-700 font-medium text-sm inline-flex items-center gap-1 hover:gap-2 transition-all">
-                        Leer más →
+                    <a href="{{ route('posts.show', $post->slug) }}" class="mt-auto inline-flex items-center gap-1 text-teal-700 hover:text-teal-800 font-semibold text-sm group">
+                        Leer más
+                        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
                     </a>
                 </div>
             </article>
@@ -192,27 +226,38 @@
 </section>
 @endif
 
+{{-- Wave: noticias (white) → stats (forest) --}}
+<div class="leading-none -mb-px overflow-hidden" aria-hidden="true">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" class="w-full h-14 block">
+        <path d="M0,0 C480,70 960,70 1440,0 L1440,70 L0,70 Z" fill="#1b4332"/>
+    </svg>
+</div>
+
 {{-- =====================================================
      BLOQUE 8: Transparencia en Cifras
      ===================================================== --}}
 @if(isset($stats))
-<section class="py-16 bg-gradient-to-br from-teal-700 via-teal-800 to-teal-900 text-white" aria-label="Transparencia en cifras">
+<section class="py-16 bg-gradient-to-br from-[#1b4332] via-[#2d6a4f] to-[#1b4332] text-white bg-nature-pattern" aria-label="Transparencia en cifras">
     <div class="container mx-auto px-4">
         <div class="text-center mb-10">
-            <p class="font-semibold uppercase tracking-wider mb-2 text-amber-300 text-sm">Transparencia activa</p>
+            <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-amber-300 mb-3">
+                <span class="block w-5 h-0.5 bg-amber-400 rounded"></span>
+                Transparencia activa
+                <span class="block w-5 h-0.5 bg-amber-400 rounded"></span>
+            </p>
             <h2 class="text-3xl md:text-4xl font-bold">El Beni en Cifras</h2>
-            <p class="text-white/80 mt-2 max-w-2xl mx-auto">Datos abiertos y actualizados del Gobierno Autónomo Departamental</p>
+            <p class="text-white/70 mt-2 max-w-2xl mx-auto text-sm">Datos abiertos y actualizados del Gobierno Autónomo Departamental</p>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            <x-stat-counter :value="$stats['tramites'] ?? 0" label="Trámites disponibles" icon="document" color="teal" :url="route('procedures.index')" />
-            <x-stat-counter :value="$stats['secretarias'] ?? 0" label="Secretarías" icon="building" color="emerald" :url="route('institutional.secretariats')" />
-            <x-stat-counter :value="$stats['oficinas'] ?? 0" label="Oficinas de atención" icon="map" color="amber" :url="route('offices')" />
-            <x-stat-counter :value="$stats['municipios'] ?? 0" label="Municipios" icon="map" color="blue" />
-            <x-stat-counter :value="$stats['normas'] ?? 0" label="Normas publicadas" icon="document" color="purple" :url="route('transparency.marco-normativo')" />
-            <x-stat-counter :value="$stats['datasets'] ?? 0" label="Datasets abiertos" icon="database" color="red" :url="route('open-data.index')" />
+            <div class="reveal reveal-d1"><x-stat-counter :value="$stats['tramites'] ?? 0" label="Trámites disponibles" icon="document" color="teal" :url="route('procedures.index')" /></div>
+            <div class="reveal reveal-d2"><x-stat-counter :value="$stats['secretarias'] ?? 0" label="Secretarías" icon="building" color="emerald" :url="route('institutional.secretariats')" /></div>
+            <div class="reveal reveal-d3"><x-stat-counter :value="$stats['oficinas'] ?? 0" label="Oficinas de atención" icon="map" color="amber" :url="route('offices')" /></div>
+            <div class="reveal reveal-d4"><x-stat-counter :value="$stats['municipios'] ?? 0" label="Municipios" icon="map" color="blue" /></div>
+            <div class="reveal reveal-d5"><x-stat-counter :value="$stats['normas'] ?? 0" label="Normas publicadas" icon="document" color="purple" :url="route('transparency.marco-normativo')" /></div>
+            <div class="reveal reveal-d6"><x-stat-counter :value="$stats['datasets'] ?? 0" label="Datasets abiertos" icon="database" color="red" :url="route('open-data.index')" /></div>
         </div>
         <div class="text-center mt-8">
-            <a href="{{ route('transparency.index') }}" class="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold px-6 py-3 rounded-lg transition shadow-lg">
+            <a href="{{ route('transparency.index') }}" class="inline-flex items-center gap-2 bg-[#d4a017] hover:bg-[#b47d14] text-white font-bold px-6 py-3 rounded-lg transition shadow-lg">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
@@ -224,6 +269,13 @@
 </section>
 @endif
 
+{{-- Wave: stats (forest) → gobernador (white) --}}
+<div class="leading-none -mt-px overflow-hidden" aria-hidden="true">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" class="w-full h-14 block">
+        <path d="M0,70 C480,0 960,0 1440,70 L1440,0 L0,0 Z" fill="#1b4332"/>
+    </svg>
+</div>
+
 {{-- =====================================================
      BLOQUE 9: El Gobernador
      ===================================================== --}}
@@ -231,8 +283,8 @@
 <section class="py-16 bg-white" aria-label="Mensaje del Gobernador">
     <div class="container mx-auto px-4">
         <div class="grid lg:grid-cols-5 gap-8 items-center max-w-6xl mx-auto">
-            <div class="lg:col-span-2">
-                <div class="aspect-[4/5] max-w-sm mx-auto bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl overflow-hidden shadow-2xl flex items-center justify-center text-white">
+            <div class="lg:col-span-2 reveal from-left">
+                <div class="aspect-[4/5] max-w-sm mx-auto bg-gradient-to-br from-[#2d6a4f] to-[#1b4332] rounded-2xl overflow-hidden shadow-2xl flex items-center justify-center text-white bg-nature-pattern relative">
                     <div class="text-center p-6">
                         <div class="w-32 h-32 mx-auto bg-white/20 backdrop-blur rounded-full flex items-center justify-center mb-4 text-5xl font-bold">
                             {{ strtoupper(mb_substr($gobernador->first()->full_name, 0, 1)) }}
@@ -242,9 +294,9 @@
                     </div>
                 </div>
             </div>
-            <div class="lg:col-span-3">
-                <p class="text-amber-600 font-semibold uppercase tracking-wider mb-2 text-sm">Mensaje del Gobierno</p>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Construyendo el futuro del Beni</h2>
+            <div class="lg:col-span-3 reveal from-right">
+                <p class="section-label">Mensaje del Gobierno</p>
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-gray-900 mb-6 mt-2">Construyendo el futuro del Beni</h2>
                 <div class="prose prose-lg text-gray-700 max-w-none">
                     <p class="mb-4">
                         {!! $aboutSettings['description'] !!}
@@ -269,21 +321,24 @@
      BLOQUE 10: Próximos Eventos
      ===================================================== --}}
 @if(isset($featuredEvents) && $featuredEvents->count() > 0)
-<section class="py-16 bg-gray-50" aria-label="Próximos eventos">
+<section class="py-16 bg-cream" aria-label="Próximos eventos">
     <div class="container mx-auto px-4">
         <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
             <div>
-                <p class="text-teal-700 font-semibold uppercase tracking-wider mb-2 text-sm">Agenda institucional</p>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Próximos Eventos</h2>
+                <p class="section-label">Agenda institucional</p>
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-gray-900">Próximos Eventos</h2>
             </div>
-            <a href="{{ route('events') }}" class="text-teal-700 font-semibold hover:text-teal-800 inline-flex items-center gap-1 text-sm md:text-base">
-                Ver todos los eventos →
+            <a href="{{ route('events') }}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-teal-700 hover:text-teal-800 border border-teal-200 hover:border-teal-400 px-4 py-2 rounded-lg transition">
+                Ver todos
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
             </a>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             @foreach($featuredEvents as $event)
-            <div class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden border border-gray-100">
-                <div class="bg-gradient-to-br from-teal-600 to-teal-800 text-white p-5 text-center">
+            <div class="card-lift bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100 reveal reveal-d{{ $loop->index + 1 }}">
+                <div class="bg-gradient-to-br from-[#2d6a4f] to-[#1b4332] text-white p-5 text-center">
                     <p class="text-3xl font-bold">{{ optional($event->starts_at)->format('d') ?? '—' }}</p>
                     <p class="text-sm uppercase tracking-wider opacity-80">{{ optional($event->starts_at)->translatedFormat('M Y') ?? '—' }}</p>
                 </div>
@@ -321,16 +376,21 @@
     <div class="container mx-auto px-4">
         <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
             <div>
-                <p class="text-teal-700 font-semibold uppercase tracking-wider mb-2 text-sm">Estructura orgánica</p>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Secretarías Departamentales</h2>
+                <p class="section-label">Estructura orgánica</p>
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-gray-900">Secretarías Departamentales</h2>
             </div>
-            <a href="{{ route('institutional.secretariats') }}" class="text-teal-700 font-semibold hover:text-teal-800 inline-flex items-center gap-1 text-sm md:text-base">
-                Ver todas →
+            <a href="{{ route('institutional.secretariats') }}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-teal-700 hover:text-teal-800 border border-teal-200 hover:border-teal-400 px-4 py-2 rounded-lg transition">
+                Ver todas
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
             </a>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             @foreach($secretariats as $secretariat)
+            <div class="reveal reveal-d{{ ($loop->index % 4) + 1 }}">
                 <x-secretary-card :secretariat="$secretariat" />
+            </div>
             @endforeach
         </div>
     </div>
@@ -341,16 +401,16 @@
      BLOQUE 12: Proyectos de Inversión
      ===================================================== --}}
 @if(isset($featuredProjects) && $featuredProjects->count() > 0)
-<section class="py-16 bg-gray-50" aria-label="Proyectos de inversión">
+<section class="py-16 bg-cream" aria-label="Proyectos de inversión">
     <div class="container mx-auto px-4">
         <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
             <div>
-                <p class="text-teal-700 font-semibold uppercase tracking-wider mb-2 text-sm">Inversión pública</p>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Proyectos Destacados</h2>
-                <p class="text-gray-600 mt-2">Obras emblemáticas que impulsa la Gobernación del Beni</p>
+                <p class="section-label">Inversión pública</p>
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-gray-900">Proyectos Destacados</h2>
+                <p class="text-gray-500 mt-3 text-sm">Obras emblemáticas que impulsa la Gobernación del Beni</p>
             </div>
-            <a href="{{ route('gobierno.proyectos.index') }}" class="text-teal-700 font-semibold hover:text-teal-800 inline-flex items-center gap-1 text-sm md:text-base">
-                Ver todos los proyectos
+            <a href="{{ route('gobierno.proyectos.index') }}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-teal-700 hover:text-teal-800 border border-teal-200 hover:border-teal-400 px-4 py-2 rounded-lg transition">
+                Ver todos
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>
@@ -358,7 +418,9 @@
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             @foreach($featuredProjects as $project)
+            <div class="reveal reveal-d{{ ($loop->index % 4) + 1 }}">
                 <x-project-card :project="$project" />
+            </div>
             @endforeach
         </div>
     </div>
@@ -368,14 +430,18 @@
 {{-- =====================================================
      BLOQUE 13: Atención al Ciudadano
      ===================================================== --}}
-<section class="py-16 bg-gradient-to-br from-amber-50 to-white" aria-label="Atención al ciudadano">
+<section class="py-16 bg-gradient-to-br from-cream to-white" aria-label="Atención al ciudadano">
     <div class="container mx-auto px-4">
         <div class="text-center mb-10">
-            <p class="text-amber-600 font-semibold uppercase tracking-wider mb-2 text-sm">Estamos para ayudarte</p>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Atención al Ciudadano</h2>
+            <p class="inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-widest text-amber-600 mb-3">
+                <span class="block w-5 h-0.5 bg-amber-400 rounded"></span>
+                Estamos para ayudarte
+                <span class="block w-5 h-0.5 bg-amber-400 rounded"></span>
+            </p>
+            <h2 class="section-title section-title-center text-3xl md:text-4xl font-bold text-gray-900 mx-auto">Atención al Ciudadano</h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <a href="{{ route('offices') }}" class="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-teal-500">
+            <a href="{{ route('offices') }}" class="group reveal reveal-d1 bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-teal-500">
                 <div class="w-14 h-14 bg-teal-100 text-teal-700 rounded-xl flex items-center justify-center mb-4 group-hover:bg-teal-600 group-hover:text-white transition">
                     <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -385,7 +451,7 @@
                 <p class="text-sm text-gray-600 mb-3">Conoce las oficinas de atención al ciudadano en todo el departamento.</p>
                 <span class="text-teal-700 font-semibold text-sm">Ver oficinas →</span>
             </a>
-            <a href="{{ route('complaints.create') }}" class="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-red-500">
+            <a href="{{ route('complaints.create') }}" class="group reveal reveal-d2 bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-red-500">
                 <div class="w-14 h-14 bg-red-100 text-red-700 rounded-xl flex items-center justify-center mb-4 group-hover:bg-red-600 group-hover:text-white transition">
                     <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
@@ -395,7 +461,7 @@
                 <p class="text-sm text-gray-600 mb-3">Registra tu queja, reclamo o sugerencia en nuestro Libro de Reclamaciones Virtual.</p>
                 <span class="text-red-700 font-semibold text-sm">Registrar ahora →</span>
             </a>
-            <a href="{{ route('contact') }}" class="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-blue-500">
+            <a href="{{ route('contact') }}" class="group reveal reveal-d3 bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-blue-500">
                 <div class="w-14 h-14 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition">
                     <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
@@ -413,7 +479,7 @@
      BLOQUE 14: Datos Abiertos
      ===================================================== --}}
 @if(isset($featuredDatasets) && $featuredDatasets->count() > 0)
-<section class="py-16 bg-gradient-to-br from-indigo-700 to-indigo-900 text-white" aria-label="Datos abiertos">
+<section class="py-16 bg-gradient-to-br from-[#0d2418] to-[#1b4332] text-white bg-nature-pattern" aria-label="Datos abiertos">
     <div class="container mx-auto px-4">
         <div class="grid lg:grid-cols-3 gap-8 items-center">
             <div class="lg:col-span-1">
@@ -425,7 +491,7 @@
                 <p class="font-semibold uppercase tracking-widest text-amber-300 mb-2 text-sm">Datos Abiertos</p>
                 <h2 class="text-3xl md:text-4xl font-bold mb-3">Información para la ciudadanía</h2>
                 <p class="text-white/90 mb-6">Descarga datasets públicos en formatos abiertos (CSV, JSON, XLSX) y úsalos libremente.</p>
-                <a href="{{ route('open-data.index') }}" class="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold px-6 py-3 rounded-lg transition shadow-lg">
+                <a href="{{ route('open-data.index') }}" class="inline-flex items-center gap-2 bg-[#d4a017] hover:bg-[#b47d14] text-white font-bold px-6 py-3 rounded-lg transition shadow-lg">
                     Explorar todos los datos
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -450,6 +516,13 @@
 </section>
 @endif
 
+{{-- Wave: datos abiertos (forest dark) → gabinete (white) --}}
+<div class="leading-none -mt-px overflow-hidden" aria-hidden="true">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" class="w-full h-14 block">
+        <path d="M0,70 C720,0 720,0 1440,70 L1440,0 L0,0 Z" fill="#0d2418"/>
+    </svg>
+</div>
+
 {{-- =====================================================
      BLOQUE 15: Gabinete / Autoridades
      ===================================================== --}}
@@ -457,17 +530,21 @@
 <section class="py-16 bg-white" aria-label="Gabinete departamental">
     <div class="container mx-auto px-4">
         <div class="text-center mb-10">
-            <p class="text-teal-700 font-semibold uppercase tracking-wider mb-2 text-sm">Liderazgo</p>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Gabinete Departamental</h2>
+            <p class="inline-flex items-center justify-center gap-2 section-label mx-auto">
+                <span class="block w-5 h-0.5 bg-teal-500 rounded -mb-0.5"></span>
+                Liderazgo
+                <span class="block w-5 h-0.5 bg-teal-500 rounded -mb-0.5"></span>
+            </p>
+            <h2 class="section-title section-title-center text-3xl md:text-4xl font-bold text-gray-900 mx-auto mt-2">Gabinete Departamental</h2>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             @foreach($gabinete as $person)
             <div class="text-center">
-                <div class="aspect-square w-full max-w-[160px] mx-auto bg-gradient-to-br from-teal-500 to-teal-700 rounded-2xl flex items-center justify-center text-white text-4xl font-bold shadow-md mb-3">
+                <div class="aspect-square w-full max-w-[160px] mx-auto bg-gradient-to-br from-[#2d6a4f] to-[#1b4332] rounded-2xl flex items-center justify-center text-white text-4xl font-bold shadow-md mb-3 ring-2 ring-[#d4a017]/30">
                     {{ strtoupper(mb_substr($person->full_name, 0, 1)) }}
                 </div>
                 <h3 class="text-sm font-bold text-gray-900 line-clamp-2">{{ $person->full_name }}</h3>
-                <p class="text-xs text-teal-700 font-semibold mt-1 line-clamp-1">{{ $person->position ?? 'Autoridad' }}</p>
+                <p class="text-xs text-[#2d6a4f] font-semibold mt-1 line-clamp-1">{{ $person->position ?? 'Autoridad' }}</p>
             </div>
             @endforeach
         </div>
@@ -484,15 +561,18 @@
      BLOQUE 16: Multimedia (Galerías)
      ===================================================== --}}
 @if(isset($galleries) && $galleries->count() > 0)
-<section class="py-16 bg-gray-50" aria-label="Galería multimedia">
+<section class="py-16 bg-cream" aria-label="Galería multimedia">
     <div class="container mx-auto px-4">
         <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
             <div>
-                <p class="text-teal-700 font-semibold uppercase tracking-wider mb-2 text-sm">Multimedia</p>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Galería Institucional</h2>
+                <p class="section-label">Multimedia</p>
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-gray-900">Galería Institucional</h2>
             </div>
-            <a href="{{ route('gallery') }}" class="text-teal-700 font-semibold hover:text-teal-800 inline-flex items-center gap-1 text-sm md:text-base">
-                Ver galería completa →
+            <a href="{{ route('gallery') }}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-teal-700 hover:text-teal-800 border border-teal-200 hover:border-teal-400 px-4 py-2 rounded-lg transition">
+                Ver galería completa
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
             </a>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -510,10 +590,17 @@
 </section>
 @endif
 
+{{-- Wave: galería (cream) → newsletter (gold) --}}
+<div class="leading-none -mb-px overflow-hidden" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" class="w-full h-12 block">
+        <path d="M0,0 C360,60 1080,60 1440,0 L1440,60 L0,60 Z" fill="#d4a017"/>
+    </svg>
+</div>
+
 {{-- =====================================================
      BLOQUE 17: Newsletter / Suscripción
      ===================================================== --}}
-<section class="py-16 bg-gradient-to-br from-amber-500 via-amber-600 to-amber-700 text-white" aria-label="Suscripción a noticias">
+<section class="py-16 bg-gradient-to-br from-[#d4a017] via-[#b47d14] to-[#8a5e0f] text-white bg-nature-pattern" aria-label="Suscripción a noticias">
     <div class="container mx-auto px-4 max-w-3xl text-center">
         <div class="w-16 h-16 mx-auto bg-white/20 backdrop-blur rounded-full flex items-center justify-center mb-4">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -528,13 +615,20 @@
             @csrf
             <input type="email" name="email" required placeholder="tu@correo.com"
                    class="flex-1 px-4 py-3 rounded-xl text-gray-900 focus:ring-2 focus:ring-white focus:outline-none">
-            <button type="submit" class="bg-teal-700 hover:bg-teal-800 text-white font-bold px-6 py-3 rounded-xl transition shadow-md">
+            <button type="submit" class="bg-[#1b4332] hover:bg-[#0d2418] text-white font-bold px-6 py-3 rounded-xl transition shadow-md">
                 Suscribirme
             </button>
         </form>
         <p class="text-xs text-white/70 mt-3">🔒 Tus datos están protegidos. No compartimos tu correo.</p>
     </div>
 </section>
+
+{{-- Wave: newsletter (gold) → footer (forest dark) --}}
+<div class="leading-none -mt-px overflow-hidden" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" class="w-full h-12 block">
+        <path d="M0,0 C720,60 720,60 1440,0 L1440,60 L0,60 Z" fill="#0d2418"/>
+    </svg>
+</div>
 
 {{-- =====================================================
      BLOQUE 18: Footer — manejado por layout
@@ -544,6 +638,42 @@
 
 @section('scripts')
 <script>
+    // =============================================
+    // SCROLL REVEAL — Intersection Observer
+    // =============================================
+    document.addEventListener('DOMContentLoaded', function () {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Also trigger section-title accent animation
+                    const title = entry.target.querySelector('.section-title');
+                    if (title) title.classList.add('visible-title');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    });
+
+    // =============================================
+    // PARALLAX — hero image subtle effect
+    // =============================================
+    (function() {
+        const heroSlider = document.getElementById('hero-slider');
+        if (!heroSlider || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            if (scrolled < 700) {
+                const imgs = heroSlider.querySelectorAll('[data-slide] img');
+                imgs.forEach(img => {
+                    img.style.transform = `translateY(${scrolled * 0.25}px)`;
+                });
+            }
+        }, { passive: true });
+    })();
+
     // Animación de contadores (count-up) al entrar en viewport
     document.addEventListener('DOMContentLoaded', function () {
         const counters = document.querySelectorAll('.counter');
@@ -586,9 +716,14 @@
         const slides = slider.querySelectorAll('[data-slide]');
         const contents = slider.querySelectorAll('[data-slide-content]');
         const btns = slider.querySelectorAll('[data-slide-btn]');
+        const counter = slider.querySelector('#slide-counter');
+        const prevBtn = slider.querySelector('#prev-slide');
+        const nextBtn = slider.querySelector('#next-slide');
         if (slides.length <= 1) return;
 
         let current = 0;
+        let autoplayTimer;
+
         const show = (i) => {
             slides.forEach((s, idx) => {
                 s.classList.toggle('opacity-100', idx === i);
@@ -600,17 +735,37 @@
             btns.forEach((b, idx) => {
                 const isActive = idx === i;
                 b.classList.toggle('w-8', isActive);
-                b.classList.toggle('md:w-8', isActive);
+                b.classList.toggle('w-2', !isActive);
                 b.classList.toggle('bg-white', isActive);
                 b.classList.toggle('bg-white/50', !isActive);
                 b.setAttribute('aria-selected', isActive ? 'true' : 'false');
             });
+            if (counter) counter.textContent = `${i + 1} / ${slides.length}`;
             current = i;
         };
-        btns.forEach((btn, idx) => btn.addEventListener('click', () => show(idx)));
+
+        const next = () => show((current + 1) % slides.length);
+        const prev = () => show((current - 1 + slides.length) % slides.length);
+
+        const resetAutoplay = () => {
+            clearInterval(autoplayTimer);
+            autoplayTimer = setInterval(next, 6000);
+        };
+
+        btns.forEach((btn, idx) => btn.addEventListener('click', () => { show(idx); resetAutoplay(); }));
+        if (prevBtn) prevBtn.addEventListener('click', () => { prev(); resetAutoplay(); });
+        if (nextBtn) nextBtn.addEventListener('click', () => { next(); resetAutoplay(); });
+
+        // Swipe support on mobile
+        let touchStartX = 0;
+        slider.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+        slider.addEventListener('touchend', (e) => {
+            const diff = touchStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) { diff > 0 ? next() : prev(); resetAutoplay(); }
+        }, { passive: true });
 
         // Autoplay
-        setInterval(() => show((current + 1) % slides.length), 6000);
+        autoplayTimer = setInterval(next, 6000);
     });
 </script>
 @endsection

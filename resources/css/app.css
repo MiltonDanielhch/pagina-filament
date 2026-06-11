@@ -8,18 +8,326 @@
 @source '../**/*.js';
 
 @theme {
-    --color-official: #0f766e;
-    --color-official-light: #14b8a6;
+    /* === BENI AMAZÓNICO THEME === */
+    /* Remap teal → forest green scale */
+    --color-teal-50:  #f0fdf4;
+    --color-teal-100: #dcfce7;
+    --color-teal-200: #bbf7d0;
+    --color-teal-300: #86efac;
+    --color-teal-400: #52b788;
+    --color-teal-500: #40916c;
+    --color-teal-600: #2d6a4f;
+    --color-teal-700: #1b4332;
+    --color-teal-800: #14342a;
+    --color-teal-900: #0d2418;
+
+    /* Official brand colors (forest green) */
+    --color-official:       #2d6a4f;
+    --color-official-dark:  #1b4332;
+    --color-official-light: #52b788;
+
+    /* Gold accent */
+    --color-gold:       #d4a017;
+    --color-gold-light: #e9c46a;
+    --color-gold-dark:  #b47d14;
+
+    /* Warm cream backgrounds */
+    --color-cream:      #f8f4e3;
+    --color-cream-dark: #f0e8c8;
+
     --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
     html {
         font-family: 'DM Sans', sans-serif;
+        scroll-behavior: smooth;
     }
     body {
-        @apply bg-gray-50 text-gray-800;
+        background-color: #faf7f0;
+        color: #1f2937;
     }
+    *:focus-visible {
+        outline: 2px solid #2d6a4f;
+        outline-offset: 2px;
+        border-radius: 4px;
+    }
+}
+
+/* Section label — uppercase eyebrow with left accent bar */
+.section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #2d6a4f;
+    margin-bottom: 8px;
+}
+.section-label::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 3px;
+    background: linear-gradient(to right, #2d6a4f, #d4a017);
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+/* Section title underline accent */
+.section-title {
+    position: relative;
+    padding-bottom: 14px;
+}
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(to right, #2d6a4f, #d4a017);
+    border-radius: 2px;
+}
+.section-title-center::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Nature pattern — subtle leaf/dot for hero/footer backgrounds */
+.bg-nature-pattern {
+    background-image:
+        radial-gradient(circle at 15% 85%, rgba(255,255,255,0.04) 2px, transparent 2px),
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.04) 2px, transparent 2px),
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px, 25px 25px;
+}
+
+/* Gold accent divider line */
+.gold-divider {
+    height: 3px;
+    background: linear-gradient(to right, transparent, #d4a017, #e9c46a, #d4a017, transparent);
+    border: none;
+    margin: 0;
+}
+
+/* Warm section backgrounds */
+.bg-cream { background-color: #f8f4e3; }
+.bg-cream-dark { background-color: #f0e8c8; }
+
+/* Mobile nav slide animation */
+#mobile-menu {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease-in-out;
+}
+#mobile-menu.open {
+    max-height: 600px;
+}
+
+/* Hero slider arrow buttons */
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(6px);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+.slider-arrow:hover {
+    background: rgba(255,255,255,0.35);
+    transform: translateY(-50%) scale(1.08);
+}
+.slider-arrow-left { left: 16px; }
+.slider-arrow-right { right: 16px; }
+
+/* Stat card top accent */
+.stat-card-accent {
+    position: relative;
+    overflow: hidden;
+}
+.stat-card-accent::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, #0f766e, #14b8a6);
+    border-radius: 0;
+}
+
+/* Card hover lift */
+.card-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px -4px rgba(0,0,0,0.12);
+}
+
+/* =============================================
+   ANIMATION SYSTEM — Beni Amazónico
+   ============================================= */
+
+/* Scroll progress bar */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(to right, #2d6a4f, #d4a017, #2d6a4f);
+    background-size: 200% 100%;
+    z-index: 9999;
+    transition: width 0.1s linear;
+    animation: shimmerProgress 2s linear infinite;
+}
+@keyframes shimmerProgress {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+/* Scroll-reveal system */
+.reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1),
+                transform 0.65s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.from-left  { transform: translateX(-40px); }
+.reveal.from-right { transform: translateX(40px); }
+.reveal.from-scale { transform: scale(0.92); }
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0) translateX(0) scale(1);
+}
+/* Stagger delays */
+.reveal-d1 { transition-delay: 0.08s; }
+.reveal-d2 { transition-delay: 0.16s; }
+.reveal-d3 { transition-delay: 0.24s; }
+.reveal-d4 { transition-delay: 0.32s; }
+.reveal-d5 { transition-delay: 0.40s; }
+.reveal-d6 { transition-delay: 0.48s; }
+.reveal-d7 { transition-delay: 0.56s; }
+.reveal-d8 { transition-delay: 0.64s; }
+
+/* Hero text entrance */
+@keyframes heroSlideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+.hero-eyebrow   { animation: heroSlideUp 0.7s 0.1s cubic-bezier(0.16,1,0.3,1) both; }
+.hero-title     { animation: heroSlideUp 0.8s 0.25s cubic-bezier(0.16,1,0.3,1) both; }
+.hero-desc      { animation: heroSlideUp 0.7s 0.4s cubic-bezier(0.16,1,0.3,1) both; }
+.hero-cta       { animation: heroSlideUp 0.7s 0.55s cubic-bezier(0.16,1,0.3,1) both; }
+.hero-arrow     { animation: heroFadeIn 0.5s 0.8s ease both; }
+
+/* Floating animation for icons */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-7px); }
+}
+.icon-float { animation: float 3.5s ease-in-out infinite; }
+/* Staggered float delays */
+.float-d1 { animation-delay: 0s; }
+.float-d2 { animation-delay: 0.4s; }
+.float-d3 { animation-delay: 0.8s; }
+.float-d4 { animation-delay: 1.2s; }
+.float-d5 { animation-delay: 1.6s; }
+.float-d6 { animation-delay: 2.0s; }
+.float-d7 { animation-delay: 2.4s; }
+.float-d8 { animation-delay: 2.8s; }
+
+/* Pulse ring for CTA buttons */
+@keyframes pulseRing {
+    0%   { box-shadow: 0 0 0 0 rgba(212,160,23,0.5); }
+    70%  { box-shadow: 0 0 0 14px rgba(212,160,23,0); }
+    100% { box-shadow: 0 0 0 0 rgba(212,160,23,0); }
+}
+.btn-pulse { animation: pulseRing 2.2s ease-out infinite; }
+
+/* Animated gradient background (for hero, stats) */
+@keyframes gradientDrift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.gradient-animated {
+    background-size: 200% 200%;
+    animation: gradientDrift 8s ease infinite;
+}
+
+/* Section title underline grow-in animation */
+@keyframes lineGrow {
+    from { width: 0; }
+    to   { width: 48px; }
+}
+.section-title.visible-title::after {
+    animation: lineGrow 0.5s 0.3s ease both;
+}
+
+/* Quick-access card ripple on click */
+@keyframes ripple {
+    0%   { transform: scale(0); opacity: 0.5; }
+    100% { transform: scale(3); opacity: 0; }
+}
+.ripple-effect {
+    position: relative;
+    overflow: hidden;
+}
+.ripple-effect .ripple-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    width: 60px;
+    height: 60px;
+    margin-top: -30px;
+    margin-left: -30px;
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+/* Typing cursor blink for search placeholder */
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* Wave divider animation */
+@keyframes waveMove {
+    0%   { d: path("M0,40 C360,0  1080,80  1440,40 L1440,80 L0,80 Z"); }
+    50%  { d: path("M0,40 C360,80 1080,0   1440,40 L1440,80 L0,80 Z"); }
+    100% { d: path("M0,40 C360,0  1080,80  1440,40 L1440,80 L0,80 Z"); }
+}
+
+/* Parallax helper */
+.parallax-hero { will-change: transform; }
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .reveal, .hero-eyebrow, .hero-title, .hero-desc, .hero-cta, .hero-arrow,
+    .icon-float, .btn-pulse, .gradient-animated, #scroll-progress {
+        animation: none !important;
+        transition: opacity 0.2s ease !important;
+        transform: none !important;
+    }
+    .reveal { opacity: 1; }
 }
 
 .ProseMirror {

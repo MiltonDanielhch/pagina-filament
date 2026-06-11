@@ -26,41 +26,77 @@
         'location' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>',
         'news'     => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>',
     ];
-    $colorMap = [
-        'teal'    => ['bg' => 'bg-teal-50',     'text' => 'text-teal-700',     'hover' => 'group-hover:bg-teal-600',     'ring' => 'group-hover:ring-teal-200'],
-        'emerald' => ['bg' => 'bg-emerald-50',  'text' => 'text-emerald-700',  'hover' => 'group-hover:bg-emerald-600',  'ring' => 'group-hover:ring-emerald-200'],
-        'amber'   => ['bg' => 'bg-amber-50',    'text' => 'text-amber-700',    'hover' => 'group-hover:bg-amber-600',    'ring' => 'group-hover:ring-amber-200'],
-        'red'     => ['bg' => 'bg-red-50',      'text' => 'text-red-700',      'hover' => 'group-hover:bg-red-600',      'ring' => 'group-hover:ring-red-200'],
-        'blue'    => ['bg' => 'bg-blue-50',     'text' => 'text-blue-700',     'hover' => 'group-hover:bg-blue-600',     'ring' => 'group-hover:ring-blue-200'],
-        'indigo'  => ['bg' => 'bg-indigo-50',   'text' => 'text-indigo-700',   'hover' => 'group-hover:bg-indigo-600',   'ring' => 'group-hover:ring-indigo-200'],
-        'orange'  => ['bg' => 'bg-orange-50',   'text' => 'text-orange-700',   'hover' => 'group-hover:bg-orange-600',   'ring' => 'group-hover:ring-orange-200'],
-        'cyan'    => ['bg' => 'bg-cyan-50',     'text' => 'text-cyan-700',     'hover' => 'group-hover:bg-cyan-600',     'ring' => 'group-hover:ring-cyan-200'],
+
+    // Gradients — Beni Amazónico palette
+    $gradientMap = [
+        'teal'    => 'from-[#2d6a4f] to-[#1b4332]',   // forest green
+        'emerald' => 'from-[#40916c] to-[#2d6a4f]',   // medium forest
+        'amber'   => 'from-[#d4a017] to-[#b47d14]',   // gold
+        'red'     => 'from-red-500 to-rose-600',
+        'blue'    => 'from-blue-500 to-indigo-600',
+        'indigo'  => 'from-[#1b4332] to-[#0d2418]',   // deep forest
+        'orange'  => 'from-[#d4a017] to-orange-600',  // gold-orange
+        'cyan'    => 'from-[#52b788] to-[#2d6a4f]',   // light-forest
+    ];
+    $hoverBorderMap = [
+        'teal'    => 'hover:border-teal-400',
+        'emerald' => 'hover:border-emerald-400',
+        'amber'   => 'hover:border-amber-400',
+        'red'     => 'hover:border-red-400',
+        'blue'    => 'hover:border-blue-400',
+        'indigo'  => 'hover:border-indigo-400',
+        'orange'  => 'hover:border-orange-400',
+        'cyan'    => 'hover:border-cyan-400',
+    ];
+    $hoverTextMap = [
+        'teal'    => 'group-hover:text-teal-700',
+        'emerald' => 'group-hover:text-emerald-700',
+        'amber'   => 'group-hover:text-amber-700',
+        'red'     => 'group-hover:text-red-700',
+        'blue'    => 'group-hover:text-blue-700',
+        'indigo'  => 'group-hover:text-indigo-700',
+        'orange'  => 'group-hover:text-orange-700',
+        'cyan'    => 'group-hover:text-cyan-700',
     ];
 @endphp
 
-<section class="py-12 bg-white" aria-label="Accesos rápidos">
+<section class="py-10 bg-white border-b border-[#e8e0c8]" aria-label="Accesos rápidos">
     <div class="container mx-auto px-4">
         <div class="text-center mb-8">
-            <p class="text-teal-700 font-semibold uppercase tracking-wider mb-2 text-sm">Accesos Rápidos</p>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">¿Qué necesitas hacer hoy?</h2>
+            <p class="section-label mx-auto justify-center">
+                <span class="block w-5 h-0.5 bg-teal-500 rounded -mb-0.5"></span>
+                Accesos Rápidos
+                <span class="block w-5 h-0.5 bg-teal-500 rounded -mb-0.5"></span>
+            </p>
+            <h2 class="section-title section-title-center text-2xl md:text-3xl font-bold text-gray-900 mx-auto mt-2">¿Qué necesitas hacer hoy?</h2>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3 md:gap-4">
+        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
             @foreach($items as $item)
                 @php
-                    $colors = $colorMap[$item['color']] ?? $colorMap['teal'];
+                    $gradient = $gradientMap[$item['color']] ?? $gradientMap['teal'];
+                    $hoverBorder = $hoverBorderMap[$item['color']] ?? $hoverBorderMap['teal'];
+                    $hoverText = $hoverTextMap[$item['color']] ?? $hoverTextMap['teal'];
                     $url = \Illuminate\Support\Str::startsWith($item['route'], '/') ? $item['route'] : route($item['route']);
                 @endphp
                 <a href="{{ $url }}"
-                   class="group flex flex-col items-center p-4 md:p-5 bg-white border-2 border-gray-100 rounded-2xl hover:border-transparent hover:shadow-xl transition ring-0 {{ $colors['ring'] }}">
-                    <div class="w-12 h-12 md:w-14 md:h-14 {{ $colors['bg'] }} {{ $colors['text'] }} rounded-xl flex items-center justify-center mb-3 group-hover:bg-white transition {{ $colors['hover'] }} group-hover:text-white">
-                        <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   class="group flex flex-col items-center p-4 bg-white border-2 border-gray-100 {{ $hoverBorder }} rounded-2xl hover:shadow-xl transition-all duration-200 card-lift text-center reveal reveal-d{{ ($loop->index % 8) + 1 }}"
+                   aria-label="{{ $item['label'] }} — {{ $item['desc'] }}">
+                    {{-- Icon with gradient background + float animation --}}
+                    <div class="icon-float float-d{{ $loop->index + 1 }} rounded-2xl bg-gradient-to-br {{ $gradient }} flex items-center justify-center mb-3 shadow-md group-hover:shadow-lg transition-shadow duration-200" style="width:52px;height:52px;flex-shrink:0;">
+                        <svg class="w-6 h-6 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             {!! $iconMap[$item['icon']] ?? $iconMap['document'] !!}
                         </svg>
                     </div>
-                    <p class="text-sm font-bold text-gray-900 group-hover:text-teal-700 transition text-center leading-tight">
+                    <p class="text-sm font-bold text-gray-800 {{ $hoverText }} transition-colors duration-200 leading-tight">
                         {{ $item['label'] }}
                     </p>
-                    <p class="text-xs text-gray-500 text-center mt-0.5 hidden md:block">{{ $item['desc'] }}</p>
+                    <p class="text-[11px] text-gray-400 text-center mt-0.5 leading-tight hidden sm:block">{{ $item['desc'] }}</p>
+                    {{-- Arrow indicator on hover --}}
+                    <span class="mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        <svg class="w-3.5 h-3.5 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </span>
                 </a>
             @endforeach
         </div>
