@@ -17,6 +17,11 @@ use Illuminate\Http\Request;
 
 class OfficialController extends Controller
 {
+    public function publicIndex()
+    {
+        return $this->index();
+    }
+
     public function index()
     {
         $officials = Official::active()
