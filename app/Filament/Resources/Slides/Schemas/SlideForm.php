@@ -19,6 +19,8 @@ class SlideForm
                     ->label('Imagen')
                     ->collection('slides')
                     ->multiple(false)
+                    ->image()
+                    ->maxSize(10240) // 10 MB (size in KB)
                     ->required(),
                 TextInput::make('link')
                     ->label('Enlace'),

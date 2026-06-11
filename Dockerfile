@@ -30,6 +30,9 @@ RUN apt-get update && apt-get install -y nginx supervisor \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Copy custom PHP uploads config
+COPY docker/php/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
+
 # Set working directory
 WORKDIR /var/www
 
@@ -41,7 +44,7 @@ RUN composer install --no-scripts --no-autoloader --optimize-autoloader
 COPY . .
 
 # =========================================================================
-# MODIFICACIÓN PARA COOLIFY: Asegurar rutas de caché y un .env simulado 
+# MODIFICACIÓN PARA COOLIFY: Asegurar rutas de caché y un .env simulado
 # para que los scripts post-autoload de Laravel no fallen durante el build.
 # =========================================================================
 RUN mkdir -p storage/framework/cache/data \
