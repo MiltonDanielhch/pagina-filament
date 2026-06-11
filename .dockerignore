@@ -15,6 +15,7 @@ Thumbs.db
 docker/*
 !docker/nginx/coolify.conf
 !docker/supervisord.conf
+!docker/php/uploads.ini
 *.log
 .phpunit.result.json
 composer.phar
