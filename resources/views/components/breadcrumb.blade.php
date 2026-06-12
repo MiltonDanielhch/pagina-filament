@@ -11,7 +11,7 @@
 @props(['items' => []])
 
 @if($items && count($items) > 0)
-<nav class="flex items-center gap-2 text-sm text-gray-600 mb-6" aria-label="Navegación breadcrumb">
+<nav class="flex items-center gap-2 text-sm text-white mb-6" aria-label="Navegación breadcrumb">
     @php
         $showDropdown = count($items) > 3;
         $visibleItems = $showDropdown ? array_slice($items, -2) : $items;
@@ -30,40 +30,40 @@
         </button>
 
         <div x-show="open" x-transition
-             class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border z-50">
+             class="absolute left-0 mt-2 w-48 bg-gray-900 rounded-lg shadow-lg border border-gray-700 z-50">
             <div class="py-1">
                 @foreach($dropdownItems as $index => $item)
                 @if($item['url'] ?? null)
                 <a href="{{ $item['url'] }}"
-                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-official/5 hover:text-official">
+                   class="block px-4 py-2 text-sm text-white hover:bg-gray-800">
                     {{ $item['label'] }}
                 </a>
                 @else
-                <span class="block px-4 py-2 text-sm text-gray-500">{{ $item['label'] }}</span>
+                <span class="block px-4 py-2 text-sm text-white/70">{{ $item['label'] }}</span>
                 @endif
                 @endforeach
             </div>
         </div>
     </div>
 
-    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
     </svg>
     @endif
 
     @foreach($visibleItems as $index => $item)
         @if($index > 0 || $showDropdown)
-        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
         </svg>
         @endif
 
         @if($item['url'] ?? null)
-        <a href="{{ $item['url'] }}" class="hover:text-official transition-colors">
+        <a href="{{ $item['url'] }}" class="hover:text-amber-300 transition-colors">
             {{ $item['label'] }}
         </a>
         @else
-        <span class="text-gray-900 font-medium">{{ $item['label'] }}</span>
+        <span class="text-white font-medium">{{ $item['label'] }}</span>
         @endif
     @endforeach
 </nav>

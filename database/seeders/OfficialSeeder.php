@@ -13,7 +13,7 @@ class OfficialSeeder extends Seeder
         $user = User::first() ?? User::factory()->create(['name' => 'Administración']);
 
         $officials = [
-            // Gobernacion
+            // Gobernacion - position_level 1
             [
                 'name' => 'Jesús Tito Egüez Rivero',
                 'position' => 'Gobernador Departamental',
@@ -21,23 +21,25 @@ class OfficialSeeder extends Seeder
                 'email' => 'gobernador@beni.gob.bo',
                 'phone' => '(591) 346-21651',
                 'bio' => 'Gobernador Autónomo Departamental del Beni. Liderando el desarrollo integral del Beni hacia el protagonismo bioceánico.',
+                'position_level' => 1,
                 'sort_order' => 1,
                 'is_active' => true,
                 'user_id' => $user->id,
             ],
-            // Secretaría de Planificación
+            // Vicegobernación - position_level 2
             [
                 'name' => 'Lic. María Elena Flores Pérez',
-                'position' => 'Secretaria de Planificación',
-                'area' => 'Secretaría de Planificación',
-                'email' => 'planificacion@beni.gob.bo',
+                'position' => 'Vicegobernadora Departamental',
+                'area' => 'Vicegobernación',
+                'email' => 'vicegobernador@beni.gob.bo',
                 'phone' => '(591) 346-21652',
-                'bio' => 'Responsable de la planificación estratégica del desarrollo departamental.',
+                'bio' => 'Vicegobernadora Autónoma Departamental del Beni. Apoyando la gestión gubernamental.',
+                'position_level' => 2,
                 'sort_order' => 1,
                 'is_active' => true,
                 'user_id' => $user->id,
             ],
-            // Secretaría de Hacienda
+            // Secretarías - position_level 3
             [
                 'name' => 'C.P. Jorge Luis Ríos Vargas',
                 'position' => 'Secretario de Hacienda',
@@ -45,11 +47,11 @@ class OfficialSeeder extends Seeder
                 'email' => 'hacienda@beni.gob.bo',
                 'phone' => '(591) 346-21653',
                 'bio' => 'Encargado de la gestión financiera y presupuestaria del gobierno departamental.',
+                'position_level' => 3,
                 'sort_order' => 1,
                 'is_active' => true,
                 'user_id' => $user->id,
             ],
-            // Secretaría de Obras Públicas
             [
                 'name' => 'Ing. Roberto Carlos Mamani Copa',
                 'position' => 'Secretario de Obras Públicas',
@@ -57,11 +59,11 @@ class OfficialSeeder extends Seeder
                 'email' => 'obraspublicas@beni.gob.bo',
                 'phone' => '(591) 346-21654',
                 'bio' => 'Gestión de proyectos de infraestructura vial, puentes y obras públicas departamentales.',
-                'sort_order' => 1,
+                'position_level' => 3,
+                'sort_order' => 2,
                 'is_active' => true,
                 'user_id' => $user->id,
             ],
-            // Secretaría de Educación
             [
                 'name' => 'Prof. Teresa Beatriz Ajno Huanca',
                 'position' => 'Secretaria de Educación',
@@ -69,11 +71,11 @@ class OfficialSeeder extends Seeder
                 'email' => 'educacion@beni.gob.bo',
                 'phone' => '(591) 346-21655',
                 'bio' => 'Promoviendo la educación técnica y el desarrollo educativo en el departamento.',
-                'sort_order' => 1,
+                'position_level' => 3,
+                'sort_order' => 3,
                 'is_active' => true,
                 'user_id' => $user->id,
             ],
-            // Secretaría de Salud
             [
                 'name' => 'Dr. Juan Carlos Pereira Justiniano',
                 'position' => 'Secretario de Salud',
@@ -81,11 +83,11 @@ class OfficialSeeder extends Seeder
                 'email' => 'salud@beni.gob.bo',
                 'phone' => '(591) 346-21656',
                 'bio' => 'Coordinando los programas de salud pública y atención hospitalaria departamental.',
-                'sort_order' => 1,
+                'position_level' => 3,
+                'sort_order' => 4,
                 'is_active' => true,
                 'user_id' => $user->id,
             ],
-            // Secretaría de Desarrollo Productivo
             [
                 'name' => 'Ing. Agr. Luis Alberto Terán Lara',
                 'position' => 'Secretario de Desarrollo Productivo',
@@ -93,11 +95,11 @@ class OfficialSeeder extends Seeder
                 'email' => 'desarrolloproductivo@beni.gob.bo',
                 'phone' => '(591) 346-21657',
                 'bio' => 'Fomentando la producción agrícola, ganadera y el emprendimiento en el Beni.',
-                'sort_order' => 1,
+                'position_level' => 3,
+                'sort_order' => 5,
                 'is_active' => true,
                 'user_id' => $user->id,
             ],
-            // Secretaría de Transparencia
             [
                 'name' => 'Abog. Carmen Rosa Justiniano Ríos',
                 'position' => 'Secretaria de Transparencia',
@@ -105,7 +107,8 @@ class OfficialSeeder extends Seeder
                 'email' => 'transparencia@beni.gob.bo',
                 'phone' => '(591) 346-21658',
                 'bio' => 'Garantizando la transparencia y acceso a la información pública departamental.',
-                'sort_order' => 1,
+                'position_level' => 3,
+                'sort_order' => 6,
                 'is_active' => true,
                 'user_id' => $user->id,
             ],

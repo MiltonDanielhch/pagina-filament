@@ -245,8 +245,8 @@
                 Transparencia activa
                 <span class="block w-5 h-0.5 bg-amber-400 rounded"></span>
             </p>
-            <h2 class="text-3xl md:text-4xl font-bold">El Beni en Cifras</h2>
-            <p class="text-white/70 mt-2 max-w-2xl mx-auto text-sm">Datos abiertos y actualizados del Gobierno Autónomo Departamental</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">El Beni en Cifras</h2>
+            <p class="text-gray-700 mt-2 max-w-2xl mx-auto text-sm">Datos abiertos y actualizados del Gobierno Autónomo Departamental</p>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             <div class="reveal reveal-d1"><x-stat-counter :value="$stats['tramites'] ?? 0" label="Trámites disponibles" icon="document" color="teal" :url="route('procedures.index')" /></div>
@@ -488,9 +488,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
                     </svg>
                 </div>
-                <p class="font-semibold uppercase tracking-widest text-amber-300 mb-2 text-sm">Datos Abiertos</p>
-                <h2 class="text-3xl md:text-4xl font-bold mb-3">Información para la ciudadanía</h2>
-                <p class="text-white/90 mb-6">Descarga datasets públicos en formatos abiertos (CSV, JSON, XLSX) y úsalos libremente.</p>
+                <p class="font-semibold uppercase tracking-widest text-amber-600 mb-2 text-sm">Datos Abiertos</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-3 text-gray-900">Información para la ciudadanía</h2>
+                <p class="text-gray-700 mb-6">Descarga datasets públicos en formatos abiertos (CSV, JSON, XLSX) y úsalos libremente.</p>
                 <a href="{{ route('open-data.index') }}" class="inline-flex items-center gap-2 bg-[#d4a017] hover:bg-[#b47d14] text-white font-bold px-6 py-3 rounded-lg transition shadow-lg">
                     Explorar todos los datos
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -498,10 +498,10 @@
                     </svg>
                 </a>
                 <div class="mt-6 flex flex-wrap gap-2">
-                    <span class="text-xs bg-white/15 backdrop-blur px-2 py-1 rounded font-mono">CSV</span>
-                    <span class="text-xs bg-white/15 backdrop-blur px-2 py-1 rounded font-mono">JSON</span>
-                    <span class="text-xs bg-white/15 backdrop-blur px-2 py-1 rounded font-mono">XLSX</span>
-                    <span class="text-xs bg-white/15 backdrop-blur px-2 py-1 rounded font-mono">PDF</span>
+                    <span class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded font-mono">CSV</span>
+                    <span class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded font-mono">JSON</span>
+                    <span class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded font-mono">XLSX</span>
+                    <span class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded font-mono">PDF</span>
                 </div>
             </div>
             <div class="lg:col-span-2 space-y-2">
@@ -600,7 +600,7 @@
 {{-- =====================================================
      BLOQUE 17: Newsletter / Suscripción
      ===================================================== --}}
-<section class="py-16 bg-gradient-to-br from-[#d4a017] via-[#b47d14] to-[#8a5e0f] text-white bg-nature-pattern" aria-label="Suscripción a noticias">
+<section class="py-16 bg-gradient-to-br from-[#d4a017] via-[#b47d14] to-[#8a5e0f] text-gray-900 bg-nature-pattern" aria-label="Suscripción a noticias">
     <div class="container mx-auto px-4 max-w-3xl text-center">
         <div class="w-16 h-16 mx-auto bg-white/20 backdrop-blur rounded-full flex items-center justify-center mb-4">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -608,18 +608,18 @@
             </svg>
         </div>
         <h2 class="text-3xl md:text-4xl font-bold mb-3">Suscríbete a nuestras noticias</h2>
-        <p class="text-white/90 mb-6 max-w-xl mx-auto">
+        <p class="text-gray-800 mb-6 max-w-xl mx-auto">
             Recibe en tu correo electrónico las últimas noticias, convocatorias y eventos del Beni.
         </p>
         <form method="POST" action="#" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
             @csrf
             <input type="email" name="email" required placeholder="tu@correo.com"
-                   class="flex-1 px-4 py-3 rounded-xl text-gray-900 focus:ring-2 focus:ring-white focus:outline-none">
+                   class="flex-1 px-4 py-3 rounded-xl text-gray-900 border-2 border-gray-900 focus:ring-2 focus:ring-gray-900 focus:outline-none">
             <button type="submit" class="bg-[#1b4332] hover:bg-[#0d2418] text-white font-bold px-6 py-3 rounded-xl transition shadow-md">
                 Suscribirme
             </button>
         </form>
-        <p class="text-xs text-white/70 mt-3">🔒 Tus datos están protegidos. No compartimos tu correo.</p>
+        <p class="text-xs text-gray-600 mt-3">🔒 Tus datos están protegidos. No compartimos tu correo.</p>
     </div>
 </section>
 
