@@ -71,6 +71,11 @@ Route::prefix('datos-abiertos')->name('open-data.')->group(function () {
     Route::get('/{slug}/descargar/{format}', [OpenDatasetController::class, 'download'])->name('download');
 });
 
+// --- Mapa de Proyectos ---
+Route::get('/mapa-proyectos', function () {
+    return view('mapa-proyectos');
+})->name('mapa-proyectos');
+
 // --- Transparencia ---
 Route::prefix('transparencia')->name('transparency.')->group(function () {
     Route::get('/', [TransparencyController::class, 'index'])->name('index');

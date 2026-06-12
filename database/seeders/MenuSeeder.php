@@ -74,6 +74,7 @@ class MenuSeeder extends Seeder
                     ['label' => 'Auditorías', 'url' => '/transparencia/auditorias'],
                     ['label' => 'Convocatorias y Contratación', 'url' => '/convocatorias'],
                     ['label' => 'Datos Abiertos', 'url' => '/datos-abiertos'],
+                    ['label' => 'Mapa de Proyectos', 'url' => '/mapa-proyectos'],
                 ],
             ],
             [
@@ -86,6 +87,7 @@ class MenuSeeder extends Seeder
                     ['label' => 'Eventos', 'url' => '/eventos'],
                     ['label' => 'Galería', 'url' => '/galeria'],
                     ['label' => 'Agenda del Gobernador', 'url' => '/agenda'],
+                    ['label' => 'Suscripción', 'url' => '/#suscripcion'],
                 ],
             ],
             [
