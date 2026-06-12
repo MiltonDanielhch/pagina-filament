@@ -27,7 +27,7 @@ class PostController extends Controller
                 $query->where('id', '!=', $pinnedPost->id);
             })
             ->latest('published_at')
-            ->paginate(10);
+            ->paginate(12);
             
         return view('blog', compact('posts', 'pinnedPost'));
     }

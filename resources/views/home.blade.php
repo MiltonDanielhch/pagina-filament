@@ -558,10 +558,96 @@
 @endif
 
 {{-- =====================================================
-     BLOQUE 16: Multimedia (Galerías)
+     BLOQUE 16: Mapa del Beni (Google Maps)
+     ===================================================== --}}
+<section class="py-16 bg-white" aria-label="Mapa del departamento del Beni">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-10">
+            <p class="inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-widest text-amber-600 mb-3">
+                <span class="block w-5 h-0.5 bg-amber-400 rounded"></span>
+                Ubicación geográfica
+                <span class="block w-5 h-0.5 bg-amber-400 rounded"></span>
+            </p>
+            <h2 class="section-title section-title-center text-3xl md:text-4xl font-bold text-gray-900 mx-auto mt-2">Departamento del Beni</h2>
+            <p class="text-gray-600 mt-3 max-w-2xl mx-auto text-sm">El Beni es el departamento más grande de Bolivia, ubicado en la región amazónica, con una extensión de 213.564 km² y rica biodiversidad.</p>
+        </div>
+        <div class="max-w-6xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-8 items-stretch">
+                <!-- Columna izquierda: Mapa -->
+                <div class="rounded-2xl overflow-hidden shadow-2xl h-full">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3181533!2d-66.5!3d-14.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91e3d0d0d0d0d0d%3A0x0!2sBeni+Department%2C+Bolivia!5e0!3m2!1ses!2sbo&4v1717497600&z=6"
+                        width="100%"
+                        height="100%"
+                        style="border:0; min-height: 500px;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <!-- Columna derecha: Foto y dirección -->
+                <div class="flex flex-col h-full">
+                    <div class="rounded-2xl overflow-hidden shadow-2xl mb-4">
+                        <img src="{{ asset('images/gobe.jpg') }}" alt="Gobernación del Beni" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="bg-gradient-to-br from-[#1b4332] to-[#2d6a4f] rounded-2xl p-5 text-white flex-1 flex flex-col justify-center">
+                        <h3 class="text-lg font-bold mb-2 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            </svg>
+                            Nuestra Dirección
+                        </h3>
+                        <p class="text-gray-200 mb-4 text-sm">Plaza José Ballivian acera sur<br>Santísima Trinidad - Beni</p>
+                        <div class="grid grid-cols-4 gap-3">
+                            <div class="text-center">
+                                <div class="text-lg font-bold text-[#e9c46a]">213.564</div>
+                                <div class="text-xs text-gray-300">km²</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg font-bold text-[#e9c46a]">8</div>
+                                <div class="text-xs text-gray-300">provincias</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg font-bold text-[#e9c46a]">48</div>
+                                <div class="text-xs text-gray-300">municipios</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg font-bold text-[#e9c46a]">~500K</div>
+                                <div class="text-xs text-gray-300">habitantes</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- =====================================================
+     BLOQUE 17: Mapa Interactivo (Leaflet)
+     ===================================================== --}}
+<section class="py-16 bg-cream" aria-label="Mapa interactivo de proyectos">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-10">
+            <p class="inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-widest text-amber-600 mb-3">
+                <span class="block w-5 h-0.5 bg-amber-400 rounded"></span>
+                Proyectos en el mapa
+                <span class="block w-5 h-0.5 bg-amber-400 rounded"></span>
+            </p>
+            <h2 class="section-title section-title-center text-3xl md:text-4xl font-bold text-gray-900 mx-auto mt-2">Mapa Interactivo</h2>
+            <p class="text-gray-600 mt-3 max-w-2xl mx-auto text-sm">Explora los proyectos de infraestructura en todo el departamento del Beni.</p>
+        </div>
+        <div class="max-w-6xl mx-auto">
+            <div id="beni-map" class="rounded-2xl overflow-hidden shadow-2xl pointer-events-none hover:pointer-events-auto relative" style="height: 500px; z-index: 1;"></div>
+        </div>
+    </div>
+</section>
+
+{{-- =====================================================
+     BLOQUE 18: Multimedia (Galerías)
      ===================================================== --}}
 @if(isset($galleries) && $galleries->count() > 0)
-<section class="py-16 bg-cream" aria-label="Galería multimedia">
+<section class="py-16 bg-white" aria-label="Galería multimedia">
     <div class="container mx-auto px-4">
         <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
             <div>
@@ -590,7 +676,7 @@
 </section>
 @endif
 
-{{-- Wave: galería (cream) → newsletter (gold) --}}
+{{-- Wave: galería (white) → newsletter (gold) --}}
 <div class="leading-none -mb-px overflow-hidden" aria-hidden="true">
     <svg viewBox="0 0 1440 60" preserveAspectRatio="none" class="w-full h-12 block">
         <path d="M0,0 C360,60 1080,60 1440,0 L1440,60 L0,60 Z" fill="#d4a017"/>
@@ -598,7 +684,7 @@
 </div>
 
 {{-- =====================================================
-     BLOQUE 17: Newsletter / Suscripción
+     BLOQUE 19: Newsletter / Suscripción
      ===================================================== --}}
 <section class="py-16 bg-gradient-to-br from-[#d4a017] via-[#b47d14] to-[#8a5e0f] text-gray-900 bg-nature-pattern" aria-label="Suscripción a noticias">
     <div class="container mx-auto px-4 max-w-3xl text-center">
@@ -631,12 +717,14 @@
 </div>
 
 {{-- =====================================================
-     BLOQUE 18: Footer — manejado por layout
+     BLOQUE 20: Footer — manejado por layout
      ===================================================== --}}
 
 @endsection
 
 @section('scripts')
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
     // =============================================
     // SCROLL REVEAL — Intersection Observer
@@ -766,6 +854,97 @@
 
         // Autoplay
         autoplayTimer = setInterval(next, 6000);
+    });
+
+    // =============================================
+    // LEAFLET MAP - Mapa interactivo del Beni
+    // =============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        if (document.getElementById('beni-map')) {
+            // Crear mapa con scroll con rueda deshabilitado
+            const map = L.map('beni-map', {
+                scrollWheelZoom: false,
+                trackResize: true
+            }).setView([-14.5, -64.9], 7);
+
+            const mapContainer = document.getElementById('beni-map');
+
+            // Permitir interacción cuando el mouse entra al mapa
+            mapContainer.addEventListener('mouseenter', function() {
+                map.scrollWheelZoom.enable();
+            });
+
+            // Desabilitar interacción cuando el mouse sale
+            mapContainer.addEventListener('mouseleave', function() {
+                map.scrollWheelZoom.disable();
+            });
+
+            // Permitir que el scroll pase a través cuando no hay interacción
+            // El mapa empieza con pointer-events: none, así que el scroll funciona automáticamente
+            // Los controles del mapa (.leaflet-interactive) pueden recibir clicks
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors',
+                maxZoom: 18
+            }).addTo(map);
+
+            // Cargar municipios del Beni (si existe el archivo)
+            fetch('/data/beni-municipios.geojson')
+                .then(response => response.json())
+                .then(data => {
+                    L.geoJSON(data, {
+                        pointToLayer: function(feature, latlng) {
+                            return L.circleMarker(latlng, {
+                                radius: 8,
+                                fillColor: '#0f766e',
+                                color: '#fff',
+                                weight: 2,
+                                opacity: 1,
+                                fillOpacity: 0.8
+                            });
+                        },
+                        onEachFeature: function(feature, layer) {
+                            layer.bindPopup(`
+                                <div class="p-2">
+                                    <h3 class="font-bold text-lg">${feature.properties.name}</h3>
+                                    <p class="text-sm text-gray-600">Provincia: ${feature.properties.province}</p>
+                                </div>
+                            `);
+                        }
+                    }).addTo(map);
+                })
+                .catch(error => console.log('Archivo de municipios no disponible'));
+
+            // Cargar proyectos de infraestructura (si existe la API)
+            fetch('/api/infrastructure-projects')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(project => {
+                        if (project.latitude && project.longitude) {
+                            const marker = L.marker([project.latitude, project.longitude], {
+                                icon: L.divIcon({
+                                    className: 'custom-marker',
+                                    html: `<div style="background-color: #0f766e; width: 24px; height: 24px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>`,
+                                    iconSize: [24, 24],
+                                    iconAnchor: [12, 12]
+                                })
+                            }).addTo(map);
+
+                            marker.bindPopup(`
+                                <div class="p-2">
+                                    <h3 class="font-bold text-lg">${project.title}</h3>
+                                    <p class="text-sm text-gray-600">${project.description || ''}</p>
+                                    <p class="text-sm"><strong>Categoría:</strong> ${project.category || '—'}</p>
+                                    <p class="text-sm"><strong>Municipio:</strong> ${project.municipality || '—'}</p>
+                                    <p class="text-sm"><strong>Estado:</strong> ${project.status || '—'}</p>
+                                    ${project.budget ? `<p class="text-sm"><strong>Presupuesto:</strong> Bs. ${parseFloat(project.budget).toLocaleString()}</p>` : ''}
+                                </div>
+                            `);
+                        }
+                    });
+                })
+                .catch(error => console.log('API de proyectos no disponible'));
+        }
     });
 </script>
 @endsection
