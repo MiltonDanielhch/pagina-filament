@@ -21,7 +21,7 @@ class MarcoNormativosTable
             ->columns([
                 TextColumn::make('type')
                     ->label('Tipo')->badge()
-                    ->color(fn (string $s): string => match ($s) {
+                    ->color(fn (string $state): string => match ($state) {
                         'ley' => 'danger', 'decreto_supremo' => 'warning',
                         'decreto' => 'info', 'resolución' => 'success',
                         default => 'gray',
@@ -30,7 +30,7 @@ class MarcoNormativosTable
                 TextColumn::make('title')->label('Título')->searchable()->wrap()->limit(50),
                 TextColumn::make('scope')
                     ->label('Ámbito')->badge()
-                    ->color(fn (string $s): string => $s === 'nacional' ? 'primary' : 'success'),
+                    ->color(fn (string $state): string => $state === 'nacional' ? 'primary' : 'success'),
                 TextColumn::make('issue_date')->label('Fecha')->date('d/m/Y')->sortable(),
                 IconColumn::make('is_published')->label('Publicado')->boolean(),
             ])

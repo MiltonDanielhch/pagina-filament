@@ -70,8 +70,7 @@ class AnnouncementForm
                 Grid::make(2)->schema([
                     FileUpload::make('document_file')
                         ->label('Bases / DBC (PDF)')
-                        ->disk('public')->directory('announcements')
-                        ->acceptedFileTypes(['application/pdf']),
+                        ->disk('public')->directory('announcements'),
                     TextInput::make('external_url')
                         ->label('Enlace externo (SICOES)')
                         ->url(),

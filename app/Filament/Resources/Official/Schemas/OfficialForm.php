@@ -30,6 +30,11 @@ class OfficialForm
                             ->relationship('secretariat', 'name')
                             ->searchable()
                             ->preload(),
+                        TextInput::make('area')
+                            ->label('Área')
+                            ->required()
+                            ->maxLength(255)
+                            ->placeholder('Ej: Salud, Educación, Infraestructura'),
                         Select::make('parent_id')
                             ->label('Depende de (organigrama)')
                             ->relationship('parent', 'name')

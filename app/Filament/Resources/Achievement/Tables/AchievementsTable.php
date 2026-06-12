@@ -21,7 +21,7 @@ class AchievementsTable
         return $table
             ->defaultSort('achieved_at', 'desc')
             ->columns([
-                ImageColumn::make('image')
+                ImageColumn::make('image_url')
                     ->label('Imagen')
                     ->square(),
                 TextColumn::make('title')

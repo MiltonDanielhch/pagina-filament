@@ -15,12 +15,12 @@ use App\Models\InfrastructureProject;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\KeyValue;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Section;
 use Illuminate\Support\Str;
 
 class InfrastructureProjectForm
@@ -33,12 +33,13 @@ class InfrastructureProjectForm
                     ->icon('heroicon-o-identification')
                     ->columns(2)
                     ->schema([
-                        TextInput::make('code')
-                            ->label('Código del proyecto')
-                            ->placeholder('GAD-BENI-PI-2026-001')
-                            ->maxLength(50)
-                            ->unique(ignoreRecord: true)
-                            ->helperText('Identificador único institucional (opcional, se puede autogenerar).'),
+                        Select::make('user_id')
+                            ->label('Autor')
+                            ->relationship('user', 'name')
+                            ->default(fn () => auth()->id())
+                            ->disabled(fn () => !auth()->user()?->hasRole('super_admin'))
+                            ->dehydrated()
+                            ->required(),
                         Select::make('secretariat_id')
                             ->label('Secretaría responsable')
                             ->relationship('secretariat', 'name')
@@ -48,8 +49,14 @@ class InfrastructureProjectForm
                     ]),
 
                 Section::make('Identificación')
-                    ->columns(2)
+                    ->columns(1)
                     ->schema([
+                        TextInput::make('code')
+                            ->label('Código del proyecto')
+                            ->placeholder('GAD-BENI-PI-2026-001')
+                            ->maxLength(50)
+                            ->unique(ignoreRecord: true)
+                            ->helperText('Identificador único institucional (opcional, se puede autogenerar).'),
                         TextInput::make('title')
                             ->label('Título del proyecto')
                             ->required()
@@ -67,7 +74,9 @@ class InfrastructureProjectForm
                             ->required()
                             ->maxLength(255)
                             ->unique(ignoreRecord: true)
-                            ->helperText('Se genera automáticamente del título.'),
+                            ->helperText('Se genera automáticamente del título.')
+                            ->disabled()
+                            ->dehydrated(),
                     ]),
 
                 Section::make('Descripción y beneficiarios')

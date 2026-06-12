@@ -16,10 +16,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Achievement extends Model
+class Achievement extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes, LogsActivity;
+    use HasFactory, SoftDeletes, LogsActivity, InteractsWithMedia;
 
     protected $fillable = [
         'user_id',
@@ -28,7 +31,6 @@ class Achievement extends Model
         'description',
         'area',
         'achieved_at',
-        'image',
         'status',
     ];
 
@@ -61,15 +63,52 @@ class Achievement extends Model
     }
 
     /**
+     * Inicialización y reglas de almacenamiento para colecciones multimedia
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('featured')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+            ->singleFile()
+            ->useDisk('public');
+    }
+
+    /**
+     * Sintonización del motor gráfico para conversiones optimizadas automáticas (.webp)
+     */
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(150)
+            ->height(150)
+            ->format('webp')
+            ->quality(80)
+            ->performOnCollections('featured');
+
+        $this->addMediaConversion('medium')
+            ->width(800)
+            ->format('webp')
+            ->quality(85)
+            ->performOnCollections('featured');
+
+        $this->addMediaConversion('large')
+            ->width(1200)
+            ->format('webp')
+            ->quality(90)
+            ->performOnCollections('featured');
+    }
+
+    /**
      * Obtener imagen o placeholder.
      */
     public function getImageUrlAttribute(): string
     {
-        if ($this->image) {
-            return asset('storage/' . $this->image);
+        $media = $this->getFirstMedia('featured');
+        if ($media) {
+            return $media->getUrl();
         }
 
-        return 'https://via.placeholder.com/800x400/0f766e/ffffff?text=Logro+Gubernamental';
+        return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzBmNzY2ZSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI0IiBmaWxsPSIjZmZmZmZmIj5Mb2dybyBHdWJlcm5hbWVudGFsPC90ZXh0Pjwvc3ZnPg==';
     }
 
     protected function getActivitylogOptions(): \Spatie\Activitylog\LogOptions

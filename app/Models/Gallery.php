@@ -97,7 +97,7 @@ class Gallery extends Model implements HasMedia
             return asset('storage/' . $firstImage->image_path);
         }
 
-        return 'https://via.placeholder.com/800x400/0f766e/ffffff?text=Galería';
+        return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzBmNzY2ZSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI0IiBmaWxsPSIjZmZmZmZmIj5HYWxlcsOtYTwvdGV4dD48L3N2Zz4=';
     }
 
     /**

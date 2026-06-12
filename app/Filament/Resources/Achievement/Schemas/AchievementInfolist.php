@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Achievement\Schemas;
 
+use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 
@@ -11,6 +12,9 @@ class AchievementInfolist
     {
         return $schema
             ->components([
+                ImageEntry::make('image_url')
+                    ->label('Imagen')
+                    ->columnSpanFull(),
                 TextEntry::make('title')
                     ->label('Título'),
                 TextEntry::make('area')
@@ -23,7 +27,8 @@ class AchievementInfolist
                     ->badge(),
                 TextEntry::make('description')
                     ->label('Descripción')
-                    ->html(),
+                    ->html()
+                    ->columnSpanFull(),
                 TextEntry::make('user.name')
                     ->label('Registrado por'),
                 TextEntry::make('created_at')

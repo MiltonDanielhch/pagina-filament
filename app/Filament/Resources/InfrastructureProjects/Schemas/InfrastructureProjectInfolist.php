@@ -11,6 +11,7 @@
 namespace App\Filament\Resources\InfrastructureProjects\Schemas;
 
 use App\Models\InfrastructureProject;
+use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Section;

@@ -11,13 +11,13 @@
 namespace App\Filament\Resources\Agendas\Schemas;
 
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Grid;
 
 class AgendaForm
 {
@@ -25,6 +25,23 @@ class AgendaForm
     {
         return $schema
             ->components([
+                Grid::make(2)->schema([
+                    Select::make('user_id')
+                        ->label('Autor')
+                        ->relationship('user', 'name')
+                        ->default(fn () => auth()->id())
+                        ->disabled(fn () => !auth()->user()?->hasRole('super_admin'))
+                        ->dehydrated()
+                        ->required(),
+                    Select::make('status')
+                        ->label('Estado')
+                        ->options([
+                            'published' => 'Publicado',
+                            'cancelled' => 'Cancelado',
+                        ])
+                        ->required()
+                        ->default('published'),
+                ]),
                 Grid::make(2)
                     ->schema([
                         TextInput::make('title')
@@ -34,12 +51,14 @@ class AgendaForm
                             ->live()
                             ->afterStateUpdated(function ($state, callable $set) {
                                 $set('slug', \Illuminate\Support\Str::slug($state));
-                            }),
+                            })
+                            ->columnSpanFull(),
                         TextInput::make('slug')
                             ->label('Slug')
                             ->required()
                             ->maxLength(255)
-                            ->unique(ignoreRecord: true),
+                            ->unique(ignoreRecord: true)
+                            ->columnSpanFull(),
                     ]),
                 Textarea::make('description')
                     ->label('Descripción')
@@ -60,21 +79,10 @@ class AgendaForm
                     ->label('Lugar')
                     ->required()
                     ->maxLength(255),
-                Grid::make(2)
-                    ->schema([
-                        Toggle::make('is_public')
-                            ->label('Público')
-                            ->default(true)
-                            ->inline(false),
-                        Select::make('status')
-                            ->label('Estado')
-                            ->options([
-                                'published' => 'Publicado',
-                                'cancelled' => 'Cancelado',
-                            ])
-                            ->required()
-                            ->default('published'),
-                    ]),
+                Toggle::make('is_public')
+                    ->label('Público')
+                    ->default(true)
+                    ->inline(false),
             ]);
     }
 }

@@ -2,7 +2,15 @@
 
 namespace App\Filament\Resources\Achievement\Schemas;
 
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Grid;
+use Illuminate\Support\Str;
 
 class AchievementForm
 {
@@ -10,49 +18,62 @@ class AchievementForm
     {
         return $schema
             ->components([
-                \Filament\Forms\Components\Section::make('Información del Logro')
+                Section::make('Información del Logro')
                     ->schema([
-                        \Filament\Forms\Components\TextInput::make('title')
+                        Grid::make(2)->schema([
+                            Select::make('user_id')
+                                ->label('Autor')
+                                ->relationship('user', 'name')
+                                ->default(fn () => auth()->id())
+                                ->disabled(fn () => !auth()->user()?->hasRole('super_admin'))
+                                ->dehydrated()
+                                ->required(),
+                            Select::make('status')
+                                ->label('Estado')
+                                ->options([
+                                    'draft' => 'Borrador',
+                                    'published' => 'Publicado',
+                                ])
+                                ->default('draft')
+                                ->required(),
+                        ]),
+                        TextInput::make('title')
                             ->label('Título del logro')
                             ->required()
-                            ->maxLength(255),
-                        \Filament\Forms\Components\TextInput::make('area')
+                            ->maxLength(255)
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(function ($state, $set) {
+                                $set('slug', Str::slug($state));
+                            })
+                            ->columnSpanFull(),
+                        TextInput::make('slug')
+                            ->label('Slug')
+                            ->required()
+                            ->disabled()
+                            ->dehydrated()
+                            ->columnSpanFull(),
+                        TextInput::make('area')
                             ->label('Área de gobierno')
                             ->placeholder('Ej: Salud, Educación, Infraestructura')
                             ->maxLength(100),
-                        \Filament\Forms\Components\DatePicker::make('achieved_at')
+                        DatePicker::make('achieved_at')
                             ->label('Fecha del logro'),
-                        \Filament\Forms\Components\Select::make('status')
-                            ->label('Estado')
-                            ->options([
-                                'draft' => 'Borrador',
-                                'published' => 'Publicado',
-                            ])
-                            ->default('draft')
-                            ->required(),
                     ])
                     ->columns(2),
-                \Filament\Forms\Components\Section::make('Descripción')
+                Section::make('Descripción')
                     ->schema([
-                        \Filament\Forms\Components\RichEditor::make('description')
+                        RichEditor::make('description')
                             ->label('Descripción completa')
                             ->required()
-                            ->toolbar(fn () => [
-                                'bold', 'italic', 'underline', 'strike',
-                                'h2', 'h3',
-                                'bulletList', 'orderedList',
-                                'link', 'blockquote', 'codeBlock',
-                                'undo', 'redo',
-                            ]),
+                            ->columnSpanFull(),
                     ]),
-                \Filament\Forms\Components\Section::make('Imagen')
+                Section::make('Imagen')
                     ->schema([
-                        \Filament\Forms\Components\FileUpload::make('image')
+                        SpatieMediaLibraryFileUpload::make('image')
                             ->label('Imagen')
-                            ->image()
-                            ->disk('public')
-                            ->directory('achievements')
-                            ->imagePreviewHeight(200),
+                            ->collection('featured')
+                            ->multiple(false)
+                            ->columnSpanFull(),
                     ]),
             ]);
     }

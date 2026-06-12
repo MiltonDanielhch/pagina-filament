@@ -10,12 +10,12 @@
 
 namespace App\Filament\Resources\DepartmentalStatistics\Schemas;
 
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
 
 class DepartmentalStatisticsForm
 {
@@ -31,8 +31,7 @@ class DepartmentalStatisticsForm
                                     ->label('Año')
                                     ->required()
                                     ->numeric()
-                                    ->min(2000)
-                                    ->max(2100),
+                                    ->rules(['min:2000', 'max:2100']),
                                 Select::make('user_id')
                                     ->label('Usuario')
                                     ->relationship('user', 'name')
