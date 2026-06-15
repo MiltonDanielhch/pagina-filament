@@ -118,7 +118,7 @@
 {{-- =====================================================
      BLOQUE 5: Trámites Destacados
      ===================================================== --}}
-@if(isset($featuredProcedures) && $featuredProcedures->count() > 0)
+<!-- @if(isset($featuredProcedures) && $featuredProcedures->count() > 0)
 <section class="py-16 bg-cream" aria-label="Trámites destacados">
     <div class="container mx-auto px-4">
         <div class="flex flex-wrap items-end justify-between gap-4 mb-10 reveal">
@@ -143,7 +143,7 @@
         </div>
     </div>
 </section>
-@endif
+@endif -->
 
 {{-- =====================================================
      BLOQUE 7: Últimas Noticias
@@ -331,8 +331,8 @@
                     <div class="rounded-2xl overflow-hidden shadow-2xl mb-4">
                         <img src="{{ asset('images/gobe.jpg') }}" alt="Gobernación del Beni" class="w-full h-64 object-cover">
                     </div>
-                    <div class="bg-gradient-to-br from-[#1b4332] to-[#2d6a4f] rounded-2xl p-5 text-white flex-1 flex flex-col justify-center">
-                        <h3 class="text-lg font-bold mb-2 flex items-center gap-2">
+                    <div class="bg-gradient-to-br from-[#1b4332] to-[#2d6a4f] rounded-2xl p-5 text-white flex-1 flex flex-col justify-center text-center">
+                        <h3 class="text-lg font-bold mb-2 flex items-center justify-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                             </svg>
