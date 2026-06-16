@@ -35,6 +35,7 @@
 
         {{-- Bloques normativos --}}
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            @if($marcoNormativo ?? true)
             <a href="{{ route('transparency.marco-normativo') }}"
                class="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-teal-500">
                 <div class="w-14 h-14 bg-teal-100 text-teal-700 rounded-xl flex items-center justify-center mb-4 group-hover:bg-teal-600 group-hover:text-white transition">
@@ -48,7 +49,9 @@
                 </p>
                 <p class="text-xs text-teal-700 font-semibold">{{ $marcoCount ?? 0 }} documentos publicados →</p>
             </a>
+            @endif
 
+            @if($presupuesto ?? true)
             <a href="{{ route('transparency.presupuesto') }}"
                class="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-emerald-500">
                 <div class="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center mb-4 group-hover:bg-emerald-600 group-hover:text-white transition">
@@ -62,7 +65,9 @@
                 </p>
                 <p class="text-xs text-emerald-700 font-semibold">Ver detalle →</p>
             </a>
+            @endif
 
+            @if($poa ?? true)
             <a href="{{ route('transparency.poa') }}"
                class="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-blue-500">
                 <div class="w-14 h-14 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition">
@@ -76,7 +81,9 @@
                 </p>
                 <p class="text-xs text-blue-700 font-semibold">Ver detalle →</p>
             </a>
+            @endif
 
+            @if($informes ?? true)
             <a href="{{ route('transparency.informes') }}"
                class="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-purple-500">
                 <div class="w-14 h-14 bg-purple-100 text-purple-700 rounded-xl flex items-center justify-center mb-4 group-hover:bg-purple-600 group-hover:text-white transition">
@@ -90,7 +97,9 @@
                 </p>
                 <p class="text-xs text-purple-700 font-semibold">Ver detalle →</p>
             </a>
+            @endif
 
+            @if($rendicion ?? true)
             <a href="{{ route('transparency.rendicion') }}"
                class="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-amber-500">
                 <div class="w-14 h-14 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center mb-4 group-hover:bg-amber-600 group-hover:text-white transition">
@@ -104,7 +113,9 @@
                 </p>
                 <p class="text-xs text-amber-700 font-semibold">Ver detalle →</p>
             </a>
+            @endif
 
+            @if($auditorias ?? true)
             <a href="{{ route('transparency.auditorias') }}"
                class="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-red-500">
                 <div class="w-14 h-14 bg-red-100 text-red-700 rounded-xl flex items-center justify-center mb-4 group-hover:bg-red-600 group-hover:text-white transition">
@@ -118,7 +129,9 @@
                 </p>
                 <p class="text-xs text-red-700 font-semibold">Ver detalle →</p>
             </a>
+            @endif
 
+            @if($convocatorias ?? true)
             <a href="{{ route('announcements.index') }}"
                class="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-orange-500">
                 <div class="w-14 h-14 bg-orange-100 text-orange-700 rounded-xl flex items-center justify-center mb-4 group-hover:bg-orange-600 group-hover:text-white transition">
@@ -132,7 +145,9 @@
                 </p>
                 <p class="text-xs text-orange-700 font-semibold">Ver detalle →</p>
             </a>
+            @endif
 
+            @if($datosAbiertos ?? true)
             <a href="{{ route('open-data.index') }}"
                class="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-indigo-500">
                 <div class="w-14 h-14 bg-indigo-100 text-indigo-700 rounded-xl flex items-center justify-center mb-4 group-hover:bg-indigo-600 group-hover:text-white transition">
@@ -146,6 +161,7 @@
                 </p>
                 <p class="text-xs text-indigo-700 font-semibold">Ver detalle →</p>
             </a>
+            @endif
 
             <a href="{{ route('statistics') }}"
                class="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-cyan-500">

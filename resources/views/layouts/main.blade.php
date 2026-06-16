@@ -163,33 +163,33 @@
                     </a> 
 
                     <!-- Menú de navegación de escritorio -->
-                    <div class="hidden md:flex items-center gap-1">
-                        @if($headerMenu && $headerMenu->items)
-                            @foreach($headerMenu->items->where('parent_id', null) as $item)
-                                @if($item->children->count() > 0)
-                                    <div class="relative desktop-dropdown">
-                                        <button onclick="toggleDropdown(this)" class="dropdown-trigger px-3 py-2 rounded-lg text-gray-700 hover:bg-teal-50 hover:text-teal-700 transition font-medium flex items-center gap-1">
-                                            {{ $item->label }}
-                                            <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                                            </svg>
-                                        </button>
-                                        <div class="dropdown-menu hidden absolute right-0 mt-2 min-w-[16rem] bg-white rounded-lg shadow-xl border border-gray-100 py-1 z-50">
-                                            @foreach($item->children as $child)
-                                                <a href="{{ $child->page_id ? route('pages.show', $child->page->slug) : $child->url }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-teal-600 hover:text-white transition">
-                                                    {{ $child->label }}
-                                                </a>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                @else
-                                    <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}" class="px-3 py-2 rounded-lg text-gray-700 hover:bg-teal-50 hover:text-teal-700 transition font-medium">
+                    @if($headerMenu && $headerMenu->is_active && $headerMenu->items)
+                    <div id="desktop-menu" class="hidden md:flex items-center gap-1 transition-all duration-300">
+                        @foreach($headerMenu->items->where('parent_id', null) as $item)
+                            @if($item->children->count() > 0)
+                                <div class="relative desktop-dropdown">
+                                    <button onclick="toggleDropdown(this)" class="dropdown-trigger px-3 py-2 rounded-lg text-gray-700 hover:bg-teal-50 hover:text-teal-700 transition font-medium flex items-center gap-1">
                                         {{ $item->label }}
-                                    </a>
-                                @endif
-                            @endforeach
-                        @endif
+                                        <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                        </svg>
+                                    </button>
+                                    <div class="dropdown-menu hidden absolute right-0 mt-2 min-w-[16rem] bg-white rounded-lg shadow-xl border border-gray-100 py-1 z-50">
+                                        @foreach($item->children as $child)
+                                            <a href="{{ $child->page_id ? route('pages.show', $child->page->slug) : $child->url }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-teal-600 hover:text-white transition">
+                                                {{ $child->label }}
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @else
+                                <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}" class="px-3 py-2 rounded-lg text-gray-700 hover:bg-teal-50 hover:text-teal-700 transition font-medium">
+                                    {{ $item->label }}
+                                </a>
+                            @endif
+                        @endforeach
                     </div>
+                    @endif
 
                     <!-- Botón móvil -->
                     <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-600" aria-label="Abrir menú">
@@ -199,35 +199,35 @@
             </nav>
 
             <!-- Menú móvil -->
+            @if($headerMenu && $headerMenu->is_active && $headerMenu->items)
             <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-200">
                 <nav class="container mx-auto px-4 py-3">
-                    @if($headerMenu && $headerMenu->items)
-                        @foreach($headerMenu->items->where('parent_id', null) as $item)
-                            @if($item->children->count() > 0)
-                                <div class="mobile-dropdown">
-                                    <button onclick="toggleMobileDropdown(this)" class="dropdown-trigger w-full flex items-center justify-between px-3 py-3 text-gray-700 hover:bg-teal-50 transition font-medium">
-                                        {{ $item->label }}
-                                        <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                                        </svg>
-                                    </button>
-                                    <div class="dropdown-menu hidden pl-4 pb-2">
-                                        @foreach($item->children as $child)
-                                            <a href="{{ $child->page_id ? route('pages.show', $child->page->slug) : $child->url }}" class="block px-4 py-2 text-sm text-gray-600 hover:bg-teal-50 hover:text-teal-700 transition">
-                                                {{ $child->label }}
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            @else
-                                <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}" class="block px-3 py-3 text-gray-700 hover:bg-teal-50 transition font-medium">
+                    @foreach($headerMenu->items->where('parent_id', null) as $item)
+                        @if($item->children->count() > 0)
+                            <div class="mobile-dropdown">
+                                <button onclick="toggleMobileDropdown(this)" class="dropdown-trigger w-full flex items-center justify-between px-3 py-3 text-gray-700 hover:bg-teal-50 transition font-medium">
                                     {{ $item->label }}
-                                </a>
-                            @endif
-                        @endforeach
-                    @endif
+                                    <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                    </svg>
+                                </button>
+                                <div class="dropdown-menu hidden pl-4 pb-2">
+                                    @foreach($item->children as $child)
+                                        <a href="{{ $child->page_id ? route('pages.show', $child->page->slug) : $child->url }}" class="block px-4 py-2 text-sm text-gray-600 hover:bg-teal-50 hover:text-teal-700 transition">
+                                            {{ $child->label }}
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @else
+                            <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}" class="block px-3 py-3 text-gray-700 hover:bg-teal-50 transition font-medium">
+                                {{ $item->label }}
+                            </a>
+                        @endif
+                    @endforeach
                 </nav>
             </div>
+            @endif
         </header>
     </div>
 

@@ -9,25 +9,24 @@ class MenuComposer
 {
     public function compose(View $view)
     {
-        // Obtener menús activos por ubicación con items y children
+        // Cargar ítems padre activos con sus hijos también activos
+        $itemQuery = function ($query) {
+            $query->where('is_active', true)
+                ->where('parent_id', null)
+                ->orderBy('order')
+                ->with(['children' => function ($q) {
+                    $q->where('is_active', true)->orderBy('order');
+                }]);
+        };
+
         $headerMenu = Menu::where('location', 'header')
             ->where('is_active', true)
-            ->with(['items' => function ($query) {
-                $query->where('is_active', true)
-                    ->where('parent_id', null)
-                    ->orderBy('order')
-                    ->with('children');
-            }])
+            ->with(['items' => $itemQuery])
             ->first();
 
         $footerMenu = Menu::where('location', 'footer')
             ->where('is_active', true)
-            ->with(['items' => function ($query) {
-                $query->where('is_active', true)
-                    ->where('parent_id', null)
-                    ->orderBy('order')
-                    ->with('children');
-            }])
+            ->with(['items' => $itemQuery])
             ->first();
 
         $view->with([

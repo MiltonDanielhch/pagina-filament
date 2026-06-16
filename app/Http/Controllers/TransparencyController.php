@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MarcoNormativo;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -11,7 +12,46 @@ class TransparencyController extends Controller
     public function index(): View
     {
         $marcoCount = MarcoNormativo::published()->count();
-        return view('transparency.index', compact('marcoCount'));
+
+        // Mapeo de bloques de transparencia => URL del menú que los habilita
+        $sectionUrls = [
+            'marcoNormativo' => '/transparencia/marco-normativo',
+            'presupuesto'    => '/transparencia/presupuesto',
+            'poa'            => '/transparencia/poa',
+            'informes'       => '/transparencia/informes',
+            'rendicion'      => '/transparencia/rendicion-cuentas',
+            'auditorias'     => '/transparencia/auditorias',
+            'convocatorias'  => '/convocatorias',
+            'datosAbiertos'  => '/datos-abiertos',
+        ];
+
+        // Recoger todos los ítems del menú header (activos e inactivos)
+        $headerItems = collect();
+        $headerMenu = Menu::where('location', 'header')
+            ->where('is_active', true)
+            ->first();
+
+        if ($headerMenu) {
+            $headerItems = $headerMenu->items()->get(['url', 'is_active']);
+        }
+
+        // Cada bloque se muestra por defecto; se oculta solo si existe un
+        // ítem de menú con esa URL y está desactivado.
+        $sectionActive = [];
+        foreach ($sectionUrls as $key => $url) {
+            $normalized = rtrim($url, '/');
+            $matching = $headerItems->first(function ($item) use ($normalized) {
+                return $item->url && rtrim($item->url, '/') === $normalized;
+            });
+
+            // Si hay un ítem de menú asociado, respetar su estado; si no hay, mostrar.
+            $sectionActive[$key] = $matching ? (bool) $matching->is_active : true;
+        }
+
+        return view('transparency.index', array_merge(
+            compact('marcoCount'),
+            $sectionActive
+        ));
     }
 
     public function marcoNormativo(Request $request): View
