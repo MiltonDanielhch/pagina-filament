@@ -115,35 +115,28 @@
         <div id="top-bar" class="bg-[#1b4332] text-white text-sm py-2 transition-all duration-300 ease-in-out">
             <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-2">
                 <div class="flex items-center justify-center md:justify-start flex-wrap gap-x-4 gap-y-1 text-xs sm:text-sm font-medium">
+                    <span class="text-[#d4a017] font-semibold">Horario:</span>
                     <span class="flex items-center gap-1">🕐 Lun - Vie 8:00 - 16:00</span>
-                    <span class="flex items-center gap-1">📞 (591) 346-21651</span>
+                    <span class="text-[#d4a017] font-semibold">Contacto:</span>
+                    <span class="flex items-center gap-1">📍 Plaza José Ballivián N° 1</span>
+                    <span class="flex items-center gap-1">📧 despacho@beni.gob.bo</span>
                 </div>
                 
                 <div class="flex items-center justify-center md:justify-end gap-2 w-full md:w-auto">
-                    <!-- Accesibilidad Controles -->
-                    <button onclick="decreaseFontSize()" class="hover:text-[#e9c46a] transition flex items-center justify-center w-8 h-8" title="Disminuir fuente" aria-label="Disminuir tamaño de fuente">
-                        <span class="text-xs font-bold">A-</span>
-                    </button>
-                    <button onclick="resetFontSize()" class="hover:text-[#e9c46a] transition flex items-center justify-center w-8 h-8" title="Restablecer fuente" aria-label="Restablecer tamaño de fuente">
-                        <span class="text-sm font-bold">A</span>
-                    </button>
-                    <button onclick="increaseFontSize()" class="hover:text-[#e9c46a] transition flex items-center justify-center w-8 h-8" title="Aumentar fuente" aria-label="Aumentar tamaño de fuente">
-                        <span class="text-lg font-bold">A+</span>
-                    </button>
-                    <button onclick="toggleHighContrast()" class="hover:text-[#e9c46a] transition flex items-center gap-1 px-1" title="Modo alto contraste" aria-label="Activar modo alto contraste">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                        <span class="hidden sm:inline text-xs">Alto Contraste</span>
-                    </button>
-                    
-                    <span class="text-[#52b788] hidden md:inline">|</span>
-
+                    <span class="text-[#d4a017] font-semibold text-xs sm:text-sm">Redes Sociales:</span>
                     <!-- Redes Sociales -->
                     <div class="flex items-center gap-2">
                         <a href="https://www.facebook.com/profile.php?id=61589790584981" target="_blank" rel="noopener noreferrer" class="hover:text-amber-200 transition p-1" aria-label="Facebook">
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.637H7.078v-3.497h3.047V9.603c0-3.014 1.825-4.679 4.532-4.679 1.313 0 2.703.235 2.703.235v2.965h-1.524c-1.501 0-1.973.934-1.973 1.893v2.27h3.328l-.527 3.497h-2.801v8.637C19.613 23.027 24 17.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="hover:text-amber-200 transition p-1" aria-label="Instagram">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer" class="hover:text-amber-200 transition p-1" aria-label="TikTok">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.51 1.32-.33 2.91.67 3.99.95 1.09 2.53 1.45 3.88.92 1.13-.45 1.93-1.58 2.03-2.8.05-1.36.02-2.73.02-4.1.01-3.17-.01-6.33.02-9.5z"/></svg>
+                        </a>
+                        <a href="https://x.com/" target="_blank" rel="noopener noreferrer" class="hover:text-amber-200 transition p-1" aria-label="X (Twitter)">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                         </a>
                     </div>
                 </div>
