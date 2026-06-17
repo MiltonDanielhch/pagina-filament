@@ -8,7 +8,7 @@
 @extends('layouts.main')
 
 @section('seo')
-    <meta name="description" content="Formulario de contacto de la Gobernación Autónoma Departamental del Beni. Envía tus consultas, sugerencias y trámites. Horario de atención de lunes a viernes de 8:00 a 16:00. Teléfono: (591) 346-21651.">
+    <meta name="description" content="Formulario de contacto de la Gobernación Autónoma Departamental del Beni. Envía tus consultas, sugerencias y trámites. Horario de atención de lunes a viernes de 8:00 a 16:00.">
 @endsection
 
 @section('content')

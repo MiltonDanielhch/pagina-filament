@@ -40,7 +40,7 @@ class HomeController extends Controller
     public function index()
     {
         // Cache de queries pesadas: 5 minutos
-        $data = Cache::remember('home:index:v1', 300, function () {
+        $data = Cache::remember('home:index:v2', 300, function () {
             // Bloque 3 — Hero Slider
             $slides = Slide::where('is_active', true)->orderBy('order')->get();
 
@@ -143,6 +143,7 @@ class HomeController extends Controller
                 ->where('position_level', '<=', 3)
                 ->orderBy('position_level')
                 ->take(5)
+                ->with('media')
                 ->get();
 
             // Bloque 16 — Multimedia

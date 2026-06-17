@@ -7,6 +7,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Schemas\Schema;
 
 class OfficialForm
@@ -49,11 +50,11 @@ class OfficialForm
                             ->label('Teléfono')
                             ->tel()
                             ->maxLength(50),
-                        FileUpload::make('image')
+                        SpatieMediaLibraryFileUpload::make('image')
                             ->label('Fotografía')
-                            ->image()
+                            ->collection('officials')
                             ->disk('public')
-                            ->directory('officials')
+                            ->multiple(false)
                             ->imagePreviewHeight(150),
                     ])
                     ->columns(2),

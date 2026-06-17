@@ -15,6 +15,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class OfficialsTable
 {
@@ -23,8 +24,9 @@ class OfficialsTable
         return $table
             ->defaultSort('sort_order', 'asc')
             ->columns([
-                ImageColumn::make('image')
+                SpatieMediaLibraryImageColumn::make('image')
                     ->label('Foto')
+                    ->collection('officials')
                     ->square(),
                 TextColumn::make('name')
                     ->label('Nombre')

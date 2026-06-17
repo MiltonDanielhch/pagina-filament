@@ -15,10 +15,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Official extends Model
+class Official extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, InteractsWithMedia;
 
     protected $fillable = [
         'user_id', 'parent_id', 'secretariat_id',
@@ -106,14 +109,30 @@ class Official extends Model
     }
 
     /**
-     * Obtener foto o placeholder.
+     * Obtener foto o placeholder usando Spatie Media Library.
      */
     public function getImageUrlAttribute(): string
     {
-        if ($this->image) {
-            return asset('storage/' . $this->image);
+        if ($this->hasMedia('officials')) {
+            return $this->getFirstMediaUrl('officials');
         }
 
         return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&background=0f766e&color=ffffff&size=200';
+    }
+
+    /**
+     * Configurar conversiones de imágenes para funcionarios.
+     */
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(150)
+            ->height(150)
+            ->nonQueued();
+
+        $this->addMediaConversion('medium')
+            ->width(300)
+            ->height(300)
+            ->nonQueued();
     }
 }

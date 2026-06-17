@@ -27,7 +27,7 @@
                 <source media="(max-width: 1024px)" srcset="{{ $slide->getFirstMediaUrl('slides') ?: $slide->image }}?w=1200&q=85">
                 <img src="{{ $slide->getFirstMediaUrl('slides') ?: $slide->image }}" alt="{{ $slide->title }}" class="w-full h-full object-cover" loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
             </picture>
-            <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-black/40 via-black/15 to-transparent"></div>
         </div>
         @endforeach
     </div>
@@ -281,10 +281,15 @@
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             @foreach($gabinete as $person)
             <div class="text-center">
+                @if($person->getFirstMediaUrl('officials'))
+                <img src="{{ $person->getFirstMediaUrl('officials') }}" alt="{{ $person->name }}" 
+                     class="aspect-square w-full max-w-[160px] mx-auto rounded-2xl object-cover shadow-md mb-3 ring-2 ring-[#d4a017]/30">
+                @else
                 <div class="aspect-square w-full max-w-[160px] mx-auto bg-gradient-to-br from-[#2d6a4f] to-[#1b4332] rounded-2xl flex items-center justify-center text-white text-4xl font-bold shadow-md mb-3 ring-2 ring-[#d4a017]/30">
-                    {{ strtoupper(mb_substr($person->full_name, 0, 1)) }}
+                    {{ strtoupper(mb_substr($person->name, 0, 1)) }}
                 </div>
-                <h3 class="text-sm font-bold text-gray-900 line-clamp-2">{{ $person->full_name }}</h3>
+                @endif
+                <h3 class="text-sm font-bold text-gray-900 line-clamp-2">{{ $person->name }}</h3>
                 <p class="text-xs text-[#2d6a4f] font-semibold mt-1 line-clamp-1">{{ $person->position ?? 'Autoridad' }}</p>
             </div>
             @endforeach
