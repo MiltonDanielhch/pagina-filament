@@ -23,6 +23,7 @@ use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\OpenDatasetController;
 use App\Http\Controllers\CredentialController;
+use App\Http\Controllers\ExternalSystemsController;
 use Illuminate\Support\Facades\Route;
 
 // Filament routes (auto-registered by Filament)
@@ -45,6 +46,8 @@ Route::prefix('tramites')->name('procedures.')->group(function () {
     Route::get('/', [ProcedureController::class, 'index'])->name('index');
     Route::get('/{slug}', [ProcedureController::class, 'show'])->name('show');
 });
+
+Route::get('/sistemas-externos', [ExternalSystemsController::class, 'index'])->name('external-systems');
 
 // --- Convocatorias y contratación ---
 Route::prefix('convocatorias')->name('announcements.')->group(function () {

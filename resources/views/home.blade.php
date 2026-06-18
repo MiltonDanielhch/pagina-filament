@@ -231,7 +231,7 @@
 {{-- =====================================================
      BLOQUE 8: Transparencia en Cifras
      ===================================================== --}}
-@if(isset($stats))
+<!-- @if(isset($stats))
 <section class="py-16 bg-gradient-to-br from-[#1b4332] via-[#2d6a4f] to-[#1b4332] text-white bg-nature-pattern" aria-label="Transparencia en cifras">
     <div class="container mx-auto px-4">
         <div class="text-center mb-10">
@@ -244,12 +244,12 @@
             <p class="text-gray-700 mt-2 max-w-2xl mx-auto text-sm">Datos abiertos y actualizados del Gobierno Autónomo Departamental</p>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            <div class="reveal reveal-d1"><x-stat-counter :value="$stats['tramites'] ?? 0" label="Trámites disponibles" icon="document" color="teal" :url="route('procedures.index')" /></div>
+            {{-- <div class="reveal reveal-d1"><x-stat-counter :value="$stats['tramites'] ?? 0" label="Trámites disponibles" icon="document" color="teal" :url="route('procedures.index')" /></div> --}}
             <div class="reveal reveal-d2"><x-stat-counter :value="$stats['secretarias'] ?? 0" label="Secretarías" icon="building" color="emerald" :url="route('institutional.secretariats')" /></div>
             <div class="reveal reveal-d3"><x-stat-counter :value="$stats['oficinas'] ?? 0" label="Oficinas de atención" icon="map" color="amber" :url="route('offices')" /></div>
             <div class="reveal reveal-d4"><x-stat-counter :value="$stats['municipios'] ?? 0" label="Municipios" icon="map" color="blue" /></div>
             <div class="reveal reveal-d5"><x-stat-counter :value="$stats['normas'] ?? 0" label="Normas publicadas" icon="document" color="purple" :url="route('transparency.marco-normativo')" /></div>
-            <div class="reveal reveal-d6"><x-stat-counter :value="$stats['datasets'] ?? 0" label="Datasets abiertos" icon="database" color="red" :url="route('open-data.index')" /></div>
+            {{-- <div class="reveal reveal-d6"><x-stat-counter :value="$stats['datasets'] ?? 0" label="Datasets abiertos" icon="database" color="red" :url="route('open-data.index')" /></div> --}}
         </div>
         <div class="text-center mt-8">
             <a href="{{ route('transparency.index') }}" class="inline-flex items-center gap-2 bg-[#d4a017] hover:bg-[#b47d14] text-white font-bold px-6 py-3 rounded-lg transition shadow-lg">
@@ -262,7 +262,7 @@
         </div>
     </div>
 </section>
-@endif
+@endif -->
 
 {{-- =====================================================
      BLOQUE 15: Gabinete / Autoridades

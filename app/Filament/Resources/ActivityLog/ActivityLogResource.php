@@ -45,6 +45,6 @@ class ActivityLogResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return true;
+        return auth()->user()?->can('view_any_activity_log') ?? false;
     }
 }

@@ -35,7 +35,7 @@ class MenuSeeder extends Seeder
                 'order' => 1,
             ],
             [
-                'label' => 'La Gobernación',
+                'label' => 'Gobernación',
                 'url' => '#',
                 'order' => 2,
                 'children' => [
@@ -59,6 +59,7 @@ class MenuSeeder extends Seeder
                     ['label' => 'Quejas y Reclamos', 'url' => '/quejas-reclamos'],
                     ['label' => 'Oficinas de Atención', 'url' => '/atencion-ciudadano'],
                     ['label' => 'Directorio de Funcionarios', 'url' => '/autoridades'],
+                    ['label' => 'Sistemas Digitales', 'url' => '/sistemas-externos'],
                 ],
             ],
             [
