@@ -22,6 +22,7 @@ use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\OpenDatasetController;
+use App\Http\Controllers\CredentialController;
 use Illuminate\Support\Facades\Route;
 
 // Filament routes (auto-registered by Filament)
@@ -110,6 +111,7 @@ Route::prefix('gobierno/proyectos')->name('gobierno.proyectos.')->group(function
     Route::get('/{slug}', [PublicInfrastructureProjectController::class, 'show'])->name('show');
 });
 Route::get('/autoridades', [OfficialController::class, 'index'])->name('officials');
+Route::get('/credenciales', [CredentialController::class, 'index'])->name('credentials');
 Route::get('/contacto', [ContactController::class, 'show'])->name('contact');
 Route::post('/contacto', [ContactController::class, 'send'])->name('contact.send');
 Route::get('/buscar', [SearchController::class, 'index'])->name('search');

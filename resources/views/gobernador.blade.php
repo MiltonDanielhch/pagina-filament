@@ -44,7 +44,7 @@
                     <div class="aspect-[3/4] bg-gradient-to-br from-official/20 to-official/5 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
                         <img src="{{ asset('images/titogobe.jpg') }}" alt="Retrato oficial de Jesús Tito Egüez Rivero, Gobernador del Beni" class="w-full h-full object-cover">
                     </div>
-                    <h2 class="text-2xl font-bold text-gray-900 mb-2 text-center">Jesús "Tito" Egüez Rivero</h2>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2 text-center">Ing. MSc. Jesús "Tito" Egüez Rivero</h2>
                     <p class="text-official font-semibold text-center mb-4">Gobernador del Beni</p>
                     
                     <div class="space-y-3 text-sm">
@@ -75,7 +75,7 @@
                     </div>
 
                     <!-- QR Code Card -->
-                    <div class="mt-6 bg-gradient-to-br from-official to-official-dark rounded-xl p-6 text-center">
+                    <!-- <div class="mt-6 bg-gradient-to-br from-official to-official-dark rounded-xl p-6 text-center">
                         <p class="text-white font-semibold mb-3">Tarjeta Digital del Gobernador</p>
                         <div class="bg-white rounded-lg p-4 inline-block mb-3">
                             <img src="{{ asset('images/qr.jpeg') }}" alt="QR Code - Tarjeta Digital" class="w-32 h-32">
@@ -84,7 +84,7 @@
                         <a href="https://card.beni.gob.bo/" target="_blank" class="inline-block bg-white text-official font-semibold px-4 py-2 rounded-lg hover:bg-official-light transition">
                             Visitar card.beni.gob.bo
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -95,7 +95,7 @@
                     <h3 class="text-2xl font-bold text-gray-900 mb-4">Biografía</h3>
                     <div class="prose prose-lg text-gray-600">
                         <p>
-                            El ingeniero <strong>Jesús "Tito" Egüez Rivero</strong> es el flamante Gobernador del Departamento del Beni, 
+                            El ingeniero M.Sc. <strong>Jesús  "Tito" Egüez Rivero</strong> es el flamante Gobernador del Departamento del Beni, 
                             posesionado en mayo de 2026 tras triunfar en las elecciones subnacionales con el respaldo del 53% de la 
                             ciudadanía beniana (108.245 votos).
                         </p>

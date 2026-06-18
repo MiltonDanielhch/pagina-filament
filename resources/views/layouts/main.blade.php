@@ -117,9 +117,9 @@
                 <div class="flex items-center justify-center md:justify-start flex-wrap gap-x-4 gap-y-1 text-xs sm:text-sm font-medium">
                     <span class="text-[#d4a017] font-semibold">Horario:</span>
                     <span class="flex items-center gap-1">🕐 Lun - Vie 8:00 - 16:00</span>
-                    <span class="text-[#d4a017] font-semibold">Contacto:</span>
-                    <span class="flex items-center gap-1">📍 Plaza José Ballivián N° 1</span>
-                    <span class="flex items-center gap-1">📧 despacho@beni.gob.bo</span>
+                    <!-- <span class="text-[#d4a017] font-semibold">Contacto:</span> -->
+                    <!-- <span class="flex items-center gap-1">📍 Plaza José Ballivián N° 1</span>
+                    <span class="flex items-center gap-1">📧 despacho@beni.gob.bo</span> -->
                 </div>
                 
                 <div class="flex items-center justify-center md:justify-end gap-2 w-full md:w-auto">
