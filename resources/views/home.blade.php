@@ -113,7 +113,7 @@
 {{-- =====================================================
      BLOQUE 4: Banda de Búsqueda
      ===================================================== --}}
-<x-search-band />
+{{-- <x-search-band /> --}}
 
 {{-- =====================================================
      BLOQUE 5: Trámites Destacados
@@ -354,7 +354,7 @@
                                 <div class="text-xs text-gray-300">provincias</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-lg font-bold text-[#e9c46a]">48</div>
+                                <div class="text-lg font-bold text-[#e9c46a]">19</div>
                                 <div class="text-xs text-gray-300">municipios</div>
                             </div>
                             <div class="text-center">

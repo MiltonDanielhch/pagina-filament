@@ -23,7 +23,7 @@ class ComplaintResource extends Resource
     protected static ?string $navigationLabel = 'Quejas y Reclamos';
     protected static ?string $pluralModelLabel = 'Quejas, Reclamos y Sugerencias';
     protected static ?string $modelLabel = 'Queja';
-    protected static string|UnitEnum|null $navigationGroup = 'Servicios';
+    protected static string|UnitEnum|null $navigationGroup = 'Servicios al Ciudadano';
     protected static ?string $recordTitleAttribute = 'code';
 
     public static function form(Schema $schema): Schema { return ComplaintForm::configure($schema); }

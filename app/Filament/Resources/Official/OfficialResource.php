@@ -36,7 +36,7 @@ class OfficialResource extends Resource
 
     protected static ?string $navigationLabel = 'Autoridades';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Gestión';
+    protected static string|UnitEnum|null $navigationGroup = 'La Gobernación';
 
     protected static ?string $recordTitleAttribute = 'name';
 

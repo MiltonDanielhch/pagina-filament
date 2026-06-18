@@ -61,6 +61,7 @@
                 <p class="text-teal-700 font-semibold uppercase tracking-wider mb-2">Reseña Histórica</p>
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Una historia de identidad y progreso</h2>
                 <div class="prose prose-lg text-gray-700 space-y-4">
+                    {!! $about->history ?? '
                     <p>
                         El Departamento del Beni fue creado el <strong>18 de noviembre de 1842</strong>
                         durante el gobierno del Mariscal Andrés de Santa Cruz. Es una de las regiones
@@ -69,7 +70,7 @@
                     </p>
                     <p>
                         La <strong>Gobernación Autónoma Departamental del Beni</strong> es la
-                        institución política-administrativa que rige el departamento en el marco
+                        institución político-administrativa que rige el departamento en el marco
                         de la autonomía reconocida por la Constitución Política del Estado
                         Plurinacional de Bolivia (2009).
                     </p>
@@ -79,15 +80,19 @@
                         invaluable: pueblos moxeño, movima, baure, mojeño, tacana, cavineño,
                         reyesano, joaquineño, entre otros.
                     </p>
+                    ' !!}
                 </div>
             </div>
             <div class="relative">
-                <div class="bg-teal-100 rounded-2xl aspect-[4/3] flex items-center justify-center overflow-hidden shadow-lg">
-                    <svg class="w-32 h-32 text-teal-600/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                              d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/>
-                    </svg>
-                </div>
+                @if($about->image)
+                    <div class="bg-teal-100 rounded-2xl aspect-[4/3] overflow-hidden shadow-lg">
+                        <img src="{{ asset($about->image) }}" alt="Imagen institucional" class="w-full h-full object-cover">
+                    </div>
+                @else
+                    <div class="bg-teal-100 rounded-2xl aspect-[4/3] overflow-hidden shadow-lg">
+                        <img src="{{ asset('images/gobe.jpg') }}" alt="Imagen institucional" class="w-full h-full object-cover">
+                    </div>
+                @endif
                 <div class="absolute -bottom-6 -left-6 bg-amber-500 text-white p-6 rounded-xl shadow-xl max-w-xs">
                     <p class="text-3xl font-bold">213,564</p>
                     <p class="text-sm">km² de extensión territorial</p>
@@ -102,7 +107,7 @@
     <div class="container mx-auto px-4">
         <div class="text-center mb-12">
             <p class="text-teal-700 font-semibold uppercase tracking-wider mb-2">Nuestro compromiso</p>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Misión, Visión y Objetivos</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">{{ $about->title ?? 'Misión, Visión y Objetivos' }}</h2>
         </div>
 
         <div class="grid md:grid-cols-3 gap-8">
@@ -114,12 +119,9 @@
                     </svg>
                 </div>
                 <h3 class="text-2xl font-bold text-gray-900 mb-3">Misión</h3>
-                <p class="text-gray-700 leading-relaxed">
-                    Promover el desarrollo humano integral y sostenible del Departamento
-                    del Beni, mediante la formulación y ejecución de políticas públicas
-                    inclusivas, la gestión transparente de los recursos y la prestación
-                    eficiente de servicios públicos de calidad para todos los benianos.
-                </p>
+                <div class="text-gray-700 leading-relaxed prose prose-sm">
+                    {!! $about->mission ?? 'Promover el desarrollo humano integral y sostenible del Departamento del Beni, mediante la formulación y ejecución de políticas públicas inclusivas, la gestión transparente de los recursos y la prestación eficiente de servicios públicos de calidad para todos los benianos.' !!}
+                </div>
             </div>
 
             <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-8 rounded-2xl border border-amber-200">
@@ -132,12 +134,9 @@
                     </svg>
                 </div>
                 <h3 class="text-2xl font-bold text-gray-900 mb-3">Visión</h3>
-                <p class="text-gray-700 leading-relaxed">
-                    Ser una entidad autónoma departamental líder en Bolivia, reconocida por
-                    su gestión transparente, eficiente y participativa; por el respeto a la
-                    diversidad cultural y el ambiente; y por mejorar la calidad de vida de
-                    los benianos con un enfoque de equidad y justicia social.
-                </p>
+                <div class="text-gray-700 leading-relaxed prose prose-sm">
+                    {!! $about->vision ?? 'Ser una entidad autónoma departamental líder en Bolivia, reconocida por su gestión transparente, eficiente y participativa; por el respeto a la diversidad cultural y el ambiente; y por mejorar la calidad de vida de los benianos con un enfoque de equidad y justicia social.' !!}
+                </div>
             </div>
 
             <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-8 rounded-2xl border border-emerald-200">
@@ -148,28 +147,32 @@
                     </svg>
                 </div>
                 <h3 class="text-2xl font-bold text-gray-900 mb-3">Objetivos</h3>
-                <ul class="text-gray-700 space-y-2">
-                    <li class="flex items-start gap-2">
-                        <span class="text-emerald-600 mt-1">▸</span>
-                        Promover el desarrollo productivo y la seguridad alimentaria.
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-emerald-600 mt-1">▸</span>
-                        Garantizar el acceso universal a salud y educación de calidad.
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-emerald-600 mt-1">▸</span>
-                        Impulsar la conectividad vial y digital del departamento.
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-emerald-600 mt-1">▸</span>
-                        Fortalecer la transparencia y la participación ciudadana.
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-emerald-600 mt-1">▸</span>
-                        Proteger el patrimonio cultural y los recursos naturales.
-                    </li>
-                </ul>
+                <div class="text-gray-700 leading-relaxed prose prose-sm">
+                    {!! $about->objectives ?? '
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-600 mt-1">▸</span>
+                            Promover el desarrollo productivo y la seguridad alimentaria.
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-600 mt-1">▸</span>
+                            Garantizar el acceso universal a salud y educación de calidad.
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-600 mt-1">▸</span>
+                            Impulsar la conectividad vial y digital del departamento.
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-600 mt-1">▸</span>
+                            Fortalecer la transparencia y la participación ciudadana.
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-600 mt-1">▸</span>
+                            Proteger el patrimonio cultural y los recursos naturales.
+                        </li>
+                    </ul>
+                    ' !!}
+                </div>
             </div>
         </div>
     </div>

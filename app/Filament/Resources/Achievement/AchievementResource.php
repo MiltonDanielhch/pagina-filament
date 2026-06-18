@@ -36,7 +36,7 @@ class AchievementResource extends Resource
 
     protected static ?string $navigationLabel = 'Resultados';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Contenido';
+    protected static string|UnitEnum|null $navigationGroup = 'Comunicación';
 
     protected static ?string $recordTitleAttribute = 'title';
 

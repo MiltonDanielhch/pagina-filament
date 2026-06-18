@@ -28,7 +28,7 @@ class SecretariatResource extends Resource
 
     protected static ?string $modelLabel = 'Secretaría';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Gestión';
+    protected static string|UnitEnum|null $navigationGroup = 'La Gobernación';
 
     protected static ?string $recordTitleAttribute = 'name';
 

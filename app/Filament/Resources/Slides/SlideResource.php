@@ -35,7 +35,7 @@ class SlideResource extends Resource
 
     protected static ?string $navigationLabel = 'Diapositivas';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Multimedia';
+    protected static string|UnitEnum|null $navigationGroup = 'Gestión';
 
     protected static ?string $recordTitleAttribute = 'title';
 

@@ -23,7 +23,7 @@ class OfficeResource extends Resource
     protected static ?string $navigationLabel = 'Oficinas';
     protected static ?string $pluralModelLabel = 'Oficinas de Atención';
     protected static ?string $modelLabel = 'Oficina';
-    protected static string|UnitEnum|null $navigationGroup = 'Servicios';
+    protected static string|UnitEnum|null $navigationGroup = 'Servicios al Ciudadano';
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Schema $schema): Schema { return OfficeForm::configure($schema); }

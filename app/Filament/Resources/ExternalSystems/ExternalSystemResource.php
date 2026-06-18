@@ -35,7 +35,7 @@ class ExternalSystemResource extends Resource
 
     protected static ?string $navigationLabel = 'Sistemas externos';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Multimedia';
+    protected static string|UnitEnum|null $navigationGroup = 'Gestión';
 
     protected static ?string $recordTitleAttribute = 'name';
 

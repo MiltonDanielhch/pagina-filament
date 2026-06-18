@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AboutUs;
 use App\Models\Official;
 use App\Models\Secretariat;
 use Illuminate\Http\Request;
@@ -14,10 +15,17 @@ class InstitutionalController extends Controller
         $stats = [
             'secretariats' => Secretariat::active()->count(),
             'authorities' => Official::active()->count(),
-            'municipalities' => 48, // dato del Beni
+            'municipalities' => 19, // dato del Beni
         ];
 
-        return view('institutional.index', compact('stats'));
+        // Cargar datos de AboutUs para sección Sobre Nosotros
+        $about = AboutUs::first();
+
+        if (!$about) {
+            $about = new AboutUs();
+        }
+
+        return view('institutional.index', compact('stats', 'about'));
     }
 
     public function organigrama(): View

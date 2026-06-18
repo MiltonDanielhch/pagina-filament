@@ -27,7 +27,7 @@ class ProcedureResource extends Resource
     protected static ?string $pluralModelLabel = 'Catálogo de Trámites';
     protected static ?string $modelLabel = 'Trámite';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Servicios';
+    protected static string|UnitEnum|null $navigationGroup = 'Servicios al Ciudadano';
 
     protected static ?string $recordTitleAttribute = 'name';
 

@@ -60,17 +60,11 @@ class SiteSettings extends Page implements HasSchemas
             'social_youtube' => SiteSetting::get('social_youtube', ''),
             'social_instagram' => SiteSetting::get('social_instagram', ''),
             'analytics_id' => SiteSetting::get('analytics_id', ''),
-            'about_title' => SiteSetting::get('about_title', ''),
-            'about_description' => SiteSetting::get('about_description', ''),
-            'about_mission' => SiteSetting::get('about_mission', ''),
-            'about_vision' => SiteSetting::get('about_vision', ''),
-            'about_image' => SiteSetting::get('about_image', ''),
         ];
 
         // Convert FileUpload string paths to arrays for Filament (Livewire v3 requires arrays)
         $settings['site_logo'] = $this->normalizeImageValue($settings['site_logo']);
         $settings['site_favicon'] = $this->normalizeImageValue($settings['site_favicon']);
-        $settings['about_image'] = $this->normalizeImageValue($settings['about_image']);
 
         $this->data = $settings;
 
@@ -148,27 +142,6 @@ class SiteSettings extends Page implements HasSchemas
                                     ->label('Instagram')
                                     ->url(),
                             ]),
-                        \Filament\Schemas\Components\Tabs\Tab::make('Sobre Nosotros')
-                            ->schema([
-                                TextInput::make('about_title')
-                                    ->label('Título'),
-                                RichEditor::make('about_description')
-                                    ->label('Descripción')
-                                    ->columnSpanFull(),
-                                RichEditor::make('about_mission')
-                                    ->label('Misión')
-                                    ->columnSpanFull(),
-                                RichEditor::make('about_vision')
-                                    ->label('Visión')
-                                    ->columnSpanFull(),
-                                FileUpload::make('about_image')
-                                    ->label('Imagen')
-                                    ->image()
-                                    ->disk('public')
-                                    ->directory('about-images')
-                                    ->imagePreviewHeight(200)
-                                    ->columnSpanFull(),
-                            ]),
                         \Filament\Schemas\Components\Tabs\Tab::make('Avanzado')
                             ->schema([
                                 TextInput::make('analytics_id')
@@ -196,12 +169,21 @@ class SiteSettings extends Page implements HasSchemas
         // Use $this->data directly since statePath('data') is set
         $data = $this->data;
 
+        // Debug: log all data being saved
+        \Log::info('Saving settings', [
+            'data' => $data,
+            'about_history' => $data['about_history'] ?? 'NOT SET',
+            'about_objectives' => $data['about_objectives'] ?? 'NOT SET',
+            'about_mission' => $data['about_mission'] ?? 'NOT SET',
+            'about_vision' => $data['about_vision'] ?? 'NOT SET',
+        ]);
+
         foreach ($data as $key => $value) {
             // Skip empty arrays
             if (is_array($value) && count($value) === 0) {
                 continue;
             }
-            // Handle FileUpload arrays
+            // Handle FileUpload arrays (including SpatieMediaLibraryFileUpload)
             if (is_array($value) && count($value) > 0) {
                 $firstValue = reset($value);
                 // Skip "[]" marker strings (used when image is removed)
@@ -224,6 +206,18 @@ class SiteSettings extends Page implements HasSchemas
             }
             // Handle null values
             if ($value === null) {
+                continue;
+            }
+            // Handle empty strings - save them as empty string, not skip
+            if ($value === '') {
+                SiteSetting::set($key, '');
+                continue;
+            }
+            // Handle TipTap JSON objects from RichEditor - convert to HTML
+            if (is_array($value) && isset($value['type']) && $value['type'] === 'doc') {
+                // Convert TipTap JSON to HTML using json_encode
+                $html = json_encode($value);
+                SiteSetting::set($key, $html);
                 continue;
             }
             SiteSetting::set($key, $value);

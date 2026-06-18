@@ -27,7 +27,7 @@ class AgendaResource extends Resource
 
     protected static ?string $navigationLabel = 'Agenda';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Contenido';
+    protected static UnitEnum|string|null $navigationGroup = 'Comunicación';
 
     protected static ?string $recordTitleAttribute = 'title';
 

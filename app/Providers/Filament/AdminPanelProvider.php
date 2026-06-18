@@ -54,12 +54,27 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugin(FilamentShieldPlugin::make())
             ->navigationGroups([
-                NavigationGroup::make('Contenido'),
-                NavigationGroup::make('Multimedia'),
-                NavigationGroup::make('Gestión'),
-                NavigationGroup::make('Servicios'),
-                NavigationGroup::make('Transparencia'),
-                NavigationGroup::make('Seguridad'),
+                NavigationGroup::make('La Gobernación')
+                    ->label('La Gobernación')
+                    ->collapsible(),
+                NavigationGroup::make('Servicios al Ciudadano')
+                    ->label('Servicios al Ciudadano')
+                    ->collapsible(),
+                NavigationGroup::make('Transparencia')
+                    ->label('Transparencia')
+                    ->collapsible(),
+                NavigationGroup::make('Comunicación')
+                    ->label('Comunicación')
+                    ->collapsible(),
+                NavigationGroup::make('Contacto')
+                    ->label('Contacto')
+                    ->collapsible(),
+                NavigationGroup::make('Gestión')
+                    ->label('Gestión')
+                    ->collapsible(),
+                NavigationGroup::make('Seguridad')
+                    ->label('Seguridad')
+                    ->collapsible(),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')

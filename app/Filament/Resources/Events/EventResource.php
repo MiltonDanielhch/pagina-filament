@@ -36,7 +36,7 @@ class EventResource extends Resource
 
     protected static ?string $navigationLabel = 'Eventos';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Contenido';
+    protected static string|UnitEnum|null $navigationGroup = 'Comunicación';
 
     protected static ?string $recordTitleAttribute = 'title';
 

@@ -27,7 +27,7 @@ class InfrastructureProjectResource extends Resource
 
     protected static ?string $navigationLabel = 'Proyectos de Infraestructura';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Contenido';
+    protected static UnitEnum|string|null $navigationGroup = 'Gestión';
 
     protected static ?string $recordTitleAttribute = 'title';
 
