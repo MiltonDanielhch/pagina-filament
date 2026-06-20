@@ -42,6 +42,10 @@ self.addEventListener('install', (event) => {
 
 // Estrategia de cache: Network First para contenido dinámico
 self.addEventListener('fetch', (event) => {
+    // Ignorar peticiones no HTTP (chrome-extension, etc.)
+    if (!event.request.url.startsWith('http')) {
+        return;
+    }
     const url = new URL(event.request.url);
 
     // Ignorar peticiones de Livewire (no cachear ni interceptar)

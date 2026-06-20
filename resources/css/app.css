@@ -238,119 +238,31 @@
     max-height: 600px;
 }
 
-/* Hero slider - new two-panel */
+/* Hero slider arrow buttons */
 .slider-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 20;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(6px);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255,255,255,0.6);
+    color: white;
     cursor: pointer;
-    transition: color 0.2s, transform 0.2s;
-    background: none;
-    border: none;
+    transition: background 0.2s, transform 0.2s;
 }
 .slider-arrow:hover {
-    color: rgba(255,255,255,1);
-    transform: translateY(-50%) scale(1.15);
+    background: rgba(255,255,255,0.35);
+    transform: translateY(-50%) scale(1.08);
 }
-.slider-arrow-left { left: -6px; }
-.slider-arrow-right { right: -6px; }
-
-@media (max-width: 767px) {
-    .slider-arrow {
-        width: 32px;
-        height: 32px;
-        background: rgba(0,0,0,0.2);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-        border-radius: 50%;
-    }
-    .slider-arrow:hover {
-        background: rgba(0,0,0,0.35);
-    }
-    .slider-arrow-left { left: 8px; }
-    .slider-arrow-right { right: 8px; }
-}
-
-/* Carousel dots minimal */
-.carousel-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.3);
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    padding: 0;
-}
-.carousel-dot.active {
-    background: #fcd400;
-    width: 20px;
-    border-radius: 3px;
-}
-.carousel-dot:hover {
-    background: rgba(255,255,255,0.6);
-}
-
-/* Inset card border for interactivity */
-.card-inset {
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06), 0 2px 8px -2px rgba(0, 73, 0, 0.08);
-    transition: box-shadow 0.2s ease;
-}
-.card-inset:hover {
-    box-shadow: inset 0 0 0 1px rgba(0, 73, 0, 0.15), 0 8px 24px -4px rgba(0, 73, 0, 0.12);
-}
-
-/* Governor card */
-.gov-card-bg {
-    background-size: cover;
-    background-position: center;
-}
-.gov-card-bg::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,73,0,0.92) 0%, rgba(0,73,0,0.55) 50%, rgba(0,73,0,0.35) 100%);
-    z-index: 0;
-}
-.gov-card-bg img {
-    position: relative;
-    z-index: 1;
-}
-
-/* Governor band overlay */
-.gov-band {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(to right, transparent, rgba(252,212,0,0.9) 20%, rgba(252,212,0,0.9) 80%, transparent);
-    color: #544600;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 2px 24px;
-    white-space: nowrap;
-}
-
-/* Hero card slide content */
-.hero-card-slide {
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.hero-card-slide.entering {
-    opacity: 0;
-    transform: translateY(12px);
-}
-.hero-card-slide.active {
-    opacity: 1;
-    transform: translateY(0);
-}
+.slider-arrow-left { left: 16px; }
+.slider-arrow-right { right: 16px; }
 
 /* Stat card top accent */
 .stat-card-accent {

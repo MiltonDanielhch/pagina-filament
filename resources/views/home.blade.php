@@ -15,178 +15,107 @@
 
 {{-- =====================================================
      BLOQUE 1+2: Header / Navbar — manejados por layout
-     BLOQUE 3: Hero Slider Institucional — Dos paneles
+     BLOQUE 3: Hero Slider
      ===================================================== --}}
-<section class="relative bg-[#004900] overflow-hidden" id="hero-slider" aria-label="Slider institucional">
-    {{-- Background texture & gradient --}}
-    <div class="absolute inset-0 bg-nature-pattern opacity-20"></div>
-    <div class="absolute inset-0 bg-gradient-to-b from-[#004900]/70 via-[#006400]/40 to-[#004900]/80"></div>
+@if($slides->count() > 0)
+<section class="relative overflow-hidden h-[55vh] sm:h-[60vh] lg:h-[86vh] max-h-[500px] md:max-h-[550px] lg:max-h-[710px]" id="hero-slider" aria-label="Diapositivas principales">
+    <div class="absolute inset-0">
+        @foreach($slides as $index => $slide)
+        <div class="absolute inset-0 transition-opacity duration-700 {{ $index === 0 ? 'opacity-100' : 'opacity-0' }}" data-slide="{{ $index }}">
+            <picture>
+                <source media="(max-width: 768px)" srcset="{{ $slide->getFirstMediaUrl('slides') ?: $slide->image }}?w=800&q=80">
+                <source media="(max-width: 1024px)" srcset="{{ $slide->getFirstMediaUrl('slides') ?: $slide->image }}?w=1200&q=85">
+                <img src="{{ $slide->getFirstMediaUrl('slides') ?: $slide->image }}" alt="{{ $slide->title }}" class="w-full h-full object-cover object-center" loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
+            </picture>
+            <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent"></div>
+        </div>
+        @endforeach
+    </div>
 
-    <div class="container mx-auto px-4 relative z-10 py-6 md:py-0 md:h-[520px] lg:h-[560px]">
-        <div class="flex flex-col md:flex-row md:h-full gap-4 md:gap-8 xl:gap-10 md:items-stretch">
-
-            {{-- ========== MOBILE BANNER: Gobernador compacto (visible solo < md) ========== --}}
-            <div class="flex md:hidden flex-col items-center text-center gap-2 mb-2">
-                <div class="inline-flex items-center gap-1.5 bg-[#fcd400] text-[#544600] px-3 py-1 rounded-sm text-[11px] font-semibold uppercase tracking-[0.05em] shadow-sm">
-                    <svg class="w-3.5 h-3.5 text-[#705d00]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
-                    </svg>
-                    Gestión del Gobernador
-                </div>
-                <p class="text-white font-bold text-base leading-tight">BENI PRODUCTIVO, SOSTENIBLE Y REGULABLE</p>
+    <div class="absolute inset-0 flex flex-col justify-center items-start px-6 md:px-16 lg:px-24 py-8 md:py-12">
+        <div class="relative z-20 block w-full text-left">
+            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-white text-xs md:text-sm px-3 py-1.5 rounded-full border border-white/20 w-max mb-6">
+                <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
+                Amazonia Productiva y Soberana
             </div>
-
-            {{-- ========== LEFT PANEL: Gobernador (md+) ========== --}}
-            <div class="hidden md:flex w-[320px] xl:w-[360px] flex-shrink-0 flex-col gap-3 py-8 h-full">
-                <div class="inline-flex items-center gap-1.5 bg-[#fcd400] text-[#544600] px-3 py-1 rounded-sm text-[11px] font-semibold uppercase tracking-[0.05em] self-start shadow-sm">
-                    <svg class="w-3.5 h-3.5 text-[#705d00]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+            <h1 class="text-white font-bold text-2xl md:text-4xl lg:text-6xl tracking-tight mb-2">
+                Beni Productivo:
+            </h1>
+            <h1 class="text-[#E5B225] font-bold text-2xl md:text-4xl lg:text-6xl tracking-tight mb-6">
+                Corazón de la Amazonia
+            </h1>
+            <p class="text-white/90 text-xs md:text-base lg:text-lg font-normal w-full max-w-[85%] sm:max-w-xl md:max-w-2xl mb-8 leading-relaxed whitespace-normal break-words text-left">
+                Trabajamos por un departamento próspero, integrando nuestra riqueza natural con la fuerza de nuestra gente para liderar el desarrollo regional.
+            </p>
+            <div class="flex flex-row flex-wrap gap-4 mt-6 md:mt-8 items-center">
+                <a href="#" class="bg-[#E5B225] hover:bg-[#cda021] text-neutral-950 font-semibold px-6 py-3 rounded-md transition-all duration-200 text-sm md:text-base shadow-lg">
+                    Ver Plan de Gestión 2026
+                </a>
+                <a href="#" class="flex items-center gap-2 border border-white/40 bg-white/5 hover:bg-white/10 text-white font-medium px-6 py-3 rounded-md transition-all duration-200 text-sm md:text-base backdrop-blur-sm">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
                     </svg>
-                    Gestión del Gobernador
-                </div>
-
-                @php
-                    $gov = $gobernador->first() ?? null;
-                    $govBg = $gov && $gov->getFirstMediaUrl('officials') ? $gov->getFirstMediaUrl('officials') : null;
-                @endphp
-                <div class="relative flex-1 rounded-lg overflow-hidden card-ambient min-h-[200px] gov-card-bg"
-                     style="background-image: url('{{ $govBg ?? asset('images/gobe.jpg') }}');">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#004900]/95 via-[#004900]/55 to-[#004900]/35 z-0"></div>
-                    <div class="relative z-10 h-full flex flex-col items-center justify-end pb-5 px-4">
-                        @if($gov)
-                        <div class="flex-1 flex items-center justify-center w-full -mb-2">
-                            <div class="relative w-full flex justify-center">
-                                @if($gov->getFirstMediaUrl('officials'))
-                                <img src="{{ $gov->getFirstMediaUrl('officials') }}"
-                                     alt="{{ $gov->name }}"
-                                     class="h-[220px] w-auto object-contain drop-shadow-xl">
-                                @else
-                                <div class="w-[140px] h-[180px] rounded flex items-center justify-center bg-[#006400]/60 text-white text-5xl font-bold">
-                                    {{ strtoupper(mb_substr($gov->name, 0, 1)) }}
-                                </div>
-                                @endif
-                                <div class="gov-band bottom-[60px]">Gobernador</div>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <p class="text-white font-bold text-sm leading-tight">{{ $gov->name }}</p>
-                            <p class="text-[#fcd400] text-[11px] font-semibold mt-0.5">{{ $gov->position ?? 'Gobernador Departamental' }}</p>
-                        </div>
-                        @else
-                        <div class="flex-1 flex items-center justify-center">
-                            <div class="text-center text-white/70">
-                                <svg class="w-16 h-16 mx-auto mb-2 opacity-40" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>
-                                <p class="text-xs">Autoridad</p>
-                            </div>
-                        </div>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="text-white text-[22px] xl:text-[26px] font-bold leading-[28px] xl:leading-[32px] tracking-tight">
-                    BENI PRODUCTIVO,<br>
-                    <span class="text-[#fcd400]">SOSTENIBLE Y REGULABLE</span>
-                </div>
+                    Video Institucional
+                </a>
             </div>
+        </div>
+    </div>
 
-            {{-- ========== RIGHT PANEL: Carrusel de proyectos/obras ========== --}}
-            <div class="flex-1 min-w-0 relative flex flex-col justify-center md:py-8">
-                @if($slides->count() > 0)
-                <div class="relative">
-                    @foreach($slides as $index => $slide)
-                    @php
-                        $slideImg = $slide->getFirstMediaUrl('slides') ?: $slide->image;
-                    @endphp
-                    <div class="hero-card-slide {{ $index === 0 ? 'active' : 'hidden' }}"
-                         data-slide-card="{{ $index }}">
-                        <div class="relative rounded-lg overflow-hidden card-ambient card-inset bg-[#005300]">
-                            <div class="aspect-[4/3] sm:aspect-[16/9] md:aspect-[21/9] lg:aspect-[5/3] relative">
-                                @if($slideImg)
-                                <img src="{{ $slideImg }}"
-                                     alt="{{ $slide->title }}"
-                                     class="w-full h-full object-cover"
-                                     loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
-                                {{-- Mobile: gradient bottom-to-top fuerte para legibilidad --}}
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 via-40% to-transparent md:bg-gradient-to-r md:from-black/60 md:via-black/30 md:to-transparent"></div>
-                                @else
-                                <div class="w-full h-full bg-gradient-to-br from-[#005300] to-[#004900]"></div>
-                                @endif
-
-                                <div class="absolute inset-0 flex flex-col justify-end p-4 md:p-7 lg:p-8">
-                                    <div>
-                                        <span class="inline-block bg-[#fcd400]/90 text-[#544600] text-[11px] font-semibold uppercase tracking-[0.05em] px-2.5 py-1 rounded-sm mb-1.5 md:mb-2">
-                                            {{ $slide->subtitle ?? 'Proyecto Estratégico' }}
-                                        </span>
-                                    </div>
-                                    <h2 class="text-white font-bold text-[18px] sm:text-xl md:text-[26px] lg:text-[28px] leading-[24px] sm:leading-[28px] md:leading-[34px] lg:leading-[36px] max-w-lg drop-shadow-lg">
-                                        {{ $slide->title ?: 'Gobernación del Beni' }}
-                                    </h2>
-                                    @if($slide->description)
-                                    <p class="text-white/80 text-[13px] md:text-[15px] leading-[18px] md:leading-[22px] mt-1 md:mt-1.5 max-w-md line-clamp-2">
-                                        {{ $slide->description }}
-                                    </p>
-                                    @endif
-                                    @if($slide->link)
-                                    <div class="mt-2 md:mt-3">
-                                        <a href="{{ $slide->link }}"
-                                           class="inline-flex items-center gap-1.5 bg-[#004900] hover:bg-[#005300] text-white text-[12px] md:text-[13px] font-semibold px-3 py-1.5 md:px-4 md:py-2 rounded transition shadow-md group">
-                                            Ver proyecto
-                                            <svg class="w-3 h-3 md:w-3.5 md:h-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-
-                    {{-- Flechas de navegación --}}
-                    @if($slides->count() > 1)
-                    <button class="slider-arrow slider-arrow-left" id="prev-slide" aria-label="Anterior">
-                        <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"/>
-                        </svg>
-                    </button>
-                    <button class="slider-arrow slider-arrow-right" id="next-slide" aria-label="Siguiente">
-                        <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/>
-                        </svg>
-                    </button>
-                    @endif
-                </div>
-
-                {{-- Indicadores de carrusel --}}
-                @if($slides->count() > 1)
-                <div class="flex items-center justify-center gap-2 mt-3 md:mt-4" role="tablist">
-                    @foreach($slides as $index => $slide)
-                    <button data-slide-btn="{{ $index }}"
-                            class="carousel-dot {{ $index === 0 ? 'active' : '' }}"
-                            aria-label="Slide {{ $index + 1 }}"
-                            role="tab"
-                            aria-selected="{{ $index === 0 ? 'true' : 'false' }}">
-                    </button>
-                    @endforeach
-                </div>
-                @endif
-
-                @else
-                <div class="flex items-center justify-center h-full py-12 md:py-0">
-                    <div class="text-white/60 text-center">
-                        <svg class="w-16 h-16 mx-auto mb-3 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                        </svg>
-                        <p class="text-sm font-medium">Contenido próximamente</p>
-                        <p class="text-xs mt-1 opacity-60">Proyectos y obras del departamento</p>
-                    </div>
-                </div>
-                @endif
+    @if($slides->count() > 1)
+    <button class="slider-arrow slider-arrow-left" id="prev-slide" aria-label="Diapositiva anterior">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+        </svg>
+    </button>
+    <button class="slider-arrow slider-arrow-right" id="next-slide" aria-label="Diapositiva siguiente">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+        </svg>
+    </button>
+    <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-3 z-10">
+        <div class="flex gap-2" role="tablist">
+            @foreach($slides as $index => $slide)
+            <button data-slide-btn="{{ $index }}" class="h-2 rounded-full transition-all duration-300 {{ $index === 0 ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/70 w-2' }}" aria-label="Slide {{ $index + 1 }}" role="tab" aria-selected="{{ $index === 0 ? 'true' : 'false' }}"></button>
+            @endforeach
+        </div>
+        <span id="slide-counter" class="text-white/70 text-xs font-mono tabular-nums">1 / {{ $slides->count() }}</span>
+    </div>
+    @endif
+</section>
+@else
+{{-- Estado fallback sin cambios sustanciales de ancho --}}
+<section class="relative overflow-hidden h-[55vh] sm:h-[60vh] lg:h-[86vh] max-h-[500px] md:max-h-[550px] lg:max-h-[710px] bg-gradient-to-br from-[#004900] via-[#006400] to-[#004900] bg-nature-pattern">
+    <div class="absolute inset-0 flex flex-col justify-center items-start px-6 md:px-16 lg:px-24 py-8 md:py-12">
+        <div class="relative z-20 block w-full text-left text-white">
+            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-white text-xs md:text-sm px-3 py-1.5 rounded-full border border-white/20 w-max mb-6">
+                <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
+                Amazonia Productiva y Soberana
+            </div>
+            <h1 class="text-white font-bold text-2xl md:text-4xl lg:text-6xl tracking-tight mb-2">
+                Beni Productivo:
+            </h1>
+            <h1 class="text-[#E5B225] font-bold text-2xl md:text-4xl lg:text-6xl tracking-tight mb-6">
+                Corazón de la Amazonia
+            </h1>
+            <p class="text-white/90 text-xs md:text-base lg:text-lg font-normal w-full max-w-[85%] sm:max-w-xl md:max-w-2xl mb-8 leading-relaxed whitespace-normal break-words text-left">
+                Trabajamos por un departamento próspero, integrando nuestra riqueza natural con la fuerza de nuestra gente para liderar el desarrollo regional.
+            </p>
+            <div class="flex flex-row flex-wrap gap-4 mt-6 md:mt-8 items-center">
+                <a href="{{ route('procedures.index') }}" class="bg-[#E5B225] hover:bg-[#cda021] text-neutral-950 font-semibold px-6 py-3 rounded-md transition-all duration-200 text-sm md:text-base shadow-lg">
+                    Ver Plan de Gestión 2026
+                </a>
+                <a href="{{ route('transparency.index') }}" class="flex items-center gap-2 border border-white/40 bg-white/5 hover:bg-white/10 text-white font-medium px-6 py-3 rounded-md transition-all duration-200 text-sm md:text-base backdrop-blur-sm">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    Video Institucional
+                </a>
             </div>
         </div>
     </div>
 </section>
+@endif
+
 
 {{-- =====================================================
      BLOQUE 4: Banda de Búsqueda
@@ -226,12 +155,8 @@
 {{-- =====================================================
      BLOQUE 7: Últimas Noticias
      ===================================================== --}}
-
-{{-- Wrapper: fondo degradado institucional --}}
-<div class="w-full bg-gradient-to-b from-[#f8f9fa] to-[#e4ebe4]">
-
 @if(isset($latestPosts) && $latestPosts->count() > 0)
-<section class="py-10" aria-label="Últimas noticias">
+<section class="py-10 bg-white" aria-label="Últimas noticias">
     <div class="container mx-auto px-4">
         <div class="flex flex-wrap items-end justify-between gap-4 mb-10 reveal">
             <div>
@@ -350,7 +275,7 @@
      BLOQUE 15: Gabinete / Autoridades
      ===================================================== --}}
 @if(isset($gabinete) && $gabinete->count() > 0)
-<section class="py-10" aria-label="Gabinete departamental">
+<section class="py-10 bg-white" aria-label="Gabinete departamental">
     <div class="container mx-auto px-4">
         <div class="text-center mb-10">
             <p class="inline-flex items-center justify-center gap-2 section-label mx-auto">
@@ -388,7 +313,7 @@
 {{-- =====================================================
      BLOQUE 16: Mapa del Beni (Google Maps)
      ===================================================== --}}
-<section class="py-10" aria-label="Mapa del departamento del Beni">
+<section class="py-10 bg-white" aria-label="Mapa del departamento del Beni">
     <div class="container mx-auto px-4">
         <div class="text-center mb-10">
             <p class="inline-flex items-center justify-center gap-2 text-[12px] font-semibold uppercase tracking-widest text-[#705d00] mb-3 leading-[20px]">
@@ -451,9 +376,6 @@
     </div>
 </section>
 
-</div>
-{{-- /wrapper fondo institucional --}}
-
 {{-- Wave: newsletter (gold) → footer (forest dark) --}}
 <div class="leading-none -mt-px overflow-hidden" aria-hidden="true">
     <svg viewBox="0 0 1440 60" preserveAspectRatio="none" class="w-full h-12 block">
@@ -489,7 +411,7 @@
     });
 
     // =============================================
-    // PARALLAX — hero card image subtle effect
+    // PARALLAX — hero image subtle effect
     // =============================================
     (function() {
         const heroSlider = document.getElementById('hero-slider');
@@ -497,9 +419,9 @@
         window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
             if (scrolled < 700) {
-                const imgs = heroSlider.querySelectorAll('[data-slide-card] img');
+                const imgs = heroSlider.querySelectorAll('[data-slide] img');
                 imgs.forEach(img => {
-                    img.style.transform = `translateY(${scrolled * 0.2}px)`;
+                    img.style.transform = `translateY(${scrolled * 0.25}px)`;
                 });
             }
         }, { passive: true });
@@ -540,39 +462,43 @@
         counters.forEach((c) => observer.observe(c));
     });
 
-    // Hero slider — carrusel de tarjetas (panel derecho)
+    // Hero slider
     document.addEventListener('DOMContentLoaded', function () {
         const slider = document.getElementById('hero-slider');
         if (!slider) return;
-        const cards = slider.querySelectorAll('[data-slide-card]');
+        const slides = slider.querySelectorAll('[data-slide]');
+        const contents = slider.querySelectorAll('[data-slide-content]');
         const btns = slider.querySelectorAll('[data-slide-btn]');
+        const counter = slider.querySelector('#slide-counter');
         const prevBtn = slider.querySelector('#prev-slide');
         const nextBtn = slider.querySelector('#next-slide');
-        if (cards.length <= 1) return;
+        if (slides.length <= 1) return;
 
         let current = 0;
         let autoplayTimer;
 
         const show = (i) => {
-            cards.forEach((c, idx) => {
-                if (idx === i) {
-                    c.classList.remove('hidden', 'active');
-                    c.classList.add('active');
-                    requestAnimationFrame(() => c.classList.remove('entering'));
-                } else {
-                    c.classList.add('hidden');
-                    c.classList.remove('active');
-                }
+            slides.forEach((s, idx) => {
+                s.classList.toggle('opacity-100', idx === i);
+                s.classList.toggle('opacity-0', idx !== i);
+            });
+            contents.forEach((c, idx) => {
+                c.classList.toggle('hidden', idx !== i);
             });
             btns.forEach((b, idx) => {
-                b.classList.toggle('active', idx === i);
-                b.setAttribute('aria-selected', idx === i ? 'true' : 'false');
+                const isActive = idx === i;
+                b.classList.toggle('w-8', isActive);
+                b.classList.toggle('w-2', !isActive);
+                b.classList.toggle('bg-white', isActive);
+                b.classList.toggle('bg-white/50', !isActive);
+                b.setAttribute('aria-selected', isActive ? 'true' : 'false');
             });
+            if (counter) counter.textContent = `${i + 1} / ${slides.length}`;
             current = i;
         };
 
-        const next = () => show((current + 1) % cards.length);
-        const prev = () => show((current - 1 + cards.length) % cards.length);
+        const next = () => show((current + 1) % slides.length);
+        const prev = () => show((current - 1 + slides.length) % slides.length);
 
         const resetAutoplay = () => {
             clearInterval(autoplayTimer);
@@ -583,11 +509,10 @@
         if (prevBtn) prevBtn.addEventListener('click', () => { prev(); resetAutoplay(); });
         if (nextBtn) nextBtn.addEventListener('click', () => { next(); resetAutoplay(); });
 
-        // Swipe support on mobile (solo en el área del carrusel derecho)
-        const rightPanel = slider.querySelector('[data-slide-card]')?.closest('.flex-1') || slider;
+        // Swipe support on mobile
         let touchStartX = 0;
-        rightPanel.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
-        rightPanel.addEventListener('touchend', (e) => {
+        slider.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+        slider.addEventListener('touchend', (e) => {
             const diff = touchStartX - e.changedTouches[0].clientX;
             if (Math.abs(diff) > 50) { diff > 0 ? next() : prev(); resetAutoplay(); }
         }, { passive: true });
