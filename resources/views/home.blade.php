@@ -37,21 +37,21 @@
                 @foreach($slides as $index => $slide)
                 <div class="{{ $index === 0 ? '' : 'hidden' }}" data-slide-content="{{ $index }}">
                     @if($slide->title)
-                    <p class="hero-eyebrow font-semibold mb-2 uppercase tracking-widest text-[#e9c46a] text-sm md:text-base">
+                    <p class="hero-eyebrow font-semibold mb-2 uppercase tracking-widest text-[#fcd400] text-sm md:text-base">
                         {{ $slide->subtitle ?? 'Gobernación del Beni' }}
                     </p>
-                    <h1 class="hero-title text-3xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight drop-shadow-lg">
+                    <h1 class="hero-title text-[28px] md:text-[32px] lg:text-[56px] font-bold mb-4 leading-[36px] md:leading-[40px] lg:leading-[64px] tracking-tight md:tracking-normal lg:tracking-tight drop-shadow-lg">
                         {{ $slide->title }}
                     </h1>
                     @if($slide->description)
-                    <p class="hero-desc text-lg md:text-xl opacity-90 mb-6 max-w-2xl leading-relaxed">{{ $slide->description }}</p>
+                    <p class="hero-desc text-[16px] md:text-[18px] opacity-90 mb-6 max-w-2xl leading-[24px] md:leading-[28px]">{{ $slide->description }}</p>
                     @endif
                     @if($slide->button_text && $slide->button_url)
                     <div class="hero-cta flex flex-wrap gap-3">
-                        <a href="{{ $slide->button_url }}" class="btn-pulse bg-[#d4a017] hover:bg-[#b47d14] text-white px-7 py-3.5 rounded-xl font-bold transition shadow-lg hover:shadow-xl">
+                        <a href="{{ $slide->button_url }}" class="btn-pulse bg-[#705d00] hover:bg-[#544600] text-white px-7 py-3.5 rounded-lg font-bold transition shadow-lg hover:shadow-xl">
                             {{ $slide->button_text }}
                         </a>
-                        <a href="{{ route('transparency.index') }}" class="bg-white/15 hover:bg-white/25 backdrop-blur border border-white/30 text-white px-7 py-3.5 rounded-xl font-semibold transition">
+                        <a href="{{ route('transparency.index') }}" class="bg-white/15 hover:bg-white/25 backdrop-blur border border-white/30 text-white px-7 py-3.5 rounded-lg font-semibold transition">
                             Ver Transparencia
                         </a>
                     </div>
@@ -86,22 +86,22 @@
     @endif
 </section>
 @else
-<section class="relative h-[400px] md:h-[520px] bg-gradient-to-br from-[#1b4332] via-[#2d6a4f] to-[#1b4332] flex items-center overflow-hidden bg-nature-pattern">
+<section class="relative h-[400px] md:h-[520px] bg-gradient-to-br from-[#004900] via-[#006400] to-[#004900] flex items-center overflow-hidden bg-nature-pattern">
     <div class="container mx-auto px-4 relative">
         <div class="max-w-3xl text-white">
-            <p class="hero-eyebrow font-semibold mb-2 uppercase tracking-widest text-[#e9c46a] text-sm md:text-base">Gobierno Autónomo Departamental</p>
-            <h1 class="hero-title text-3xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight drop-shadow-lg">
+            <p class="hero-eyebrow font-semibold mb-2 uppercase tracking-widest text-[#fcd400] text-sm md:text-base">Gobierno Autónomo Departamental</p>
+            <h1 class="hero-title text-[28px] md:text-[32px] lg:text-[56px] font-bold mb-4 leading-[36px] md:leading-[40px] lg:leading-[64px] tracking-tight md:tracking-normal lg:tracking-tight drop-shadow-lg">
                 Gobernación Autónoma Departamental del Beni
             </h1>
-            <p class="hero-desc text-lg md:text-xl opacity-90 mb-6 max-w-2xl leading-relaxed">
+            <p class="hero-desc text-[16px] md:text-[18px] opacity-90 mb-6 max-w-2xl leading-[24px] md:leading-[28px]">
                 Comprometidos con el desarrollo integral de nuestro departamento.
                 Trámites, transparencia y atención al ciudadano en un solo lugar.
             </p>
             <div class="hero-cta flex flex-wrap gap-3">
-                <a href="{{ route('procedures.index') }}" class="btn-pulse bg-[#d4a017] hover:bg-[#b47d14] text-white px-7 py-3.5 rounded-xl font-bold transition shadow-lg hover:shadow-xl">
+                <a href="{{ route('procedures.index') }}" class="btn-pulse bg-[#705d00] hover:bg-[#544600] text-white px-7 py-3.5 rounded-lg font-bold transition shadow-lg hover:shadow-xl">
                     Ver Trámites
                 </a>
-                <a href="{{ route('transparency.index') }}" class="bg-white/15 hover:bg-white/25 backdrop-blur border border-white/30 text-white px-7 py-3.5 rounded-xl font-semibold transition">
+                <a href="{{ route('transparency.index') }}" class="bg-white/15 hover:bg-white/25 backdrop-blur border border-white/30 text-white px-7 py-3.5 rounded-lg font-semibold transition">
                     Portal de Transparencia
                 </a>
             </div>
@@ -149,14 +149,14 @@
      BLOQUE 7: Últimas Noticias
      ===================================================== --}}
 @if(isset($latestPosts) && $latestPosts->count() > 0)
-<section class="py-16 bg-white" aria-label="Últimas noticias">
+<section class="py-10 bg-white" aria-label="Últimas noticias">
     <div class="container mx-auto px-4">
         <div class="flex flex-wrap items-end justify-between gap-4 mb-10 reveal">
             <div>
                 <p class="section-label">Sala de prensa</p>
-                <h2 class="section-title text-3xl md:text-4xl font-bold text-gray-900">Últimas Noticias</h2>
+                <h2 class="section-title text-[24px] md:text-[32px] font-semibold text-gray-900 leading-[32px] md:leading-[40px]">Últimas Noticias</h2>
             </div>
-            <a href="{{ route('blog') }}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-teal-700 hover:text-teal-800 border border-teal-200 hover:border-teal-400 px-4 py-2 rounded-lg transition">
+            <a href="{{ route('blog') }}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#004900] hover:text-[#005300] border border-[#e1e3e4] hover:border-[#004900] px-4 py-2 rounded transition">
                 Ver todas
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -165,7 +165,7 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($latestPosts as $post)
-            <article class="card-lift bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm flex flex-col reveal reveal-d{{ $loop->index + 1 }}">
+            <article class="card-lift bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm flex flex-col reveal reveal-d{{ $loop->index + 1 }}">
                 <a href="{{ route('posts.show', $post->slug) }}" class="block relative overflow-hidden">
                     @if(method_exists($post, 'getFirstMedia') && $post->getFirstMedia('featured'))
                     <img src="{{ $post->getFirstMedia('featured')->getUrl('medium') }}" alt="{{ $post->title }}" class="w-full h-48 object-cover transition-transform duration-500 hover:scale-105" loading="lazy">
@@ -190,7 +190,7 @@
                 <div class="p-5 flex flex-col flex-1">
                     <div class="flex items-center gap-2 mb-3 text-xs">
                         @if($post->category)
-                        <span class="bg-teal-50 text-teal-700 border border-teal-100 px-2 py-0.5 rounded-full font-semibold">{{ $post->category->name }}</span>
+                        <span class="bg-[#f3f4f5] text-[#004900] border border-[#e1e3e4] px-2 py-0.5 rounded-full font-semibold">{{ $post->category->name }}</span>
                         @endif
                         <span class="text-gray-400 flex items-center gap-1">
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -199,15 +199,15 @@
                             {{ optional($post->published_at)->format('d/m/Y') }}
                         </span>
                     </div>
-                    <h3 class="text-base font-bold mb-2 line-clamp-2 leading-snug flex-1">
-                        <a href="{{ route('posts.show', $post->slug) }}" class="hover:text-teal-700 transition text-gray-900">
+                    <h3 class="text-[16px] font-semibold mb-2 line-clamp-2 leading-[24px] flex-1">
+                        <a href="{{ route('posts.show', $post->slug) }}" class="hover:text-[#004900] transition text-gray-900">
                             {{ $post->title }}
                         </a>
                     </h3>
                     @if($post->excerpt)
-                    <p class="text-sm text-gray-500 line-clamp-2 mb-4">{{ $post->excerpt }}</p>
+                    <p class="text-[14px] text-gray-500 line-clamp-2 mb-4 leading-[20px]">{{ $post->excerpt }}</p>
                     @endif
-                    <a href="{{ route('posts.show', $post->slug) }}" class="mt-auto inline-flex items-center gap-1 text-teal-700 hover:text-teal-800 font-semibold text-sm group">
+                    <a href="{{ route('posts.show', $post->slug) }}" class="mt-auto inline-flex items-center gap-1 text-[#004900] hover:text-[#005300] font-semibold text-[14px] group">
                         Leer más
                         <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -224,7 +224,7 @@
 {{-- Wave: noticias (white) → stats (forest) --}}
 <div class="leading-none -mb-px overflow-hidden" aria-hidden="true">
     <svg viewBox="0 0 1440 70" preserveAspectRatio="none" class="w-full h-14 block">
-        <path d="M0,0 C480,70 960,70 1440,0 L1440,70 L0,70 Z" fill="#1b4332"/>
+        <path d="M0,0 C480,70 960,70 1440,0 L1440,70 L0,70 Z" fill="#004900"/>
     </svg>
 </div>
 
@@ -268,34 +268,34 @@
      BLOQUE 15: Gabinete / Autoridades
      ===================================================== --}}
 @if(isset($gabinete) && $gabinete->count() > 0)
-<section class="py-16 bg-white" aria-label="Gabinete departamental">
+<section class="py-10 bg-white" aria-label="Gabinete departamental">
     <div class="container mx-auto px-4">
         <div class="text-center mb-10">
             <p class="inline-flex items-center justify-center gap-2 section-label mx-auto">
-                <span class="block w-5 h-0.5 bg-teal-500 rounded -mb-0.5"></span>
+                <span class="block w-5 h-0.5 bg-[#004900] rounded -mb-0.5"></span>
                 Liderazgo
-                <span class="block w-5 h-0.5 bg-teal-500 rounded -mb-0.5"></span>
+                <span class="block w-5 h-0.5 bg-[#004900] rounded -mb-0.5"></span>
             </p>
-            <h2 class="section-title section-title-center text-3xl md:text-4xl font-bold text-gray-900 mx-auto mt-2">Gabinete Departamental</h2>
+            <h2 class="section-title section-title-center text-[24px] md:text-[32px] font-semibold text-gray-900 mx-auto mt-2 leading-[32px] md:leading-[40px]">Gabinete Departamental</h2>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             @foreach($gabinete as $person)
             <div class="text-center">
                 @if($person->getFirstMediaUrl('officials'))
-                <img src="{{ $person->getFirstMediaUrl('officials') }}" alt="{{ $person->name }}" 
-                     class="aspect-square w-full max-w-[160px] mx-auto rounded-2xl object-cover shadow-md mb-3 ring-2 ring-[#d4a017]/30">
+                <img src="{{ $person->getFirstMediaUrl('officials') }}" alt="{{ $person->name }}"
+                     class="aspect-square w-full max-w-[160px] mx-auto rounded-lg object-cover shadow-md mb-3 ring-2 ring-[#705d00]/30">
                 @else
-                <div class="aspect-square w-full max-w-[160px] mx-auto bg-gradient-to-br from-[#2d6a4f] to-[#1b4332] rounded-2xl flex items-center justify-center text-white text-4xl font-bold shadow-md mb-3 ring-2 ring-[#d4a017]/30">
+                <div class="aspect-square w-full max-w-[160px] mx-auto bg-gradient-to-br from-[#004900] to-[#006400] rounded-lg flex items-center justify-center text-white text-4xl font-bold shadow-md mb-3 ring-2 ring-[#705d00]/30">
                     {{ strtoupper(mb_substr($person->name, 0, 1)) }}
                 </div>
                 @endif
-                <h3 class="text-sm font-bold text-gray-900 line-clamp-2">{{ $person->name }}</h3>
-                <p class="text-xs text-[#2d6a4f] font-semibold mt-1 line-clamp-1">{{ $person->position ?? 'Autoridad' }}</p>
+                <h3 class="text-[14px] font-semibold text-gray-900 line-clamp-2 leading-[20px]">{{ $person->name }}</h3>
+                <p class="text-[12px] text-[#004900] font-semibold mt-1 line-clamp-1 leading-[16px]">{{ $person->position ?? 'Autoridad' }}</p>
             </div>
             @endforeach
         </div>
         <div class="text-center mt-8">
-            <a href="{{ route('institutional.organigrama') }}" class="text-teal-700 font-semibold hover:text-teal-800 inline-flex items-center gap-1">
+            <a href="{{ route('institutional.organigrama') }}" class="text-[#004900] font-semibold hover:text-[#005300] inline-flex items-center gap-1">
                 Ver organigrama completo →
             </a>
         </div>
@@ -306,21 +306,21 @@
 {{-- =====================================================
      BLOQUE 16: Mapa del Beni (Google Maps)
      ===================================================== --}}
-<section class="py-16 bg-white" aria-label="Mapa del departamento del Beni">
+<section class="py-10 bg-white" aria-label="Mapa del departamento del Beni">
     <div class="container mx-auto px-4">
         <div class="text-center mb-10">
-            <p class="inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-widest text-amber-600 mb-3">
-                <span class="block w-5 h-0.5 bg-amber-400 rounded"></span>
+            <p class="inline-flex items-center justify-center gap-2 text-[12px] font-semibold uppercase tracking-widest text-[#705d00] mb-3 leading-[20px]">
+                <span class="block w-5 h-0.5 bg-[#fcd400] rounded"></span>
                 Ubicación geográfica
-                <span class="block w-5 h-0.5 bg-amber-400 rounded"></span>
+                <span class="block w-5 h-0.5 bg-[#fcd400] rounded"></span>
             </p>
-            <h2 class="section-title section-title-center text-3xl md:text-4xl font-bold text-gray-900 mx-auto mt-2">Departamento del Beni</h2>
-            <p class="text-gray-600 mt-3 max-w-2xl mx-auto text-sm">El Beni es el departamento más grande de Bolivia, ubicado en la región amazónica, con una extensión de 213.564 km² y rica biodiversidad.</p>
+            <h2 class="section-title section-title-center text-[24px] md:text-[32px] font-semibold text-gray-900 mx-auto mt-2 leading-[32px] md:leading-[40px]">Departamento del Beni</h2>
+            <p class="text-gray-600 mt-3 max-w-2xl mx-auto text-[14px] leading-[20px]">El Beni es el departamento más grande de Bolivia, ubicado en la región amazónica, con una extensión de 213.564 km² y rica biodiversidad.</p>
         </div>
         <div class="max-w-6xl mx-auto">
             <div class="grid lg:grid-cols-2 gap-8 items-stretch">
                 <!-- Columna izquierda: Mapa -->
-                <div class="rounded-2xl overflow-hidden shadow-2xl h-full">
+                <div class="rounded-lg overflow-hidden shadow-2xl h-full">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3181533!2d-66.5!3d-14.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91e3d0d0d0d0d0d%3A0x0!2sBeni+Department%2C+Bolivia!5e0!3m2!1ses!2sbo&4v1717497600&z=6"
                         width="100%"
@@ -333,33 +333,33 @@
                 </div>
                 <!-- Columna derecha: Foto y dirección -->
                 <div class="flex flex-col h-full">
-                    <div class="rounded-2xl overflow-hidden shadow-2xl mb-4">
+                    <div class="rounded-lg overflow-hidden shadow-2xl mb-4">
                         <img src="{{ asset('images/gobe.jpg') }}" alt="Gobernación del Beni" class="w-full h-64 object-cover">
                     </div>
-                    <div class="bg-gradient-to-br from-[#1b4332] to-[#2d6a4f] rounded-2xl p-5 text-white flex-1 flex flex-col justify-center text-center">
-                        <h3 class="text-lg font-bold mb-2 flex items-center justify-center gap-2">
+                    <div class="bg-gradient-to-br from-[#004900] to-[#006400] rounded-lg p-5 text-white flex-1 flex flex-col justify-center text-center">
+                        <h3 class="text-[18px] font-semibold mb-2 flex items-center justify-center gap-2 leading-[28px]">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                             </svg>
                             Nuestra Dirección
                         </h3>
-                        <p class="text-gray-200 mb-4 text-sm">Plaza José Ballivian acera sur<br>Santísima Trinidad - Beni</p>
+                        <p class="text-gray-200 mb-4 text-[14px] leading-[20px]">Plaza José Ballivian acera sur<br>Santísima Trinidad - Beni</p>
                         <div class="grid grid-cols-4 gap-3">
                             <div class="text-center">
-                                <div class="text-lg font-bold text-[#e9c46a]">213.564</div>
-                                <div class="text-xs text-gray-300">km²</div>
+                                <div class="text-[18px] font-semibold text-[#fcd400] leading-[28px]">213.564</div>
+                                <div class="text-[12px] text-gray-300 leading-[16px]">km²</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-lg font-bold text-[#e9c46a]">8</div>
-                                <div class="text-xs text-gray-300">provincias</div>
+                                <div class="text-[18px] font-semibold text-[#fcd400] leading-[28px]">8</div>
+                                <div class="text-[12px] text-gray-300 leading-[16px]">provincias</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-lg font-bold text-[#e9c46a]">19</div>
-                                <div class="text-xs text-gray-300">municipios</div>
+                                <div class="text-[18px] font-semibold text-[#fcd400] leading-[28px]">19</div>
+                                <div class="text-[12px] text-gray-300 leading-[16px]">municipios</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-lg font-bold text-[#e9c46a]">~500K</div>
-                                <div class="text-xs text-gray-300">habitantes</div>
+                                <div class="text-[18px] font-semibold text-[#fcd400] leading-[28px]">~500K</div>
+                                <div class="text-[12px] text-gray-300 leading-[16px]">habitantes</div>
                             </div>
                         </div>
                     </div>

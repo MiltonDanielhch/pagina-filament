@@ -98,7 +98,7 @@
 <body class="bg-gray-50 min-h-screen flex flex-col antialiased text-gray-800 transition-colors duration-200">
 
     <!-- Skip Link para accesibilidad Keyboard-Only -->
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:bg-amber-500 focus:text-gray-900 focus:px-4 focus:py-2 focus:rounded-br-md font-bold shadow">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:bg-[#fcd400] focus:text-gray-900 focus:px-4 focus:py-2 focus:rounded-br font-bold shadow">
         Ir al contenido principal
     </a>
 
@@ -108,22 +108,22 @@
     <!-- Contenedor Padre Sticky global -->
     <div class="sticky top-0 z-50 w-full flex flex-col" id="nav-wrapper">
 
-        <!-- Gold accent line at very top (Beni Amazónico) -->
-        <div class="h-1 w-full bg-gradient-to-r from-[#1b4332] via-[#d4a017] to-[#1b4332] flex-shrink-0"></div>
+        <!-- Gold accent line at very top (Civic Excellence) -->
+        <div class="h-1 w-full bg-gradient-to-r from-[#004900] via-[#705d00] to-[#004900] flex-shrink-0"></div>
 
         <!-- Top Bar -->
-        <div id="top-bar" class="bg-[#1b4332] text-white text-sm py-2 transition-all duration-300 ease-in-out">
+        <div id="top-bar" class="bg-[#004900] text-white text-sm py-2 transition-all duration-300 ease-in-out">
             <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-2">
                 <div class="flex items-center justify-center md:justify-start flex-wrap gap-x-4 gap-y-1 text-xs sm:text-sm font-medium">
-                    <span class="text-[#d4a017] font-semibold">Horario:</span>
+                    <span class="text-[#fcd400] font-semibold">Horario:</span>
                     <span class="flex items-center gap-1">🕐 Lun - Vie 8:00 - 16:00</span>
-                    <!-- <span class="text-[#d4a017] font-semibold">Contacto:</span> -->
+                    <!-- <span class="text-[#fcd400] font-semibold">Contacto:</span> -->
                     <!-- <span class="flex items-center gap-1">📍 Plaza José Ballivián N° 1</span>
                     <span class="flex items-center gap-1">📧 despacho@beni.gob.bo</span> -->
                 </div>
                 
                 <div class="flex items-center justify-center md:justify-end gap-2 w-full md:w-auto">
-                    <span class="text-[#d4a017] font-semibold text-xs sm:text-sm">Redes Sociales:</span>
+                    <span class="text-[#fcd400] font-semibold text-xs sm:text-sm">Redes Sociales:</span>
                     <!-- Redes Sociales -->
                     <div class="flex items-center gap-2">
                         <a href="https://www.facebook.com/profile.php?id=61589790584981" target="_blank" rel="noopener noreferrer" class="hover:text-amber-200 transition p-1" aria-label="Facebook">
@@ -161,22 +161,22 @@
                         @foreach($headerMenu->items->where('parent_id', null) as $item)
                             @if($item->children->count() > 0)
                                 <div class="relative desktop-dropdown">
-                                    <button onclick="toggleDropdown(this)" class="dropdown-trigger px-3 py-2 rounded-lg text-gray-700 hover:bg-teal-50 hover:text-teal-700 transition font-medium flex items-center gap-1">
+                                    <button onclick="toggleDropdown(this)" class="dropdown-trigger px-3 py-2 rounded text-gray-700 hover:bg-[#f3f4f5] hover:text-[#004900] transition font-medium flex items-center gap-1">
                                         {{ $item->label }}
                                         <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                         </svg>
                                     </button>
-                                    <div class="dropdown-menu hidden absolute right-0 mt-2 min-w-[16rem] bg-white rounded-lg shadow-xl border border-gray-100 py-1 z-50">
+                                    <div class="dropdown-menu hidden absolute right-0 mt-2 min-w-[16rem] bg-white rounded shadow-xl border border-gray-100 py-1 z-50">
                                         @foreach($item->children as $child)
-                                            <a href="{{ $child->page_id ? route('pages.show', $child->page->slug) : $child->url }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-teal-600 hover:text-white transition">
+                                            <a href="{{ $child->page_id ? route('pages.show', $child->page->slug) : $child->url }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#004900] hover:text-white transition">
                                                 {{ $child->label }}
                                             </a>
                                         @endforeach
                                     </div>
                                 </div>
                             @else
-                                <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}" class="px-3 py-2 rounded-lg text-gray-700 hover:bg-teal-50 hover:text-teal-700 transition font-medium">
+                                <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}" class="px-3 py-2 rounded text-gray-700 hover:bg-[#f3f4f5] hover:text-[#004900] transition font-medium">
                                     {{ $item->label }}
                                 </a>
                             @endif
@@ -198,7 +198,7 @@
                     @foreach($headerMenu->items->where('parent_id', null) as $item)
                         @if($item->children->count() > 0)
                             <div class="mobile-dropdown">
-                                <button onclick="toggleMobileDropdown(this)" class="dropdown-trigger w-full flex items-center justify-between px-3 py-3 text-gray-700 hover:bg-teal-50 transition font-medium">
+                                <button onclick="toggleMobileDropdown(this)" class="dropdown-trigger w-full flex items-center justify-between px-3 py-3 text-gray-700 hover:bg-[#f3f4f5] transition font-medium">
                                     {{ $item->label }}
                                     <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -206,14 +206,14 @@
                                 </button>
                                 <div class="dropdown-menu hidden pl-4 pb-2">
                                     @foreach($item->children as $child)
-                                        <a href="{{ $child->page_id ? route('pages.show', $child->page->slug) : $child->url }}" class="block px-4 py-2 text-sm text-gray-600 hover:bg-teal-50 hover:text-teal-700 transition">
+                                        <a href="{{ $child->page_id ? route('pages.show', $child->page->slug) : $child->url }}" class="block px-4 py-2 text-sm text-gray-600 hover:bg-[#f3f4f5] hover:text-[#004900] transition">
                                             {{ $child->label }}
                                         </a>
                                     @endforeach
                                 </div>
                             </div>
                         @else
-                            <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}" class="block px-3 py-3 text-gray-700 hover:bg-teal-50 transition font-medium">
+                            <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}" class="block px-3 py-3 text-gray-700 hover:bg-[#f3f4f5] transition font-medium">
                                 {{ $item->label }}
                             </a>
                         @endif
@@ -230,19 +230,19 @@
     </main>
 
     <!-- Footer Corporativo -->
-    <footer class="bg-[#0d2418] text-gray-300 mt-auto border-t-4 border-[#d4a017] bg-nature-pattern">
+    <footer class="bg-[#344234] text-gray-300 mt-auto border-t-4 border-[#705d00] bg-nature-pattern">
         <div class="container mx-auto px-4 pt-12 pb-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
                 
                 <!-- Identificación Institucional -->
                 <div class="space-y-4">
                     <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-lg overflow-hidden bg-white p-1 flex items-center justify-center shadow-md">
+                        <div class="w-12 h-12 rounded overflow-hidden bg-white p-1 flex items-center justify-center shadow-md">
                             <img src="{{ $logoSrc }}" alt="Gobernación del Beni" class="w-full h-full object-contain">
                         </div>
                         <div>
-                            <h3 class="text-md font-bold text-white leading-tight">Gobernación<br><span class="text-[#e9c46a] text-sm font-medium">del Beni</span></h3>
-                            <p class="text-[10px] text-[#52b788] tracking-wider uppercase">Autónoma Departamental</p>
+                            <h3 class="text-md font-bold text-white leading-tight">Gobernación<br><span class="text-[#fcd400] text-sm font-medium">del Beni</span></h3>
+                            <p class="text-[10px] text-[#82db6f] tracking-wider uppercase">Autónoma Departamental</p>
                         </div>
                     </div>
                     <p class="text-sm text-gray-400 leading-relaxed">
@@ -254,7 +254,7 @@
                 @if($footerMenu && $footerMenu->items && $footerMenu->items->count() > 0)
                     @foreach($footerMenu->items->sortBy('order')->chunk(4) as $chunk)
                         <div class="space-y-3">
-                            <h4 class="text-xs font-bold text-[#d4a017] uppercase tracking-widest border-b border-[#1b4332] pb-2">
+                            <h4 class="text-xs font-bold text-[#fcd400] uppercase tracking-widest border-b border-[#004900] pb-2">
                                 {{ $loop->first ? 'Enlaces Institucionales' : 'Servicios y Más' }}
                             </h4>
                             <ul class="space-y-2 text-sm">
@@ -263,7 +263,7 @@
                                         <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}"
                                            target="{{ $item->target ?? '_self' }}"
                                            class="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-[#d4a017] opacity-50 group-hover:opacity-100 transition-opacity"></span>
+                                            <span class="w-1.5 h-1.5 rounded-full bg-[#fcd400] opacity-50 group-hover:opacity-100 transition-opacity"></span>
                                             {{ $item->label }}
                                         </a>
                                     </li>
@@ -290,22 +290,22 @@
 
                 <!-- Datos de Contacto Directo -->
                 <div class="space-y-3">
-                    <h4 class="text-xs font-bold text-[#d4a017] uppercase tracking-widest border-b border-[#1b4332] pb-2">Información de Contacto</h4>
+                    <h4 class="text-xs font-bold text-[#fcd400] uppercase tracking-widest border-b border-[#004900] pb-2">Información de Contacto</h4>
                     <ul class="space-y-3 text-sm text-gray-400">
                         <li class="flex items-start gap-2">
-                            <svg class="w-4 h-4 mt-0.5 text-[#52b788] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 mt-0.5 text-[#82db6f] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                             </svg>
                             <span>Plaza José Ballivián N° 1<br><span class="text-gray-500 text-xs">Trinidad, Beni - Bolivia</span></span>
                         </li>
                         <!-- <li class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-[#52b788] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 text-[#82db6f] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                             </svg>
                             <span>(591) 346-21651</span>
                         </li> -->
                         <li class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-[#52b788] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 text-[#82db6f] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                             </svg>
                             <a href="mailto:despacho@beni.gob.bo" class="hover:text-white transition">despacho@beni.gob.bo</a>
@@ -315,34 +315,10 @@
 
             </div>
 
-            <!-- Normative Compliance Badges -->
-            <div class="border-t border-[#1b4332] mt-10 pt-6 pb-3">
-                <div class="flex flex-wrap justify-center gap-3 mb-5">
-                    <span class="inline-flex items-center gap-1.5 text-[10px] font-semibold text-gray-400 border border-[#2d6a4f] px-3 py-1.5 rounded-full">
-                        <svg class="w-3 h-3 text-[#52b788]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                        RM 067/2025
-                    </span>
-                    <span class="inline-flex items-center gap-1.5 text-[10px] font-semibold text-gray-400 border border-[#2d6a4f] px-3 py-1.5 rounded-full">
-                        <svg class="w-3 h-3 text-[#52b788]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                        DS 5340/2025
-                    </span>
-                    <span class="inline-flex items-center gap-1.5 text-[10px] font-semibold text-gray-400 border border-[#2d6a4f] px-3 py-1.5 rounded-full">
-                        <svg class="w-3 h-3 text-[#d4a017]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                        HTTPS Seguro
-                    </span>
-                    <span class="inline-flex items-center gap-1.5 text-[10px] font-semibold text-gray-400 border border-[#2d6a4f] px-3 py-1.5 rounded-full">
-                        <svg class="w-3 h-3 text-[#52b788]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                        WCAG 2.1 AA
-                    </span>
-                    <span class="inline-flex items-center gap-1.5 text-[10px] font-semibold text-gray-400 border border-[#2d6a4f] px-3 py-1.5 rounded-full">
-                        <svg class="w-3 h-3 text-[#e9c46a]" fill="currentColor" viewBox="0 0 20 20"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg>
-                        Ley N° 164 TIC
-                    </span>
-                </div>
-            </div>
+
 
             <!-- Copyright and Legal -->
-            <div class="border-t border-[#1b4332] pt-4 flex flex-col md:flex-row justify-between items-center gap-2 text-[11px] text-gray-500">
+            <div class="border-t border-[#004900] pt-4 flex flex-col md:flex-row justify-between items-center gap-2 text-[11px] text-gray-500">
                 <p>&copy; {{ date('Y') }} Gobernación Autónoma Departamental del Beni. Todos los derechos reservados.</p>
                 <div class="flex gap-3">
                     <a href="/politica-de-privacidad" class="hover:text-gray-300 transition">Política de Privacidad</a>
