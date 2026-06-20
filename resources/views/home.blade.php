@@ -226,8 +226,12 @@
 {{-- =====================================================
      BLOQUE 7: Últimas Noticias
      ===================================================== --}}
+
+{{-- Wrapper: fondo degradado institucional --}}
+<div class="w-full bg-gradient-to-b from-[#f8f9fa] to-[#e4ebe4]">
+
 @if(isset($latestPosts) && $latestPosts->count() > 0)
-<section class="py-10 bg-white" aria-label="Últimas noticias">
+<section class="py-10" aria-label="Últimas noticias">
     <div class="container mx-auto px-4">
         <div class="flex flex-wrap items-end justify-between gap-4 mb-10 reveal">
             <div>
@@ -346,7 +350,7 @@
      BLOQUE 15: Gabinete / Autoridades
      ===================================================== --}}
 @if(isset($gabinete) && $gabinete->count() > 0)
-<section class="py-10 bg-white" aria-label="Gabinete departamental">
+<section class="py-10" aria-label="Gabinete departamental">
     <div class="container mx-auto px-4">
         <div class="text-center mb-10">
             <p class="inline-flex items-center justify-center gap-2 section-label mx-auto">
@@ -384,7 +388,7 @@
 {{-- =====================================================
      BLOQUE 16: Mapa del Beni (Google Maps)
      ===================================================== --}}
-<section class="py-10 bg-white" aria-label="Mapa del departamento del Beni">
+<section class="py-10" aria-label="Mapa del departamento del Beni">
     <div class="container mx-auto px-4">
         <div class="text-center mb-10">
             <p class="inline-flex items-center justify-center gap-2 text-[12px] font-semibold uppercase tracking-widest text-[#705d00] mb-3 leading-[20px]">
@@ -446,6 +450,9 @@
         </div>
     </div>
 </section>
+
+</div>
+{{-- /wrapper fondo institucional --}}
 
 {{-- Wave: newsletter (gold) → footer (forest dark) --}}
 <div class="leading-none -mt-px overflow-hidden" aria-hidden="true">

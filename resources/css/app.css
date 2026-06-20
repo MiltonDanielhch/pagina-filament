@@ -226,6 +226,8 @@
 .bg-cream { background-color: var(--color-cream); }
 .bg-cream-dark { background-color: var(--color-cream-dark); }
 
+
+
 /* Mobile nav slide animation */
 #mobile-menu {
     overflow: hidden;
