@@ -23,6 +23,7 @@ use App\Observers\PostObserver;
 use App\Observers\SlideObserver;
 use App\Observers\UserObserver;
 use App\Http\ViewComposers\MenuComposer;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -44,6 +45,11 @@ class AppServiceProvider extends ServiceProvider
         Page::observe(PageObserver::class);
         Event::observe(EventObserver::class);
         Slide::observe(SlideObserver::class);
+
+        if (($this->app['request']->server('HTTP_X_FORWARDED_PROTO') ?? '') === 'https'
+            || $this->app['request']->server('HTTPS', false)) {
+            URL::forceScheme('https');
+        }
 
         view()->composer('layouts.main', MenuComposer::class);
     }
