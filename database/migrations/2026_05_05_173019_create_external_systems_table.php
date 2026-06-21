@@ -29,6 +29,8 @@ return new class extends Migration
             $table->enum('last_status', ['online', 'offline', 'unknown'])->default('unknown');
             $table->timestamp('last_checked_at')->nullable();
             $table->timestamps();
+
+            $table->index(['is_active', 'order'], 'idx_external_systems_active_order');
         });
     }
 

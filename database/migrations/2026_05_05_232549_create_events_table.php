@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->longText('description');
+            $table->unsignedBigInteger('view_count')->default(0);
             $table->string('location')->nullable();
             $table->dateTime('starts_at');
             $table->dateTime('ends_at')->nullable();
@@ -31,6 +32,8 @@ return new class extends Migration
             $table->enum('status', ['draft', 'published'])->default('draft');
             $table->softDeletes();
             $table->timestamps();
+
+            $table->index(['status', 'starts_at'], 'idx_events_status_starts');
         });
     }
 

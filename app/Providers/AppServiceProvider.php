@@ -15,11 +15,13 @@ namespace App\Providers;
 use App\Models\Event;
 use App\Models\Page;
 use App\Models\Post;
+use App\Models\SiteSetting;
 use App\Models\Slide;
 use App\Models\User;
 use App\Observers\EventObserver;
 use App\Observers\PageObserver;
 use App\Observers\PostObserver;
+use App\Observers\SiteSettingObserver;
 use App\Observers\SlideObserver;
 use App\Observers\UserObserver;
 use App\Http\ViewComposers\MenuComposer;
@@ -45,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
         Page::observe(PageObserver::class);
         Event::observe(EventObserver::class);
         Slide::observe(SlideObserver::class);
+        SiteSetting::observe(SiteSettingObserver::class);
 
         if (($this->app['request']->server('HTTP_X_FORWARDED_PROTO') ?? '') === 'https'
             || $this->app['request']->server('HTTPS', false)) {

@@ -13,6 +13,7 @@ namespace App\Http\Controllers;
 
 use App\Models\InfrastructureProject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
 class InfrastructureProjectController extends Controller
@@ -43,11 +44,28 @@ class InfrastructureProjectController extends Controller
             ->paginate(12)
             ->withQueryString();
 
-        // Para filtros laterales
-        $allProjects = InfrastructureProject::all();
-        $municipalities = $allProjects->pluck('municipality')->filter()->unique()->sort()->values();
-        $categories = $allProjects->pluck('category')->filter()->unique()->sort()->values();
-        $statuses = $allProjects->pluck('status')->filter()->unique()->sort()->values();
+        // Para filtros laterales (cacheado 1 hora)
+        $municipalities = Cache::remember('projects:municipalities', 3600, function () {
+            return InfrastructureProject::distinct()
+                ->whereNotNull('municipality')
+                ->pluck('municipality')
+                ->sort()
+                ->values();
+        });
+        $categories = Cache::remember('projects:categories', 3600, function () {
+            return InfrastructureProject::distinct()
+                ->whereNotNull('category')
+                ->pluck('category')
+                ->sort()
+                ->values();
+        });
+        $statuses = Cache::remember('projects:statuses', 3600, function () {
+            return InfrastructureProject::distinct()
+                ->whereNotNull('status')
+                ->pluck('status')
+                ->sort()
+                ->values();
+        });
 
         // Para el mapa (preparado como array simple para @json)
         $mapProjects = InfrastructureProject::whereNotNull('latitude')
@@ -67,13 +85,15 @@ class InfrastructureProjectController extends Controller
             })
             ->values();
 
-        // Estadísticas rápidas
-        $stats = [
-            'total' => InfrastructureProject::count(),
-            'in_progress' => InfrastructureProject::inProgress()->count(),
-            'completed' => InfrastructureProject::completed()->count(),
-            'budget_total' => InfrastructureProject::sum('budget'),
-        ];
+        // Estadísticas rápidas (cacheado 1 hora)
+        $stats = Cache::remember('projects:stats', 3600, function () {
+            return [
+                'total' => InfrastructureProject::count(),
+                'in_progress' => InfrastructureProject::inProgress()->count(),
+                'completed' => InfrastructureProject::completed()->count(),
+                'budget_total' => InfrastructureProject::sum('budget'),
+            ];
+        });
 
         // Schema.org ItemList (JSON-LD) para SEO
         $itemList = $projects->take(10)->map(function ($p, $i) {

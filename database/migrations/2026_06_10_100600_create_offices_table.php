@@ -28,6 +28,7 @@ return new class extends Migration
             $table->softDeletes();
 
             $table->index(['is_active', 'municipality']);
+            $table->index('sort_order', 'idx_offices_sort_order');
         });
     }
 

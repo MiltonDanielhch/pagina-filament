@@ -22,7 +22,7 @@ class PostController extends Controller
     {
         $pinnedPost = Post::published()->where('is_pinned', true)->first();
         
-        $posts = Post::published()
+        $posts = Post::with('category')->published()
             ->when($pinnedPost, function ($query) use ($pinnedPost) {
                 $query->where('id', '!=', $pinnedPost->id);
             })
@@ -34,14 +34,14 @@ class PostController extends Controller
 
     public function show($slug)
     {
-        $post = Post::where('slug', $slug)->firstOrFail();
+        $post = Post::with('category')->where('slug', $slug)->firstOrFail();
         return view('posts.show', compact('post'));
     }
 
     public function category($slug)
     {
         $category = Category::where('slug', $slug)->firstOrFail();
-        $posts = Post::published()->where('category_id', $category->id)->latest('published_at')->paginate(10);
+        $posts = Post::with('category')->published()->where('category_id', $category->id)->latest('published_at')->paginate(10);
         
         $title = $category->name . ' - Gobernación del Beni';
         $description = $category->description ?? 'Noticias sobre ' . $category->name . ' en la Gobernación Autónoma Departamental del Beni.';

@@ -32,6 +32,9 @@ return new class extends Migration
             $table->integer('order')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
+
+            $table->index(['menu_id', 'is_active', 'order'], 'idx_menu_items_menu_active_order');
+            $table->index(['parent_id', 'order'], 'idx_menu_items_parent_order');
         });
     }
 

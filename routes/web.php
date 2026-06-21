@@ -22,7 +22,6 @@ use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\OpenDatasetController;
-use App\Http\Controllers\CredentialController;
 use App\Http\Controllers\ExternalSystemsController;
 use Illuminate\Support\Facades\Route;
 
@@ -76,9 +75,7 @@ Route::prefix('datos-abiertos')->name('open-data.')->group(function () {
 });
 
 // --- Mapa de Proyectos ---
-Route::get('/mapa-proyectos', function () {
-    return view('mapa-proyectos');
-})->name('mapa-proyectos');
+Route::view('/mapa-proyectos', 'mapa-proyectos')->name('mapa-proyectos');
 
 // --- Transparencia ---
 Route::prefix('transparencia')->name('transparency.')->group(function () {
@@ -93,7 +90,7 @@ Route::prefix('transparencia')->name('transparency.')->group(function () {
 
 // --- Contenido existente ---
 Route::get('/blog', [PostController::class, 'index'])->name('blog');
-Route::get('/blog/{slug}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/blog/{slug}', [PostController::class, 'show'])->name('posts.show')->middleware('track-views');
 Route::get('/category/{slug}', [PostController::class, 'category'])->name('posts.category');
 Route::get('/eventos', [EventController::class, 'index'])->name('events');
 Route::get('/galeria', [GalleryController::class, 'index'])->name('gallery');
@@ -114,7 +111,6 @@ Route::prefix('gobierno/proyectos')->name('gobierno.proyectos.')->group(function
     Route::get('/{slug}', [PublicInfrastructureProjectController::class, 'show'])->name('show');
 });
 Route::get('/autoridades', [OfficialController::class, 'index'])->name('officials');
-Route::get('/credenciales', [CredentialController::class, 'index'])->name('credentials');
 Route::get('/contacto', [ContactController::class, 'show'])->name('contact');
 Route::post('/contacto', [ContactController::class, 'send'])->name('contact.send');
 Route::get('/buscar', [SearchController::class, 'index'])->name('search');

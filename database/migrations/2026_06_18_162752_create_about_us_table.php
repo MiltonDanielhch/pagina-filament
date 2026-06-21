@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('mission')->nullable();
             $table->text('vision')->nullable();
             $table->text('objectives')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

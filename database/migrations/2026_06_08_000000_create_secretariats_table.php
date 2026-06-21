@@ -25,10 +25,6 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('secretariats')
                 ->onDelete('set null');
-            $table->foreignId('head_official_id')
-                ->nullable()
-                ->constrained('officials')
-                ->onDelete('set null');
             $table->string('contact_email')->nullable();
             $table->string('contact_phone', 50)->nullable();
             $table->string('office_address')->nullable();

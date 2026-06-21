@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('description')->nullable();
             $table->string('color')->default('#F59E0B');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('status')->default('published'); // published, cancelled
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index(['status', 'date', 'time'], 'idx_agendas_status_date_time');
         });
     }
 

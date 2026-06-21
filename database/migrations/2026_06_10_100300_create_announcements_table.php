@@ -27,6 +27,7 @@ return new class extends Migration
             $table->enum('status', [
                 'borrador', 'publicada', 'en_proceso', 'finalizada', 'desierta',
             ])->default('borrador');
+            $table->integer('sort_order')->default(0);
             $table->string('document_file')->nullable();
             $table->string('external_url')->nullable(); // SICOES
             $table->foreignId('responsible_secretariat_id')
@@ -37,6 +38,7 @@ return new class extends Migration
             $table->softDeletes();
 
             $table->index(['status', 'type', 'publication_date']);
+            $table->index('closing_date', 'idx_announcements_closing_date');
         });
     }
 

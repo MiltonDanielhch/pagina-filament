@@ -14,6 +14,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use UnitEnum;
 
 class SecretariatResource extends Resource
@@ -31,6 +32,11 @@ class SecretariatResource extends Resource
     protected static string|UnitEnum|null $navigationGroup = 'La Gobernación';
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->with(['head', 'parent']);
+    }
 
     public static function form(Schema $schema): Schema
     {

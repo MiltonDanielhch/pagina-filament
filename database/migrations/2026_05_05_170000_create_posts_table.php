@@ -27,11 +27,18 @@ return new class extends Migration
             $table->text('excerpt')->nullable();
             $table->text('body');
             $table->enum('status', ['draft', 'published', 'archived'])->default('draft');
+            $table->boolean('is_pinned')->default(false);
             $table->timestamp('published_at')->nullable();
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
+            $table->unsignedBigInteger('view_count')->default(0);
+            $table->boolean('shared_to_social')->default(false);
+            $table->timestamp('shared_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
+
+            $table->index(['status', 'published_at'], 'idx_posts_status_published');
+            $table->index(['category_id', 'status', 'published_at'], 'idx_posts_category_status_published');
         });
     }
 

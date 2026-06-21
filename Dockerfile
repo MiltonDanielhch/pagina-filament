@@ -75,7 +75,7 @@ RUN mkdir -p /var/run/php \
     && chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache /var/www/public \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-# Configurar Nginx (Código 3026 - Sintonía de Rutas y Configuración limpia)
+# Configurar Nginx (Rutas y Configuración limpia)
 RUN rm -f /etc/nginx/sites-enabled/default \
     && rm -f /etc/nginx/sites-available/default \
     && rm -f /etc/nginx/conf.d/default.conf \
