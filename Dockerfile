@@ -1,7 +1,31 @@
-FROM php:8.3-fpm
+# ==========================================
+# ETAPA 1: Node.js (Compilación de Assets)
+# ==========================================
+FROM node:20-alpine AS frontend-builder
+WORKDIR /app
 
-# Install system dependencies (Sintonizado para optimización de imágenes WebP)
-RUN apt-get update && apt-get install -y \
+# Aprovechar el caché para los módulos de node
+COPY package.json package-lock.json* ./
+RUN --mount=type=cache,target=/root/.npm \
+    npm clean-install
+
+# Copiar el resto de archivos necesarios para Vite / Tailwind v4
+COPY vite.config.js tailwind.config.js* postcss.config.js* ./
+COPY resources/ ./resources/
+COPY app/ ./app/
+
+# Compilar assets de producción (Filament v5 + Vite)
+RUN npm run build
+
+# ==========================================
+# ETAPA 2: Configuración de la Imagen Final
+# ==========================================
+FROM php:8.2-fpm
+
+# Instalar todas las dependencias del sistema en UN SOLO paso usando Caché APT
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && apt-get install -y \
     git \
     curl \
     libpng-dev \
@@ -14,8 +38,8 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     zip \
     unzip \
-    nodejs \
-    npm \
+    nginx \
+    supervisor \
     && docker-php-ext-configure intl \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip intl \
@@ -23,29 +47,26 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-enable redis \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Instalar Nginx y Supervisord
-RUN apt-get update && apt-get install -y nginx supervisor \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Install Composer
+# Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy custom PHP uploads config
+# Copiar configuración personalizada de subidas de PHP
 COPY docker/php/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
 
-# Set working directory
 WORKDIR /var/www
 
-# Copy composer files first for better caching
+# Copiar archivos de Composer para aprovechamiento de Caché
 COPY composer.json composer.lock ./
 RUN composer install --no-scripts --no-autoloader --optimize-autoloader
 
-# Copy application files
+# Copiar los archivos de la aplicación (Menos el frontend crudo)
 COPY . .
 
+# Traer los assets YA COMPILADOS desde la etapa de Node (Ahorra capas y herramientas innecesarias)
+COPY --from=frontend-builder /app/public/build ./public/build
+
 # =========================================================================
-# MODIFICACIÓN PARA COOLIFY: Asegurar rutas de caché y un .env simulado
-# para que los scripts post-autoload de Laravel no fallen durante el build.
+# CONFIGURACIÓN PARA COOLIFY (Estructura interna y .env ficticio)
 # =========================================================================
 RUN mkdir -p storage/framework/cache/data \
              storage/framework/app \
@@ -56,15 +77,11 @@ RUN mkdir -p storage/framework/cache/data \
     && echo "APP_KEY=base64:d3VubmVkZml4Y29vbGlmeWxhcmF2ZWxrZXlzZWN1cmU=" >> .env \
     && echo "VIEW_COMPILED_PATH=/var/www/storage/framework/views" >> .env
 
-# Generate autoloader and run scripts (Ahora pasará sin problemas)
+# Optimizar el Autoloader de Composer ejecutando los comandos de Filament v5
 RUN composer dump-autoload --optimize \
     && composer run-script post-autoload-dump
-# =========================================================================
 
-# Build assets with Vite
-RUN npm install && npm run build
-
-# Configurar PHP-FPM socket y permisos
+# Configurar sockets de PHP-FPM y permisos estructurales
 RUN mkdir -p /var/run/php \
     && sed -i 's|^;*listen =.*|listen = /var/run/php/php-fpm.sock|g' /usr/local/etc/php-fpm.d/www.conf \
     && sed -i 's|^;*listen.mode =.*|listen.mode = 0666|g' /usr/local/etc/php-fpm.d/www.conf \
@@ -75,7 +92,7 @@ RUN mkdir -p /var/run/php \
     && chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache /var/www/public \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-# Configurar Nginx (Rutas y Configuración limpia)
+# Configuración limpia de Nginx
 RUN rm -f /etc/nginx/sites-enabled/default \
     && rm -f /etc/nginx/sites-available/default \
     && rm -f /etc/nginx/conf.d/default.conf \
@@ -84,13 +101,10 @@ RUN rm -f /etc/nginx/sites-enabled/default \
 COPY docker/nginx/coolify.conf /etc/nginx/sites-available/default
 RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
-# Configurar Supervisord
+# Supervisor
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Configurar proxy confianza para Coolify
 ENV TRUSTED_PROXIES=*
-
-# Expose port
 EXPOSE 8000
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
