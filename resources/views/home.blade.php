@@ -311,6 +311,66 @@
 @endif
 
 {{-- =====================================================
+     BLOQUE 15ab: Potencial Productivo
+     ===================================================== --}}
+<section id="potencial-productivo" class="bg-gray-50 py-20 px-6 md:px-12" aria-label="Potencial productivo del Beni">
+    <div class="max-w-7xl mx-auto">
+
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-4">
+            <div>
+                <span class="text-[#E5B225] text-xs md:text-sm font-bold uppercase tracking-wider block mb-2">
+                    Desarrollo Regional
+                </span>
+                <h2 class="text-[#0a3118] font-bold text-3xl md:text-4xl tracking-tight">
+                    Potencial Productivo
+                </h2>
+                <p class="text-gray-600 text-sm md:text-base max-w-2xl mt-3 leading-relaxed">
+                    Descubra los pilares económicos que sustentan el crecimiento de nuestro departamento y las oportunidades de inversión en la región.
+                </p>
+            </div>
+
+            <a href="#" class="inline-flex items-center text-[#0a3118] font-semibold text-sm md:text-base group hover:underline whitespace-nowrap">
+                Explorar todos los sectores
+                <svg class="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <div class="relative group h-[420px] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <img src="{{ asset('images/ganaderia.jpg') }}" alt="Ganadería Beniana" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div class="absolute inset-0 p-6 flex flex-col justify-end">
+                    <span class="w-max bg-[#E5B225] text-[#0a3118] text-[10px] font-bold px-2.5 py-1 rounded-full uppercase mb-2 shadow-sm">Sector Primario</span>
+                    <h3 class="text-white font-bold text-xl md:text-2xl tracking-wide drop-shadow-sm">Ganadería</h3>
+                </div>
+            </div>
+
+            <div class="relative group h-[420px] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <img src="{{ asset('images/agricola.jpg') }}" alt="Agricultura en Beni" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div class="absolute inset-0 p-6 flex flex-col justify-end">
+                    <span class="w-max bg-[#0a3118] text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase mb-2 shadow-sm">Expansión</span>
+                    <h3 class="text-white font-bold text-xl md:text-2xl tracking-wide drop-shadow-sm">Agricultura</h3>
+                </div>
+            </div>
+
+            <div class="relative group h-[420px] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <img src="{{ asset('images/cacao.jpg') }}" alt="Cacao beniano" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div class="absolute inset-0 p-6 flex flex-col justify-end">
+                    <span class="w-max bg-[#E5B225] text-[#0a3118] text-[10px] font-bold px-2.5 py-1 rounded-full uppercase mb-2 shadow-sm">Exportación</span>
+                    <h3 class="text-white font-bold text-xl md:text-2xl tracking-wide drop-shadow-sm">Cacao</h3>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{{-- =====================================================
      BLOQUE 15b: Servicios al Ciudadano
      ===================================================== --}}
 <section class="py-16 bg-gray-50" aria-label="Servicios al ciudadano">
@@ -465,15 +525,15 @@
      BLOQUE 15c: Turismo y Naturaleza
      ===================================================== --}}
 <section id="turismo-naturaleza" class="relative overflow-hidden py-24 px-6 min-h-[85vh] flex items-center" aria-label="Turismo y naturaleza del Beni">
-    
+
     <div class="absolute inset-0 w-full h-full z-0 bg-cover bg-center bg-no-repeat bg-fixed"
-         style="background-image: url('{{ asset('images/turismo.webp') }}');">
+         style="background-image: url('{{ asset('images/turismo.png') }}');">
     </div>
 
     <div class="absolute inset-0 bg-gradient-to-b from-[#062411]/90 via-[#0a3118]/85 to-[#041a0c]/95 z-10"></div>
 
     <div class="relative w-full max-w-7xl mx-auto z-20">
-        
+
         <div class="text-center max-w-3xl mx-auto mb-14">
             <h2 class="text-[#E5B225] font-bold text-3xl md:text-4xl mb-4 tracking-tight drop-shadow-md">
                 Turismo y Naturaleza
@@ -487,7 +547,7 @@
             {{-- Tarjeta 1: Ruta del Bufeo --}}
             <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl">
                 <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
-                    <img src="http://googleusercontent.com/image_collection/image_retrieval/15725731973394084720_0" alt="Bufeo boliviano nadando en aguas amazónicas" class="w-full h-full object-cover object-center" loading="lazy">
+                    <img src="{{ asset('images/bufeo.jpg') }}" alt="Bufeo boliviano nadando en aguas amazónicas" class="w-full h-full object-cover object-center" loading="lazy">
                 </div>
                 <h3 class="text-white font-semibold text-lg mb-2">Ruta del Bufeo</h3>
                 <p class="text-white/70 text-xs md:text-sm leading-relaxed">Navegue junto al delfín rosado, emblema de nuestras aguas dulces amazónicas.</p>
@@ -495,7 +555,7 @@
             {{-- Tarjeta 2: Llanos de Moxos --}}
             <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl">
                 <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
-                    <img src="http://googleusercontent.com/image_collection/image_retrieval/1563513055179319110_0" alt="Sabanas inundables de los Llanos de Moxos" class="w-full h-full object-cover object-center" loading="lazy">
+                    <img src="{{ asset('images/llanos.png') }}" alt="Sabanas inundables de los Llanos de Moxos" class="w-full h-full object-cover object-center" loading="lazy">
                 </div>
                 <h3 class="text-white font-semibold text-lg mb-2">Llanos de Moxos</h3>
                 <p class="text-white/70 text-xs md:text-sm leading-relaxed">Patrimonio arqueológico y sistema hidráulico ancestral único en el mundo.</p>
@@ -503,7 +563,7 @@
             {{-- Tarjeta 3: Misiones Jesuíticas --}}
             <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl">
                 <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
-                    <img src="http://googleusercontent.com/image_collection/image_retrieval/3825459950255495286_0" alt="Iglesia misional jesuítica en la Amazonía beniana" class="w-full h-full object-cover object-center" loading="lazy">
+                    <img src="{{ asset('images/jesuita.png') }}" alt="Iglesia misional jesuítica en la Amazonía beniana" class="w-full h-full object-cover object-center" loading="lazy">
                 </div>
                 <h3 class="text-white font-semibold text-lg mb-2">Misiones Jesuíticas</h3>
                 <p class="text-white/70 text-xs md:text-sm leading-relaxed">Cultura viva, música barroca y tradiciones milenarias rodeadas de selva.</p>
@@ -511,7 +571,7 @@
             {{-- Tarjeta 4: Gastronomía Beniana --}}
             <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl">
                 <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
-                    <img src="http://googleusercontent.com/image_collection/image_retrieval/8374901513247827749_0" alt="Plato tradicional de Majadito beniano" class="w-full h-full object-cover object-center" loading="lazy">
+                    <img src="{{ asset('images/gastronomia.png') }}" alt="Plato tradicional de Majadito beniano" class="w-full h-full object-cover object-center" loading="lazy">
                 </div>
                 <h3 class="text-white font-semibold text-lg mb-2">Gastronomía Beniana</h3>
                 <p class="text-white/70 text-xs md:text-sm leading-relaxed">Un viaje de sabores únicos: el Majadito, el Masaco y exquisitos pescados de río.</p>

@@ -4,6 +4,13 @@ Guía práctica de optimización de rendimiento, organización y mantenibilidad 
 
 ---
 
+
+Las optimizaciones pendientes que mencionaba la guía son:
+1. Imágenes externas — 4 imágenes de turismo en home.blade.php se cargan desde googleusercontent.com (lentas, sin WebP). Hay que descargarlas y servirlas localmente con Spatie Media Library.
+2. Inline JS render-blocking — ~230 líneas de JavaScript inline en main.blade.php y home.blade.php. Extraer a archivos .js con Vite y atributo defer.
+3. custom.js y custom.css fuera de Vite — se cargan desde public/ directamente sin versionado ni minificación. Moverlos al pipeline de Vite.
+4. Debounce RegenerateSitemap — los observers disparan RegenerateSitemap en cada guardado. Múltiples guardados rápidos encolan múltiples regeneraciones innecesarias.
+
 ## Estado actual
 
 ### Lo que ya funciona bien
