@@ -18,7 +18,7 @@
      BLOQUE 3: Hero Slider
      ===================================================== --}}
 @if($slides->count() > 0)
-<section class="relative overflow-hidden h-[55vh] sm:h-[60vh] lg:h-[86vh] max-h-[500px] md:max-h-[550px] lg:max-h-[710px]" id="hero-slider" aria-label="Diapositivas principales">
+<section class="relative overflow-hidden h-[70vh] min-h-[460px] max-h-[500px] md:h-[65vh] md:max-h-[560px] lg:h-[95vh] lg:max-h-[800px] xl:max-h-[720px]" id="hero-slider" aria-label="Diapositivas principales">
     <div class="absolute inset-0">
         @foreach($slides as $index => $slide)
         <div class="absolute inset-0 transition-opacity duration-700 {{ $index === 0 ? 'opacity-100' : 'opacity-0' }}" data-slide="{{ $index }}">
@@ -84,7 +84,7 @@
 </section>
 @else
 {{-- Estado fallback sin cambios sustanciales de ancho --}}
-<section class="relative overflow-hidden h-[55vh] sm:h-[60vh] lg:h-[86vh] max-h-[500px] md:max-h-[550px] lg:max-h-[710px] bg-gradient-to-br from-[#004900] via-[#006400] to-[#004900] bg-nature-pattern">
+<section class="relative overflow-hidden h-[70vh] min-h-[460px] max-h-[500px] md:h-[65vh] md:max-h-[560px] lg:h-[95vh] lg:max-h-[800px] xl:max-h-[720px] bg-gradient-to-br from-[#004900] via-[#006400] to-[#004900] bg-nature-pattern">
     <div class="absolute inset-0 flex flex-col justify-center items-start px-6 md:px-16 lg:px-24 py-8 md:py-12">
         <div class="relative z-20 block w-full text-left text-white">
             <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-white text-xs md:text-sm px-3 py-1.5 rounded-full border border-white/20 w-max mb-6">
@@ -311,6 +311,91 @@
 @endif
 
 {{-- =====================================================
+     BLOQUE 15b: Servicios al Ciudadano
+     ===================================================== --}}
+<section class="py-16 bg-gray-50" aria-label="Servicios al ciudadano">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+
+            {{-- Columna izquierda: Tarjeta principal destacada --}}
+            <div class="relative rounded-2xl bg-[#004900] p-8 flex flex-col justify-between overflow-hidden min-h-[320px]">
+                <div class="absolute inset-0 opacity-10" style="background-image: url(&quot;data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E&quot;); background-repeat: repeat;"></div>
+                <div class="relative z-10 flex flex-col h-full">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center mb-6">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                            </svg>
+                        </div>
+                        <h2 class="text-white font-bold text-2xl md:text-3xl mb-4 leading-tight">Servicios al Ciudadano</h2>
+                        <p class="text-white/80 text-sm md:text-base leading-relaxed mb-8">Acceda a nuestra plataforma digital de trámites y servicios institucionales de forma rápida y segura.</p>
+                    </div>
+                    <div class="mt-auto">
+                        <a href="#" class="inline-flex items-center gap-2 bg-[#E5B225] hover:bg-[#cda021] text-[#004900] font-semibold rounded-lg px-5 py-2.5 text-sm transition-all duration-200 shadow-lg">
+                            Portal Digital
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Columna derecha: Cuadrícula de accesos rápidos --}}
+            <div class="lg:col-span-2">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
+                    {{-- Tarjeta 1: Trámites en Línea (destacada) --}}
+                    <div class="bg-white border border-[#E5B225]/40 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex flex-col relative">
+                        <div class="absolute top-0 right-0 w-16 h-16 overflow-hidden">
+                            <div class="absolute top-0 right-0 w-20 h-20 bg-[#E5B225]/10 rounded-bl-full"></div>
+                        </div>
+                        <div class="w-11 h-11 rounded-lg bg-[#E5B225]/15 flex items-center justify-center mb-4">
+                            <svg class="w-5 h-5 text-[#705d00]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-[#004900] font-bold text-lg mb-2">Trámites en Línea</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed flex-1">Personalidad jurídica, licencias ambientales y registros departamentales.</p>
+                    </div>
+                    {{-- Tarjeta 2: Transparencia --}}
+                    <div class="bg-white border border-gray-100 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex flex-col">
+                        <div class="w-11 h-11 rounded-lg bg-[#004900]/10 flex items-center justify-center mb-4">
+                            <svg class="w-5 h-5 text-[#004900]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-[#004900] font-bold text-lg mb-2">Transparencia</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed flex-1">Rendición de cuentas, auditorías y control social gubernamental.</p>
+                    </div>
+                    {{-- Tarjeta 3: Atención Ciudadana --}}
+                    <div class="bg-white border border-gray-100 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex flex-col">
+                        <div class="w-11 h-11 rounded-lg bg-[#004900]/10 flex items-center justify-center mb-4">
+                            <svg class="w-5 h-5 text-[#004900]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-[#004900] font-bold text-lg mb-2">Atención Ciudadana</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed flex-1">Canal directo para consultas, reclamos y sugerencias vecinales.</p>
+                    </div>
+                    {{-- Tarjeta 4: Gaceta Oficial --}}
+                    <div class="bg-white border border-gray-100 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex flex-col">
+                        <div class="w-11 h-11 rounded-lg bg-[#004900]/10 flex items-center justify-center mb-4">
+                            <svg class="w-5 h-5 text-[#004900]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-[#004900] font-bold text-lg mb-2">Gaceta Oficial</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed flex-1">Histórico legislativo de leyes departamentales y resoluciones.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{{-- =====================================================
      BLOQUE 16: Mapa del Beni (Google Maps)
      ===================================================== --}}
 <section class="py-10 bg-white" aria-label="Mapa del departamento del Beni">
@@ -373,6 +458,72 @@
                 </div>
             </div>
         </div>
+    </div>
+</section>
+
+{{-- =====================================================
+     BLOQUE 15c: Turismo y Naturaleza
+     ===================================================== --}}
+<section id="turismo-naturaleza" class="relative overflow-hidden py-24 px-6 min-h-[85vh] flex items-center" aria-label="Turismo y naturaleza del Beni">
+    
+    <div class="absolute inset-0 w-full h-full z-0 bg-cover bg-center bg-no-repeat bg-fixed"
+         style="background-image: url('{{ asset('images/turismo.webp') }}');">
+    </div>
+
+    <div class="absolute inset-0 bg-gradient-to-b from-[#062411]/90 via-[#0a3118]/85 to-[#041a0c]/95 z-10"></div>
+
+    <div class="relative w-full max-w-7xl mx-auto z-20">
+        
+        <div class="text-center max-w-3xl mx-auto mb-14">
+            <h2 class="text-[#E5B225] font-bold text-3xl md:text-4xl mb-4 tracking-tight drop-shadow-md">
+                Turismo y Naturaleza
+            </h2>
+            <p class="text-white/90 text-sm md:text-base leading-relaxed drop-shadow">
+                Descubra el santuario ecológico más vibrante de Bolivia. Desde los enigmáticos Llanos de Moxos hasta nuestros parques nacionales.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {{-- Tarjeta 1: Ruta del Bufeo --}}
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl">
+                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/15725731973394084720_0" alt="Bufeo boliviano nadando en aguas amazónicas" class="w-full h-full object-cover object-center" loading="lazy">
+                </div>
+                <h3 class="text-white font-semibold text-lg mb-2">Ruta del Bufeo</h3>
+                <p class="text-white/70 text-xs md:text-sm leading-relaxed">Navegue junto al delfín rosado, emblema de nuestras aguas dulces amazónicas.</p>
+            </div>
+            {{-- Tarjeta 2: Llanos de Moxos --}}
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl">
+                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/1563513055179319110_0" alt="Sabanas inundables de los Llanos de Moxos" class="w-full h-full object-cover object-center" loading="lazy">
+                </div>
+                <h3 class="text-white font-semibold text-lg mb-2">Llanos de Moxos</h3>
+                <p class="text-white/70 text-xs md:text-sm leading-relaxed">Patrimonio arqueológico y sistema hidráulico ancestral único en el mundo.</p>
+            </div>
+            {{-- Tarjeta 3: Misiones Jesuíticas --}}
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl">
+                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/3825459950255495286_0" alt="Iglesia misional jesuítica en la Amazonía beniana" class="w-full h-full object-cover object-center" loading="lazy">
+                </div>
+                <h3 class="text-white font-semibold text-lg mb-2">Misiones Jesuíticas</h3>
+                <p class="text-white/70 text-xs md:text-sm leading-relaxed">Cultura viva, música barroca y tradiciones milenarias rodeadas de selva.</p>
+            </div>
+            {{-- Tarjeta 4: Gastronomía Beniana --}}
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl">
+                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/8374901513247827749_0" alt="Plato tradicional de Majadito beniano" class="w-full h-full object-cover object-center" loading="lazy">
+                </div>
+                <h3 class="text-white font-semibold text-lg mb-2">Gastronomía Beniana</h3>
+                <p class="text-white/70 text-xs md:text-sm leading-relaxed">Un viaje de sabores únicos: el Majadito, el Masaco y exquisitos pescados de río.</p>
+            </div>
+        </div>
+
+        <div class="mt-14 text-center">
+            <a href="#" class="inline-block bg-white text-[#0a3118] font-bold px-8 py-3.5 rounded-full hover:bg-gray-100 hover:shadow-xl transition-all duration-300 text-sm md:text-base">
+                Planifique su Visita
+            </a>
+        </div>
+
     </div>
 </section>
 
