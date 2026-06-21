@@ -62,7 +62,7 @@ class HomeController extends Controller
             }
 
             // Bloque 7 — Últimas Noticias
-            $latestPosts = Post::published()->latest('published_at')->take(6)->get();
+            $latestPosts = Post::with('category')->published()->latest('published_at')->take(6)->get();
 
             // Bloque 8 — Transparencia en Cifras
             // Cada tabla tiene su propia convención: is_active, status, is_published

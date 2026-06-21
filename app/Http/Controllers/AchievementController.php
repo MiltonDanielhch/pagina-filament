@@ -19,7 +19,7 @@ class AchievementController extends Controller
 {
     public function index()
     {
-        $achievements = Achievement::published()
+        $achievements = Achievement::with('user')->published()
             ->latest('achieved_at')
             ->paginate(12);
 

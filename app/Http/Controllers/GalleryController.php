@@ -50,7 +50,7 @@ class GalleryController extends Controller
      */
     public function show(string $slug)
     {
-        $gallery = Gallery::where('slug', $slug)->published()->firstOrFail();
+        $gallery = Gallery::with('items')->where('slug', $slug)->published()->firstOrFail();
 
         return view('gallery.show', compact('gallery'));
     }

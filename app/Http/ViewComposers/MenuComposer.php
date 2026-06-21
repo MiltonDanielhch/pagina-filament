@@ -16,7 +16,7 @@ class MenuComposer
                 ->orderBy('order')
                 ->with(['children' => function ($q) {
                     $q->where('is_active', true)->orderBy('order');
-                }]);
+                }, 'page', 'children.page']);
         };
 
         $headerMenu = Menu::where('location', 'header')

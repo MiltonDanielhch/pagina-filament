@@ -40,7 +40,7 @@ class InfrastructureProjectController extends Controller
             });
         }
 
-        $projects = $query->orderByDesc('start_date')
+        $projects = $query->with('media')->orderByDesc('start_date')
             ->paginate(12)
             ->withQueryString();
 
@@ -113,10 +113,13 @@ class InfrastructureProjectController extends Controller
 
     public function show(string $slug): View
     {
-        $project = InfrastructureProject::where('slug', $slug)->firstOrFail();
+        $project = InfrastructureProject::with('secretariat.head', 'media')
+            ->where('slug', $slug)
+            ->firstOrFail();
 
         // Proyectos relacionados (mismo municipio o categoría)
-        $related = InfrastructureProject::where('id', '!=', $project->id)
+        $related = InfrastructureProject::with('secretariat')
+            ->where('id', '!=', $project->id)
             ->where(function ($q) use ($project) {
                 $q->where('municipality', $project->municipality)
                   ->orWhere('category', $project->category);

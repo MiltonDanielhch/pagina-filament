@@ -34,7 +34,7 @@ class PostController extends Controller
 
     public function show($slug)
     {
-        $post = Post::with('category')->where('slug', $slug)->firstOrFail();
+        $post = Post::with(['category', 'user'])->where('slug', $slug)->firstOrFail();
         return view('posts.show', compact('post'));
     }
 

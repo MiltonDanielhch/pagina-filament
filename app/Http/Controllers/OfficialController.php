@@ -25,6 +25,7 @@ class OfficialController extends Controller
     public function index()
     {
         $officials = Official::active()
+            ->with('media')
             ->orderBy('area')
             ->orderBy('sort_order')
             ->get();
