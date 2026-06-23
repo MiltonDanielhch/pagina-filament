@@ -34,6 +34,66 @@
     <priority>0.8</priority>
             </url>
     <url>
+    <loc>http://localhost:8000/blog/ljoljl</loc>
+    <lastmod>2002-04-13T06:27:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost:8000/blog/comunicado-oficial</loc>
+    <lastmod>2025-05-19T05:44:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost:8000/blog/titulo-de-la-nota-de-prensa</loc>
+    <lastmod>1987-02-26T13:41:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost:8000/blog/ugoih-lijpojpoj</loc>
+    <lastmod>2014-02-20T05:09:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost:8000/blog/uihoih-jpjpjpo</loc>
+    <lastmod>2021-09-21T20:31:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost:8000/blog/lkiho-kuhoihoijo-kjljl</loc>
+    <lastmod>2025-06-08T00:24:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost:8000/blog/lijoip-loijpokjpno-ljnkjn</loc>
+    <lastmod>1973-02-20T20:43:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost:8000/blog/uho-lnlholgf-kuhl</loc>
+    <lastmod>2001-07-22T14:54:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost:8000/blog/kuho-jnlnl-lml</loc>
+    <lastmod>1994-05-11T09:31:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost:8000/blog/juhkln-knhlijln-hul</loc>
+    <lastmod>1979-01-02T04:19:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
     <loc>http://localhost:8000/inicio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

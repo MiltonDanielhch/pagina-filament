@@ -22,7 +22,7 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Navigation\Menu\NavigationMenuItem;
-use Filament\Widgets\AccountWidget;
+use App\Filament\Widgets\WelcomeWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use App\Filament\Resources\Users\UserResource;
 use App\Filament\Widgets\StatsOverviewWidget;
@@ -88,7 +88,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
-                AccountWidget::class,
+                WelcomeWidget::class,
                 FilamentInfoWidget::class,
                 StatsOverviewWidget::class,
                 RecentPostsWidget::class,

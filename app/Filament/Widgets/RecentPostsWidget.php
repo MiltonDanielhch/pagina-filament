@@ -19,6 +19,8 @@ use Filament\Widgets\TableWidget as BaseWidget;
 
 class RecentPostsWidget extends BaseWidget
 {
+    protected static ?string $heading = 'Publicaciones recientes';
+
     protected int $maxRecords = 5;
 
     protected function getTableQuery(): \Illuminate\Database\Eloquent\Builder

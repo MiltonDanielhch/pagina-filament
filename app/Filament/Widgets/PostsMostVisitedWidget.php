@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class PostsMostVisitedWidget extends BaseWidget
 {
+    protected static ?string $heading = 'Publicaciones más visitadas';
+
     protected int $maxRecords = 10;
 
     protected function getTableQuery(): Builder

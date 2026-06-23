@@ -13,7 +13,6 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Post;
-use App\Models\Event;
 use App\Models\User;
 use Filament\Widgets\Concerns\InteractsWithPage;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
@@ -25,7 +24,6 @@ class StatsOverviewWidget extends BaseWidget
     {
         $publishedPosts = Post::where('status', 'published')->count();
         $draftPosts = Post::where('status', 'draft')->count();
-        $upcomingEvents = Event::where('starts_at', '>=', now())->count();
         $activeUsers = User::count();
 
         return [
@@ -35,9 +33,6 @@ class StatsOverviewWidget extends BaseWidget
             Stat::make('Posts en borrador', $draftPosts)
                 ->icon('heroicon-o-pencil')
                 ->color('warning'),
-            Stat::make('Eventos próximos', $upcomingEvents)
-                ->icon('heroicon-o-calendar')
-                ->color('info'),
             Stat::make('Usuarios activos', $activeUsers)
                 ->icon('heroicon-o-users')
                 ->color('primary'),
