@@ -153,33 +153,9 @@ class MenuSeeder extends Seeder
         MenuItem::where('menu_id', $footerMenu->id)->delete();
 
         $footerItems = [
-            // Columna 1: Servicios
             ['label' => 'Gaceta Jurídica', 'url' => 'https://gaceta.beni.gob.bo', 'target' => '_blank', 'order' => 1],
-            ['label' => 'Plataforma SISCOR', 'url' => 'https://siscor.beni.gob.bo', 'target' => '_blank', 'order' => 2],
+            ['label' => 'Contacto', 'url' => '/contacto', 'order' => 2],
             ['label' => 'Portal de Transparencia', 'url' => 'https://transparencia.beni.gob.bo', 'target' => '_blank', 'order' => 3],
-            ['label' => 'Datos Abiertos', 'url' => '/datos-abiertos', 'order' => 4],
-            ['label' => 'Catálogo de Trámites', 'url' => '/tramites', 'order' => 5],
-
-            // Columna 2: Institucional
-            ['label' => 'Reseña Histórica', 'url' => '/institucional', 'order' => 6],
-            ['label' => 'Marco Normativo', 'url' => '/transparencia/marco-normativo', 'order' => 7],
-            ['label' => 'Organigrama', 'url' => '/institucional/organigrama', 'order' => 8],
-            ['label' => 'Autoridades', 'url' => '/institucional/autoridades', 'order' => 9],
-            ['label' => 'Secretarías', 'url' => '/institucional/secretarias', 'order' => 10],
-
-            // Columna 3: Comunicación
-            ['label' => 'Noticias', 'url' => '/blog', 'order' => 11],
-            ['label' => 'Eventos', 'url' => '/eventos', 'order' => 12],
-            ['label' => 'Galería', 'url' => '/galeria', 'order' => 13],
-            ['label' => 'Convocatorias', 'url' => '/convocatorias', 'order' => 14],
-            ['label' => 'Quejas y Reclamos', 'url' => '/quejas-reclamos', 'order' => 15],
-
-            // Columna 4: Portal
-            ['label' => 'Contacto', 'url' => '/contacto', 'order' => 16],
-            ['label' => 'Buscador', 'url' => '/buscar', 'order' => 17],
-            ['label' => 'Mapa del Sitio', 'url' => '/mapa-del-sitio', 'order' => 18],
-            ['label' => 'Política de Privacidad', 'url' => '/politica-de-privacidad', 'order' => 19],
-            ['label' => 'Términos de Uso', 'url' => '/terminos-de-uso', 'order' => 20],
         ];
 
         foreach ($footerItems as $item) {

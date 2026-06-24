@@ -268,100 +268,81 @@
     </main>
 
     <!-- Footer Corporativo -->
-    <footer class="bg-[#344234] text-gray-300 mt-auto border-t-4 border-[#705d00] bg-nature-pattern">
-        <div class="container mx-auto px-4 pt-12 pb-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
+    <footer class="bg-[#0a3118] text-gray-300 mt-auto border-t-4 border-[#705d00] bg-nature-pattern" style="display: block; width: 100%;">
+        <div class="container mx-auto px-4 pt-12 pb-6 w-full" style="display: block; width: 100%;">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left items-start w-full" style="display: grid; width: 100%;">
 
-                <!-- Identificación Institucional -->
-                <div class="space-y-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded overflow-hidden bg-white p-1 flex items-center justify-center shadow-md">
-                            <img src="{{ $logoSrc }}" alt="Gobernación del Beni" class="w-full h-full object-contain">
+                <!-- Columna 1: Identificación Institucional -->
+                <div class="space-y-4 w-full" style="display: block; width: 100%;">
+                    <div class="flex flex-col md:flex-row items-center gap-3">
+                        <div class="w-14 h-14 rounded overflow-hidden bg-white p-1 flex items-center justify-center shadow-md flex-shrink-0">
+                            <img src="{{ $logoSrc }}" alt="Gobernación del Beni" class="w-full h-full object-contain" style="display: block;">
                         </div>
                         <div>
-                            <h3 class="text-md font-bold text-white leading-tight">Gobernación<br><span class="text-[#fcd400] text-sm font-medium">del Beni</span></h3>
+                            <h3 class="text-md font-bold text-white leading-tight">Gobernación<br><span class="text-[#E5B225] text-sm font-medium">del Beni</span></h3>
                             <p class="text-[10px] text-[#82db6f] tracking-wider uppercase">Autónoma Departamental</p>
                         </div>
                     </div>
-                    <p class="text-sm text-gray-400 leading-relaxed">
-                        Institución pública comprometida con el desarrollo integral del departamento del Beni, trabajando por el bienestar de todos los benianos.
+                    <p class="text-base text-gray-300 leading-relaxed">
+                        Impulsando el desarrollo sostenible de la Amazonia Boliviana a través de la gestión transparente y participativa.
                     </p>
                 </div>
 
-                <!-- Enlaces Dinámicos Chunk 1 & 2 -->
-                @if($footerMenu && $footerMenu->items && $footerMenu->items->count() > 0)
-                    @foreach($footerMenu->items->sortBy('order')->chunk(4) as $chunk)
-                        <div class="space-y-3">
-                            <h4 class="text-xs font-bold text-[#fcd400] uppercase tracking-widest border-b border-[#004900] pb-2">
-                                {{ $loop->first ? 'Enlaces Institucionales' : 'Servicios y Más' }}
-                            </h4>
-                            <ul class="space-y-2 text-sm">
-                                @foreach($chunk as $item)
-                                    <li>
-                                        <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}"
-                                           target="{{ $item->target ?? '_self' }}"
-                                           class="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-[#fcd400] opacity-50 group-hover:opacity-100 transition-opacity"></span>
-                                            {{ $item->label }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endforeach
-                @else
-                    <!-- Fallback Estático -->
-                    <div class="space-y-3">
-                        <h4 class="text-xs font-bold text-amber-400 uppercase tracking-widest border-b border-gray-800 pb-2">Enlaces de Interés</h4>
-                        <ul class="space-y-2 text-sm">
-                            <li><a href="https://gaceta.beni.gob.bo" class="text-gray-400 hover:text-white transition">Gaceta Jurídica</a></li>
-                            <li><a href="https://siscor.beni.gob.bo" class="text-gray-400 hover:text-white transition">Plataforma SISCOR</a></li>
-                        </ul>
-                    </div>
-                    <div class="space-y-3">
-                        <h4 class="text-xs font-bold text-amber-400 uppercase tracking-widest border-b border-gray-800 pb-2">Portal</h4>
-                        <ul class="space-y-2 text-sm">
-                            <li><a href="/politica-de-privacidad" class="text-gray-400 hover:text-white transition">Privacidad</a></li>
-                        </ul>
-                    </div>
-                @endif
+                <!-- Columna 2: Enlaces Institucionales -->
+                <div class="space-y-4 w-full" style="display: block; width: 100%;">
+                    <h4 class="text-sm font-bold text-[#E5B225] uppercase tracking-widest border-b border-[#004900] pb-2">Enlaces Institucionales</h4>
+                    @if($footerMenu && $footerMenu->items && $footerMenu->items->count() > 0)
+                    <ul class="space-y-3 text-base">
+                        @foreach($footerMenu->items->sortBy('order') as $item)
+                        <li>
+                            <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}"
+                               target="{{ $item->target ?? '_self' }}"
+                               class="text-gray-300 hover:text-white transition-colors inline-flex items-center gap-2 group font-medium">
+                                <svg class="w-3.5 h-3.5 text-[#E5B225] flex-shrink-0 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: block;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                </svg>
+                                {{ $item->label }}
+                            </a>
+                        </li>
+                        @endforeach
+                    </ul>
+                    @endif
+                </div>
 
-                <!-- Datos de Contacto Directo -->
-                <div class="space-y-3">
-                    <h4 class="text-xs font-bold text-[#fcd400] uppercase tracking-widest border-b border-[#004900] pb-2">Información de Contacto</h4>
-                    <ul class="space-y-3 text-sm text-gray-400">
-                        <li class="flex items-start gap-2">
-                            <svg class="w-4 h-4 mt-0.5 text-[#82db6f] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <!-- Columna 3: Información de Contacto -->
+                <div class="space-y-4 w-full" style="display: block; width: 100%;">
+                    <h4 class="text-sm font-bold text-[#E5B225] uppercase tracking-widest border-b border-[#004900] pb-2">Información de Contacto</h4>
+                    <ul class="space-y-4 text-base">
+                        <li class="flex items-center justify-center md:justify-start gap-3">
+                            <svg class="w-5 h-5 text-[#82db6f] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: block;">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                             </svg>
-                            <span>Plaza José Ballivián N° 1<br><span class="text-gray-500 text-xs">Trinidad, Beni - Bolivia</span></span>
+                            <div>
+                                <span class="text-white font-medium">Plaza José Ballivián N° 1</span><br>
+                                <span class="text-gray-400 text-sm">Trinidad, Beni - Bolivia</span>
+                            </div>
                         </li>
-                        <!-- <li class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-[#82db6f] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                            </svg>
-                            <span>(591) 346-21651</span>
-                        </li> -->
-                        <li class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-[#82db6f] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <li class="flex items-center justify-center md:justify-start gap-3">
+                            <svg class="w-5 h-5 text-[#82db6f] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: block;">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                             </svg>
-                            <a href="mailto:despacho@beni.gob.bo" class="hover:text-white transition">despacho@beni.gob.bo</a>
+                            <a href="mailto:despacho@beni.gob.bo" class="text-white hover:text-[#E5B225] transition font-medium">despacho@beni.gob.bo</a>
                         </li>
                     </ul>
                 </div>
 
             </div>
 
-
-
-            <!-- Copyright and Legal -->
-            <div class="border-t border-[#004900] pt-4 flex flex-col md:flex-row justify-between items-center gap-2 text-[11px] text-gray-500">
+            <!-- Copyright -->
+            <div class="border-t border-[#004900] pt-6 mt-8 flex flex-col md:flex-row justify-between items-center gap-2 text-xs text-white/60 w-full" style="display: flex; width: 100%;">
                 <p>&copy; {{ date('Y') }} Gobernación Autónoma Departamental del Beni. Todos los derechos reservados.</p>
-                <div class="flex gap-3">
-                    <a href="/politica-de-privacidad" class="hover:text-gray-300 transition">Política de Privacidad</a>
-                    <span>|</span>
-                    <a href="/terminos-de-uso" class="hover:text-gray-300 transition">Términos de Uso</a>
+                <div class="flex items-center gap-4">
+                    <a href="/politica-de-privacidad" class="block hover:opacity-80 transition-opacity">
+                        <img src="{{ asset('images/logo.webp') }}" alt="Política de Privacidad" class="w-6 h-6">
+                    </a>
+                    <a href="/terminos-de-uso" class="block hover:opacity-80 transition-opacity">
+                        <img src="{{ asset('images/bandera.avif') }}" alt="Términos de Uso" class="w-6 h-6">
+                    </a>
                 </div>
             </div>
         </div>
