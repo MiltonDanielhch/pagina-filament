@@ -23,6 +23,8 @@ use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\OpenDatasetController;
 use App\Http\Controllers\ExternalSystemsController;
+use App\Http\Controllers\DepartamentoController;
+use App\Http\Controllers\ServiciosController;
 use Illuminate\Support\Facades\Route;
 
 // Filament routes (auto-registered by Filament)
@@ -116,6 +118,8 @@ Route::post('/contacto', [ContactController::class, 'send'])->name('contact.send
 Route::get('/buscar', [SearchController::class, 'index'])->name('search');
 Route::get('/api/buscar', [SearchController::class, 'search']);
 Route::view('/gobernador', 'gobernador')->name('gobernador');
+Route::get('/departamento', [DepartamentoController::class, 'index'])->name('departamento');
+Route::get('/servicios', [ServiciosController::class, 'index'])->name('servicios');
 Route::get('/sobre-nosotros', [HomeController::class, 'about'])->name('sobre-nosotros');
 
 // Página dinámica — siempre AL FINAL

@@ -1,10 +1,19 @@
+@php
+    $currentUrl = request()->path() ?: '/';
+    function isMenuItemActive($item, $currentUrl): bool {
+        if ($item->children->count() > 0) {
+            return $item->children->contains(fn($child) => (trim($child->url, '/') ?: '/') === $currentUrl);
+        }
+        return (trim($item->url, '/') ?: '/') === $currentUrl;
+    }
+@endphp
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Gobernación Autónoma Departamental del Beni' }}</title>
-    
+
     <!-- Google Fonts: Public Sans (preconnect para reducir latencia) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,7 +74,7 @@
 
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ url()->current() }}">
-    
+
     <!-- Schema.org Markup for Government Organization -->
     @verbatim
     <script type="application/ld+json">
@@ -126,7 +135,7 @@
                     <!-- <span class="flex items-center gap-1">📍 Plaza José Ballivián N° 1</span>
                     <span class="flex items-center gap-1">📧 despacho@beni.gob.bo</span> -->
                 </div>
-                
+
                 <div class="flex items-center justify-center md:justify-end gap-2 w-full md:w-auto">
                     <span class="text-[#fcd400] font-semibold text-xs sm:text-sm">Redes Sociales:</span>
                     <!-- Redes Sociales -->
@@ -152,21 +161,22 @@
         <header class="bg-white shadow-md w-full" id="main-header">
             <nav class="container mx-auto px-4 py-3">
                 <div class="flex items-center justify-between">
-                    
+
                     <!-- Logo -->
                     <a href="/" class="flex items-center" aria-label="Ir a la página de inicio">
                         <div class="max-w-[200px] h-12 flex items-center justify-start">
                             <img src="{{ $logoSrc }}" alt="Logo Gobernación del Beni" class="w-full h-full object-contain object-left">
                         </div>
-                    </a> 
+                    </a>
 
                     <!-- Menú de navegación de escritorio -->
                     @if($headerMenu && $headerMenu->is_active && $headerMenu->items)
                     <div id="desktop-menu" class="hidden md:flex items-center gap-1 transition-all duration-300">
                         @foreach($headerMenu->items->where('parent_id', null) as $item)
                             @if($item->children->count() > 0)
+                                @php $isActive = isMenuItemActive($item, $currentUrl); @endphp
                                 <div class="relative desktop-dropdown">
-                                    <button onclick="toggleDropdown(this)" class="dropdown-trigger px-3 py-2 rounded text-gray-700 hover:bg-[#f3f4f5] hover:text-[#004900] transition font-medium flex items-center gap-1">
+                                    <button onclick="toggleDropdown(this)" class="dropdown-trigger relative px-3 py-2 rounded text-gray-700 hover:text-[#004900] transition font-medium flex items-center gap-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-[#E5B225] after:rounded-full after:transition-transform after:duration-300 after:origin-left {{ $isActive ? 'after:scale-x-100 text-[#004900]' : 'after:scale-x-0' }} hover:after:scale-x-100">
                                         {{ $item->label }}
                                         <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -181,11 +191,32 @@
                                     </div>
                                 </div>
                             @else
-                                <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}" class="px-3 py-2 rounded text-gray-700 hover:bg-[#f3f4f5] hover:text-[#004900] transition font-medium">
+                                @php $isActive = isMenuItemActive($item, $currentUrl); @endphp
+                                <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}" class="relative px-3 py-2 rounded text-gray-700 hover:text-[#004900] transition font-medium after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-[#E5B225] after:rounded-full after:transition-transform after:duration-300 after:origin-left {{ $isActive ? 'after:scale-x-100 text-[#004900]' : 'after:scale-x-0' }} hover:after:scale-x-100">
                                     {{ $item->label }}
                                 </a>
                             @endif
                         @endforeach
+
+                        <!-- Buscador -->
+                        <div class="relative" style="display: block; flex-shrink: 0;">
+                            <form action="/buscar" method="GET" style="display: block; margin: 0; padding: 0;">
+                                <div class="relative flex items-center" style="display: flex; flex-direction: row; align-items: center;">
+                                    <input
+                                        type="text"
+                                        name="q"
+                                        placeholder="Buscar..."
+                                        class="w-40 lg:w-48 py-2 pl-4 pr-10 text-sm bg-[#f3f4f6] text-gray-700 placeholder:text-[#6b7280] rounded-full border-0 focus:outline-none focus:ring-2 focus:ring-[#004900]/20 focus:bg-white transition-all duration-200"
+                                        style="display: block; width: 10rem; font-size: 0.875rem; line-height: 1.25rem; border: none; box-shadow: none;"
+                                    >
+                                    <button type="submit" class="absolute right-0 flex items-center justify-center w-10 h-full text-gray-400 hover:text-[#004900] transition-colors" style="display: flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer;">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: block; width: 1rem; height: 1rem;">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                     @endif
 
@@ -202,8 +233,9 @@
                 <nav class="container mx-auto px-4 py-3">
                     @foreach($headerMenu->items->where('parent_id', null) as $item)
                         @if($item->children->count() > 0)
+                            @php $isActive = isMenuItemActive($item, $currentUrl); @endphp
                             <div class="mobile-dropdown">
-                                <button onclick="toggleMobileDropdown(this)" class="dropdown-trigger w-full flex items-center justify-between px-3 py-3 text-gray-700 hover:bg-[#f3f4f5] transition font-medium">
+                                <button onclick="toggleMobileDropdown(this)" class="dropdown-trigger w-full flex items-center justify-between px-3 py-3 text-gray-700 transition font-medium {{ $isActive ? 'text-[#004900] bg-[#f3f4f5] border-l-4 border-[#E5B225]' : 'hover:bg-[#f3f4f5]' }}">
                                     {{ $item->label }}
                                     <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -218,7 +250,8 @@
                                 </div>
                             </div>
                         @else
-                            <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}" class="block px-3 py-3 text-gray-700 hover:bg-[#f3f4f5] transition font-medium">
+                            @php $isActive = isMenuItemActive($item, $currentUrl); @endphp
+                            <a href="{{ $item->page_id ? route('pages.show', $item->page->slug) : $item->url }}" class="block px-3 py-3 text-gray-700 transition font-medium {{ $isActive ? 'text-[#004900] bg-[#f3f4f5] border-l-4 border-[#E5B225]' : 'hover:bg-[#f3f4f5]' }}">
                                 {{ $item->label }}
                             </a>
                         @endif
@@ -238,7 +271,7 @@
     <footer class="bg-[#344234] text-gray-300 mt-auto border-t-4 border-[#705d00] bg-nature-pattern">
         <div class="container mx-auto px-4 pt-12 pb-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
-                
+
                 <!-- Identificación Institucional -->
                 <div class="space-y-4">
                     <div class="flex items-center gap-3">
@@ -366,7 +399,7 @@
                     // Scroll arriba: Mostramos la barra verde de nuevo
                     navWrapper.style.transform = "translateY(0)";
                 }
-                
+
                 lastScrollY = currentScrollY;
             }, { passive: true });
         });
@@ -376,7 +409,7 @@
             const dropdown = button.closest('.desktop-dropdown');
             const menu = dropdown.querySelector('.dropdown-menu');
             const arrow = button.querySelector('svg');
-            
+
             // Close all other dropdowns
             document.querySelectorAll('.desktop-dropdown .dropdown-menu').forEach(el => {
                 if (el !== menu) {
@@ -384,7 +417,7 @@
                     el.closest('.desktop-dropdown').querySelector('svg').style.transform = '';
                 }
             });
-            
+
             // Toggle current dropdown
             menu.classList.toggle('hidden');
             arrow.style.transform = menu.classList.contains('hidden') ? '' : 'rotate(180deg)';

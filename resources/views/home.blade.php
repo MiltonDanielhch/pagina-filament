@@ -155,7 +155,7 @@
 {{-- =====================================================
      BLOQUE 7: Últimas Noticias
      ===================================================== --}}
-@if(isset($latestPosts) && $latestPosts->count() > 0)
+{{-- @if(isset($latestPosts) && $latestPosts->count() > 0)
 <section class="py-10 bg-white" aria-label="Últimas noticias">
     <div class="container mx-auto px-4">
         <div class="flex flex-wrap items-end justify-between gap-4 mb-10 reveal">
@@ -226,14 +226,14 @@
         </div>
     </div>
 </section>
-@endif
+@endif --}}
 
 {{-- Wave: noticias (white) → stats (forest) --}}
-<div class="leading-none -mb-px overflow-hidden" aria-hidden="true">
+{{-- <div class="leading-none -mb-px overflow-hidden" aria-hidden="true">
     <svg viewBox="0 0 1440 70" preserveAspectRatio="none" class="w-full h-14 block">
         <path d="M0,0 C480,70 960,70 1440,0 L1440,70 L0,70 Z" fill="#004900"/>
     </svg>
-</div>
+</div> --}}
 
 {{-- =====================================================
      BLOQUE 8: Transparencia en Cifras
@@ -274,7 +274,7 @@
 {{-- =====================================================
      BLOQUE 15: Gabinete / Autoridades
      ===================================================== --}}
-@if(isset($gabinete) && $gabinete->count() > 0)
+{{-- @if(isset($gabinete) && $gabinete->count() > 0)
 <section class="py-10 bg-white" aria-label="Gabinete departamental">
     <div class="container mx-auto px-4">
         <div class="text-center mb-10">
@@ -308,7 +308,7 @@
         </div>
     </div>
 </section>
-@endif
+@endif --}}
 
 {{-- =====================================================
      BLOQUE 15ab: Potencial Productivo
@@ -364,6 +364,131 @@
                     <span class="w-max bg-[#E5B225] text-[#0a3118] text-[10px] font-bold px-2.5 py-1 rounded-full uppercase mb-2 shadow-sm">Exportación</span>
                     <h3 class="text-white font-bold text-xl md:text-2xl tracking-wide drop-shadow-sm">Cacao</h3>
                 </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- SECCIÓN: GESTIÓN EN ACCIÓN (Blindado para Filament) -->
+<section id="seccion-gestion" class="bg-[#f9fafb] py-16 px-4 sm:px-6 md:px-12 w-full block clear-both" style="display: block; width: 100%; clear: both; box-sizing: border-box; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    <div class="max-w-6xl mx-auto w-full block" style="display: block; width: 100%;">
+
+        <!-- Encabezado Centrado de la Sección -->
+        <div class="w-full text-center mb-12 block" style="display: block; text-align: center; margin-bottom: 3rem;">
+            <h2 class="text-[#0a3118] font-bold text-3xl md:text-4xl mb-3 block" style="display: block; font-weight: 700; color: #0a3118; font-size: 2.25rem; margin-bottom: 0.75rem;">
+                Gestión en Acción
+            </h2>
+            <p class="text-gray-500 text-xs md:text-sm font-light block" style="display: block; color: #6b7280; font-size: 0.875rem; white-space: normal;">
+                Información actualizada sobre decretos, obras públicas y actividades del Gobernador.
+            </p>
+        </div>
+
+        <!-- CONTENEDOR DE DOS COLUMNAS -->
+        <div class="flex flex-col lg:flex-row gap-8 items-stretch w-full" style="display: flex; flex-direction: row; gap: 2rem; width: 100%; flex-wrap: wrap; lg:flex-wrap: nowrap; align-items: stretch;">
+
+            <!-- COLUMNA IZQUIERDA: Tarjeta de Noticia Destacada -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex-1 min-w-[320px] text-left flex flex-col justify-between" style="display: flex; flex-direction: column; justify-content: space-between; background-color: #fff; border: 1px solid #f3f4f6; border-radius: 1rem; overflow: hidden; flex: 1 1 0%; min-width: 320px; text-align: left;">
+                <div class="block w-full">
+                    <!-- Imagen de la Noticia con Badge Absoluto -->
+                    <div class="w-full h-64 md:h-80 relative overflow-hidden block" style="display: block; width: 100%; height: 18rem; position: relative; overflow: hidden;">
+                        <img src="{{ asset('images/puente.jpg') }}" alt="Inauguración de Puente Binacional" class="w-full h-full object-cover block" style="display: block; width: 100%; height: 100%; object-fit: cover;">
+                        <!-- Insignia Noticia Destacada -->
+                        <span class="absolute top-4 left-4 bg-[#0a3118] text-white font-semibold text-[10px] md:text-xs px-3 py-1.5 rounded-md uppercase tracking-wider z-10 block" style="position: absolute; top: 1rem; left: 1rem; background-color: #0a3118; color: #fff; font-weight: 600; font-size: 0.75rem; letter-spacing: 0.05em; padding: 0.375rem 0.75rem; border-radius: 0.375rem; z-index: 10;">
+                            Noticia Destacada
+                        </span>
+                    </div>
+
+                    <!-- Contenido de la Noticia -->
+                    <div class="p-6 md:p-8 block text-left" style="display: block; padding: 1.5rem 2rem; text-align: left;">
+                        <span class="text-blue-600 font-medium text-[11px] block mb-2" style="display: block; color: #2563eb; font-weight: 500; font-size: 0.6875rem; margin-bottom: 0.5rem;">
+                            Obras Públicas • Hace 2 horas
+                        </span>
+                        <h3 class="text-[#0a3118] font-bold text-xl md:text-2xl mb-4 leading-snug block" style="display: block; font-weight: 700; color: #0a3118; font-size: 1.5rem; margin-bottom: 1rem; line-height: 1.25;">
+                            Inauguración de Puente Binacional impulsará el comercio en la frontera
+                        </h3>
+                        <p class="text-gray-500 text-xs md:text-sm font-light leading-relaxed block" style="display: block; color: #6b7280; font-size: 0.875rem; line-height: 1.5; white-space: normal;">
+                            La infraestructura facilitará el transporte de productos agrícolas y ganaderos, reduciendo los tiempos de logística en un 40% hacia los mercados limítrofes.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Enlace Leer Más fijo al fondo -->
+                <div class="px-6 md:px-8 pb-6 md:pb-8 block text-left" style="display: block; padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem; text-align: left;">
+                    <a href="#" class="text-[#0a3118] hover:text-[#061f0f] font-bold text-xs inline-flex items-center gap-1 group" style="display: inline-flex; align-items: center; gap: 0.25rem; color: #0a3118; font-weight: 700; font-size: 0.75rem; text-decoration: none;">
+                        Leer más
+                        <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="width: 0.875rem; height: 0.875rem;"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- COLUMNA DERECHA: Bloque Decretos y Gaceta -->
+            <div class="w-full lg:w-[380px] bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 flex flex-col justify-between" style="display: flex; flex-direction: column; justify-content: space-between; background-color: #fff; border: 1px solid #f3f4f6; border-radius: 1rem; padding: 2rem; width: 100%; max-width: 380px; box-sizing: border-box; text-align: left;">
+
+                <div class="block w-full">
+                    <h3 class="text-[#0a3118] font-bold text-sm uppercase tracking-wider mb-6 pb-4 border-b border-gray-100 block" style="display: block; font-weight: 700; color: #0a3118; font-size: 0.875rem; letter-spacing: 0.05em; border-bottom: 1px solid #f3f4f6; padding-bottom: 1rem; margin-bottom: 1.5rem;">
+                        Decretos y Gaceta
+                    </h3>
+
+                    <!-- Lista de Documentos -->
+                    <div class="flex flex-col gap-5 w-full" style="display: flex; flex-direction: column; gap: 1.25rem; width: 100%;">
+
+                        <!-- Documento 1 -->
+                        <div class="flex flex-row items-start gap-3 w-full text-left" style="display: flex; flex-direction: row; align-items: flex-start; gap: 0.75rem; width: 100%; text-align: left;">
+                            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center flex-shrink-0" style="display: flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; background-color: #ecfdf5; color: #047857; border-radius: 0.5rem; flex-shrink: 0;">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="width: 1rem; height: 1rem;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            </div>
+                            <div class="block" style="display: block;">
+                                <span class="text-blue-600 font-bold text-[10px] uppercase tracking-wider block mb-0.5" style="display: block; color: #2563eb; font-weight: 700; font-size: 0.625rem; letter-spacing: 0.05em;">
+                                    Decreto 015/2024
+                                </span>
+                                <p class="text-slate-800 font-medium text-xs md:text-sm leading-snug block" style="display: block; color: #1e293b; font-weight: 500; font-size: 0.875rem; line-height: 1.35; white-space: normal;">
+                                    Plan de contingencia ambiental para la protección de la cuenca d...
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Documento 2 -->
+                        <div class="flex flex-row items-start gap-3 w-full text-left" style="display: flex; flex-direction: row; align-items: flex-start; gap: 0.75rem; width: 100%; text-align: left;">
+                            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center flex-shrink-0" style="display: flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; background-color: #ecfdf5; color: #047857; border-radius: 0.5rem; flex-shrink: 0;">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="width: 1rem; height: 1rem;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 009 11V7a4 4 0 00-8 0v4c0 2.18.57 4.225 1.574 6"></path></svg>
+                            </div>
+                            <div class="block" style="display: block;">
+                                <span class="text-blue-600 font-bold text-[10px] uppercase tracking-wider block mb-0.5" style="display: block; color: #2563eb; font-weight: 700; font-size: 0.625rem; letter-spacing: 0.05em;">
+                                    Resolución 202/2024
+                                </span>
+                                <p class="text-slate-800 font-medium text-xs md:text-sm leading-snug block" style="display: block; color: #1e293b; font-weight: 500; font-size: 0.875rem; line-height: 1.35; white-space: normal;">
+                                    Normativa para el uso de suelos agrícolas en la provincia Vaca Díez.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Documento 3 -->
+                        <div class="flex flex-row items-start gap-3 w-full text-left" style="display: flex; flex-direction: row; align-items: flex-start; gap: 0.75rem; width: 100%; text-align: left;">
+                            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center flex-shrink-0" style="display: flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; background-color: #ecfdf5; color: #047857; border-radius: 0.5rem; flex-shrink: 0;">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="width: 1rem; height: 1rem;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                            </div>
+                            <div class="block" style="display: block;">
+                                <span class="text-blue-600 font-bold text-[10px] uppercase tracking-wider block mb-0.5" style="display: block; color: #2563eb; font-weight: 700; font-size: 0.625rem; letter-spacing: 0.05em;">
+                                    Transparencia
+                                </span>
+                                <p class="text-slate-800 font-medium text-xs md:text-sm leading-snug block" style="display: block; color: #1e293b; font-weight: 500; font-size: 0.875rem; line-height: 1.35; white-space: normal;">
+                                    Publicación del informe trimestral de ejecución presupuestaria.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Botón Ver Toda la Gaceta al pie -->
+                <div class="w-full block pt-6 mt-6 border-t border-gray-50" style="display: block; width: 100%; border-top: 1px solid #f9fafb; margin-top: 1.5rem;">
+                    <a href="#" class="w-full bg-gray-100 text-slate-700 hover:bg-gray-200 hover:text-slate-900 font-bold text-xs md:text-sm py-3 px-4 rounded-xl text-center block transition-colors" style="display: block; width: 100%; box-sizing: border-box; background-color: #f3f4f6; color: #374151; font-weight: 700; font-size: 0.875rem; padding: 0.75rem 1rem; border-radius: 0.75rem; text-align: center; text-decoration: none;">
+                        Ver toda la Gaceta
+                    </a>
+                </div>
+
             </div>
 
         </div>
