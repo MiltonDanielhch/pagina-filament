@@ -38,6 +38,72 @@
     ]" />
 </div> --}}
 
+<!-- SECCIÓN: Ubicación Geográfica -->
+<section id="ubicacion-geografica" class="bg-white py-16 px-6 md:px-12 lg:px-24">
+    <div class="max-w-7xl mx-auto">
+
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-widest text-[#B7950B] mb-3">
+                <span class="block w-5 h-0.5 bg-[#fcd400] rounded"></span>
+                Ubicación geográfica
+                <span class="block w-5 h-0.5 bg-[#fcd400] rounded"></span>
+            </span>
+            <h2 class="text-[#0a3118] font-bold text-3xl md:text-4xl tracking-tight mb-3">
+                Sede de la Gobernación
+            </h2>
+            <p class="text-gray-600 text-sm md:text-base font-light">
+                La Gobernación del Beni tiene su sede en la ciudad de Trinidad, corazón político y administrativo del departamento.
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 items-stretch">
+
+            <!-- COLUMNA IZQUIERDA: Mapa (ocupa 7/12) -->
+            <div class="lg:col-span-7 rounded-2xl overflow-hidden shadow-sm h-[400px] md:h-[500px]">
+                <iframe
+                    src="https://www.google.com/maps?q=Gobernaci%C3%B3n+del+Beni+Plaza+Ballivi%C3%A1n+Trinidad+Bolivia&output=embed&z=17"
+                    width="100%"
+                    height="100%"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
+            <!-- COLUMNA DERECHA: Fichas de datos (ocupa 5/12) -->
+            <div class="lg:col-span-5 flex flex-col gap-4 justify-center">
+
+                <div class="bg-gray-50/80 rounded-2xl border border-gray-100 p-6 flex flex-col gap-1.5">
+                    <span class="text-[#0a3118] font-bold text-xs uppercase tracking-wider">Dirección</span>
+                    <p class="text-gray-700 text-sm">Plaza José Ballivián, acera sur<br>Santísima Trinidad, Beni - Bolivia</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-gray-50/80 rounded-2xl border border-gray-100 p-5 flex flex-col gap-1">
+                        <span class="text-[#0a3118] text-2xl font-bold">213.564</span>
+                        <span class="text-gray-500 text-xs">km² de extensión</span>
+                    </div>
+                    <div class="bg-gray-50/80 rounded-2xl border border-gray-100 p-5 flex flex-col gap-1">
+                        <span class="text-[#0a3118] text-2xl font-bold">8</span>
+                        <span class="text-gray-500 text-xs">provincias</span>
+                    </div>
+                    <div class="bg-gray-50/80 rounded-2xl border border-gray-100 p-5 flex flex-col gap-1">
+                        <span class="text-[#0a3118] text-2xl font-bold">19</span>
+                        <span class="text-gray-500 text-xs">municipios</span>
+                    </div>
+                    <div class="bg-gray-50/80 rounded-2xl border border-gray-100 p-5 flex flex-col gap-1">
+                        <span class="text-[#0a3118] text-2xl font-bold">~500k</span>
+                        <span class="text-gray-500 text-xs">habitantes</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
 <!-- SECCIÓN COMPLETAMENTE CORREGIDA PARA DOS COLUMNAS ASIMÉTRICAS -->
 <section id="biodiversidad" class="bg-white py-16 px-6 md:px-12 lg:px-24">
     <div class="max-w-7xl mx-auto">

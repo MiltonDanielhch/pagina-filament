@@ -71,7 +71,7 @@
 </section>
 
 <!-- Sección: Categorías de Servicios -->
-<section id="categorias-servicios" class="bg-white pb-20 px-4 md:px-12 lg:px-24 block clear-both w-full">
+<section id="categorias-servicios" class="bg-white pb-25 px-4 md:px-12 lg:px-24 block clear-both w-full">
     <div class="max-w-7xl mx-auto w-full block">
 
         <!-- Título de la Sección con Línea Divisoria -->
@@ -210,9 +210,175 @@
 
                 <!-- Imagen Derecha Acoplada (Ocupa el 40% de espacio) -->
                 <!-- Nota: Coloca aquí una foto de un paisaje o ganado real en tu carpeta public, p. ej. /img/beni.jpg -->
-                <div class="w-full md:w-2/5 min-h-[180px] md:min-h-full relative bg-gray-100 flex-shrink-0">
+                {{-- <div class="w-full md:w-2/5 min-h-[180px] md:min-h-full relative bg-gray-100 flex-shrink-0">
                     <img src="https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?auto=format&fit=crop&w=600&q=80" alt="Ganadería" class="absolute inset-0 w-full h-full object-cover">
+                </div> --}}
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Sección: Sistemas y Plataformas Digitales -->
+<section id="sistemas-digitales" class="bg-white py-10 px-4 md:px-12 lg:px-24 w-full block clear-both">
+    <div class="max-w-7xl mx-auto w-full block">
+
+        <div class="flex items-center gap-4 mb-10 w-full">
+            <h2 class="text-[#0a3118] font-bold text-2xl md:text-3xl tracking-tight whitespace-nowrap block text-left">
+                Sistemas y Plataformas Digitales
+            </h2>
+            <div class="grow h-[1px] bg-gray-100"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 w-full">
+
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div class="w-10 h-10 bg-[#DEF7EC] text-[#0a3118] rounded-xl flex items-center justify-center mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 7v8m4-4H8m11 9H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2z"/>
+                    </svg>
                 </div>
+                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Gaceta Jurídica</h3>
+                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Normativa departamental oficial actualizada.</p>
+                <a href="https://gaceta.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
+                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div class="w-10 h-10 bg-[#FEF9E7] text-[#B7950B] rounded-xl flex items-center justify-center mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                </div>
+                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Plataforma SISCOR</h3>
+                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Correspondencia y control institucional.</p>
+                <a href="https://siscor.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
+                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                    </svg>
+                </div>
+                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Portal de Transparencia</h3>
+                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Datos abiertos y rendición de cuentas.</p>
+                <a href="https://transparencia.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
+                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div class="w-10 h-10 bg-red-50 text-red-600 rounded-xl flex items-center justify-center mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h1.5A2.5 2.5 0 0019 9.5V8a2 2 0 00-2-2h-1a3 3 0 01-3-3V3.055"/>
+                    </svg>
+                </div>
+                <h3 class="text-[#0a3118] font-bold text-sm mb-1">IDTGB</h3>
+                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Calcula el impuesto por transmisión gratuita de bienes.</p>
+                <a href="https://idtgb.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
+                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div class="w-10 h-10 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                </div>
+                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Transporte</h3>
+                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Gestiona asociados, vehículos, rutas y organizaciones.</p>
+                <a href="https://transporte.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
+                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 3-3"/>
+                    </svg>
+                </div>
+                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Auditoría Interna</h3>
+                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Control y auditoría institucional.</p>
+                <a href="https://auditoria.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
+                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div class="w-10 h-10 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                    </svg>
+                </div>
+                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Almacén Central</h3>
+                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Gestión de almacenes y suministros.</p>
+                <a href="https://almacen.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
+                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
+
+            <!-- Ecoalbergue -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/>
+                    </svg>
+                </div>
+                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Ecoalbergue</h3>
+                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Gestión hotelera, habitaciones y paquetes turísticos.</p>
+                <a href="http://aguaysal.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
+                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
+
+            <!-- Minería -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div class="w-10 h-10 bg-yellow-50 text-yellow-700 rounded-xl flex items-center justify-center mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3L5 10v11h14V10L12 3z"/>
+                    </svg>
+                </div>
+                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Minería</h3>
+                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Gestión de recursos mineros departamentales.</p>
+                <a href="https://mineria.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
+                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
+
+            <!-- Mamoré -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div class="w-10 h-10 bg-teal-50 text-teal-600 rounded-xl flex items-center justify-center mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                </div>
+                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Sistema Mamoré</h3>
+                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Gestión administrativa departamental.</p>
+                <a href="https://mamore.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
+                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
+
+            <!-- Gobernación -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div class="w-10 h-10 bg-gray-50 text-gray-700 rounded-xl flex items-center justify-center mb-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11m16-11v11M8 14v3m4-3v3m4-3v3"/>
+                    </svg>
+                </div>
+                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Gobernación</h3>
+                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Portal principal institucional del Beni.</p>
+                <a href="https://www.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
+                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
             </div>
 
         </div>
@@ -318,25 +484,6 @@
                 <!-- Contenedor de Canales Verticales -->
                 <div class="space-y-4 w-full block" style="display: block; width: 100%;">
 
-                    <!-- Tarjeta 1: Chat en Vivo -->
-                    <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm flex flex-row items-start gap-4 text-left w-full" style="display: flex; flex-direction: row; align-items: flex-start; text-align: left; width: 100%; background-color: #fff; border-radius: 1rem; border-width: 1px; padding: 1.25rem;">
-                        <div class="w-12 h-12 bg-emerald-50 text-[#0a3118] rounded-xl flex items-center justify-center flex-shrink-0" style="flex-shrink: 0; width: 3rem; height: 3rem; background-color: #ecfdf5; border-radius: 0.75rem; display: flex; align-items: center; justify-center: center;">
-                            <svg class="w-6 h-6 text-[#0a3118]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="width: 1.5rem; height: 1.5rem; color: #0a3118;">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                            </svg>
-                        </div>
-                        <div style="flex: 1 1 0%; min-width: 0; display: block; text-align: left;">
-                            <h3 class="text-[#0a3118] font-bold text-base mb-1 block" style="display: block; font-weight: 700; color: #0a3118;">Chat en Vivo</h3>
-                            <p class="text-gray-400 text-xs font-medium mb-2 block" style="display: block; color: #9ca3af; white-space: normal;">Disponible de lunes a viernes (08:00 - 18:30)</p>
-                            <a href="#" class="text-[#0a3118] font-bold text-sm inline-flex items-center gap-1" style="display: inline-flex; align-items: center; color: #0a3118; font-weight: 700;">
-                                Iniciar Conversación
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="width: 0.875rem; height: 0.875rem;">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-
                     <!-- Tarjeta 2: Central Telefónica -->
                     <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm flex flex-row items-start gap-4 text-left w-full" style="display: flex; flex-direction: row; align-items: flex-start; text-align: left; width: 100%; background-color: #fff; border-radius: 1rem; border-width: 1px; padding: 1.25rem;">
                         <div class="w-12 h-12 bg-emerald-50 text-[#0a3118] rounded-xl flex items-center justify-center flex-shrink-0" style="flex-shrink: 0; width: 3rem; height: 3rem; background-color: #ecfdf5; border-radius: 0.75rem; display: flex; align-items: center; justify-center: center;">
@@ -378,34 +525,18 @@
                 </div>
             </div>
 
-            <!-- COLUMNA DERECHA: Tarjeta del Mapa con Aspecto Fijo Proporcional (Ocupa el 40%) -->
+            <!-- COLUMNA DERECHA: Mapa Google Maps (Ocupa el 40%) -->
             <div class="w-full lg:w-[40%] flex justify-center lg:justify-end flex-shrink-0" style="display: flex; flex-shrink: 0; justify-content: flex-end;">
-                <div class="bg-[#386b52] w-full max-w-[380px] aspect-square rounded-[2.5rem] shadow-xl p-8 flex flex-col justify-between relative overflow-hidden" style="display: flex; flex-direction: column; justify-content: space-between; width: 100%; max-width: 380px; aspect-ratio: 1 / 1; background-color: #386b52; border-radius: 2.5rem; position: relative; overflow: hidden; padding: 2rem;">
-
-                    <!-- SVG del mapa incrustado directamente con tamaño forzado -->
-                    <div class="absolute inset-0 flex items-center justify-center p-8 opacity-90" style="position: absolute; inset: 0px; display: flex; align-items: center; justify-content: center; padding: 2rem;">
-                        <svg class="w-full h-full" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
-                            <path d="M40 70C35 90 25 110 30 130C35 150 65 170 90 175C115 180 145 160 160 140C175 120 170 85 155 60C140 35 105 25 85 35C65 45 45 50 40 70Z" fill="#4d8569"/>
-                            <path d="M42 67C37 87 27 107 32 127C37 147 67 167 92 172C117 177 147 157 162 137C177 117 172 82 157 57C142 32 107 22 87 32C67 42 47 47 42 67Z" fill="#5fa181"/>
-                            <circle cx="105" cy="110" r="7" fill="#ffffff" />
-                            <circle cx="105" cy="110" r="4" fill="#872929" />
-                        </svg>
-                    </div>
-
-                    <!-- Falso divisor transparente -->
-                    <div class="block" style="display: block; height: 1px;"></div>
-
-                    <!-- Tarjeta Informativa Flotante en la Base Blindada -->
-                    <div class="bg-white rounded-2xl p-4 shadow-md w-full relative z-10 text-left flex flex-col gap-1" style="display: flex; flex-direction: column; text-align: left; width: 100%; background-color: #fff; border-radius: 1rem; padding: 1rem; position: relative; z-index: 10;">
-                        <div class="flex flex-row items-center gap-2" style="display: flex; flex-direction: row; align-items: center;">
-                            <span style="display: inline-block; width: 0.5rem; height: 0.5rem; background-color: #10b981; border-radius: 9999px;"></span>
-                            <span class="text-[#0a3118] font-bold text-xs" style="font-weight: 700; color: #0a3118; font-size: 0.75rem;">Atención Presencial Habilitada</span>
-                        </div>
-                        <p class="text-gray-500 text-xs font-light" style="display: block; color: #6b7280; font-size: 0.75rem; white-space: normal; line-height: 1.4;">
-                            Contamos con 12 ventanillas de atención rápida para trámites presenciales en la Casa de Gobierno.
-                        </p>
-                    </div>
-
+                <div class="w-full max-w-[380px] rounded-[2.5rem] overflow-hidden shadow-xl h-[400px]" style="width: 100%; max-width: 380px; border-radius: 2.5rem; overflow: hidden; height: 400px;">
+                    <iframe
+                        src="https://www.google.com/maps?q=Gobernaci%C3%B3n+del+Beni+Plaza+Ballivi%C3%A1n+Trinidad+Bolivia&output=embed&z=17"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
             </div>
 

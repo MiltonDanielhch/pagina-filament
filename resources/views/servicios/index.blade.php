@@ -370,15 +370,15 @@
 
             <!-- Contenedor del Avatar con Borde Dorado -->
             <div class="w-16 h-16 rounded-xl overflow-hidden p-0.5 bg-gradient-to-br from-[#e5c158] to-[#c9a43b] shadow-sm mb-3 mx-auto block" style="display: block; width: 4rem; height: 4rem; border-radius: 0.75rem; background: linear-gradient(135deg, #e5c158, #c9a43b); padding: 2px; box-sizing: border-box; margin-left: auto; margin-right: auto;">
-                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=256&q=80" alt="Ing. Carlos Antelo" class="w-full h-full object-cover rounded-[10px] block" style="display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+                <img src="{{ asset('images/titogobe.JPG') }}" alt="Ing. Carlos Antelo" class="w-full h-full object-cover rounded-[10px] block" style="display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
             </div>
 
             <!-- Datos del Productor -->
             <h5 class="text-slate-900 font-bold text-sm md:text-base tracking-wide block mb-1" style="display: block; color: #0f172a; font-weight: 700; font-size: 0.9375rem; margin-bottom: 0.25rem;">
-                Ing. Carlos
+                Ing. M.Sc. Jesús "Tito" Egüez Rivero
             </h5>
             <p class="text-gray-400 font-bold text-[10px] sm:text-[11px] tracking-widest uppercase block" style="display: block; color: #9ca3af; font-weight: 700; font-size: 0.6875rem; letter-spacing: 0.1em; margin: 0;">
-                Productor Pecuario - Región Moxos
+                Gobernador del Beni
             </p>
         </div>
 
