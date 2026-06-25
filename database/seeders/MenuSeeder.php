@@ -44,7 +44,7 @@ class MenuSeeder extends Seeder
                     ['label' => 'Marco Normativo', 'url' => '/transparencia/marco-normativo'],
                     ['label' => 'Organigrama', 'url' => '/institucional/organigrama'],
                     ['label' => 'Gobernador', 'url' => '/gobernador'],
-                    ['label' => 'sub-gobernador', 'url' => '/sub-gobernador'],
+                    ['label' => 'vice-gobernador', 'url' => '/vice-gobernador'],
                     // ['label' => 'Gobernador y Gabinete', 'url' => '/institucional/autoridades'],
                     ['label' => 'Secretarías Departamentales', 'url' => '/institucional/secretarias'],
                 ],

@@ -370,7 +370,7 @@
 
             <!-- Contenedor del Avatar con Borde Dorado -->
             <div class="w-16 h-16 rounded-xl overflow-hidden p-0.5 bg-gradient-to-br from-[#e5c158] to-[#c9a43b] shadow-sm mb-3 mx-auto block" style="display: block; width: 4rem; height: 4rem; border-radius: 0.75rem; background: linear-gradient(135deg, #e5c158, #c9a43b); padding: 2px; box-sizing: border-box; margin-left: auto; margin-right: auto;">
-                <img src="{{ asset('images/titogobe.JPG') }}" alt="Ing. Carlos Antelo" class="w-full h-full object-cover rounded-[10px] block" style="display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+                <img src="{{ asset('images/titogobe.webp') }}" alt="Ing. Tito Eguez" class="w-full h-full object-cover rounded-[10px] block" style="display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
             </div>
 
             <!-- Datos del Productor -->
