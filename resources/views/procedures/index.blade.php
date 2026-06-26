@@ -32,7 +32,7 @@
         </p>
 
         <!-- Barra de Búsqueda Integrada con Sombra Suave -->
-        <div class="w-full max-w-3xl bg-white rounded-xl shadow-md border border-gray-100 p-2 flex items-center gap-2 mb-6">
+        <form action="/buscar" method="GET" class="w-full max-w-3xl bg-white rounded-xl shadow-md border border-gray-100 p-2 flex items-center gap-2 mb-6">
             <div class="pl-3 text-gray-400">
                 <!-- Icono de Lupa (Search) -->
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -40,15 +40,15 @@
                 </svg>
             </div>
             <!-- Input text de búsqueda -->
-            <input type="text"
+            <input type="text" name="q"
                    placeholder="¿Qué trámite estás buscando hoy?"
                    class="w-full py-2 px-1 text-gray-700 text-sm md:text-base focus:outline-none placeholder-gray-400 bg-transparent">
 
             <!-- Botón Buscar Institucional -->
-            <button class="bg-[#0a3118] hover:bg-[#06200f] text-white font-semibold text-sm md:text-base px-6 py-2.5 rounded-lg transition-colors duration-200 shadow-sm">
+            <button type="submit" class="bg-[#0a3118] hover:bg-[#06200f] text-white font-semibold text-sm md:text-base px-6 py-2.5 rounded-lg transition-colors duration-200 shadow-sm">
                 Buscar
             </button>
-        </div>
+        </form>
 
         <!-- Trámites Frecuentes (Etiquetas Estilo Píldora) -->
         <div class="flex flex-wrap items-center justify-center gap-2 md:gap-3 text-xs md:text-sm">
@@ -232,154 +232,60 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 w-full">
 
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <div class="w-10 h-10 bg-[#DEF7EC] text-[#0a3118] rounded-xl flex items-center justify-center mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 7v8m4-4H8m11 9H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2z"/>
-                    </svg>
-                </div>
-                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Gaceta Jurídica</h3>
-                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Normativa departamental oficial actualizada.</p>
-                <a href="https://gaceta.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
-                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </a>
-            </div>
+            @php
+                $iconMap = [
+                    'plus' => '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v8m4-4H8m11 9H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2z"/></svg>',
+                    'document' => '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>',
+                    'eye' => '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>',
+                    'external-link' => '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>',
+                    'globe' => '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h1.5A2.5 2.5 0 0019 9.5V8a2 2 0 00-2-2h-1a3 3 0 01-3-3V3.055"/></svg>',
+                    'calendar' => '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>',
+                    'beaker' => '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>',
+                    'clipboard' => '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 3-3"/></svg>',
+                    'cube' => '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>',
+                    'building' => '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/></svg>',
+                    'mountain' => '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3L5 10v11h14V10L12 3z"/></svg>',
+                    'cog' => '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>',
+                    'government' => '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11m16-11v11M8 14v3m4-3v3m4-3v3"/></svg>',
+                ];
 
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <div class="w-10 h-10 bg-[#FEF9E7] text-[#B7950B] rounded-xl flex items-center justify-center mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                    </svg>
-                </div>
-                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Plataforma SISCOR</h3>
-                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Correspondencia y control institucional.</p>
-                <a href="https://siscor.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
-                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </a>
-            </div>
+                $colorPalette = [
+                    ['bg' => '#DEF7EC', 'text' => '#0a3118'],
+                    ['bg' => '#FEF9E7', 'text' => '#B7950B'],
+                    ['bg' => '#DBEAFE', 'text' => '#2563EB'],
+                    ['bg' => '#FEE2E2', 'text' => '#DC2626'],
+                    ['bg' => '#FEF3C7', 'text' => '#D97706'],
+                    ['bg' => '#DBEAFE', 'text' => '#4F46E5'],
+                    ['bg' => '#FFEDD5', 'text' => '#EA580C'],
+                    ['bg' => '#D1FAE5', 'text' => '#059669'],
+                    ['bg' => '#FEF9C3', 'text' => '#CA8A04'],
+                    ['bg' => '#CCFBF1', 'text' => '#0D9488'],
+                    ['bg' => '#F3E8FF', 'text' => '#9333EA'],
+                    ['bg' => '#FCE7F3', 'text' => '#DB2777'],
+                    ['bg' => '#F3F4F6', 'text' => '#4B5563'],
+                ];
+            @endphp
 
+            @forelse($externalSystems as $system)
+            @php $c = $colorPalette[$loop->index % count($colorPalette)]; @endphp
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                    </svg>
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background-color: {{ $c['bg'] }}; color: {{ $c['text'] }};">
+                    {!! $iconMap[$system->icon] ?? $iconMap['external-link'] !!}
                 </div>
-                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Portal de Transparencia</h3>
-                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Datos abiertos y rendición de cuentas.</p>
-                <a href="https://transparencia.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
-                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                <h3 class="text-[#0a3118] font-bold text-sm mb-1">{{ $system->name }}</h3>
+                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">{{ $system->description }}</p>
+                @php
+                    $isExternal = Str::startsWith($system->url, 'http');
+                @endphp
+                <a href="{{ $system->url }}" @if($isExternal) target="_blank" @endif class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
+                    {{ $isExternal ? 'Acceder' : 'Explorar' }} <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                 </a>
             </div>
-
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <div class="w-10 h-10 bg-red-50 text-red-600 rounded-xl flex items-center justify-center mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h1.5A2.5 2.5 0 0019 9.5V8a2 2 0 00-2-2h-1a3 3 0 01-3-3V3.055"/>
-                    </svg>
-                </div>
-                <h3 class="text-[#0a3118] font-bold text-sm mb-1">IDTGB</h3>
-                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Calcula el impuesto por transmisión gratuita de bienes.</p>
-                <a href="https://idtgb.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
-                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </a>
+            @empty
+            <div class="col-span-full text-center py-10 text-gray-500">
+                No hay sistemas disponibles por el momento.
             </div>
-
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <div class="w-10 h-10 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                    </svg>
-                </div>
-                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Transporte</h3>
-                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Gestiona asociados, vehículos, rutas y organizaciones.</p>
-                <a href="https://transporte.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
-                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </a>
-            </div>
-
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 3-3"/>
-                    </svg>
-                </div>
-                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Auditoría Interna</h3>
-                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Control y auditoría institucional.</p>
-                <a href="https://auditoria.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
-                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </a>
-            </div>
-
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <div class="w-10 h-10 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-                    </svg>
-                </div>
-                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Almacén Central</h3>
-                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Gestión de almacenes y suministros.</p>
-                <a href="https://almacen.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
-                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </a>
-            </div>
-
-            <!-- Ecoalbergue -->
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/>
-                    </svg>
-                </div>
-                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Ecoalbergue</h3>
-                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Gestión hotelera, habitaciones y paquetes turísticos.</p>
-                <a href="http://aguaysal.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
-                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </a>
-            </div>
-
-            <!-- Minería -->
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <div class="w-10 h-10 bg-yellow-50 text-yellow-700 rounded-xl flex items-center justify-center mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3L5 10v11h14V10L12 3z"/>
-                    </svg>
-                </div>
-                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Minería</h3>
-                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Gestión de recursos mineros departamentales.</p>
-                <a href="https://mineria.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
-                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </a>
-            </div>
-
-            <!-- Mamoré -->
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <div class="w-10 h-10 bg-teal-50 text-teal-600 rounded-xl flex items-center justify-center mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    </svg>
-                </div>
-                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Sistema Mamoré</h3>
-                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Gestión administrativa departamental.</p>
-                <a href="https://mamore.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
-                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </a>
-            </div>
-
-            <!-- Gobernación -->
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <div class="w-10 h-10 bg-gray-50 text-gray-700 rounded-xl flex items-center justify-center mb-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11m16-11v11M8 14v3m4-3v3m4-3v3"/>
-                    </svg>
-                </div>
-                <h3 class="text-[#0a3118] font-bold text-sm mb-1">Gobernación</h3>
-                <p class="text-gray-500 text-xs leading-relaxed font-light mb-3">Portal principal institucional del Beni.</p>
-                <a href="https://www.beni.gob.bo" target="_blank" class="mt-auto inline-flex items-center gap-1.5 text-[#0a3118] font-semibold text-xs bg-gray-50 hover:bg-gray-100 border border-gray-100 px-3.5 py-2 rounded-lg transition-colors">
-                    Acceder <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </a>
-            </div>
+            @endforelse
 
         </div>
     </div>

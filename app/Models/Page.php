@@ -40,4 +40,9 @@ class Page extends Model implements HasMedia
             ->logOnlyDirty()
             ->logExcept(['created_at', 'updated_at']);
     }
+
+    public function scopePublished($query)
+    {
+        return $query->where('is_published', true);
+    }
 }

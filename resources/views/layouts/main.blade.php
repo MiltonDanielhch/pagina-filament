@@ -69,6 +69,10 @@
     <!-- Tailwind CSS dynamic build -->
     @vite(['resources/css/app.css'])
 
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+
     <!-- SEO Hook -->
     @yield('seo')
 
@@ -152,6 +156,11 @@
                         <a href="https://x.com/" target="_blank" rel="noopener noreferrer" class="hover:text-amber-200 transition p-1" aria-label="X (Twitter)">
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                         </a>
+                        <a href="https://youtube.com/" target="_blank" rel="noopener noreferrer" class="hover:text-amber-200 transition p-1" aria-label="YouTube">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -198,14 +207,22 @@
                             @endif
                         @endforeach
 
-                        <!-- Buscador -->
-                        <div class="relative" style="display: block; flex-shrink: 0;">
-                            <form action="/buscar" method="GET" style="display: block; margin: 0; padding: 0;">
+                        <!-- Buscador con Autocomplete -->
+                        <div class="relative" x-data="searchAutocomplete()" @click.away="resultsOpen = false" style="display: block; flex-shrink: 0;">
+                            <form action="{{ route('search') }}" method="GET" style="display: block; margin: 0; padding: 0;" @submit.prevent="submitSearch()">
                                 <div class="relative flex items-center" style="display: flex; flex-direction: row; align-items: center;">
                                     <input
+                                        x-ref="searchInput"
                                         type="text"
                                         name="q"
+                                        x-model="query"
+                                        @input.debounce.300ms="search()"
+                                        @focus="if (results.length) resultsOpen = true"
+                                        @keydown.escape="resultsOpen = false"
+                                        @keydown.down.prevent="$focus.wrap().next()"
+                                        @keydown.up.prevent="$focus.wrap().previous()"
                                         placeholder="Buscar..."
+                                        autocomplete="off"
                                         class="w-40 lg:w-48 py-2 pl-4 pr-10 text-sm bg-[#f3f4f6] text-gray-700 placeholder:text-[#6b7280] rounded-full border-0 focus:outline-none focus:ring-2 focus:ring-[#004900]/20 focus:bg-white transition-all duration-200"
                                         style="display: block; width: 10rem; font-size: 0.875rem; line-height: 1.25rem; border: none; box-shadow: none;"
                                     >
@@ -216,6 +233,42 @@
                                     </button>
                                 </div>
                             </form>
+
+                            <!-- Dropdown de resultados -->
+                            <div x-show="resultsOpen && results.length" x-cloak
+                                class="absolute right-0 mt-2 w-96 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-50"
+                                style="max-height: 80vh; overflow-y: auto;">
+                                <template x-for="(group, key) in results" :key="key">
+                                    <div x-show="group.items.length > 0">
+                                        <div class="px-4 py-2 bg-gray-50 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-100"
+                                            x-text="group.label">
+                                        </div>
+                                        <template x-for="item in group.items.slice(0, 5)" :key="item.id + '-' + key">
+                                            <a :href="item.url" class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-50 transition"
+                                               @click="resultsOpen = false">
+                                                <div class="text-sm font-medium text-gray-800" x-html="item.title"></div>
+                                                <div class="text-xs text-gray-500 mt-0.5 line-clamp-1" x-html="item.excerpt" x-show="item.excerpt"></div>
+                                            </a>
+                                        </template>
+                                        <a :href="'{{ route('search') }}?q=' + encodeURIComponent(query) + '&type=' + key"
+                                           class="block px-4 py-2 text-xs font-semibold text-[#004900] hover:bg-gray-50 text-center"
+                                           @click="resultsOpen = false">
+                                            Ver todos en <span x-text="group.label.toLowerCase()"></span>
+                                        </a>
+                                    </div>
+                                </template>
+                                <a :href="'{{ route('search') }}?q=' + encodeURIComponent(query)"
+                                   class="block px-4 py-3 bg-gray-50 text-sm font-semibold text-[#004900] hover:bg-gray-100 text-center border-t border-gray-200"
+                                   @click="resultsOpen = false">
+                                    Ver todos los resultados →
+                                </a>
+                            </div>
+
+                            <!-- Sin resultados -->
+                            <div x-show="resultsOpen && searched && !results.some(g => g.items.length > 0)" x-cloak
+                                class="absolute right-0 mt-2 w-96 bg-white rounded-xl shadow-2xl border border-gray-100 p-6 text-center z-50">
+                                <p class="text-gray-500 text-sm">No se encontraron resultados para <strong x-text="query"></strong></p>
+                            </div>
                         </div>
                     </div>
                     @endif
@@ -231,6 +284,49 @@
             @if($headerMenu && $headerMenu->is_active && $headerMenu->items)
             <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-200">
                 <nav class="container mx-auto px-4 py-3">
+                    <!-- Buscador móvil -->
+                    <div class="mb-3 px-3" x-data="searchAutocomplete()" @click.away="resultsOpen = false">
+                        <form action="{{ route('search') }}" method="GET" @submit.prevent="submitSearch()">
+                            <div class="relative flex items-center">
+                                <input
+                                    type="text"
+                                    name="q"
+                                    x-model="query"
+                                    @input.debounce.300ms="search()"
+                                    @focus="if (results.length) resultsOpen = true"
+                                    autocomplete="off"
+                                    placeholder="Buscar..."
+                                    class="w-full py-2.5 pl-4 pr-10 text-sm bg-[#f3f4f6] text-gray-700 placeholder:text-[#6b7280] rounded-full border-0 focus:outline-none focus:ring-2 focus:ring-[#004900]/20 focus:bg-white transition-all duration-200"
+                                >
+                                <button type="submit" class="absolute right-0 flex items-center justify-center w-10 h-full text-gray-400">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                        <!-- Mobile results dropdown -->
+                        <div x-show="resultsOpen && results.some(g => g.items.length > 0)" x-cloak
+                            class="mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden"
+                            style="max-height: 60vh; overflow-y: auto;">
+                            <template x-for="(group, key) in results" :key="key">
+                                <div x-show="group.items.length > 0">
+                                    <div class="px-4 py-2 bg-gray-50 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-100" x-text="group.label"></div>
+                                    <template x-for="item in group.items.slice(0, 3)" :key="item.id + '-' + key">
+                                        <a :href="item.url" class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-50 transition" @click="resultsOpen = false">
+                                            <div class="text-sm font-medium text-gray-800" x-html="item.title"></div>
+                                            <div class="text-xs text-gray-500 mt-0.5 line-clamp-1" x-html="item.excerpt" x-show="item.excerpt"></div>
+                                        </a>
+                                    </template>
+                                </div>
+                            </template>
+                            <a :href="'{{ route('search') }}?q=' + encodeURIComponent(query)"
+                               class="block px-4 py-3 bg-gray-50 text-sm font-semibold text-[#004900] hover:bg-gray-100 text-center"
+                               @click="resultsOpen = false">
+                                Ver todos los resultados →
+                            </a>
+                        </div>
+                    </div>
                     @foreach($headerMenu->items->where('parent_id', null) as $item)
                         @if($item->children->count() > 0)
                             @php $isActive = isMenuItemActive($item, $currentUrl); @endphp
@@ -461,5 +557,114 @@
 
     <!-- External Custom Assets logic -->
     <script src="{{ asset('js/custom.js') }}"></script>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('searchAutocomplete', () => ({
+                query: '',
+                results: [],
+                resultsOpen: false,
+                searched: false,
+
+                async search() {
+                    if (this.query.length < 3) {
+                        this.results = [];
+                        this.resultsOpen = false;
+                        this.searched = false;
+                        return;
+                    }
+
+                    try {
+                        const res = await fetch(`/api/buscar?q=${encodeURIComponent(this.query)}`);
+                        const data = await res.json();
+
+                        this.results = [
+                            { label: 'Noticias', key: 'posts', items: this.mapPosts(data.posts || []) },
+                            { label: 'Páginas', key: 'pages', items: this.mapPages(data.pages || []) },
+                            { label: 'Trámites', key: 'procedures', items: this.mapProcedures(data.procedures || []) },
+                            { label: 'Eventos', key: 'events', items: this.mapSimple(data.events || []) },
+                            { label: 'Convocatorias', key: 'announcements', items: this.mapSimple(data.announcements || []) },
+                            { label: 'Autoridades', key: 'officials', items: this.mapOfficials(data.officials || []) },
+                            { label: 'Proyectos', key: 'projects', items: this.mapSimple(data.projects || []) },
+                            { label: 'Datos Abiertos', key: 'datasets', items: this.mapSimple(data.datasets || []) },
+                            { label: 'Agenda', key: 'agenda', items: this.mapSimple(data.agenda || []) },
+                            { label: 'Sistemas', key: 'systems', items: this.mapSystems(data.systems || []) },
+                        ];
+
+                        this.resultsOpen = true;
+                        this.searched = true;
+                    } catch (e) {
+                        console.error('Search error:', e);
+                    }
+                },
+
+                mapPosts(posts) {
+                    return posts.map(p => ({
+                        id: p.id,
+                        title: this.highlight(p.title),
+                        excerpt: this.highlight(p.excerpt ? p.excerpt.substring(0, 100) : ''),
+                        url: `/blog/${p.slug}`
+                    }));
+                },
+
+                mapPages(pages) {
+                    return pages.map(p => ({
+                        id: p.id,
+                        title: this.highlight(p.title),
+                        excerpt: '',
+                        url: p.slug ? `/institucional/${p.slug}` : '#'
+                    }));
+                },
+
+                mapProcedures(procedures) {
+                    return procedures.map(p => ({
+                        id: p.id,
+                        title: this.highlight(p.name),
+                        excerpt: this.highlight(p.description ? p.description.substring(0, 100) : ''),
+                        url: p.slug ? `/tramites/${p.slug}` : '#'
+                    }));
+                },
+
+                mapSimple(items) {
+                    return items.map(i => ({
+                        id: i.id,
+                        title: this.highlight(i.title || i.name),
+                        excerpt: this.highlight((i.description || i.excerpt || '').substring(0, 100)),
+                        url: i.url || (i.slug ? `#` : '#')
+                    }));
+                },
+
+                mapOfficials(officials) {
+                    return officials.map(o => ({
+                        id: o.id,
+                        title: this.highlight(o.name),
+                        excerpt: this.highlight(o.position),
+                        url: '/institucional/autoridades'
+                    }));
+                },
+
+                mapSystems(systems) {
+                    return systems.map(s => ({
+                        id: s.id,
+                        title: this.highlight(s.name),
+                        excerpt: this.highlight(s.description ? s.description.substring(0, 100) : ''),
+                        url: s.url
+                    }));
+                },
+
+                highlight(text) {
+                    if (!text) return '';
+                    const q = this.query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    return text.replace(new RegExp(`(${q})`, 'gi'), '<mark class="bg-yellow-200 text-gray-900 rounded px-0.5">$1</mark>');
+                },
+
+                submitSearch() {
+                    if (this.query.length >= 3) {
+                        window.location.href = `{{ route('search') }}?q=${encodeURIComponent(this.query)}`;
+                    }
+                }
+            }));
+        });
+    </script>
 </body>
 </html>

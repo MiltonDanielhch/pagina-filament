@@ -379,7 +379,7 @@
         </div>
 
         <div class="w-full text-center mt-10 block" style="display: block; text-align: center; width: 100%;">
-            <a href="#" class="inline-flex items-center text-[#0a3118] font-semibold text-sm md:text-base group hover:underline">
+            <a href="/servicios" class="inline-flex items-center text-[#0a3118] font-semibold text-sm md:text-base group hover:underline">
                 Explorar todos los sectores
                 <svg class="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -406,13 +406,21 @@
         <!-- CONTENEDOR DE DOS COLUMNAS -->
         <div class="flex flex-col lg:flex-row gap-6 items-stretch w-full" style="display: flex; flex-direction: row; gap: 1.5rem; width: 100%; flex-wrap: wrap; lg:flex-wrap: nowrap; align-items: stretch;">
 
-            <!-- COLUMNA IZQUIERDA: Tarjeta de Noticia Destacada -->
+            @if(isset($featuredPost))
+            <!-- COLUMNA IZQUIERDA: Noticia Destacada (dinámica) -->
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex-1 min-w-[320px] text-left flex flex-col justify-between" style="display: flex; flex-direction: column; justify-content: space-between; background-color: #fff; border: 1px solid #f3f4f6; border-radius: 1rem; overflow: hidden; flex: 1 1 0%; min-width: 320px; text-align: left;">
                 <div class="block w-full">
                     <!-- Imagen de la Noticia con Badge Absoluto -->
                     <div class="w-full h-64 md:h-80 relative overflow-hidden block" style="display: block; width: 100%; height: 18rem; position: relative; overflow: hidden;">
-                        <img src="{{ asset('images/puente.jpg') }}" alt="Inauguración de Puente Binacional" class="w-full h-full object-cover block" style="display: block; width: 100%; height: 100%; object-fit: cover;">
-                        <!-- Insignia Noticia Destacada -->
+                        @if(method_exists($featuredPost, 'getFirstMedia') && $featuredPost->getFirstMedia('featured'))
+                        <img src="{{ $featuredPost->getFirstMedia('featured')->getUrl('large') }}" alt="{{ $featuredPost->title }}" class="w-full h-full object-cover block" style="display: block; width: 100%; height: 100%; object-fit: cover;">
+                        @else
+                        <div class="w-full h-full bg-gradient-to-br from-emerald-700 to-teal-800 flex items-center justify-center">
+                            <svg class="w-16 h-16 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                            </svg>
+                        </div>
+                        @endif
                         <span class="absolute top-4 left-4 bg-[#0a3118] text-white font-semibold text-[10px] md:text-xs px-3 py-1.5 rounded-md uppercase tracking-wider z-10 block" style="position: absolute; top: 1rem; left: 1rem; background-color: #0a3118; color: #fff; font-weight: 600; font-size: 0.75rem; letter-spacing: 0.05em; padding: 0.375rem 0.75rem; border-radius: 0.375rem; z-index: 10;">
                             Noticia Destacada
                         </span>
@@ -421,25 +429,33 @@
                     <!-- Contenido de la Noticia -->
                     <div class="p-6 md:p-8 block text-left" style="display: block; padding: 1.5rem 2rem; text-align: left;">
                         <span class="text-blue-600 font-medium text-[11px] block mb-2" style="display: block; color: #2563eb; font-weight: 500; font-size: 0.6875rem; margin-bottom: 0.5rem;">
-                            Obras Públicas • Hace 2 horas
+                            @if($featuredPost->category)
+                                {{ $featuredPost->category->name }}
+                            @else
+                                Noticia
+                            @endif
+                            • {{ optional($featuredPost->published_at)->format('d/m/Y') }}
                         </span>
                         <h3 class="text-[#0a3118] font-bold text-xl md:text-2xl mb-4 leading-snug block" style="display: block; font-weight: 700; color: #0a3118; font-size: 1.5rem; margin-bottom: 1rem; line-height: 1.25;">
-                            Inauguración de Puente Binacional impulsará el comercio en la frontera
+                            {{ $featuredPost->title }}
                         </h3>
+                        @if($featuredPost->excerpt)
                         <p class="text-gray-500 text-xs md:text-sm font-light leading-relaxed block" style="display: block; color: #6b7280; font-size: 0.875rem; line-height: 1.5; white-space: normal;">
-                            La infraestructura facilitará el transporte de productos agrícolas y ganaderos, reduciendo los tiempos de logística en un 40% hacia los mercados limítrofes.
+                            {{ $featuredPost->excerpt }}
                         </p>
+                        @endif
                     </div>
                 </div>
 
                 <!-- Enlace Leer Más fijo al fondo -->
                 <div class="px-6 md:px-8 pb-6 md:pb-8 block text-left" style="display: block; padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem; text-align: left;">
-                    <a href="#" class="text-[#0a3118] hover:text-[#061f0f] font-bold text-xs inline-flex items-center gap-1 group" style="display: inline-flex; align-items: center; gap: 0.25rem; color: #0a3118; font-weight: 700; font-size: 0.75rem; text-decoration: none;">
+                    <a href="{{ route('posts.show', $featuredPost->slug) }}" class="text-[#0a3118] hover:text-[#061f0f] font-bold text-xs inline-flex items-center gap-1 group" style="display: inline-flex; align-items: center; gap: 0.25rem; color: #0a3118; font-weight: 700; font-size: 0.75rem; text-decoration: none;">
                         Leer más
                         <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="width: 0.875rem; height: 0.875rem;"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </a>
                 </div>
             </div>
+            @endif
 
             <!-- COLUMNA DERECHA: Bloque Decretos y Gaceta -->
             <div class="w-full lg:w-[380px] bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 flex flex-col justify-between" style="display: flex; flex-direction: column; justify-content: space-between; background-color: #fff; border: 1px solid #f3f4f6; border-radius: 1rem; padding: 2rem; width: 100%; max-width: 380px; box-sizing: border-box; text-align: left;">
@@ -500,11 +516,16 @@
                     </div>
                 </div>
 
-                <!-- Botón Ver Toda la Gaceta al pie -->
+                <!-- Botones al pie -->
                 <div class="w-full block pt-6 mt-6 border-t border-gray-50" style="display: block; width: 100%; border-top: 1px solid #f9fafb; margin-top: 1.5rem;">
-                    <a href="#" class="w-full bg-gray-100 text-slate-700 hover:bg-gray-200 hover:text-slate-900 font-bold text-xs md:text-sm py-3 px-4 rounded-xl text-center block transition-colors" style="display: block; width: 100%; box-sizing: border-box; background-color: #f3f4f6; color: #374151; font-weight: 700; font-size: 0.875rem; padding: 0.75rem 1rem; border-radius: 0.75rem; text-align: center; text-decoration: none;">
-                        Ver toda la Gaceta
-                    </a>
+                    <div class="flex gap-3 w-full">
+                        <a href="https://gaceta.beni.gob.bo/" target="_blank" class="flex-1 bg-gray-100 text-slate-700 hover:bg-gray-200 hover:text-slate-900 font-bold text-xs md:text-sm py-3 px-4 rounded-xl text-center block transition-colors" style="background-color: #f3f4f6; color: #374151; font-weight: 700; font-size: 0.875rem; padding: 0.75rem 1rem; border-radius: 0.75rem; text-align: center; text-decoration: none;">
+                            Ver toda la Gaceta
+                        </a>
+                        <a href="/blog" class="flex-1 bg-gray-100 text-slate-700 hover:bg-gray-200 hover:text-slate-900 font-bold text-xs md:text-sm py-3 px-4 rounded-xl text-center block transition-colors" style="background-color: #f3f4f6; color: #374151; font-weight: 700; font-size: 0.875rem; padding: 0.75rem 1rem; border-radius: 0.75rem; text-align: center; text-decoration: none;">
+                            Ver toda la Prensa
+                        </a>
+                    </div>
                 </div>
 
             </div>
@@ -610,7 +631,7 @@
                         <p class="text-white/80 text-sm md:text-base leading-relaxed mb-8">Acceda a nuestra plataforma digital de trámites y servicios institucionales de forma rápida y segura.</p>
                     </div>
                     <div class="mt-auto">
-                        <a href="#" class="inline-flex items-center gap-2 bg-[#E5B225] hover:bg-[#cda021] text-[#004900] font-semibold rounded-lg px-5 py-2.5 text-sm transition-all duration-200 shadow-lg">
+                        <a href="/tramites" class="inline-flex items-center gap-2 bg-[#E5B225] hover:bg-[#cda021] text-[#004900] font-semibold rounded-lg px-5 py-2.5 text-sm transition-all duration-200 shadow-lg">
                             Portal Digital
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
@@ -741,64 +762,69 @@
 </section>
 
 {{-- =====================================================
-     BLOQUE 15c: Turismo y Naturaleza
+     BLOQUE 15c: Turismo y Naturaleza (Iluminado y Blindado)
      ===================================================== --}}
-<section id="turismo-naturaleza" class="relative overflow-hidden py-16 px-6 min-h-[75vh] flex items-center" aria-label="Turismo y naturaleza del Beni">
+<section id="turismo-naturaleza" class="relative overflow-hidden py-10 md:py-16 px-4 md:px-12 lg:px-24 min-h-[75vh] flex items-center w-full block clear-both" style="display: flex; align-items: center; min-height: 75vh; width: 100%; clear: both;" aria-label="Turismo y naturaleza del Beni">
 
     <div class="absolute inset-0 w-full h-full z-0 bg-cover bg-center bg-no-repeat bg-fixed"
-         style="background-image: url('{{ asset('images/turismo.png') }}');">
+         style="position: absolute; inset: 0; width: 100%; height: 100%; background-image: url('{{ asset('images/turismo.png') }}'); z-index: 0;">
     </div>
 
-    <div class="absolute inset-0 bg-gradient-to-b from-[#062411]/90 via-[#0a3118]/85 to-[#041a0c]/95 z-10"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/25 via-[#0a3118]/65 to-[#0a3118]/98 z-10" style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,49,24,0.98) 0%, rgba(10,49,24,0.65) 50%, rgba(0,0,0,0.25) 100%); z-index: 10;"></div>
 
-    <div class="relative w-full max-w-7xl mx-auto z-20">
+    <div class="relative w-full max-w-7xl mx-auto z-20 text-center block" style="position: relative; width: 100%; max-w: 80rem; z-index: 20; display: block;">
 
-        <div class="text-center max-w-3xl mx-auto mb-8">
-            <h2 class="text-[#E5B225] font-bold text-3xl md:text-4xl mb-4 tracking-tight drop-shadow-md">
+        <div class="text-center max-w-3xl mx-auto mb-6 md:mb-10 block" style="display: block; margin-left: auto; margin-right: auto;">
+            <h2 class="text-[#E5B225] font-bold text-2xl md:text-4xl mb-3 tracking-tight drop-shadow-md block" style="display: block; font-weight: 700; color: #E5B225;">
                 Turismo y Naturaleza
             </h2>
-            <p class="text-white/90 text-sm md:text-base leading-relaxed drop-shadow">
+            <p class="text-white text-xs md:text-base leading-relaxed drop-shadow block" style="display: block; color: #ffffff; white-space: normal !important; overflow-wrap: break-word;">
                 Descubra el santuario ecológico más vibrante de Bolivia. Desde los enigmáticos Llanos de Moxos hasta nuestros parques nacionales.
             </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full block" style="display: grid; width: 100%;">
+            
             {{-- Tarjeta 1: Ruta del Bufeo --}}
-            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl">
-                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
-                    <img src="{{ asset('images/bufeo.webp') }}" alt="Bufeo boliviano nadando en aguas amazónicas" class="w-full h-full object-cover object-center" loading="lazy">
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl text-left block" style="display: block; text-align: left; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); background-color: rgba(255,255,255,0.05); backdrop-filter: blur(12px);">
+                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4 block" style="display: block; width: 100%; aspect-ratio: 4/3; border-radius: 0.75rem; overflow: hidden;">
+                    <img src="{{ asset('images/bufeo.webp') }}" alt="Bufeo boliviano nadando en aguas amazónicas" class="w-full h-full object-cover object-center block" style="display: block; width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                 </div>
-                <h3 class="text-white font-semibold text-lg mb-2">Ruta del Bufeo</h3>
-                <p class="text-white/70 text-xs md:text-sm leading-relaxed">Navegue junto al delfín rosado, emblema de nuestras aguas dulces amazónicas.</p>
+                <h3 class="text-white font-semibold text-lg mb-2 block" style="display: block; color: #ffffff; font-weight: 600; margin: 0 0 0.5rem 0;">Ruta del Bufeo</h3>
+                <p class="text-gray-200 text-xs md:text-sm leading-relaxed block" style="display: block; color: #e5e7eb; white-space: normal !important; overflow-wrap: break-word;">Navegue junto al delfín rosado, emblema de nuestras aguas dulces amazónicas.</p>
             </div>
+
             {{-- Tarjeta 2: Llanos de Moxos --}}
-            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl">
-                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
-                    <img src="{{ asset('images/llanura.webp') }}" alt="Sabanas inundables de los Llanos de Moxos" class="w-full h-full object-cover object-center" loading="lazy">
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl text-left block" style="display: block; text-align: left; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); background-color: rgba(255,255,255,0.05); backdrop-filter: blur(12px);">
+                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4 block" style="display: block; width: 100%; aspect-ratio: 4/3; border-radius: 0.75rem; overflow: hidden;">
+                    <img src="{{ asset('images/llanura.webp') }}" alt="Sabanas inundables de los Llanos de Moxos" class="w-full h-full object-cover object-center block" style="display: block; width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                 </div>
-                <h3 class="text-white font-semibold text-lg mb-2">Llanos de Moxos</h3>
-                <p class="text-white/70 text-xs md:text-sm leading-relaxed">Patrimonio arqueológico y sistema hidráulico ancestral único en el mundo.</p>
+                <h3 class="text-white font-semibold text-lg mb-2 block" style="display: block; color: #ffffff; font-weight: 600; margin: 0 0 0.5rem 0;">Llanos de Moxos</h3>
+                <p class="text-gray-200 text-xs md:text-sm leading-relaxed block" style="display: block; color: #e5e7eb; white-space: normal !important; overflow-wrap: break-word;">Patrimonio arqueológico y sistema hidráulico ancestral único en el mundo.</p>
             </div>
+
             {{-- Tarjeta 3: Misiones Jesuíticas --}}
-            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl">
-                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
-                    <img src="{{ asset('images/jesuita.png') }}" alt="Iglesia misional jesuítica en la Amazonía beniana" class="w-full h-full object-cover object-center" loading="lazy">
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl text-left block" style="display: block; text-align: left; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); background-color: rgba(255,255,255,0.05); backdrop-filter: blur(12px);">
+                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4 block" style="display: block; width: 100%; aspect-ratio: 4/3; border-radius: 0.75rem; overflow: hidden;">
+                    <img src="{{ asset('images/jesuita.png') }}" alt="Iglesia misional jesuítica en la Amazonía beniana" class="w-full h-full object-cover object-center block" style="display: block; width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                 </div>
-                <h3 class="text-white font-semibold text-lg mb-2">Misiones Jesuíticas</h3>
-                <p class="text-white/70 text-xs md:text-sm leading-relaxed">Cultura viva, música barroca y tradiciones milenarias rodeadas de selva.</p>
+                <h3 class="text-white font-semibold text-lg mb-2 block" style="display: block; color: #ffffff; font-weight: 600; margin: 0 0 0.5rem 0;">Misiones Jesuíticas</h3>
+                <p class="text-gray-200 text-xs md:text-sm leading-relaxed block" style="display: block; color: #e5e7eb; white-space: normal !important; overflow-wrap: break-word;">Cultura viva, música barroca y tradiciones milenarias rodeadas de selva.</p>
             </div>
+
             {{-- Tarjeta 4: Gastronomía Beniana --}}
-            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl">
-                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
-                    <img src="{{ asset('images/majadito.webp') }}" alt="Plato tradicional de Majadito beniano" class="w-full h-full object-cover object-center" loading="lazy">
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl text-left block" style="display: block; text-align: left; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); background-color: rgba(255,255,255,0.05); backdrop-filter: blur(12px);">
+                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4 block" style="display: block; width: 100%; aspect-ratio: 4/3; border-radius: 0.75rem; overflow: hidden;">
+                    <img src="{{ asset('images/majadito.webp') }}" alt="Plato tradicional de Majadito beniano" class="w-full h-full object-cover object-center block" style="display: block; width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                 </div>
-                <h3 class="text-white font-semibold text-lg mb-2">Gastronomía Beniana</h3>
-                <p class="text-white/70 text-xs md:text-sm leading-relaxed">Un viaje de sabores únicos: el Majadito, el Masaco y exquisitos pescados de río.</p>
+                <h3 class="text-white font-semibold text-lg mb-2 block" style="display: block; color: #ffffff; font-weight: 600; margin: 0 0 0.5rem 0;">Gastronomía Beniana</h3>
+                <p class="text-gray-200 text-xs md:text-sm leading-relaxed block" style="display: block; color: #e5e7eb; white-space: normal !important; overflow-wrap: break-word;">Un viaje de sabores únicos: el Majadito, el Masaco y exquisitos pescados de río.</p>
             </div>
+
         </div>
 
-        <div class="mt-8 text-center">
-            <a href="#" class="inline-block bg-white text-[#0a3118] font-bold px-8 py-3.5 rounded-full hover:bg-gray-100 hover:shadow-xl transition-all duration-300 text-sm md:text-base">
+        <div class="mt-8 text-center block" style="display: block;">
+            <a href="/departamento" class="inline-block bg-white text-[#0a3118] font-bold px-8 py-3.5 rounded-full hover:bg-gray-100 hover:shadow-xl transition-all duration-300 text-sm md:text-base">
                 Planifique su Visita
             </a>
         </div>

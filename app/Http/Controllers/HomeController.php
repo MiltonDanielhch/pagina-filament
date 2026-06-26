@@ -61,7 +61,11 @@ class HomeController extends Controller
                     ->get();
             }
 
-            // Bloque 7 — Últimas Noticias
+            // Bloque 7 — Noticia Destacada (is_pinned) + Últimas Noticias
+            $featuredPost = Post::with('category')->published()->where('is_pinned', true)->latest('published_at')->first();
+            if (!$featuredPost) {
+                $featuredPost = Post::with('category')->published()->latest('published_at')->first();
+            }
             $latestPosts = Post::with('category')->published()->latest('published_at')->take(6)->get();
 
             // Bloque 8 — Transparencia en Cifras
@@ -163,6 +167,7 @@ class HomeController extends Controller
             return compact(
                 'slides',
                 'featuredProcedures',
+                'featuredPost',
                 'latestPosts',
                 'stats',
                 'gobernador',

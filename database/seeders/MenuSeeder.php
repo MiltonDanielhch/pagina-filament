@@ -29,15 +29,15 @@ class MenuSeeder extends Seeder
 
         // Items de nivel superior
         $blocks = [
-            // [
-            //     'label' => 'Gestión',
-            //     'url' => '/',
-            //     'order' => 1,
-            // ],
+            [
+                'label' => 'Inicio',
+                'url' => '/',
+                'order' => 1,
+            ],
             [
                 'label' => 'Gestión',
                 'url' => '#',
-                'order' => 1,
+                'order' => 2,
                 'children' => [
                     ['label' => 'Reseña Histórica', 'url' => '/institucional'],
                     ['label' => 'Misión, Visión y Objetivos', 'url' => '/institucional#mision-vision'],
@@ -52,12 +52,12 @@ class MenuSeeder extends Seeder
             [
                 'label' => 'Trámites',
                 'url' => '/tramites',
-                'order' => 2,
+                'order' => 3,
             ],
             [
                 'label' => 'Departamento',
                 'url' => '/departamento',
-                'order' => 3,
+                'order' => 4,
             ],
             // [
             //     'label' => 'Servicios al Ciudadano',
@@ -76,7 +76,7 @@ class MenuSeeder extends Seeder
             [
                 'label' => 'Transparencia',
                 'url' => '#',
-                'order' => 4,
+                'order' => 5,
                 'children' => [
                     ['label' => 'Portal de Transparencia', 'url' => '/transparencia'],
                     ['label' => 'Presupuesto', 'url' => '/transparencia/presupuesto'],
@@ -92,7 +92,7 @@ class MenuSeeder extends Seeder
             [
                 'label' => 'Prensa',
                 'url' => '#',
-                'order' => 5,
+                'order' => 6,
                 'children' => [
                     ['label' => 'Noticias', 'url' => '/blog'],
                     ['label' => 'Memoria Institucional', 'url' => '/blog?tipo=comunicado'],
@@ -105,12 +105,12 @@ class MenuSeeder extends Seeder
             [
                 'label' => 'Servicios',
                 'url' => '/servicios',
-                'order' => 6,
+                'order' => 7,
             ],
             [
                 'label' => 'Contacto',
                 'url' => '/contacto',
-                'order' => 7,
+                'order' => 8,
             ],
         ];
 

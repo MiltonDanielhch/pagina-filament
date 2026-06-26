@@ -37,7 +37,7 @@
             <div class="lg:col-span-1">
                 <div class="bg-gray-50 rounded-2xl p-6 shadow-lg">
                     <div class="aspect-[3/4] bg-gradient-to-br from-official/20 to-official/5 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
-                        <img src="{{ asset('images/perfil.webp') }}" alt="Retrato oficial de Juan Carlos Teddy Camacho Gamarra, Vicegobernador del Beni" class="w-full h-full object-cover">
+                        <img src="{{ asset('images/vice.webp') }}" alt="Retrato oficial de Juan Carlos Teddy Camacho Gamarra, Vicegobernador del Beni" class="w-full h-full object-cover">
                     </div>
                     <h2 class="text-2xl font-bold text-gray-900 mb-2 text-center">Juan Carlos "Teddy" Camacho Gamarra</h2>
                     <p class="text-official font-semibold text-center mb-4">Vicegobernador del Beni</p>
@@ -47,7 +47,7 @@
                             <svg class="w-5 h-5 text-official" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                             </svg>
-                            <span class="text-gray-600">Ingeniero de profesión</span>
+                            <span class="text-gray-600">Ingeniero Industrial y Comercial</span>
                         </div>
                         <div class="flex items-center gap-3">
                             <svg class="w-5 h-5 text-official" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,18 +73,41 @@
 
             <!-- Información detallada -->
             <div class="lg:col-span-2 space-y-8">
-                <!-- Perfil y Trayectoria Académica -->
+                <!-- Perfil General -->
                 <div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Perfil y Trayectoria Académica</h3>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Perfil General</h3>
                     <div class="prose prose-lg text-gray-600">
                         <p>
-                            <strong>Juan Carlos "Teddy" Camacho Gamarra</strong> es un ingeniero, académico y político beniano que actualmente ejerce como el <strong>Vicegobernador del Departamento del Beni</strong> para el periodo constitucional <strong>2026 - 2031</strong>.
+                            <strong>Msc. Juan Carlos T. Camacho Gamarra</strong>, conocido ampliamente como <strong>Teddy Camacho</strong>, es un profesional beniano, ingeniero industrial y comercial, especialista en desarrollo productivo, seguridad alimentaria y gestión empresarial. Actualmente ejerce el cargo de <strong>Vicegobernador del Departamento Autónomo del Beni</strong>, desempeñando funciones de coordinación institucional, representación departamental y apoyo a la gestión pública en beneficio de la población beniana.
                         </p>
                         <p>
-                            Cuenta con el título profesional de <strong>Ingeniero</strong>. Antes de asumir su carrera política a nivel departamental, destacó notablemente por su labor institucional y académica en la región amazónica.
+                            Nacido y formado en <strong>Riberalta</strong>, provincia Vaca Díez, Teddy Camacho ha construido una trayectoria profesional y académica orientada al fortalecimiento del desarrollo productivo de la Amazonía boliviana.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Formación Académica -->
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Formación Académica</h3>
+                    <div class="prose prose-lg text-gray-600">
+                        <p>
+                            Su formación incluye el título de <strong>Ingeniero Industrial y Comercial</strong>, una <strong>Maestría en Seguridad Alimentaria</strong>, estudios de <strong>MBA</strong>, además de diversos diplomados y cursos de especialización en áreas relacionadas con seguridad industrial, medio ambiente, auditoría, producción y gestión empresarial. Asimismo, se encuentra vinculado a procesos de formación avanzada en ciencias empresariales y desarrollo organizacional.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Carrera Profesional -->
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Carrera Profesional</h3>
+                    <div class="prose prose-lg text-gray-600">
+                        <p>
+                            A lo largo de su carrera ha acumulado una amplia experiencia en el ámbito académico, técnico y empresarial. Durante <strong>siete años</strong> se desempeñó como <strong>Jefe de Carrera de Industria de Alimentos</strong> del <strong>Instituto Tecnológico Superior de la Amazonía (ITSA)</strong>, liderando importantes proyectos de fortalecimiento institucional. Entre sus principales logros destaca la gestión de <strong>dos módulos completamente equipados con laboratorios especializados</strong>, implementados con el apoyo de la Cooperación Suiza y ONU Mujeres, contribuyendo significativamente a la formación técnica y profesional de cientos de estudiantes de la región.
                         </p>
                         <p>
-                            Ha sido públicamente condecorado por su gestión educativa y el impulso técnico brindado al <strong>Instituto Tecnológico Superior Amazonía (ITSA)</strong> en el municipio de <strong>Riberalta</strong>.
+                            Su experiencia profesional también incluye el ejercicio como <strong>consultor y supervisor en seguridad industrial</strong>, gestión ambiental y procesos productivos, además de desempeñarse como <strong>certificador de normas internacionales</strong> para empresas castañeras, sector estratégico para la economía del norte amazónico. Asimismo, ha brindado asesoramiento técnico en cadenas productivas, recursos naturales e industrias vinculadas a la transformación de materias primas amazónicas.
+                        </p>
+                        <p>
+                            En el ámbito institucional, fue <strong>Presidente de la Asociación de Profesionales de Riberalta</strong>, impulsando iniciativas orientadas al fortalecimiento de las capacidades profesionales y al desarrollo regional. Su trabajo ha estado enfocado en promover la <strong>industrialización</strong>, la generación de valor agregado y el aprovechamiento sostenible de los recursos naturales del Beni.
                         </p>
                     </div>
                 </div>
@@ -140,62 +163,41 @@
                     </div>
                 </div>
 
-                <!-- Desempeño en el Cargo -->
+                <!-- Gestión como Vicegobernador -->
                 <div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Desempeño en el Cargo</h3>
-                    <p class="text-gray-600 mb-4">
-                        Como la <strong>segunda máxima autoridad ejecutiva del Beni</strong>, Camacho enfoca su agenda pública en la <strong>descentralización regional</strong>. Ha priorizado constantes giras de fiscalización y desarrollo en las provincias del norte y oeste beniano, principalmente en los municipios de las provincias Vaca Díez y Ballivián.
-                    </p>
-                    <p class="text-gray-600">
-                        Su gestión promueve un modelo de <strong>desarrollo productivo y sostenible</strong> para la Amazonía boliviana.
-                    </p>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Gestión como Vicegobernador</h3>
+                    <div class="prose prose-lg text-gray-600">
+                        <p>
+                            Como Vicegobernador del Beni, Teddy Camacho trabaja en estrecha coordinación con el gobernador <strong>Dr. Jesús Eguez Rivero</strong>, impulsando proyectos, convenios y programas destinados a fortalecer la salud, la educación, la producción, la integración regional y la gestión ambiental. Su gestión promueve la articulación entre los diferentes niveles de gobierno, instituciones públicas y privadas, organismos de cooperación internacional y organizaciones sociales, con el objetivo de generar mayores oportunidades para la población.
+                        </p>
+                        <p>
+                            Su gestión promueve un modelo de <strong>desarrollo productivo y sostenible</strong> para la Amazonía boliviana.
+                        </p>
+                    </div>
                 </div>
 
-                <!-- Reconocimientos -->
-                <div class="border-l-4 border-official pl-6 py-2">
-                    <blockquote class="text-lg italic text-gray-700 mb-4">
-                        "Ha sido públicamente condecorado por su gestión educativa y el impulso técnico brindado al Instituto Tecnológico Superior Amazonía (ITSA) en Riberalta."
-                    </blockquote>
-                    <cite class="text-official font-semibold">— Trayectoria institucional</cite>
-                </div>
-
-                <!-- Compromisos -->
-                <div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Ejes de Gestión</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start gap-3">
-                            <svg class="w-6 h-6 text-official flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                            </svg>
-                            <span class="text-gray-600">Descentralización regional y desarrollo equitativo de las provincias</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <svg class="w-6 h-6 text-official flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                            </svg>
-                            <span class="text-gray-600">Giras de fiscalización y desarrollo en provincias del norte y oeste beniano</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <svg class="w-6 h-6 text-official flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                            </svg>
-                            <span class="text-gray-600">Modelo de desarrollo productivo y sostenible para la Amazonía boliviana</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <svg class="w-6 h-6 text-official flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                            </svg>
-                            <span class="text-gray-600">Impulso a la educación técnica y formación académica regional</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Contexto -->
+                <!-- Visión de Desarrollo -->
                 <div class="bg-official/5 rounded-xl p-6">
-                    <h4 class="font-bold text-gray-900 mb-2">Contexto</h4>
-                    <p class="text-sm text-gray-600">
-                        Juan Carlos Camacho asume la vicegobernación en un momento crucial para el Beni, trabajando en estrecha coordinación con el gobernador Jesús Egüez para impulsar el desarrollo integral del departamento. Su experiencia académica y su conocimiento del territorio beniano son pilares fundamentales para la gestión descentralizada que promueve la actual administración.
-                    </p>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Visión de Desarrollo</h3>
+                    <div class="prose prose-lg text-gray-600">
+                        <p>
+                            Su visión de desarrollo se fundamenta en la convicción de que el potencial económico del Beni debe transformarse en bienestar para sus habitantes. Por ello, impulsa políticas orientadas a la <strong>industrialización de la castaña, la madera, los frutos amazónicos</strong> y otros recursos estratégicos, promoviendo la capacitación técnica de los jóvenes y el fortalecimiento de instituciones educativas como el ITSA e INCOS.
+                        </p>
+                        <p>
+                            Asimismo, defiende una gestión responsable de los recursos naturales, promoviendo el ordenamiento y control de las actividades extractivas, la protección del medio ambiente y el aprovechamiento sostenible de las riquezas amazónicas. Considera que el desarrollo regional debe sustentarse en la formación, la innovación, la producción con valor agregado y la apertura de oportunidades para la exportación y el comercio internacional.
+                        </p>
+                        <p>
+                            Reconocido por su capacidad técnica, vocación de servicio y compromiso con la región amazónica, Teddy Camacho representa una nueva generación de liderazgo público orientada al trabajo coordinado, la transparencia, la eficiencia administrativa y el desarrollo sostenible. Su trayectoria combina formación académica, experiencia profesional y conocimiento de la realidad beniana, consolidándolo como una de las figuras destacadas en la promoción del crecimiento económico y social del departamento.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Compromiso -->
+                <div class="border-l-4 border-official pl-6 py-2">
+                    <blockquote class="text-lg italic text-gray-700">
+                        "Construir un Beni más productivo, competitivo e inclusivo, donde el conocimiento, la capacitación y la industrialización permitan transformar la riqueza natural en oportunidades y bienestar para todas las familias benianas."
+                    </blockquote>
+                    <cite class="text-official font-semibold">— Teddy Camacho, Vicegobernador del Beni</cite>
                 </div>
             </div>
         </div>

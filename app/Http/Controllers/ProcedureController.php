@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExternalSystem;
 use App\Models\Procedure;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -38,7 +39,9 @@ class ProcedureController extends Controller
             ->limit(6)
             ->get();
 
-        return view('procedures.index', compact('procedures', 'featured'));
+        $externalSystems = ExternalSystem::active()->get();
+
+        return view('procedures.index', compact('procedures', 'featured', 'externalSystems'));
     }
 
     public function show(Procedure $procedure): View
