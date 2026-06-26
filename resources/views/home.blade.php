@@ -764,13 +764,13 @@
 {{-- =====================================================
      BLOQUE 15c: Turismo y Naturaleza (Iluminado y Blindado)
      ===================================================== --}}
-<section id="turismo-naturaleza" class="relative overflow-hidden py-10 md:py-16 px-4 md:px-12 lg:px-24 min-h-[75vh] flex items-center w-full block clear-both" style="display: flex; align-items: center; min-height: 75vh; width: 100%; clear: both;" aria-label="Turismo y naturaleza del Beni">
+<section id="turismo-naturaleza" class="relative overflow-hidden py-10 md:py-16 px-4 md:px-12 lg:px-24 min-h-[75vh] flex items-center w-full block clear-both bg-[#0a3118]" style="display: flex; align-items: center; min-height: 75vh; width: 100%; clear: both; background-color: #0a3118;" aria-label="Turismo y naturaleza del Beni">
 
-    <div class="absolute inset-0 w-full h-full z-0 bg-cover bg-center bg-no-repeat bg-fixed"
+    <div class="absolute inset-0 w-full h-full z-0 bg-cover bg-center bg-no-repeat"
          style="position: absolute; inset: 0; width: 100%; height: 100%; background-image: url('{{ asset('images/turismo.png') }}'); z-index: 0;">
     </div>
 
-    <div class="absolute inset-0 bg-gradient-to-b from-black/25 via-[#0a3118]/65 to-[#0a3118]/98 z-10" style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,49,24,0.98) 0%, rgba(10,49,24,0.65) 50%, rgba(0,0,0,0.25) 100%); z-index: 10;"></div>
+    <div class="absolute inset-0 z-10" style="position: absolute; inset: 0; background: linear-gradient(to top, #0a3118 0%, rgba(10,49,24,0.65) 50%, rgba(0,0,0,0.25) 100%); z-index: 10;"></div>
 
     <div class="relative w-full max-w-7xl mx-auto z-20 text-center block" style="position: relative; width: 100%; max-w: 80rem; z-index: 20; display: block;">
 
@@ -832,12 +832,8 @@
     </div>
 </section>
 
-{{-- Wave: newsletter (gold) → footer (forest dark) --}}
-<div class="leading-none -mt-px overflow-hidden" aria-hidden="true">
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" class="w-full h-12 block">
-        <path d="M0,0 C720,60 720,60 1440,0 L1440,60 L0,60 Z" fill="#0d2418"/>
-    </svg>
-</div>
+{{-- Transición directa a footer — sin wave para evitar línea blanca --}}
+<div class="h-0 leading-none" aria-hidden="true"></div>
 
 {{-- =====================================================
      BLOQUE 20: Footer — manejado por layout
