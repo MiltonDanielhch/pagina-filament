@@ -375,7 +375,7 @@
                             <img src="{{ $logoSrc }}" alt="Gobernación del Beni" class="w-full h-full object-contain" style="display: block;">
                         </div>
                         <div>
-                            <h3 class="text-md font-bold text-white leading-tight">Gobernación<br><span class="text-[#E5B225] text-sm font-medium">del Beni</span></h3>
+                            <h3 class="text-md font-bold text-white leading-tight">Gobierno<br><span class="text-[#E5B225] text-sm font-medium">del Beni</span></h3>
                             <p class="text-[10px] text-[#82db6f] tracking-wider uppercase">Autónoma Departamental</p>
                         </div>
                     </div>
