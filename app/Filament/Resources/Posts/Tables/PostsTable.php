@@ -21,25 +21,15 @@ class PostsTable
         return $table
             ->defaultSort('created_at', 'desc')
             ->columns([
-                TextColumn::make('user.name')
-                    ->label('Autor')
-                    ->searchable(),
                 TextColumn::make('category.name')
                     ->label('Categoría')
                     ->searchable(),
                 TextColumn::make('title')
                     ->label('Título')
                     ->searchable(),
-                TextColumn::make('slug')
-                    ->label('Slug')
-                    ->searchable(),
                 TextColumn::make('status')
                     ->label('Estado')
                     ->badge(),
-                TextColumn::make('published_at')
-                    ->label('Publicado el')
-                    ->dateTime()
-                    ->sortable(),
                 IconColumn::make('shared_to_social')
                     ->label('Compartido')
                     ->boolean()
@@ -47,13 +37,6 @@ class PostsTable
                     ->falseIcon('heroicon-m-x-circle')
                     ->trueColor('success')
                     ->falseColor('gray'),
-                TextColumn::make('view_count')
-                    ->label('Visitas')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('meta_title')
-                    ->label('Meta título')
-                    ->searchable(),
                 TextColumn::make('deleted_at')
                     ->label('Eliminado el')
                     ->dateTime()
