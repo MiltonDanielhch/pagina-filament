@@ -313,9 +313,11 @@
 {{-- =====================================================
      BLOQUE 15ab: Potencial Productivo (Blindado contra Filament)
      ===================================================== --}}
-<section id="potencial-productivo" class="bg-gray-50 py-8 px-4 md:px-12 lg:px-24 w-full block clear-both" style="display: block; width: 100%; clear: both;" aria-label="Potencial productivo del Beni">
+{{-- Corrección: Aumentamos pt-20 para separarlo limpiamente del slider/hero superior y bajamos pb-12 --}}
+<section id="potencial-productivo" class="bg-gray-50 pt-20 pb-12 px-4 md:px-12 lg:px-24 w-full block clear-both" style="display: block; width: 100%; clear: both;" aria-label="Potencial productivo del Beni">
     <div class="max-w-7xl mx-auto w-full block" style="display: block; width: 100%;">
 
+        {{-- Espaciado controlado hacia abajo (mb-8) --}}
         <div class="w-full text-center mb-8 block" style="display: block; text-align: center; width: 100%;">
             <span class="text-[#E5B225] text-xs md:text-sm font-bold uppercase tracking-wider block mb-2" style="display: block; color: #E5B225; font-weight: 700;">
                 Desarrollo Regional
@@ -328,17 +330,15 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 w-full block" style="display: grid; width: 100%;">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full block" style="display: grid; width: 100%;">
 
+            {{-- Tarjeta 1 --}}
             <div class="group relative h-[420px] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer block" style="position: relative; overflow: hidden; height: 420px; border-radius: 1rem;">
                 <img src="{{ asset('images/ganaderia.webp') }}" alt="Ganadería Beniana" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 block" style="position: absolute; width: 100%; height: 100%; object-fit: cover;">
-
                 <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 60%, transparent 100%); z-index: 5;"></div>
-
                 <div class="absolute inset-0 p-6 flex flex-col justify-end z-10 w-full" style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; z-index: 10; box-sizing: border-box;">
                     <span class="w-max bg-[#E5B225] text-[#0a3118] text-[10px] font-bold px-2.5 py-1 rounded-full uppercase mb-2 shadow-sm block" style="display: block; width: max-content; background-color: #E5B225; color: #0a3118; font-weight: 700; font-size: 10px; border-radius: 9999px;">Sector Primario</span>
                     <h3 class="text-white font-bold text-xl md:text-2xl tracking-wide drop-shadow-sm block" style="display: block; font-weight: 700; color: #ffffff; margin: 0;">Ganadería</h3>
-
                     <p class="text-gray-200 text-xs md:text-sm font-light leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-[100px] group-hover:opacity-100 group-hover:mt-2 block"
                        style="display: block; color: #e5e7eb; white-space: normal !important; overflow-wrap: break-word; line-height: 1.45;">
                         Líderes nacionales en producción cárnica con estándares internacionales de calidad.
@@ -346,14 +346,13 @@
                 </div>
             </div>
 
+            {{-- Tarjeta 2 --}}
             <div class="group relative h-[420px] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer block" style="position: relative; overflow: hidden; height: 420px; border-radius: 1rem;">
                 <img src="{{ asset('images/agricultura.webp') }}" alt="Agricultura en Beni" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 block" style="position: absolute; width: 100%; height: 100%; object-fit: cover;">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 60%, transparent 100%); z-index: 5;"></div>
-
                 <div class="absolute inset-0 p-6 flex flex-col justify-end z-10 w-full" style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; z-index: 10; box-sizing: border-box;">
                     <span class="w-max bg-[#0a3118] text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase mb-2 shadow-sm block" style="display: block; width: max-content; background-color: #0a3118; color: #ffffff; font-weight: 700; font-size: 10px; border-radius: 9999px;">Expansión</span>
                     <h3 class="text-white font-bold text-xl md:text-2xl tracking-wide drop-shadow-sm block" style="display: block; font-weight: 700; color: #ffffff; margin: 0;">Agricultura</h3>
-
                     <p class="text-gray-200 text-xs md:text-sm font-light leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-[100px] group-hover:opacity-100 group-hover:mt-2 block"
                        style="display: block; color: #e5e7eb; white-space: normal !important; overflow-wrap: break-word; line-height: 1.45;">
                         Transformando las pampas en el nuevo granero de Bolivia con tecnología sostenible.
@@ -361,14 +360,13 @@
                 </div>
             </div>
 
+            {{-- Tarjeta 3 --}}
             <div class="group relative h-[420px] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer block" style="position: relative; overflow: hidden; height: 420px; border-radius: 1rem;">
                 <img src="{{ asset('images/castana.webp') }}" alt="Cacao beniano" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 block" style="position: absolute; width: 100%; height: 100%; object-fit: cover;">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 60%, transparent 100%); z-index: 5;"></div>
-
                 <div class="absolute inset-0 p-6 flex flex-col justify-end z-10 w-full" style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; z-index: 10; box-sizing: border-box;">
                     <span class="w-max bg-[#E5B225] text-[#0a3118] text-[10px] font-bold px-2.5 py-1 rounded-full uppercase mb-2 shadow-sm block" style="display: block; width: max-content; background-color: #E5B225; color: #0a3118; font-weight: 700; font-size: 10px; border-radius: 9999px;">Exportación</span>
                     <h3 class="text-white font-bold text-xl md:text-2xl tracking-wide drop-shadow-sm block" style="display: block; font-weight: 700; color: #ffffff; margin: 0;">Industria de la Castaña</h3>
-
                     <p class="text-gray-200 text-xs md:text-sm font-light leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-[100px] group-hover:opacity-100 group-hover:mt-2 block"
                        style="display: block; color: #e5e7eb; white-space: normal !important; overflow-wrap: break-word; line-height: 1.45;">
                         El oro amazónico que conecta a Beni con los mercados más exigentes del mundo.
@@ -376,24 +374,24 @@
                 </div>
             </div>
 
+            {{-- Tarjeta 4 --}}
             <div class="group relative h-[420px] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer block" style="position: relative; overflow: hidden; height: 420px; border-radius: 1rem;">
                 <img src="{{ asset('images/mineria.jpeg') }}" alt="Minería en Beni" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 block" style="position: absolute; width: 100%; height: 100%; object-fit: cover;">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 60%, transparent 100%); z-index: 5;"></div>
-
                 <div class="absolute inset-0 p-6 flex flex-col justify-end z-10 w-full" style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; z-index: 10; box-sizing: border-box;">
                     <span class="w-max bg-[#E5B225] text-[#0a3118] text-[10px] font-bold px-2.5 py-1 rounded-full uppercase mb-2 shadow-sm block" style="display: block; width: max-content; background-color: #E5B225; color: #0a3118; font-weight: 700; font-size: 10px; border-radius: 9999px;">Recursos Naturales</span>
                     <h3 class="text-white font-bold text-xl md:text-2xl tracking-wide drop-shadow-sm block" style="display: block; font-weight: 700; color: #ffffff; margin: 0;">Minería</h3>
-
                     <p class="text-gray-200 text-xs md:text-sm font-light leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-[100px] group-hover:opacity-100 group-hover:mt-2 block"
                        style="display: block; color: #e5e7eb; white-space: normal !important; overflow-wrap: break-word; line-height: 1.45;">
                         Potencial aurífero y recursos minerales estratégicos para el desarrollo departamental.
                     </p>
-                </div>  
+                </div>
             </div>
 
         </div>
 
-        <div class="w-full text-center mt-10 block" style="display: block; text-align: center; width: 100%;">
+        {{-- Ajuste: Reducido mt-6 para compactar el enlace con la sección siguiente --}}
+        <div class="w-full text-center mt-6 block" style="display: block; text-align: center; width: 100%;">
             <a href="/servicios" class="inline-flex items-center text-[#0a3118] font-semibold text-sm md:text-base group hover:underline">
                 Explorar todos los sectores
                 <svg class="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -408,10 +406,11 @@
      BLOQUE 15c: Turismo y Naturaleza (Dinámico)
      ===================================================== --}}
 @if(isset($turismoDestacados) && $turismoDestacados->count() > 0)
-<section id="turismo-naturaleza" class="bg-[#f9fafb] py-10 md:py-36 px-4 md:px-12 lg:px-24 w-full clear-both" aria-label="Turismo y naturaleza del Beni">
+{{-- Corrección: Eliminado el md:py-36 exagerado. Ahora usa pt-8 para unirse suavemente arriba y pb-12 --}}
+<section id="turismo-naturaleza" class="bg-[#f9fafb] pt-8 pb-12 px-4 md:px-12 lg:px-24 w-full clear-both" aria-label="Turismo y naturaleza del Beni">
     <div class="max-w-7xl mx-auto">
 
-        <div class="text-center max-w-3xl mx-auto mb-8 md:mb-10">
+        <div class="text-center max-w-3xl mx-auto mb-8">
             <span class="text-[#E5B225] text-xs md:text-sm font-bold uppercase tracking-wider block mb-2">Turismo y Naturaleza</span>
             <h2 class="text-[#0a3118] font-bold text-3xl md:text-4xl tracking-tight">Descubra el Beni</h2>
             <p class="text-gray-600 text-sm md:text-base mt-3 leading-relaxed max-w-2xl mx-auto">
@@ -439,7 +438,7 @@
             @endforeach
         </div>
 
-        <div class="mt-8 md:mt-10 text-center">
+        <div class="mt-8 text-center">
             <a href="{{ route('turismo.index') }}" class="inline-flex items-center text-[#0a3118] font-semibold text-sm md:text-base group hover:underline">
                 Planifique su Visita
                 <svg class="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -452,17 +451,20 @@
 </section>
 @endif
 
-<!-- SECCIÓN: VISITAS / CONTADOR DE VISITANTES -->
-<section id="contador-visitas" class="py-10 md:py-25 px-4 md:px-12 lg:px-24 bg-[#f9fafb] w-full clear-both" aria-label="Estadísticas del portal">
+<!-- =====================================================
+     SECCIÓN: VISITAS / CONTADOR DE VISITANTES (Corregido)
+     ===================================================== -->
+{{-- Corrección: Cambiado a bg-white y py-12 para romper la monotonía del gris y controlar el espaciado --}}
+<section id="contador-visitas" class="py-12 px-4 md:px-12 lg:px-24 bg-white w-full clear-both" aria-label="Estadísticas del portal">
     <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-8 md:mb-10">
+        <div class="text-center mb-8">
             <h2 class="text-[#0a3118] font-bold text-2xl md:text-3xl tracking-tight">Estadísticas del Portal</h2>
-            {{-- <p class="text-gray-500 text-xs md:text-sm mt-2 max-w-xl mx-auto">Manteniéndote informado sobre el alcance de nuestra comunidad digital</p> --}}
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {{-- Hoy --}}
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 md:p-6 text-center hover:shadow-md transition-shadow duration-300">
+            {{-- Corrección: Añadido borde inferior sutil con el color verde institucional --}}
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 border-b-4 border-b-[#0a3118] p-5 md:p-6 text-center hover:shadow-md transition-shadow duration-300">
                 <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-[#0a3118]/5 flex items-center justify-center">
                     <svg class="w-6 h-6 text-[#E5B225]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -473,7 +475,7 @@
             </div>
 
             {{-- Esta Semana --}}
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 md:p-6 text-center hover:shadow-md transition-shadow duration-300">
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 border-b-4 border-b-[#0a3118] p-5 md:p-6 text-center hover:shadow-md transition-shadow duration-300">
                 <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-[#0a3118]/5 flex items-center justify-center">
                     <svg class="w-6 h-6 text-[#E5B225]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -484,7 +486,7 @@
             </div>
 
             {{-- Este Mes --}}
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 md:p-6 text-center hover:shadow-md transition-shadow duration-300">
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 border-b-4 border-b-[#0a3118] p-5 md:p-6 text-center hover:shadow-md transition-shadow duration-300">
                 <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-[#0a3118]/5 flex items-center justify-center">
                     <svg class="w-6 h-6 text-[#E5B225]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
@@ -494,8 +496,8 @@
                 <span class="block text-xs md:text-sm text-gray-500 mt-1 font-medium">Este Mes</span>
             </div>
 
-            {{-- Visitantes Únicos --}}
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 md:p-6 text-center hover:shadow-md transition-shadow duration-300">
+            {{-- Total Visitas --}}
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 border-b-4 border-b-[#0a3118] p-5 md:p-6 text-center hover:shadow-md transition-shadow duration-300">
                 <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-[#0a3118]/5 flex items-center justify-center">
                     <svg class="w-6 h-6 text-[#E5B225]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
@@ -508,12 +510,15 @@
     </div>
 </section>
 
-<!-- SECCIÓN: GESTIÓN EN ACCIÓN (Blindado para Filament) -->
-<section id="seccion-gestion" class="bg-[#f9fafb] py-8 px-4 sm:px-6 md:px-12 w-full block clear-both" style="display: block; width: 100%; clear: both; box-sizing: border-box;" aria-label="Gestión en acción">
+<!-- =====================================================
+     SECCIÓN: GESTIÓN EN ACCIÓN (Manteniendo el Gris de Fondo)
+     ===================================================== -->
+{{-- Nota: Mantiene bg-[#f9fafb] y pt-12, logrando un contraste perfecto con la sección de arriba --}}
+<section id="seccion-gestion" class="bg-[#f9fafb] pt-12 pb-16 px-4 sm:px-6 md:px-12 w-full block clear-both" style="display: block; width: 100%; clear: both; box-sizing: border-box;" aria-label="Gestión en acción">
     <div class="max-w-6xl mx-auto w-full block" style="display: block; width: 100%;">
 
         <!-- Encabezado Centrado de la Sección -->
-        <div class="w-full text-center mb-6 block" style="display: block; text-align: center; width: 100%;">
+        <div class="w-full text-center mb-8 block" style="display: block; text-align: center; width: 100%;">
             <h2 class="text-[#0a3118] font-bold text-3xl md:text-4xl mb-3 block" style="display: block; font-weight: 700; color: #0a3118; font-size: 2.25rem; margin-bottom: 0.75rem;">
                 Gestión en Acción
             </h2>
@@ -526,7 +531,7 @@
         <div class="flex flex-col lg:flex-row gap-6 items-stretch w-full" style="display: flex; flex-direction: row; gap: 1.5rem; width: 100%; flex-wrap: wrap; lg:flex-wrap: nowrap; align-items: stretch;">
 
             @if(isset($featuredPost))
-            <!-- COLUMNA IZQUIERDA: Noticia Destacada (dinámica) -->
+            <!-- COLUMNA IZQUIERDA: Noticia Destacada -->
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex-1 min-w-[320px] text-left flex flex-col justify-between" style="display: flex; flex-direction: column; justify-content: space-between; background-color: #fff; border: 1px solid #f3f4f6; border-radius: 1rem; overflow: hidden; flex: 1 1 0%; min-width: 320px; text-align: left;">
                 <div class="block w-full">
                     <!-- Imagen de la Noticia con Badge Absoluto -->
@@ -652,7 +657,6 @@
         </div>
     </div>
 </section>
-
 {{-- =====================================================
      BLOQUE 7: Últimas Noticias (3)
      ===================================================== --}}
