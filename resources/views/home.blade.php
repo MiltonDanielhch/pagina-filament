@@ -39,7 +39,7 @@
                 Amazonia Productiva y Soberana
             </div>
             <h1 class="text-white font-bold text-2xl md:text-4xl lg:text-6xl tracking-tight mb-2">
-                Beni Productivo:
+                Beni Productivo y Regulado:
             </h1>
             <h1 class="text-[#E5B225] font-bold text-2xl md:text-4xl lg:text-6xl tracking-tight mb-6">
                 Corazón de la Amazonia
@@ -92,7 +92,7 @@
                 Amazonia Productiva y Soberana
             </div>
             <h1 class="text-white font-bold text-2xl md:text-4xl lg:text-6xl tracking-tight mb-2">
-                Beni Productivo:
+                Beni Productivo y Regulado:
             </h1>
             <h1 class="text-[#E5B225] font-bold text-2xl md:text-4xl lg:text-6xl tracking-tight mb-6">
                 Corazón de la Amazonia
