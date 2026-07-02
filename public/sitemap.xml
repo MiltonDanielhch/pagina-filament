@@ -1,115 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
     <url>
-    <loc>http://localhost:8000</loc>
+    <loc>http://127.0.0.1:8000</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/blog</loc>
+    <loc>http://127.0.0.1:8000/blog</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/contacto</loc>
+    <loc>http://127.0.0.1:8000/contacto</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/blog/gobernacion-beni-coordinacion-montecristo-tiquin</loc>
+    <loc>http://127.0.0.1:8000/blog/gobernacion-beni-coordinacion-montecristo-tiquin</loc>
     <lastmod>2026-06-21T21:34:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/blog/gobernacion-beni-campana-donacion-sangre</loc>
+    <loc>http://127.0.0.1:8000/blog/gobernacion-beni-campana-donacion-sangre</loc>
     <lastmod>2026-06-19T21:34:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/blog/gobernacion-beni-asociacion-descendientes-boliviano-japones-becas-proyectos-desarrollo</loc>
+    <loc>http://127.0.0.1:8000/blog/gobernacion-beni-asociacion-descendientes-boliviano-japones-becas-proyectos-desarrollo</loc>
     <lastmod>2026-05-22T21:34:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/blog/ljoljl</loc>
+    <loc>http://127.0.0.1:8000/blog/ljoljl</loc>
     <lastmod>2002-04-13T06:27:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/blog/comunicado-oficial</loc>
+    <loc>http://127.0.0.1:8000/blog/comunicado-oficial</loc>
     <lastmod>2025-05-19T05:44:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/blog/titulo-de-la-nota-de-prensa</loc>
+    <loc>http://127.0.0.1:8000/blog/titulo-de-la-nota-de-prensa</loc>
     <lastmod>1987-02-26T13:41:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/blog/ugoih-lijpojpoj</loc>
+    <loc>http://127.0.0.1:8000/blog/ugoih-lijpojpoj</loc>
     <lastmod>2014-02-20T05:09:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/blog/uihoih-jpjpjpo</loc>
+    <loc>http://127.0.0.1:8000/blog/uihoih-jpjpjpo</loc>
     <lastmod>2021-09-21T20:31:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/blog/lkiho-kuhoihoijo-kjljl</loc>
+    <loc>http://127.0.0.1:8000/blog/lkiho-kuhoihoijo-kjljl</loc>
     <lastmod>2025-06-08T00:24:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/blog/lijoip-loijpokjpno-ljnkjn</loc>
+    <loc>http://127.0.0.1:8000/blog/lijoip-loijpokjpno-ljnkjn</loc>
     <lastmod>1973-02-20T20:43:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/blog/uho-lnlholgf-kuhl</loc>
+    <loc>http://127.0.0.1:8000/blog/uho-lnlholgf-kuhl</loc>
     <lastmod>2001-07-22T14:54:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/blog/kuho-jnlnl-lml</loc>
+    <loc>http://127.0.0.1:8000/blog/kuho-jnlnl-lml</loc>
     <lastmod>1994-05-11T09:31:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/blog/juhkln-knhlijln-hul</loc>
+    <loc>http://127.0.0.1:8000/blog/juhkln-knhlijln-hul</loc>
     <lastmod>1979-01-02T04:19:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/inicio</loc>
+    <loc>http://127.0.0.1:8000/inicio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/gobernador</loc>
+    <loc>http://127.0.0.1:8000/gobernador</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/politica-de-privacidad</loc>
+    <loc>http://127.0.0.1:8000/politica-de-privacidad</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
             </url>
     <url>
-    <loc>http://localhost:8000/eventos/exposicion-agropecuaria</loc>
+    <loc>http://127.0.0.1:8000/pagos</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+            </url>
+    <url>
+    <loc>http://127.0.0.1:8000/eventos/exposicion-agropecuaria</loc>
     <lastmod>2026-07-20T08:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
