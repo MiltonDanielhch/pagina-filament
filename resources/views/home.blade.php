@@ -328,7 +328,7 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full block" style="display: grid; width: 100%;">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 w-full block" style="display: grid; width: 100%;">
 
             <div class="group relative h-[420px] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer block" style="position: relative; overflow: hidden; height: 420px; border-radius: 1rem;">
                 <img src="{{ asset('images/ganaderia.webp') }}" alt="Ganadería Beniana" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 block" style="position: absolute; width: 100%; height: 100%; object-fit: cover;">
@@ -376,6 +376,21 @@
                 </div>
             </div>
 
+            <div class="group relative h-[420px] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer block" style="position: relative; overflow: hidden; height: 420px; border-radius: 1rem;">
+                <img src="{{ asset('images/mineria.jpeg') }}" alt="Minería en Beni" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 block" style="position: absolute; width: 100%; height: 100%; object-fit: cover;">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 60%, transparent 100%); z-index: 5;"></div>
+
+                <div class="absolute inset-0 p-6 flex flex-col justify-end z-10 w-full" style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; z-index: 10; box-sizing: border-box;">
+                    <span class="w-max bg-[#E5B225] text-[#0a3118] text-[10px] font-bold px-2.5 py-1 rounded-full uppercase mb-2 shadow-sm block" style="display: block; width: max-content; background-color: #E5B225; color: #0a3118; font-weight: 700; font-size: 10px; border-radius: 9999px;">Recursos Naturales</span>
+                    <h3 class="text-white font-bold text-xl md:text-2xl tracking-wide drop-shadow-sm block" style="display: block; font-weight: 700; color: #ffffff; margin: 0;">Minería</h3>
+
+                    <p class="text-gray-200 text-xs md:text-sm font-light leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-[100px] group-hover:opacity-100 group-hover:mt-2 block"
+                       style="display: block; color: #e5e7eb; white-space: normal !important; overflow-wrap: break-word; line-height: 1.45;">
+                        Potencial aurífero y recursos minerales estratégicos para el desarrollo departamental.
+                    </p>
+                </div>  
+            </div>
+
         </div>
 
         <div class="w-full text-center mt-10 block" style="display: block; text-align: center; width: 100%;">
@@ -385,6 +400,110 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                 </svg>
             </a>
+        </div>
+    </div>
+</section>
+
+{{-- =====================================================
+     BLOQUE 15c: Turismo y Naturaleza (Dinámico)
+     ===================================================== --}}
+@if(isset($turismoDestacados) && $turismoDestacados->count() > 0)
+<section id="turismo-naturaleza" class="bg-[#f9fafb] py-10 md:py-36 px-4 md:px-12 lg:px-24 w-full clear-both" aria-label="Turismo y naturaleza del Beni">
+    <div class="max-w-7xl mx-auto">
+
+        <div class="text-center max-w-3xl mx-auto mb-8 md:mb-10">
+            <span class="text-[#E5B225] text-xs md:text-sm font-bold uppercase tracking-wider block mb-2">Turismo y Naturaleza</span>
+            <h2 class="text-[#0a3118] font-bold text-3xl md:text-4xl tracking-tight">Descubra el Beni</h2>
+            <p class="text-gray-600 text-sm md:text-base mt-3 leading-relaxed max-w-2xl mx-auto">
+                Descubra el santuario ecológico más vibrante de Bolivia. Desde los enigmáticos Llanos de Moxos hasta nuestros parques nacionales.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach($turismoDestacados as $destino)
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl text-left">
+                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
+                    @if($destino->getFirstMediaUrl('images'))
+                    <img src="{{ $destino->getFirstMediaUrl('images') }}" alt="{{ $destino->title }}" class="w-full h-full object-cover object-center" loading="lazy">
+                    @else
+                    <div class="w-full h-full bg-gray-100 flex items-center justify-center">
+                        <svg class="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    @endif
+                </div>
+                <h3 class="text-[#0a3118] font-semibold text-lg mb-2">{{ $destino->title }}</h3>
+                <p class="text-gray-500 text-xs md:text-sm leading-relaxed">{{ $destino->description }}</p>
+            </div>
+            @endforeach
+        </div>
+
+        <div class="mt-8 md:mt-10 text-center">
+            <a href="{{ route('turismo.index') }}" class="inline-flex items-center text-[#0a3118] font-semibold text-sm md:text-base group hover:underline">
+                Planifique su Visita
+                <svg class="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+            </a>
+        </div>
+
+    </div>
+</section>
+@endif
+
+<!-- SECCIÓN: VISITAS / CONTADOR DE VISITANTES -->
+<section id="contador-visitas" class="py-10 md:py-25 px-4 md:px-12 lg:px-24 bg-[#f9fafb] w-full clear-both" aria-label="Estadísticas del portal">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-8 md:mb-10">
+            <h2 class="text-[#0a3118] font-bold text-2xl md:text-3xl tracking-tight">Estadísticas del Portal</h2>
+            {{-- <p class="text-gray-500 text-xs md:text-sm mt-2 max-w-xl mx-auto">Manteniéndote informado sobre el alcance de nuestra comunidad digital</p> --}}
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {{-- Hoy --}}
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 md:p-6 text-center hover:shadow-md transition-shadow duration-300">
+                <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-[#0a3118]/5 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-[#E5B225]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <span class="counter block text-3xl md:text-4xl font-bold text-[#0a3118] tabular-nums" data-target="{{ $visitsToday ?? 0 }}">0</span>
+                <span class="block text-xs md:text-sm text-gray-500 mt-1 font-medium">Hoy</span>
+            </div>
+
+            {{-- Esta Semana --}}
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 md:p-6 text-center hover:shadow-md transition-shadow duration-300">
+                <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-[#0a3118]/5 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-[#E5B225]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                </div>
+                <span class="counter block text-3xl md:text-4xl font-bold text-[#0a3118] tabular-nums" data-target="{{ $visitsWeek ?? 0 }}">0</span>
+                <span class="block text-xs md:text-sm text-gray-500 mt-1 font-medium">Esta Semana</span>
+            </div>
+
+            {{-- Este Mes --}}
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 md:p-6 text-center hover:shadow-md transition-shadow duration-300">
+                <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-[#0a3118]/5 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-[#E5B225]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                    </svg>
+                </div>
+                <span class="counter block text-3xl md:text-4xl font-bold text-[#0a3118] tabular-nums" data-target="{{ $visitsMonth ?? 0 }}">0</span>
+                <span class="block text-xs md:text-sm text-gray-500 mt-1 font-medium">Este Mes</span>
+            </div>
+
+            {{-- Visitantes Únicos --}}
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 md:p-6 text-center hover:shadow-md transition-shadow duration-300">
+                <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-[#0a3118]/5 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-[#E5B225]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
+                    </svg>
+                </div>
+                <span class="counter block text-3xl md:text-4xl font-bold text-[#0a3118] tabular-nums" data-target="{{ $totalVisits ?? 0 }}">0</span>
+                <span class="block text-xs md:text-sm text-gray-500 mt-1 font-medium">Total Visitas</span>
+            </div>
         </div>
     </div>
 </section>
@@ -758,77 +877,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-{{-- =====================================================
-     BLOQUE 15c: Turismo y Naturaleza (Iluminado y Blindado)
-     ===================================================== --}}
-<section id="turismo-naturaleza" class="relative overflow-hidden py-10 md:py-16 px-4 md:px-12 lg:px-24 min-h-[75vh] flex items-center w-full block clear-both bg-[#0a3118]" style="display: flex; align-items: center; min-height: 75vh; width: 100%; clear: both; background-color: #0a3118;" aria-label="Turismo y naturaleza del Beni">
-
-    <div class="absolute inset-0 w-full h-full z-0 bg-cover bg-center bg-no-repeat"
-         style="position: absolute; inset: 0; width: 100%; height: 100%; background-image: url('{{ asset('images/turismo.png') }}'); z-index: 0;">
-    </div>
-
-    <div class="absolute inset-0 z-10" style="position: absolute; inset: 0; background: linear-gradient(to top, #0a3118 0%, rgba(10,49,24,0.65) 50%, rgba(0,0,0,0.25) 100%); z-index: 10;"></div>
-
-    <div class="relative w-full max-w-7xl mx-auto z-20 text-center block" style="position: relative; width: 100%; max-w: 80rem; z-index: 20; display: block;">
-
-        <div class="text-center max-w-3xl mx-auto mb-6 md:mb-10 block" style="display: block; margin-left: auto; margin-right: auto;">
-            <h2 class="text-[#E5B225] font-bold text-2xl md:text-4xl mb-3 tracking-tight drop-shadow-md block" style="display: block; font-weight: 700; color: #E5B225;">
-                Turismo y Naturaleza
-            </h2>
-            <p class="text-white text-xs md:text-base leading-relaxed drop-shadow block" style="display: block; color: #ffffff; white-space: normal !important; overflow-wrap: break-word;">
-                Descubra el santuario ecológico más vibrante de Bolivia. Desde los enigmáticos Llanos de Moxos hasta nuestros parques nacionales.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full block" style="display: grid; width: 100%;">
-            
-            {{-- Tarjeta 1: Ruta del Bufeo --}}
-            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl text-left block" style="display: block; text-align: left; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); background-color: rgba(255,255,255,0.05); backdrop-filter: blur(12px);">
-                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4 block" style="display: block; width: 100%; aspect-ratio: 4/3; border-radius: 0.75rem; overflow: hidden;">
-                    <img src="{{ asset('images/bufeo.webp') }}" alt="Bufeo boliviano nadando en aguas amazónicas" class="w-full h-full object-cover object-center block" style="display: block; width: 100%; height: 100%; object-fit: cover;" loading="lazy">
-                </div>
-                <h3 class="text-white font-semibold text-lg mb-2 block" style="display: block; color: #ffffff; font-weight: 600; margin: 0 0 0.5rem 0;">Ruta del Bufeo</h3>
-                <p class="text-gray-200 text-xs md:text-sm leading-relaxed block" style="display: block; color: #e5e7eb; white-space: normal !important; overflow-wrap: break-word;">Navegue junto al delfín rosado, emblema de nuestras aguas dulces amazónicas.</p>
-            </div>
-
-            {{-- Tarjeta 2: Llanos de Moxos --}}
-            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl text-left block" style="display: block; text-align: left; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); background-color: rgba(255,255,255,0.05); backdrop-filter: blur(12px);">
-                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4 block" style="display: block; width: 100%; aspect-ratio: 4/3; border-radius: 0.75rem; overflow: hidden;">
-                    <img src="{{ asset('images/llanura.webp') }}" alt="Sabanas inundables de los Llanos de Moxos" class="w-full h-full object-cover object-center block" style="display: block; width: 100%; height: 100%; object-fit: cover;" loading="lazy">
-                </div>
-                <h3 class="text-white font-semibold text-lg mb-2 block" style="display: block; color: #ffffff; font-weight: 600; margin: 0 0 0.5rem 0;">Llanos de Moxos</h3>
-                <p class="text-gray-200 text-xs md:text-sm leading-relaxed block" style="display: block; color: #e5e7eb; white-space: normal !important; overflow-wrap: break-word;">Patrimonio arqueológico y sistema hidráulico ancestral único en el mundo.</p>
-            </div>
-
-            {{-- Tarjeta 3: Misiones Jesuíticas --}}
-            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl text-left block" style="display: block; text-align: left; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); background-color: rgba(255,255,255,0.05); backdrop-filter: blur(12px);">
-                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4 block" style="display: block; width: 100%; aspect-ratio: 4/3; border-radius: 0.75rem; overflow: hidden;">
-                    <img src="{{ asset('images/jesuita.png') }}" alt="Iglesia misional jesuítica en la Amazonía beniana" class="w-full h-full object-cover object-center block" style="display: block; width: 100%; height: 100%; object-fit: cover;" loading="lazy">
-                </div>
-                <h3 class="text-white font-semibold text-lg mb-2 block" style="display: block; color: #ffffff; font-weight: 600; margin: 0 0 0.5rem 0;">Misiones Jesuíticas</h3>
-                <p class="text-gray-200 text-xs md:text-sm leading-relaxed block" style="display: block; color: #e5e7eb; white-space: normal !important; overflow-wrap: break-word;">Cultura viva, música barroca y tradiciones milenarias rodeadas de selva.</p>
-            </div>
-
-            {{-- Tarjeta 4: Gastronomía Beniana --}}
-            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-xl text-left block" style="display: block; text-align: left; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); background-color: rgba(255,255,255,0.05); backdrop-filter: blur(12px);">
-                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-4 block" style="display: block; width: 100%; aspect-ratio: 4/3; border-radius: 0.75rem; overflow: hidden;">
-                    <img src="{{ asset('images/majadito.webp') }}" alt="Plato tradicional de Majadito beniano" class="w-full h-full object-cover object-center block" style="display: block; width: 100%; height: 100%; object-fit: cover;" loading="lazy">
-                </div>
-                <h3 class="text-white font-semibold text-lg mb-2 block" style="display: block; color: #ffffff; font-weight: 600; margin: 0 0 0.5rem 0;">Gastronomía Beniana</h3>
-                <p class="text-gray-200 text-xs md:text-sm leading-relaxed block" style="display: block; color: #e5e7eb; white-space: normal !important; overflow-wrap: break-word;">Un viaje de sabores únicos: el Majadito, el Masaco y exquisitos pescados de río.</p>
-            </div>
-
-        </div>
-
-        <div class="mt-8 text-center block" style="display: block;">
-            <a href="/departamento" class="inline-block bg-white text-[#0a3118] font-bold px-8 py-3.5 rounded-full hover:bg-gray-100 hover:shadow-xl transition-all duration-300 text-sm md:text-base">
-                Planifique su Visita
-            </a>
-        </div>
-
     </div>
 </section>
 

@@ -24,7 +24,9 @@ use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\OpenDatasetController;
 use App\Http\Controllers\ExternalSystemsController;
 use App\Http\Controllers\DepartamentoController;
+use App\Http\Controllers\TurismoController;
 use App\Http\Controllers\ServiciosController;
+use App\Http\Controllers\GacetaController;
 use Illuminate\Support\Facades\Route;
 
 // Filament routes (auto-registered by Filament)
@@ -76,6 +78,21 @@ Route::prefix('datos-abiertos')->name('open-data.')->group(function () {
     Route::get('/{slug}/descargar/{format}', [OpenDatasetController::class, 'download'])->name('download');
 });
 
+// --- Gaceta Jurídica ---
+Route::prefix('gaceta')->name('gaceta.')->group(function () {
+    Route::get('/', [GacetaController::class, 'index'])->name('index');
+    Route::get('/{slug}', [GacetaController::class, 'show'])->name('show')
+        ->whereIn('slug', [
+            'estatuto-departamental',
+            'ley-departamental',
+            'decretos-departamental',
+            'decretos-gubernativo',
+            'resolucion-departamental',
+            'resolucion-administrativa',
+            'personalidad-juridica',
+        ]);
+});
+
 // --- Mapa de Proyectos ---
 Route::view('/mapa-proyectos', 'mapa-proyectos')->name('mapa-proyectos');
 
@@ -119,7 +136,15 @@ Route::get('/buscar', [SearchController::class, 'index'])->name('search');
 Route::get('/api/buscar', [SearchController::class, 'search']);
 Route::view('/gobernador', 'gobernador')->name('gobernador');
 Route::view('/vice-gobernador', 'vice-gobernador')->name('vice-gobernador');
-Route::get('/departamento', [DepartamentoController::class, 'index'])->name('departamento');
+Route::prefix('departamento')->name('departamento.')->group(function () {
+    Route::get('/', [DepartamentoController::class, 'index'])->name('index');
+    Route::get('/ganaderia', [DepartamentoController::class, 'ganaderia'])->name('ganaderia');
+    Route::get('/agricultura', [DepartamentoController::class, 'agricultura'])->name('agricultura');
+    Route::get('/industria-castana', [DepartamentoController::class, 'industriaCastana'])->name('industria-castana');
+    Route::get('/mineria', [DepartamentoController::class, 'mineria'])->name('mineria');
+    Route::get('/turismo', [DepartamentoController::class, 'turismo'])->name('turismo');
+});
+Route::get('/turismo', [TurismoController::class, 'index'])->name('turismo.index');
 Route::get('/servicios', [ServiciosController::class, 'index'])->name('servicios');
 Route::get('/sobre-nosotros', [HomeController::class, 'about'])->name('sobre-nosotros');
 

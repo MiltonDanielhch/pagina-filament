@@ -15,7 +15,7 @@ class MenuSeeder extends Seeder
     }
 
     /**
-     * Menú principal (header) — 5 bloques normativos.
+     * Menú principal (header) — 8 bloques normativos.
      */
     protected function seedHeader(): void
     {
@@ -35,7 +35,7 @@ class MenuSeeder extends Seeder
                 'order' => 1,
             ],
             [
-                'label' => 'Gestión',
+                'label' => 'Institucional',
                 'url' => '#',
                 'order' => 2,
                 'children' => [
@@ -55,9 +55,16 @@ class MenuSeeder extends Seeder
                 'order' => 3,
             ],
             [
-                'label' => 'Departamento',
-                'url' => '/departamento',
+                'label' => 'Sectores Estratégicos',
+                'url' => '#',
                 'order' => 4,
+                'children' => [
+                    ['label' => 'Agricultura', 'url' => '/departamento/agricultura'],
+                    ['label' => 'Ganadería', 'url' => '/departamento/ganaderia'],
+                    ['label' => 'Industria', 'url' => '/departamento/industria-castana'],
+                    ['label' => 'Minería', 'url' => '/departamento/mineria'],
+                    ['label' => 'Turismo', 'url' => '/departamento/turismo'],
+                ],
             ],
             // [
             //     'label' => 'Servicios al Ciudadano',
@@ -103,9 +110,18 @@ class MenuSeeder extends Seeder
                 ],
             ],
             [
-                'label' => 'Servicios',
-                'url' => '/servicios',
+                'label' => 'Gaceta',
+                'url' => '#',
                 'order' => 7,
+                'children' => [
+                    ['label' => 'Estatuto Departamental', 'url' => '/gaceta/estatuto-departamental'],
+                    ['label' => 'Ley Departamental', 'url' => '/gaceta/ley-departamental'],
+                    ['label' => 'Decretos Departamental', 'url' => '/gaceta/decretos-departamental'],
+                    ['label' => 'Decretos Gubernativo', 'url' => '/gaceta/decretos-gubernativo'],
+                    ['label' => 'Resolución Departamental', 'url' => '/gaceta/resolucion-departamental'],
+                    ['label' => 'Resolución Administrativa', 'url' => '/gaceta/resolucion-administrativa'],
+                    ['label' => 'Personalidad Jurídica', 'url' => '/gaceta/personalidad-juridica'],
+                ],
             ],
             [
                 'label' => 'Contacto',

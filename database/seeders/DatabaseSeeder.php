@@ -49,6 +49,7 @@ class DatabaseSeeder extends Seeder
             MenuSeeder::class,
             AchievementSeeder::class,
             GallerySeeder::class,
+            TurismoDestinoSeeder::class,
             AgendaSeeder::class,
             InfrastructureProjectSeeder::class,
             DepartmentalStatisticsSeeder::class,

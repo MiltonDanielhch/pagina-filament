@@ -32,6 +32,8 @@ use App\Models\Office;
 use App\Models\DepartmentalStatistics;
 use App\Models\Gallery;
 use App\Models\GalleryItem;
+use App\Models\TurismoDestino;
+use App\Models\PageView;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
@@ -158,6 +160,20 @@ class HomeController extends Controller
                 ->take(2)
                 ->get();
 
+            // Turismo Destacados Home
+            $turismoDestacados = TurismoDestino::published()
+                ->byCategory('home')
+                ->orderBy('sort_order')
+                ->get();
+
+            // Visitor Counter — Estadísticas del Portal
+            $visitsToday = PageView::whereDate('created_at', today())->count();
+            $visitsWeek = PageView::whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])->count();
+            $visitsMonth = PageView::whereYear('created_at', now()->year)
+                ->whereMonth('created_at', now()->month)
+                ->count();
+            $totalVisits = PageView::count();
+
             // Categorías (existente)
             $categories = Category::all();
 
@@ -180,6 +196,11 @@ class HomeController extends Controller
                 'galleries',
                 'categories',
                 'externalSystems',
+                'turismoDestacados',
+                'visitsToday',
+                'visitsWeek',
+                'visitsMonth',
+                'totalVisits',
             );
         });
 

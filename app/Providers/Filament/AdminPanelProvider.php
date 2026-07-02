@@ -28,6 +28,8 @@ use App\Filament\Resources\Users\UserResource;
 use App\Filament\Widgets\StatsOverviewWidget;
 use App\Filament\Widgets\RecentPostsWidget;
 use App\Filament\Widgets\QuickActionsWidget;
+use App\Filament\Widgets\PageViewsStatsWidget;
+use App\Filament\Widgets\PageViewsBySectionWidget;
 use App\Filament\Pages\Settings\SiteSettings;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use BezhanSalleh\FilamentShield\Resources\Roles\RoleResource;
@@ -69,6 +71,9 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make('Contacto')
                     ->label('Contacto')
                     ->collapsible(),
+                NavigationGroup::make('Turismo')
+                    ->label('Turismo')
+                    ->collapsible(),
                 NavigationGroup::make('Gestión')
                     ->label('Gestión')
                     ->collapsible(),
@@ -93,6 +98,8 @@ class AdminPanelProvider extends PanelProvider
                 StatsOverviewWidget::class,
                 RecentPostsWidget::class,
                 QuickActionsWidget::class,
+                PageViewsStatsWidget::class,
+                PageViewsBySectionWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

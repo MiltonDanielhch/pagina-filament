@@ -12,6 +12,7 @@
         ['route' => 'open-data.index',      'icon' => 'database', 'label' => 'Datos Abiertos',   'color' => 'indigo',  'desc' => 'Datasets públicos'],
         ['route' => 'offices',             'icon' => 'location', 'label' => 'Oficinas',         'color' => 'orange',  'desc' => 'Puntos de atención'],
         ['route' => 'blog',                 'icon' => 'news',     'label' => 'Noticias',         'color' => 'cyan',    'desc' => 'Sala de prensa'],
+        ['route' => 'turismo.index',        'icon' => 'globe',    'label' => 'Turismo',          'color' => 'teal',    'desc' => 'Naturaleza y cultura'],
     ]
 ])
 
@@ -25,6 +26,7 @@
         'database' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>',
         'location' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>',
         'news'     => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>',
+        'globe'    => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 0c2.21 0 4.21.895 5.657 2.343A7.994 7.994 0 0119 10M12 2a7.994 7.994 0 00-5.657 2.343A7.994 7.994 0 005 10m14 0a7.994 7.994 0 01-2.343 5.657A7.994 7.994 0 0112 18M5 10a7.994 7.994 0 002.343 5.657A7.994 7.994 0 0012 18m0 0c-2.21 0-4.21-.895-5.657-2.343A7.994 7.994 0 015 10m14 0a7.994 7.994 0 00-2.343-5.657A7.994 7.994 0 0012 2"/>',
     ];
 
     // Gradients — Beni Amazónico palette
